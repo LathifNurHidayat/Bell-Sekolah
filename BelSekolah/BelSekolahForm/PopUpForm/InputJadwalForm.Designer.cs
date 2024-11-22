@@ -30,6 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalForm));
             panel2 = new Panel();
+            label3 = new Label();
+            textBox1 = new TextBox();
+            dateTimePicker1 = new DateTimePicker();
+            label4 = new Label();
+            label1 = new Label();
+            BrowseIndonesiaRayaButton = new Button();
+            PlayIndonesiaRayaButton = new Button();
+            IndonesiaRayaText = new TextBox();
+            IndonesiaRayaPicker = new DateTimePicker();
+            IndonesiaRayaLabel = new Label();
             SimpanButton = new Button();
             label29 = new Label();
             BrowseKepulanganButton = new Button();
@@ -110,16 +120,19 @@
             Jam1Text = new TextBox();
             Jam1Picker = new DateTimePicker();
             Jam1Label = new Label();
-            BrowseJam0Button = new Button();
-            PlayJam0Button = new Button();
+            BrowseJamMasukButton = new Button();
+            PlayJamMasukButton = new Button();
             Jam0Text = new TextBox();
             Jam0Picker = new DateTimePicker();
-            Jam0Label = new Label();
+            JamMasukLabel = new Label();
             panel3 = new Panel();
             label28 = new Label();
             label2 = new Label();
             UbahButton = new Button();
             HariText = new Label();
+            button2 = new Button();
+            label5 = new Label();
+            BrowseLaguButton = new Button();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -129,6 +142,19 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.Gainsboro;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(BrowseLaguButton);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(dateTimePicker1);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(BrowseIndonesiaRayaButton);
+            panel2.Controls.Add(PlayIndonesiaRayaButton);
+            panel2.Controls.Add(IndonesiaRayaText);
+            panel2.Controls.Add(IndonesiaRayaPicker);
+            panel2.Controls.Add(IndonesiaRayaLabel);
             panel2.Controls.Add(SimpanButton);
             panel2.Controls.Add(label29);
             panel2.Controls.Add(BrowseKepulanganButton);
@@ -209,16 +235,139 @@
             panel2.Controls.Add(Jam1Text);
             panel2.Controls.Add(Jam1Picker);
             panel2.Controls.Add(Jam1Label);
-            panel2.Controls.Add(BrowseJam0Button);
-            panel2.Controls.Add(PlayJam0Button);
+            panel2.Controls.Add(BrowseJamMasukButton);
+            panel2.Controls.Add(PlayJamMasukButton);
             panel2.Controls.Add(Jam0Text);
             panel2.Controls.Add(Jam0Picker);
-            panel2.Controls.Add(Jam0Label);
+            panel2.Controls.Add(JamMasukLabel);
             panel2.Controls.Add(panel3);
             panel2.Location = new Point(12, 81);
             panel2.Name = "panel2";
-            panel2.Size = new Size(656, 629);
+            panel2.Size = new Size(755, 705);
             panel2.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(229, 60);
+            label3.Name = "label3";
+            label3.Size = new Size(14, 23);
+            label3.TabIndex = 179;
+            label3.Tag = "0";
+            label3.Text = ":";
+            // 
+            // textBox1
+            // 
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.Location = new Point(345, 60);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(251, 30);
+            textBox1.TabIndex = 176;
+            textBox1.TabStop = false;
+            textBox1.Tag = "Jam0";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "HH:mm";
+            dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(251, 60);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.Size = new Size(83, 30);
+            dateTimePicker1.TabIndex = 174;
+            dateTimePicker1.Tag = "Jam0";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(11, 60);
+            label4.Name = "label4";
+            label4.Size = new Size(101, 23);
+            label4.TabIndex = 175;
+            label4.Tag = "0";
+            label4.Text = "Lagu - Lagu";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(229, 312);
+            label1.Name = "label1";
+            label1.Size = new Size(14, 23);
+            label1.TabIndex = 173;
+            label1.Text = ":";
+            // 
+            // BrowseIndonesiaRayaButton
+            // 
+            BrowseIndonesiaRayaButton.BackColor = Color.Gainsboro;
+            BrowseIndonesiaRayaButton.FlatAppearance.BorderColor = Color.Black;
+            BrowseIndonesiaRayaButton.FlatStyle = FlatStyle.Flat;
+            BrowseIndonesiaRayaButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            BrowseIndonesiaRayaButton.Location = new Point(644, 313);
+            BrowseIndonesiaRayaButton.Name = "BrowseIndonesiaRayaButton";
+            BrowseIndonesiaRayaButton.Size = new Size(94, 29);
+            BrowseIndonesiaRayaButton.TabIndex = 172;
+            BrowseIndonesiaRayaButton.Tag = "Jam4";
+            BrowseIndonesiaRayaButton.Text = "Browse";
+            BrowseIndonesiaRayaButton.UseVisualStyleBackColor = false;
+            // 
+            // PlayIndonesiaRayaButton
+            // 
+            PlayIndonesiaRayaButton.BackColor = Color.Gainsboro;
+            PlayIndonesiaRayaButton.BackgroundImageLayout = ImageLayout.Zoom;
+            PlayIndonesiaRayaButton.FlatAppearance.BorderColor = Color.Black;
+            PlayIndonesiaRayaButton.FlatStyle = FlatStyle.Flat;
+            PlayIndonesiaRayaButton.Location = new Point(605, 312);
+            PlayIndonesiaRayaButton.Name = "PlayIndonesiaRayaButton";
+            PlayIndonesiaRayaButton.Size = new Size(30, 30);
+            PlayIndonesiaRayaButton.TabIndex = 171;
+            PlayIndonesiaRayaButton.TabStop = false;
+            PlayIndonesiaRayaButton.Tag = "Jam4";
+            PlayIndonesiaRayaButton.UseVisualStyleBackColor = false;
+            // 
+            // IndonesiaRayaText
+            // 
+            IndonesiaRayaText.BorderStyle = BorderStyle.FixedSingle;
+            IndonesiaRayaText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            IndonesiaRayaText.Location = new Point(345, 312);
+            IndonesiaRayaText.Name = "IndonesiaRayaText";
+            IndonesiaRayaText.ReadOnly = true;
+            IndonesiaRayaText.Size = new Size(251, 30);
+            IndonesiaRayaText.TabIndex = 170;
+            IndonesiaRayaText.TabStop = false;
+            IndonesiaRayaText.Tag = "Jam4";
+            // 
+            // IndonesiaRayaPicker
+            // 
+            IndonesiaRayaPicker.CustomFormat = "HH:mm";
+            IndonesiaRayaPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            IndonesiaRayaPicker.Format = DateTimePickerFormat.Custom;
+            IndonesiaRayaPicker.Location = new Point(251, 312);
+            IndonesiaRayaPicker.Name = "IndonesiaRayaPicker";
+            IndonesiaRayaPicker.ShowUpDown = true;
+            IndonesiaRayaPicker.Size = new Size(83, 30);
+            IndonesiaRayaPicker.TabIndex = 168;
+            IndonesiaRayaPicker.Tag = "Jam4";
+            IndonesiaRayaPicker.Value = new DateTime(2024, 12, 16, 10, 0, 0, 0);
+            // 
+            // IndonesiaRayaLabel
+            // 
+            IndonesiaRayaLabel.AutoSize = true;
+            IndonesiaRayaLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            IndonesiaRayaLabel.ForeColor = Color.Red;
+            IndonesiaRayaLabel.Location = new Point(11, 312);
+            IndonesiaRayaLabel.Name = "IndonesiaRayaLabel";
+            IndonesiaRayaLabel.Size = new Size(125, 23);
+            IndonesiaRayaLabel.TabIndex = 169;
+            IndonesiaRayaLabel.Text = "Indonesia Raya";
             // 
             // SimpanButton
             // 
@@ -226,7 +375,7 @@
             SimpanButton.FlatAppearance.BorderColor = Color.Black;
             SimpanButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SimpanButton.ForeColor = Color.White;
-            SimpanButton.Location = new Point(505, 574);
+            SimpanButton.Location = new Point(605, 652);
             SimpanButton.Name = "SimpanButton";
             SimpanButton.Size = new Size(133, 38);
             SimpanButton.TabIndex = 167;
@@ -238,7 +387,7 @@
             label29.AutoSize = true;
             label29.BackColor = Color.Transparent;
             label29.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label29.Location = new Point(129, 532);
+            label29.Location = new Point(229, 600);
             label29.Name = "label29";
             label29.Size = new Size(14, 23);
             label29.TabIndex = 164;
@@ -250,7 +399,7 @@
             BrowseKepulanganButton.FlatAppearance.BorderColor = Color.Black;
             BrowseKepulanganButton.FlatStyle = FlatStyle.Flat;
             BrowseKepulanganButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseKepulanganButton.Location = new Point(544, 529);
+            BrowseKepulanganButton.Location = new Point(644, 601);
             BrowseKepulanganButton.Name = "BrowseKepulanganButton";
             BrowseKepulanganButton.Size = new Size(94, 29);
             BrowseKepulanganButton.TabIndex = 163;
@@ -264,7 +413,7 @@
             PlayJamKepulanganButton.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJamKepulanganButton.FlatAppearance.BorderColor = Color.Black;
             PlayJamKepulanganButton.FlatStyle = FlatStyle.Flat;
-            PlayJamKepulanganButton.Location = new Point(505, 528);
+            PlayJamKepulanganButton.Location = new Point(605, 600);
             PlayJamKepulanganButton.Name = "PlayJamKepulanganButton";
             PlayJamKepulanganButton.Size = new Size(30, 30);
             PlayJamKepulanganButton.TabIndex = 162;
@@ -276,7 +425,7 @@
             // 
             JamKepulanganText.BorderStyle = BorderStyle.FixedSingle;
             JamKepulanganText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            JamKepulanganText.Location = new Point(245, 528);
+            JamKepulanganText.Location = new Point(345, 600);
             JamKepulanganText.Name = "JamKepulanganText";
             JamKepulanganText.ReadOnly = true;
             JamKepulanganText.Size = new Size(251, 30);
@@ -289,7 +438,7 @@
             JamKepulanganPicker.CustomFormat = "HH:mm";
             JamKepulanganPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JamKepulanganPicker.Format = DateTimePickerFormat.Custom;
-            JamKepulanganPicker.Location = new Point(151, 528);
+            JamKepulanganPicker.Location = new Point(251, 600);
             JamKepulanganPicker.Name = "JamKepulanganPicker";
             JamKepulanganPicker.ShowUpDown = true;
             JamKepulanganPicker.Size = new Size(83, 30);
@@ -300,7 +449,7 @@
             // 
             JamKepulanganLabel.AutoSize = true;
             JamKepulanganLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            JamKepulanganLabel.Location = new Point(11, 530);
+            JamKepulanganLabel.Location = new Point(11, 600);
             JamKepulanganLabel.Name = "JamKepulanganLabel";
             JamKepulanganLabel.Size = new Size(98, 23);
             JamKepulanganLabel.TabIndex = 160;
@@ -311,7 +460,7 @@
             label27.AutoSize = true;
             label27.BackColor = Color.Transparent;
             label27.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label27.Location = new Point(129, 496);
+            label27.Location = new Point(229, 564);
             label27.Name = "label27";
             label27.Size = new Size(14, 23);
             label27.TabIndex = 158;
@@ -322,7 +471,7 @@
             label24.AutoSize = true;
             label24.BackColor = Color.Transparent;
             label24.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label24.Location = new Point(129, 460);
+            label24.Location = new Point(229, 528);
             label24.Name = "label24";
             label24.Size = new Size(14, 23);
             label24.TabIndex = 157;
@@ -333,7 +482,7 @@
             label25.AutoSize = true;
             label25.BackColor = Color.Transparent;
             label25.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label25.Location = new Point(129, 424);
+            label25.Location = new Point(229, 492);
             label25.Name = "label25";
             label25.Size = new Size(14, 23);
             label25.TabIndex = 156;
@@ -344,7 +493,7 @@
             label26.AutoSize = true;
             label26.BackColor = Color.Transparent;
             label26.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label26.Location = new Point(129, 388);
+            label26.Location = new Point(229, 456);
             label26.Name = "label26";
             label26.Size = new Size(14, 23);
             label26.TabIndex = 155;
@@ -355,7 +504,7 @@
             label21.AutoSize = true;
             label21.BackColor = Color.Transparent;
             label21.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label21.Location = new Point(129, 352);
+            label21.Location = new Point(229, 420);
             label21.Name = "label21";
             label21.Size = new Size(14, 23);
             label21.TabIndex = 154;
@@ -366,7 +515,7 @@
             label22.AutoSize = true;
             label22.BackColor = Color.Transparent;
             label22.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label22.Location = new Point(129, 316);
+            label22.Location = new Point(229, 384);
             label22.Name = "label22";
             label22.Size = new Size(14, 23);
             label22.TabIndex = 153;
@@ -377,7 +526,7 @@
             label23.AutoSize = true;
             label23.BackColor = Color.Transparent;
             label23.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label23.Location = new Point(129, 280);
+            label23.Location = new Point(229, 348);
             label23.Name = "label23";
             label23.Size = new Size(14, 23);
             label23.TabIndex = 152;
@@ -388,7 +537,7 @@
             label18.AutoSize = true;
             label18.BackColor = Color.Transparent;
             label18.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label18.Location = new Point(129, 244);
+            label18.Location = new Point(229, 276);
             label18.Name = "label18";
             label18.Size = new Size(14, 23);
             label18.TabIndex = 151;
@@ -399,7 +548,7 @@
             label19.AutoSize = true;
             label19.BackColor = Color.Transparent;
             label19.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label19.Location = new Point(129, 208);
+            label19.Location = new Point(229, 240);
             label19.Name = "label19";
             label19.Size = new Size(14, 23);
             label19.TabIndex = 150;
@@ -410,7 +559,7 @@
             label20.AutoSize = true;
             label20.BackColor = Color.Transparent;
             label20.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label20.Location = new Point(129, 172);
+            label20.Location = new Point(229, 204);
             label20.Name = "label20";
             label20.Size = new Size(14, 23);
             label20.TabIndex = 149;
@@ -421,7 +570,7 @@
             label17.AutoSize = true;
             label17.BackColor = Color.Transparent;
             label17.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label17.Location = new Point(129, 136);
+            label17.Location = new Point(229, 168);
             label17.Name = "label17";
             label17.Size = new Size(14, 23);
             label17.TabIndex = 148;
@@ -432,7 +581,7 @@
             label16.AutoSize = true;
             label16.BackColor = Color.Transparent;
             label16.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label16.Location = new Point(129, 100);
+            label16.Location = new Point(229, 132);
             label16.Name = "label16";
             label16.Size = new Size(14, 23);
             label16.TabIndex = 147;
@@ -443,7 +592,7 @@
             label15.AutoSize = true;
             label15.BackColor = Color.Transparent;
             label15.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.Location = new Point(129, 64);
+            label15.Location = new Point(229, 96);
             label15.Name = "label15";
             label15.Size = new Size(14, 23);
             label15.TabIndex = 85;
@@ -456,7 +605,7 @@
             BrowseJam10Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam10Button.FlatStyle = FlatStyle.Flat;
             BrowseJam10Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam10Button.Location = new Point(544, 493);
+            BrowseJam10Button.Location = new Point(644, 565);
             BrowseJam10Button.Name = "BrowseJam10Button";
             BrowseJam10Button.Size = new Size(94, 29);
             BrowseJam10Button.TabIndex = 146;
@@ -470,7 +619,7 @@
             PlayJam10Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam10Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam10Button.FlatStyle = FlatStyle.Flat;
-            PlayJam10Button.Location = new Point(505, 492);
+            PlayJam10Button.Location = new Point(605, 564);
             PlayJam10Button.Name = "PlayJam10Button";
             PlayJam10Button.Size = new Size(30, 30);
             PlayJam10Button.TabIndex = 145;
@@ -482,7 +631,7 @@
             // 
             Jam10Text.BorderStyle = BorderStyle.FixedSingle;
             Jam10Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam10Text.Location = new Point(245, 492);
+            Jam10Text.Location = new Point(345, 564);
             Jam10Text.Name = "Jam10Text";
             Jam10Text.ReadOnly = true;
             Jam10Text.Size = new Size(251, 30);
@@ -495,7 +644,7 @@
             Jam10Picker.CustomFormat = "HH:mm";
             Jam10Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam10Picker.Format = DateTimePickerFormat.Custom;
-            Jam10Picker.Location = new Point(151, 492);
+            Jam10Picker.Location = new Point(251, 564);
             Jam10Picker.Name = "Jam10Picker";
             Jam10Picker.ShowUpDown = true;
             Jam10Picker.Size = new Size(83, 30);
@@ -506,7 +655,7 @@
             // 
             Jam10Label.AutoSize = true;
             Jam10Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam10Label.Location = new Point(11, 494);
+            Jam10Label.Location = new Point(11, 564);
             Jam10Label.Name = "Jam10Label";
             Jam10Label.Size = new Size(97, 23);
             Jam10Label.TabIndex = 143;
@@ -518,7 +667,7 @@
             BrowseJam9Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam9Button.FlatStyle = FlatStyle.Flat;
             BrowseJam9Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam9Button.Location = new Point(544, 457);
+            BrowseJam9Button.Location = new Point(644, 529);
             BrowseJam9Button.Name = "BrowseJam9Button";
             BrowseJam9Button.Size = new Size(94, 29);
             BrowseJam9Button.TabIndex = 141;
@@ -532,7 +681,7 @@
             PlayJam9Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam9Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam9Button.FlatStyle = FlatStyle.Flat;
-            PlayJam9Button.Location = new Point(505, 456);
+            PlayJam9Button.Location = new Point(605, 528);
             PlayJam9Button.Name = "PlayJam9Button";
             PlayJam9Button.Size = new Size(30, 30);
             PlayJam9Button.TabIndex = 140;
@@ -544,7 +693,7 @@
             // 
             Jam9Text.BorderStyle = BorderStyle.FixedSingle;
             Jam9Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam9Text.Location = new Point(245, 456);
+            Jam9Text.Location = new Point(345, 528);
             Jam9Text.Name = "Jam9Text";
             Jam9Text.ReadOnly = true;
             Jam9Text.Size = new Size(251, 30);
@@ -557,7 +706,7 @@
             Jam9Picker.CustomFormat = "HH:mm";
             Jam9Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam9Picker.Format = DateTimePickerFormat.Custom;
-            Jam9Picker.Location = new Point(151, 456);
+            Jam9Picker.Location = new Point(251, 528);
             Jam9Picker.Name = "Jam9Picker";
             Jam9Picker.ShowUpDown = true;
             Jam9Picker.Size = new Size(83, 30);
@@ -568,7 +717,7 @@
             // 
             Jam9Label.AutoSize = true;
             Jam9Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam9Label.Location = new Point(11, 458);
+            Jam9Label.Location = new Point(11, 528);
             Jam9Label.Name = "Jam9Label";
             Jam9Label.Size = new Size(88, 23);
             Jam9Label.TabIndex = 138;
@@ -580,7 +729,7 @@
             BrowseJam8Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam8Button.FlatStyle = FlatStyle.Flat;
             BrowseJam8Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam8Button.Location = new Point(544, 421);
+            BrowseJam8Button.Location = new Point(644, 493);
             BrowseJam8Button.Name = "BrowseJam8Button";
             BrowseJam8Button.Size = new Size(94, 29);
             BrowseJam8Button.TabIndex = 136;
@@ -594,7 +743,7 @@
             PlayJam8Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam8Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam8Button.FlatStyle = FlatStyle.Flat;
-            PlayJam8Button.Location = new Point(505, 420);
+            PlayJam8Button.Location = new Point(605, 492);
             PlayJam8Button.Name = "PlayJam8Button";
             PlayJam8Button.Size = new Size(30, 30);
             PlayJam8Button.TabIndex = 135;
@@ -606,7 +755,7 @@
             // 
             Jam8Text.BorderStyle = BorderStyle.FixedSingle;
             Jam8Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam8Text.Location = new Point(245, 420);
+            Jam8Text.Location = new Point(345, 492);
             Jam8Text.Name = "Jam8Text";
             Jam8Text.ReadOnly = true;
             Jam8Text.Size = new Size(251, 30);
@@ -619,7 +768,7 @@
             Jam8Picker.CustomFormat = "HH:mm";
             Jam8Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam8Picker.Format = DateTimePickerFormat.Custom;
-            Jam8Picker.Location = new Point(151, 420);
+            Jam8Picker.Location = new Point(251, 492);
             Jam8Picker.Name = "Jam8Picker";
             Jam8Picker.ShowUpDown = true;
             Jam8Picker.Size = new Size(83, 30);
@@ -630,7 +779,7 @@
             // 
             Jam8Label.AutoSize = true;
             Jam8Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam8Label.Location = new Point(11, 422);
+            Jam8Label.Location = new Point(11, 492);
             Jam8Label.Name = "Jam8Label";
             Jam8Label.Size = new Size(88, 23);
             Jam8Label.TabIndex = 133;
@@ -642,7 +791,7 @@
             BrowseJam7Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam7Button.FlatStyle = FlatStyle.Flat;
             BrowseJam7Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam7Button.Location = new Point(544, 385);
+            BrowseJam7Button.Location = new Point(644, 457);
             BrowseJam7Button.Name = "BrowseJam7Button";
             BrowseJam7Button.Size = new Size(94, 29);
             BrowseJam7Button.TabIndex = 131;
@@ -656,7 +805,7 @@
             PlayJam7Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam7Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam7Button.FlatStyle = FlatStyle.Flat;
-            PlayJam7Button.Location = new Point(505, 384);
+            PlayJam7Button.Location = new Point(605, 456);
             PlayJam7Button.Name = "PlayJam7Button";
             PlayJam7Button.Size = new Size(30, 30);
             PlayJam7Button.TabIndex = 130;
@@ -668,7 +817,7 @@
             // 
             Jam7Text.BorderStyle = BorderStyle.FixedSingle;
             Jam7Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam7Text.Location = new Point(245, 384);
+            Jam7Text.Location = new Point(345, 456);
             Jam7Text.Name = "Jam7Text";
             Jam7Text.ReadOnly = true;
             Jam7Text.Size = new Size(251, 30);
@@ -681,7 +830,7 @@
             Jam7Picker.CustomFormat = "HH:mm";
             Jam7Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam7Picker.Format = DateTimePickerFormat.Custom;
-            Jam7Picker.Location = new Point(151, 384);
+            Jam7Picker.Location = new Point(251, 456);
             Jam7Picker.Name = "Jam7Picker";
             Jam7Picker.ShowUpDown = true;
             Jam7Picker.Size = new Size(83, 30);
@@ -692,7 +841,7 @@
             // 
             Jam7Label.AutoSize = true;
             Jam7Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam7Label.Location = new Point(11, 386);
+            Jam7Label.Location = new Point(11, 456);
             Jam7Label.Name = "Jam7Label";
             Jam7Label.Size = new Size(88, 23);
             Jam7Label.TabIndex = 128;
@@ -704,7 +853,7 @@
             BrowseIstirahat2Button.FlatAppearance.BorderColor = Color.Black;
             BrowseIstirahat2Button.FlatStyle = FlatStyle.Flat;
             BrowseIstirahat2Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseIstirahat2Button.Location = new Point(544, 349);
+            BrowseIstirahat2Button.Location = new Point(644, 421);
             BrowseIstirahat2Button.Name = "BrowseIstirahat2Button";
             BrowseIstirahat2Button.Size = new Size(94, 29);
             BrowseIstirahat2Button.TabIndex = 126;
@@ -718,7 +867,7 @@
             PlayJamIstirahat2Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJamIstirahat2Button.FlatAppearance.BorderColor = Color.Black;
             PlayJamIstirahat2Button.FlatStyle = FlatStyle.Flat;
-            PlayJamIstirahat2Button.Location = new Point(505, 348);
+            PlayJamIstirahat2Button.Location = new Point(605, 420);
             PlayJamIstirahat2Button.Name = "PlayJamIstirahat2Button";
             PlayJamIstirahat2Button.Size = new Size(30, 30);
             PlayJamIstirahat2Button.TabIndex = 125;
@@ -730,7 +879,7 @@
             // 
             JamIstirahat2Text.BorderStyle = BorderStyle.FixedSingle;
             JamIstirahat2Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            JamIstirahat2Text.Location = new Point(245, 348);
+            JamIstirahat2Text.Location = new Point(345, 420);
             JamIstirahat2Text.Name = "JamIstirahat2Text";
             JamIstirahat2Text.ReadOnly = true;
             JamIstirahat2Text.Size = new Size(251, 30);
@@ -743,7 +892,7 @@
             JamIstirahat2Picker.CustomFormat = "HH:mm";
             JamIstirahat2Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JamIstirahat2Picker.Format = DateTimePickerFormat.Custom;
-            JamIstirahat2Picker.Location = new Point(151, 348);
+            JamIstirahat2Picker.Location = new Point(251, 420);
             JamIstirahat2Picker.Name = "JamIstirahat2Picker";
             JamIstirahat2Picker.ShowUpDown = true;
             JamIstirahat2Picker.Size = new Size(83, 30);
@@ -755,7 +904,7 @@
             JamIstirahat2Label.AutoSize = true;
             JamIstirahat2Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JamIstirahat2Label.ForeColor = Color.Blue;
-            JamIstirahat2Label.Location = new Point(11, 350);
+            JamIstirahat2Label.Location = new Point(11, 420);
             JamIstirahat2Label.Name = "JamIstirahat2Label";
             JamIstirahat2Label.Size = new Size(122, 23);
             JamIstirahat2Label.TabIndex = 123;
@@ -767,7 +916,7 @@
             BrowseJam6Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam6Button.FlatStyle = FlatStyle.Flat;
             BrowseJam6Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam6Button.Location = new Point(544, 313);
+            BrowseJam6Button.Location = new Point(644, 385);
             BrowseJam6Button.Name = "BrowseJam6Button";
             BrowseJam6Button.Size = new Size(94, 29);
             BrowseJam6Button.TabIndex = 121;
@@ -781,7 +930,7 @@
             PlayJam6Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam6Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam6Button.FlatStyle = FlatStyle.Flat;
-            PlayJam6Button.Location = new Point(505, 312);
+            PlayJam6Button.Location = new Point(605, 384);
             PlayJam6Button.Name = "PlayJam6Button";
             PlayJam6Button.Size = new Size(30, 30);
             PlayJam6Button.TabIndex = 120;
@@ -793,7 +942,7 @@
             // 
             Jam6Text.BorderStyle = BorderStyle.FixedSingle;
             Jam6Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam6Text.Location = new Point(245, 312);
+            Jam6Text.Location = new Point(345, 384);
             Jam6Text.Name = "Jam6Text";
             Jam6Text.ReadOnly = true;
             Jam6Text.Size = new Size(251, 30);
@@ -806,7 +955,7 @@
             Jam6Picker.CustomFormat = "HH:mm";
             Jam6Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam6Picker.Format = DateTimePickerFormat.Custom;
-            Jam6Picker.Location = new Point(151, 312);
+            Jam6Picker.Location = new Point(251, 384);
             Jam6Picker.Name = "Jam6Picker";
             Jam6Picker.ShowUpDown = true;
             Jam6Picker.Size = new Size(83, 30);
@@ -817,7 +966,7 @@
             // 
             Jam6Label.AutoSize = true;
             Jam6Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam6Label.Location = new Point(11, 314);
+            Jam6Label.Location = new Point(11, 384);
             Jam6Label.Name = "Jam6Label";
             Jam6Label.Size = new Size(88, 23);
             Jam6Label.TabIndex = 118;
@@ -829,7 +978,7 @@
             BrowseJam5Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam5Button.FlatStyle = FlatStyle.Flat;
             BrowseJam5Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam5Button.Location = new Point(544, 277);
+            BrowseJam5Button.Location = new Point(644, 349);
             BrowseJam5Button.Name = "BrowseJam5Button";
             BrowseJam5Button.Size = new Size(94, 29);
             BrowseJam5Button.TabIndex = 116;
@@ -843,7 +992,7 @@
             PlayJam5Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam5Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam5Button.FlatStyle = FlatStyle.Flat;
-            PlayJam5Button.Location = new Point(505, 276);
+            PlayJam5Button.Location = new Point(605, 348);
             PlayJam5Button.Name = "PlayJam5Button";
             PlayJam5Button.Size = new Size(30, 30);
             PlayJam5Button.TabIndex = 115;
@@ -855,7 +1004,7 @@
             // 
             Jam5Text.BorderStyle = BorderStyle.FixedSingle;
             Jam5Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam5Text.Location = new Point(245, 276);
+            Jam5Text.Location = new Point(345, 348);
             Jam5Text.Name = "Jam5Text";
             Jam5Text.ReadOnly = true;
             Jam5Text.Size = new Size(251, 30);
@@ -868,7 +1017,7 @@
             Jam5Picker.CustomFormat = "HH:mm";
             Jam5Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam5Picker.Format = DateTimePickerFormat.Custom;
-            Jam5Picker.Location = new Point(151, 276);
+            Jam5Picker.Location = new Point(251, 348);
             Jam5Picker.Name = "Jam5Picker";
             Jam5Picker.ShowUpDown = true;
             Jam5Picker.Size = new Size(83, 30);
@@ -879,7 +1028,7 @@
             // 
             Jam5Label.AutoSize = true;
             Jam5Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam5Label.Location = new Point(11, 278);
+            Jam5Label.Location = new Point(11, 348);
             Jam5Label.Name = "Jam5Label";
             Jam5Label.Size = new Size(88, 23);
             Jam5Label.TabIndex = 113;
@@ -891,7 +1040,7 @@
             BrowseJam4Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam4Button.FlatStyle = FlatStyle.Flat;
             BrowseJam4Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam4Button.Location = new Point(544, 241);
+            BrowseJam4Button.Location = new Point(644, 277);
             BrowseJam4Button.Name = "BrowseJam4Button";
             BrowseJam4Button.Size = new Size(94, 29);
             BrowseJam4Button.TabIndex = 111;
@@ -905,7 +1054,7 @@
             PlayJam4Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam4Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam4Button.FlatStyle = FlatStyle.Flat;
-            PlayJam4Button.Location = new Point(505, 240);
+            PlayJam4Button.Location = new Point(605, 276);
             PlayJam4Button.Name = "PlayJam4Button";
             PlayJam4Button.Size = new Size(30, 30);
             PlayJam4Button.TabIndex = 110;
@@ -917,7 +1066,7 @@
             // 
             Jam4Text.BorderStyle = BorderStyle.FixedSingle;
             Jam4Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam4Text.Location = new Point(245, 240);
+            Jam4Text.Location = new Point(345, 276);
             Jam4Text.Name = "Jam4Text";
             Jam4Text.ReadOnly = true;
             Jam4Text.Size = new Size(251, 30);
@@ -930,7 +1079,7 @@
             Jam4Picker.CustomFormat = "HH:mm";
             Jam4Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam4Picker.Format = DateTimePickerFormat.Custom;
-            Jam4Picker.Location = new Point(151, 240);
+            Jam4Picker.Location = new Point(251, 276);
             Jam4Picker.Name = "Jam4Picker";
             Jam4Picker.ShowUpDown = true;
             Jam4Picker.Size = new Size(83, 30);
@@ -941,7 +1090,7 @@
             // 
             Jam4Label.AutoSize = true;
             Jam4Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam4Label.Location = new Point(11, 242);
+            Jam4Label.Location = new Point(11, 276);
             Jam4Label.Name = "Jam4Label";
             Jam4Label.Size = new Size(88, 23);
             Jam4Label.TabIndex = 108;
@@ -953,7 +1102,7 @@
             BrowseIstirahat1Button.FlatAppearance.BorderColor = Color.Black;
             BrowseIstirahat1Button.FlatStyle = FlatStyle.Flat;
             BrowseIstirahat1Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseIstirahat1Button.Location = new Point(544, 205);
+            BrowseIstirahat1Button.Location = new Point(644, 241);
             BrowseIstirahat1Button.Name = "BrowseIstirahat1Button";
             BrowseIstirahat1Button.Size = new Size(94, 29);
             BrowseIstirahat1Button.TabIndex = 106;
@@ -967,7 +1116,7 @@
             PlayJamIstirahat1Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJamIstirahat1Button.FlatAppearance.BorderColor = Color.Black;
             PlayJamIstirahat1Button.FlatStyle = FlatStyle.Flat;
-            PlayJamIstirahat1Button.Location = new Point(505, 204);
+            PlayJamIstirahat1Button.Location = new Point(605, 240);
             PlayJamIstirahat1Button.Name = "PlayJamIstirahat1Button";
             PlayJamIstirahat1Button.Size = new Size(30, 30);
             PlayJamIstirahat1Button.TabIndex = 105;
@@ -979,7 +1128,7 @@
             // 
             JamIstirahat1Text.BorderStyle = BorderStyle.FixedSingle;
             JamIstirahat1Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            JamIstirahat1Text.Location = new Point(245, 204);
+            JamIstirahat1Text.Location = new Point(345, 240);
             JamIstirahat1Text.Name = "JamIstirahat1Text";
             JamIstirahat1Text.ReadOnly = true;
             JamIstirahat1Text.Size = new Size(251, 30);
@@ -992,7 +1141,7 @@
             JamIstirahat1Picker.CustomFormat = "HH:mm";
             JamIstirahat1Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JamIstirahat1Picker.Format = DateTimePickerFormat.Custom;
-            JamIstirahat1Picker.Location = new Point(151, 204);
+            JamIstirahat1Picker.Location = new Point(251, 240);
             JamIstirahat1Picker.Name = "JamIstirahat1Picker";
             JamIstirahat1Picker.ShowUpDown = true;
             JamIstirahat1Picker.Size = new Size(83, 30);
@@ -1004,7 +1153,7 @@
             JamIstirahat1Label.AutoSize = true;
             JamIstirahat1Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JamIstirahat1Label.ForeColor = Color.Blue;
-            JamIstirahat1Label.Location = new Point(11, 206);
+            JamIstirahat1Label.Location = new Point(11, 240);
             JamIstirahat1Label.Name = "JamIstirahat1Label";
             JamIstirahat1Label.Size = new Size(122, 23);
             JamIstirahat1Label.TabIndex = 103;
@@ -1016,7 +1165,7 @@
             BrowseJam3Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam3Button.FlatStyle = FlatStyle.Flat;
             BrowseJam3Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam3Button.Location = new Point(544, 169);
+            BrowseJam3Button.Location = new Point(644, 205);
             BrowseJam3Button.Name = "BrowseJam3Button";
             BrowseJam3Button.Size = new Size(94, 29);
             BrowseJam3Button.TabIndex = 101;
@@ -1030,7 +1179,7 @@
             PlayJam3Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam3Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam3Button.FlatStyle = FlatStyle.Flat;
-            PlayJam3Button.Location = new Point(505, 168);
+            PlayJam3Button.Location = new Point(605, 204);
             PlayJam3Button.Name = "PlayJam3Button";
             PlayJam3Button.Size = new Size(30, 30);
             PlayJam3Button.TabIndex = 100;
@@ -1042,7 +1191,7 @@
             // 
             Jam3Text.BorderStyle = BorderStyle.FixedSingle;
             Jam3Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam3Text.Location = new Point(245, 168);
+            Jam3Text.Location = new Point(345, 204);
             Jam3Text.Name = "Jam3Text";
             Jam3Text.ReadOnly = true;
             Jam3Text.Size = new Size(251, 30);
@@ -1055,7 +1204,7 @@
             Jam3Picker.CustomFormat = "HH:mm";
             Jam3Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam3Picker.Format = DateTimePickerFormat.Custom;
-            Jam3Picker.Location = new Point(151, 168);
+            Jam3Picker.Location = new Point(251, 204);
             Jam3Picker.Name = "Jam3Picker";
             Jam3Picker.ShowUpDown = true;
             Jam3Picker.Size = new Size(83, 30);
@@ -1067,7 +1216,7 @@
             Jam3Label.AutoSize = true;
             Jam3Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam3Label.ForeColor = Color.Black;
-            Jam3Label.Location = new Point(11, 170);
+            Jam3Label.Location = new Point(11, 204);
             Jam3Label.Name = "Jam3Label";
             Jam3Label.Size = new Size(88, 23);
             Jam3Label.TabIndex = 98;
@@ -1079,7 +1228,7 @@
             BrowseJam2Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam2Button.FlatStyle = FlatStyle.Flat;
             BrowseJam2Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam2Button.Location = new Point(544, 133);
+            BrowseJam2Button.Location = new Point(644, 169);
             BrowseJam2Button.Name = "BrowseJam2Button";
             BrowseJam2Button.Size = new Size(94, 29);
             BrowseJam2Button.TabIndex = 96;
@@ -1093,7 +1242,7 @@
             PlayJam2Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam2Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam2Button.FlatStyle = FlatStyle.Flat;
-            PlayJam2Button.Location = new Point(505, 132);
+            PlayJam2Button.Location = new Point(605, 168);
             PlayJam2Button.Name = "PlayJam2Button";
             PlayJam2Button.Size = new Size(30, 30);
             PlayJam2Button.TabIndex = 95;
@@ -1105,7 +1254,7 @@
             // 
             Jam2Text.BorderStyle = BorderStyle.FixedSingle;
             Jam2Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam2Text.Location = new Point(245, 132);
+            Jam2Text.Location = new Point(345, 168);
             Jam2Text.Name = "Jam2Text";
             Jam2Text.ReadOnly = true;
             Jam2Text.Size = new Size(251, 30);
@@ -1118,7 +1267,7 @@
             Jam2Picker.CustomFormat = "HH:mm";
             Jam2Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam2Picker.Format = DateTimePickerFormat.Custom;
-            Jam2Picker.Location = new Point(151, 132);
+            Jam2Picker.Location = new Point(251, 168);
             Jam2Picker.Name = "Jam2Picker";
             Jam2Picker.ShowUpDown = true;
             Jam2Picker.Size = new Size(83, 30);
@@ -1129,7 +1278,7 @@
             // 
             Jam2Label.AutoSize = true;
             Jam2Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam2Label.Location = new Point(11, 134);
+            Jam2Label.Location = new Point(11, 168);
             Jam2Label.Name = "Jam2Label";
             Jam2Label.Size = new Size(88, 23);
             Jam2Label.TabIndex = 93;
@@ -1141,7 +1290,7 @@
             BrowseJam1Button.FlatAppearance.BorderColor = Color.Black;
             BrowseJam1Button.FlatStyle = FlatStyle.Flat;
             BrowseJam1Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam1Button.Location = new Point(544, 97);
+            BrowseJam1Button.Location = new Point(644, 133);
             BrowseJam1Button.Name = "BrowseJam1Button";
             BrowseJam1Button.Size = new Size(94, 29);
             BrowseJam1Button.TabIndex = 91;
@@ -1155,7 +1304,7 @@
             PlayJam1Button.BackgroundImageLayout = ImageLayout.Zoom;
             PlayJam1Button.FlatAppearance.BorderColor = Color.Black;
             PlayJam1Button.FlatStyle = FlatStyle.Flat;
-            PlayJam1Button.Location = new Point(505, 96);
+            PlayJam1Button.Location = new Point(605, 132);
             PlayJam1Button.Name = "PlayJam1Button";
             PlayJam1Button.Size = new Size(30, 30);
             PlayJam1Button.TabIndex = 90;
@@ -1167,7 +1316,7 @@
             // 
             Jam1Text.BorderStyle = BorderStyle.FixedSingle;
             Jam1Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam1Text.Location = new Point(245, 96);
+            Jam1Text.Location = new Point(345, 132);
             Jam1Text.Name = "Jam1Text";
             Jam1Text.ReadOnly = true;
             Jam1Text.Size = new Size(251, 30);
@@ -1180,7 +1329,7 @@
             Jam1Picker.CustomFormat = "HH:mm";
             Jam1Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam1Picker.Format = DateTimePickerFormat.Custom;
-            Jam1Picker.Location = new Point(151, 96);
+            Jam1Picker.Location = new Point(251, 132);
             Jam1Picker.Name = "Jam1Picker";
             Jam1Picker.ShowUpDown = true;
             Jam1Picker.Size = new Size(83, 30);
@@ -1191,45 +1340,45 @@
             // 
             Jam1Label.AutoSize = true;
             Jam1Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam1Label.Location = new Point(11, 98);
+            Jam1Label.Location = new Point(129, 132);
             Jam1Label.Name = "Jam1Label";
-            Jam1Label.Size = new Size(88, 23);
+            Jam1Label.Size = new Size(105, 23);
             Jam1Label.TabIndex = 88;
-            Jam1Label.Text = "Jam ke - 1";
+            Jam1Label.Text = "+ Jam ke - 1";
             // 
-            // BrowseJam0Button
+            // BrowseJamMasukButton
             // 
-            BrowseJam0Button.BackColor = Color.Gainsboro;
-            BrowseJam0Button.FlatAppearance.BorderColor = Color.Black;
-            BrowseJam0Button.FlatStyle = FlatStyle.Flat;
-            BrowseJam0Button.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseJam0Button.Location = new Point(544, 61);
-            BrowseJam0Button.Name = "BrowseJam0Button";
-            BrowseJam0Button.Size = new Size(94, 29);
-            BrowseJam0Button.TabIndex = 81;
-            BrowseJam0Button.Tag = "Jam0";
-            BrowseJam0Button.Text = "Browse";
-            BrowseJam0Button.UseVisualStyleBackColor = false;
+            BrowseJamMasukButton.BackColor = Color.Gainsboro;
+            BrowseJamMasukButton.FlatAppearance.BorderColor = Color.Black;
+            BrowseJamMasukButton.FlatStyle = FlatStyle.Flat;
+            BrowseJamMasukButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            BrowseJamMasukButton.Location = new Point(644, 97);
+            BrowseJamMasukButton.Name = "BrowseJamMasukButton";
+            BrowseJamMasukButton.Size = new Size(94, 29);
+            BrowseJamMasukButton.TabIndex = 81;
+            BrowseJamMasukButton.Tag = "Jam0";
+            BrowseJamMasukButton.Text = "Browse";
+            BrowseJamMasukButton.UseVisualStyleBackColor = false;
             // 
-            // PlayJam0Button
+            // PlayJamMasukButton
             // 
-            PlayJam0Button.BackColor = Color.Gainsboro;
-            PlayJam0Button.BackgroundImageLayout = ImageLayout.Zoom;
-            PlayJam0Button.FlatAppearance.BorderColor = Color.Black;
-            PlayJam0Button.FlatStyle = FlatStyle.Flat;
-            PlayJam0Button.Location = new Point(505, 60);
-            PlayJam0Button.Name = "PlayJam0Button";
-            PlayJam0Button.Size = new Size(30, 30);
-            PlayJam0Button.TabIndex = 80;
-            PlayJam0Button.TabStop = false;
-            PlayJam0Button.Tag = "Jam0";
-            PlayJam0Button.UseVisualStyleBackColor = false;
+            PlayJamMasukButton.BackColor = Color.Gainsboro;
+            PlayJamMasukButton.BackgroundImageLayout = ImageLayout.Zoom;
+            PlayJamMasukButton.FlatAppearance.BorderColor = Color.Black;
+            PlayJamMasukButton.FlatStyle = FlatStyle.Flat;
+            PlayJamMasukButton.Location = new Point(605, 96);
+            PlayJamMasukButton.Name = "PlayJamMasukButton";
+            PlayJamMasukButton.Size = new Size(30, 30);
+            PlayJamMasukButton.TabIndex = 80;
+            PlayJamMasukButton.TabStop = false;
+            PlayJamMasukButton.Tag = "Jam0";
+            PlayJamMasukButton.UseVisualStyleBackColor = false;
             // 
             // Jam0Text
             // 
             Jam0Text.BorderStyle = BorderStyle.FixedSingle;
             Jam0Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam0Text.Location = new Point(245, 60);
+            Jam0Text.Location = new Point(345, 96);
             Jam0Text.Name = "Jam0Text";
             Jam0Text.ReadOnly = true;
             Jam0Text.Size = new Size(251, 30);
@@ -1242,23 +1391,24 @@
             Jam0Picker.CustomFormat = "HH:mm";
             Jam0Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Jam0Picker.Format = DateTimePickerFormat.Custom;
-            Jam0Picker.Location = new Point(151, 60);
+            Jam0Picker.Location = new Point(251, 96);
             Jam0Picker.Name = "Jam0Picker";
             Jam0Picker.ShowUpDown = true;
             Jam0Picker.Size = new Size(83, 30);
             Jam0Picker.TabIndex = 77;
             Jam0Picker.Tag = "Jam0";
             // 
-            // Jam0Label
+            // JamMasukLabel
             // 
-            Jam0Label.AutoSize = true;
-            Jam0Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam0Label.Location = new Point(11, 62);
-            Jam0Label.Name = "Jam0Label";
-            Jam0Label.Size = new Size(88, 23);
-            Jam0Label.TabIndex = 78;
-            Jam0Label.Tag = "0";
-            Jam0Label.Text = "Jam ke - 0";
+            JamMasukLabel.AutoSize = true;
+            JamMasukLabel.BackColor = Color.Transparent;
+            JamMasukLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            JamMasukLabel.Location = new Point(11, 96);
+            JamMasukLabel.Name = "JamMasukLabel";
+            JamMasukLabel.Size = new Size(94, 23);
+            JamMasukLabel.TabIndex = 78;
+            JamMasukLabel.Tag = "0";
+            JamMasukLabel.Text = "Jam Masuk";
             // 
             // panel3
             // 
@@ -1270,7 +1420,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(654, 52);
+            panel3.Size = new Size(753, 52);
             panel3.TabIndex = 86;
             // 
             // label28
@@ -1278,7 +1428,7 @@
             label28.AutoSize = true;
             label28.BackColor = Color.Transparent;
             label28.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label28.Location = new Point(141, 13);
+            label28.Location = new Point(128, 13);
             label28.Name = "label28";
             label28.Size = new Size(14, 23);
             label28.TabIndex = 159;
@@ -1301,7 +1451,7 @@
             UbahButton.FlatAppearance.BorderColor = Color.Black;
             UbahButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             UbahButton.ForeColor = Color.White;
-            UbahButton.Location = new Point(163, 6);
+            UbahButton.Location = new Point(148, 6);
             UbahButton.Name = "UbahButton";
             UbahButton.Size = new Size(87, 38);
             UbahButton.TabIndex = 83;
@@ -1316,20 +1466,60 @@
             HariText.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             HariText.Location = new Point(12, 13);
             HariText.Name = "HariText";
-            HariText.Size = new Size(655, 56);
+            HariText.Size = new Size(754, 56);
             HariText.TabIndex = 86;
             HariText.Text = "Senin - Jadwal Normal";
             HariText.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // InputDataForm
+            // button2
+            // 
+            button2.BackColor = Color.Gainsboro;
+            button2.BackgroundImageLayout = ImageLayout.Zoom;
+            button2.FlatAppearance.BorderColor = Color.Black;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(605, 60);
+            button2.Name = "button2";
+            button2.Size = new Size(30, 30);
+            button2.TabIndex = 180;
+            button2.TabStop = false;
+            button2.Tag = "Jam0";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(11, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(125, 23);
+            label5.TabIndex = 181;
+            label5.Text = "Indonesia Raya";
+            // 
+            // BrowseLaguButton
+            // 
+            BrowseLaguButton.BackColor = Color.Gainsboro;
+            BrowseLaguButton.FlatAppearance.BorderColor = Color.Black;
+            BrowseLaguButton.FlatStyle = FlatStyle.Flat;
+            BrowseLaguButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            BrowseLaguButton.Location = new Point(644, 58);
+            BrowseLaguButton.Name = "BrowseLaguButton";
+            BrowseLaguButton.Size = new Size(94, 29);
+            BrowseLaguButton.TabIndex = 182;
+            BrowseLaguButton.Tag = "Jam0";
+            BrowseLaguButton.Text = "Browse";
+            BrowseLaguButton.UseVisualStyleBackColor = false;
+            // 
+            // InputJadwalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(680, 722);
+            ClientSize = new Size(779, 798);
             Controls.Add(HariText);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "InputDataForm";
+            Name = "InputJadwalForm";
             StartPosition = FormStartPosition.CenterParent;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -1342,11 +1532,11 @@
         private Panel panel2;
         private Button SaveButton;
         private Button SimpanButton;
-        private Button BrowseJam0Button;
-        private Button PlayJam0Button;
+        private Button BrowseJamMasukButton;
+        private Button PlayJamMasukButton;
         private TextBox Jam0Text;
         private DateTimePicker Jam0Picker;
-        private Label Jam0Label;
+        private Label JamMasukLabel;
         private Label label2;
         private Button UbahButton;
         private Panel panel3;
@@ -1431,5 +1621,18 @@
         private TextBox JamKepulanganText;
         private DateTimePicker JamKepulanganPicker;
         private Label JamKepulanganLabel;
+        private Label label1;
+        private Button BrowseIndonesiaRayaButton;
+        private Button PlayIndonesiaRayaButton;
+        private TextBox IndonesiaRayaText;
+        private DateTimePicker IndonesiaRayaPicker;
+        private Label IndonesiaRayaLabel;
+        private Label label3;
+        private TextBox textBox1;
+        private DateTimePicker dateTimePicker1;
+        private Label label4;
+        private Label label5;
+        private Button button2;
+        private Button BrowseLaguButton;
     }
 }

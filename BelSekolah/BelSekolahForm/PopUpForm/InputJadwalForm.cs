@@ -86,7 +86,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     { "Jam Ke - 5.mp3", Jam5Text },
                     { "Jam Ke - 6.mp3", Jam6Text },
                     { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
-                    { "Jam Ke - 7.mp3", Jam7Text },
+                    { "Jam Ke - 7.mp3", Jam7Text }, 
                     { "Jam Ke - 8.mp3", Jam8Text },
                     { "Akhir Pekan.mp3", JamKepulanganText }
                 };
@@ -156,7 +156,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             List<Button> buttons = new List<Button>
             {
-                PlayJam0Button, PlayJam1Button, PlayJam2Button, PlayJam3Button, PlayJam4Button,
+                PlayJamMasukButton, PlayJam1Button, PlayJam2Button, PlayJam3Button, PlayJam4Button,
                 PlayJam5Button, PlayJam6Button, PlayJam7Button, PlayJam8Button, PlayJam9Button,
                 PlayJam10Button, PlayJamKepulanganButton, PlayJamIstirahat1Button, PlayJamIstirahat2Button
             };
@@ -192,7 +192,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             List<Label> labelControls = new List<Label>
             {
-                Jam0Label, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
+                JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
                 Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
             };
@@ -245,7 +245,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {   
             List<Label> labels = new List<Label>()
             {
-                Jam0Label, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
+                JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
                 Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
             };
@@ -355,7 +355,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void RegisterControlEvent()
         {
-            BrowseJam0Button.Click += BrowseButton_Click;
+            BrowseJamMasukButton.Click += BrowseButton_Click;
             BrowseJam1Button.Click += BrowseButton_Click;
             BrowseJam2Button.Click += BrowseButton_Click;
             BrowseJam3Button.Click += BrowseButton_Click;
@@ -371,7 +371,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             BrowseKepulanganButton.Click += BrowseButton_Click;
 
 
-            PlayJam0Button.Click += PlayJamButton_Click;
+            PlayJamMasukButton.Click += PlayJamButton_Click;
             PlayJam1Button.Click += PlayJamButton_Click;
             PlayJam2Button.Click += PlayJamButton_Click;
             PlayJam3Button.Click += PlayJamButton_Click;

@@ -92,6 +92,7 @@ namespace BelSekolah.BelSekolahForm
 
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
+
         }
 
         private void CustomStyleGrid(DataGridView grid) 
@@ -124,7 +125,7 @@ namespace BelSekolah.BelSekolahForm
             var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
             if (stopSoundIsPlayed != null && (stopSoundIsPlayed.Waktu - timeNow).TotalSeconds <= 5)
             {
-                StopAudio();
+                StopAudio(); 
             }
 
             if (data != null)
@@ -475,7 +476,6 @@ namespace BelSekolah.BelSekolahForm
                 HariID = _hariID != 0 ? _hariID : 0,
                 JenisJadwal = value,
             };
-
             _jadwalDal.Update(data);
         }
 

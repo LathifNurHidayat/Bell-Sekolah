@@ -31,6 +31,15 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             InitialCombo();
             AturButton.Click += AturButton_Click;
+            IntervalText.KeyPress += Angka_KeyPress;
+            JamIstirahat1Text.KeyPress += Angka_KeyPress;
+            JamIstirahat2Text.KeyPress += Angka_KeyPress;
+        }
+
+        private void Angka_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
         }
 
         private void AturButton_Click(object? sender, EventArgs e)
