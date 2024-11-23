@@ -24,9 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BelSekolahForm\" />
-    <Folder Include="BelSekolahBackEnd\" />
-    <Folder Include="BelSekolahDatabase\" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
   </ItemGroup>
 
 </Project>
