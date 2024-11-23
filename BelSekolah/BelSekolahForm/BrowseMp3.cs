@@ -1,4 +1,5 @@
 ﻿using BelSekolah.BelSekolahDatabase;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,97 @@ namespace BelSekolah.BelSekolahForm
         {
             browse_button.Click += Browse_button_Click;
             Save_button.Click += Save_button_Click;
+            SoundList_box.SelectedIndexChanged += SoundList_box_SelectedIndexChanged;
+            Play_button.Click += Play_button_Click;
         }
+
+        // Event handler ketika tombol Play diklik
+        private void Play_button_Click(object? sender, EventArgs e)
+        {
+            // Pastikan ada nama file di TextBox (SoundPlay_text)
+            if (!string.IsNullOrEmpty(SoundPlay_text.Text))
+            {
+                // Ambil teks yang ada di TextBox
+                string selectedFile = SoundPlay_text.Text;
+
+                // Periksa apakah format string benar, yaitu ada " - " yang memisahkan FileName dan FilePath
+                if (selectedFile.Contains(" - "))
+                {
+                    var parts = selectedFile.Split(" - ");
+                    if (parts.Length == 2)
+                    {
+                        string fileName = parts[0];  // Nama file
+                        string filePath = parts[1];  // Path file
+
+                        // Panggil fungsi untuk memutar suara
+                        PlaySound(filePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Format file tidak valid. Pastikan formatnya adalah 'FileName - FilePath'.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Format file tidak valid. Pastikan formatnya adalah 'FileName - FilePath'.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pilih suara terlebih dahulu.");
+            }
+        }
+
+        // Event handler untuk ListBox ketika item dipilih
+        private void SoundList_box_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (SoundList_box.SelectedItem != null)
+            {
+                // Ambil item yang dipilih dari ListBox
+                string selectedItem = SoundList_box.SelectedItem.ToString();
+
+                // Menampilkan nama file atau detail lainnya di TextBox
+                SoundPlay_text.Text = selectedItem;
+
+                // Ambil nama file dan path dari selectedItem
+                var parts = selectedItem.Split(" - "); // Asumsi format: "FileName - FilePath"
+                if (parts.Length == 2)
+                {
+                    string fileName = parts[0];
+                    string filePath = parts[1];
+
+                    // Memutar suara dengan filePath
+                    PlaySound(filePath);
+                }
+            }
+        }
+
+        // Fungsi untuk memutar suara (misalnya menggunakan NAudio)
+        private void PlaySound(string filePath)
+        {
+            // Memastikan file ada
+            if (File.Exists(filePath))
+            {
+                // Menggunakan NAudio untuk memutar file
+                using (var audioFile = new NAudio.Wave.AudioFileReader(filePath))
+                using (var outputDevice = new NAudio.Wave.WaveOutEvent())
+                {
+                    outputDevice.Init(audioFile);
+                    outputDevice.Play();
+                    while (outputDevice.PlaybackState == NAudio.Wave.PlaybackState.Playing)
+                    {
+                        // Tunggu sampai audio selesai diputar
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("File tidak ditemukan.");
+            }
+        }
+
+
+
         #region Browse
         private void Browse_button_Click(object? sender, EventArgs e)
         {
@@ -68,8 +159,9 @@ namespace BelSekolah.BelSekolahForm
         }
         #endregion
 
-        #region Display List Box
-        private void DisplaySavedSounds()
+        #region Display dataGrid
+
+       private void DisplaySavedSounds()
         {
             database db = new database();
             var soundsList = db.GetSounds();
@@ -80,20 +172,21 @@ namespace BelSekolah.BelSekolahForm
                 SoundList_box.Items.Add(sound);
             }
         }
-        #endregion
 
-
-        /* private void DisplaySavedSounds() // kalau menggunakan data grid
+       /* private void DisplaySavedSounds() 
          {
              database db = new database();
              var soundsList = db.GetSounds();
 
-             dataGridView1.Rows.Clear();
+             Sound_grid.Rows.Clear();
              foreach (var sound in soundsList)
              {
-                 var soundData = sound.Split(" - "); // Memisahkan FileName dan FilePath
-                 dataGridView1.Rows.Add(soundData[0], soundData[1]);
+                 var soundData = sound.Split(" - "); 
+                 Sound_grid.Rows.Add(soundData[0], soundData[1]);
              }
          }*/
+        #endregion
+
+
     }
 }

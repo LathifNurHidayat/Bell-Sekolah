@@ -32,6 +32,10 @@
             browse_button = new Button();
             SoundList_box = new ListBox();
             Save_button = new Button();
+            Sound_grid = new DataGridView();
+            Play_button = new Button();
+            SoundPlay_text = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)Sound_grid).BeginInit();
             SuspendLayout();
             // 
             // sound_text
@@ -68,11 +72,39 @@
             Save_button.Text = "save";
             Save_button.UseVisualStyleBackColor = true;
             // 
+            // Sound_grid
+            // 
+            Sound_grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Sound_grid.Location = new Point(98, 218);
+            Sound_grid.Name = "Sound_grid";
+            Sound_grid.RowTemplate.Height = 25;
+            Sound_grid.Size = new Size(352, 150);
+            Sound_grid.TabIndex = 4;
+            // 
+            // Play_button
+            // 
+            Play_button.Location = new Point(694, 21);
+            Play_button.Name = "Play_button";
+            Play_button.Size = new Size(40, 23);
+            Play_button.TabIndex = 5;
+            Play_button.Text = "Play";
+            Play_button.UseVisualStyleBackColor = true;
+            // 
+            // SoundPlay_text
+            // 
+            SoundPlay_text.Location = new Point(535, 21);
+            SoundPlay_text.Name = "SoundPlay_text";
+            SoundPlay_text.Size = new Size(153, 23);
+            SoundPlay_text.TabIndex = 6;
+            // 
             // BrowseMp3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 443);
+            Controls.Add(SoundPlay_text);
+            Controls.Add(Play_button);
+            Controls.Add(Sound_grid);
             Controls.Add(Save_button);
             Controls.Add(SoundList_box);
             Controls.Add(browse_button);
@@ -80,6 +112,7 @@
             Name = "BrowseMp3";
             Text = "BrowseMp3";
             Load += BrowseMp3_Load;
+            ((System.ComponentModel.ISupportInitialize)Sound_grid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -90,5 +123,8 @@
         private Button browse_button;
         private ListBox SoundList_box;
         private Button Save_button;
+        private DataGridView Sound_grid;
+        private Button Play_button;
+        private TextBox SoundPlay_text;
     }
 }
