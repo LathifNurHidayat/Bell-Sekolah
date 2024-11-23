@@ -36,13 +36,10 @@ namespace BelSekolah.BelSekolahForm
             Play_button.Click += Play_button_Click;
         }
 
-        // Event handler ketika tombol Play diklik
         private void Play_button_Click(object? sender, EventArgs e)
         {
-            // Pastikan ada nama file di TextBox (SoundPlay_text)
             if (!string.IsNullOrEmpty(SoundPlay_text.Text))
             {
-                // Ambil teks yang ada di TextBox
                 string selectedFile = SoundPlay_text.Text;
 
                 // Periksa apakah format string benar, yaitu ada " - " yang memisahkan FileName dan FilePath
@@ -73,7 +70,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-        // Event handler untuk ListBox ketika item dipilih
         private void SoundList_box_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (SoundList_box.SelectedItem != null)
@@ -96,11 +92,8 @@ namespace BelSekolah.BelSekolahForm
                 }
             }
         }
-
-        // Fungsi untuk memutar suara (misalnya menggunakan NAudio)
         private void PlaySound(string filePath)
         {
-            // Memastikan file ada
             if (File.Exists(filePath))
             {
                 // Menggunakan NAudio untuk memutar file
