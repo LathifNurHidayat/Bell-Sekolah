@@ -86,9 +86,6 @@ namespace BelSekolah.BelSekolahForm
                 {
                     string fileName = parts[0];
                     string filePath = parts[1];
-
-                    // Memutar suara dengan filePath
-                    PlaySound(filePath);
                 }
             }
         }
