@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BelSekolah.BelSekolahBackEnd.Dal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,17 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BelSekolah
+namespace BelSekolah.BelSekolahForm
 {
-    public partial class LoadForm : Form
+    public partial class MainForm : Form
     {
-        public LoadForm()
+        private readonly CekDal cekDal;
+        public MainForm()
         {
             InitializeComponent();
-            this.ControlBox = false;
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
+            cekDal = new CekDal();
         }
-
     }
 }

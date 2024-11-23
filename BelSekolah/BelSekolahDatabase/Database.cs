@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System;
 using System.Data.SQLite;
+using NAudio.Wave;
+using BelSekolah.BelSekolahDatabase.Helper;
 
 namespace BelSekolah.BelSekolahDatabase
 {
     public class database
     {
-        private string connectionString = "Data Source=sounds.db;Version=3;";
-
+        private WaveOutEvent _waveOutEvent;
+        private Mp3FileReader _mp3FileReader;
         public void CreateTable()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 connection.Open();
 
                 string createTableQuery = @"
                     CREATE TABLE IF NOT EXISTS Sounds (
                         SoundID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        FileName TEXT,
-                        FilePath TEXT
+                        FileName TEXT NOT NULL,
+                        SoundFile BLOB NOT NULL
                     );";
 
                 using (SQLiteCommand command = new SQLiteCommand(createTableQuery, connection))
@@ -32,18 +34,20 @@ namespace BelSekolah.BelSekolahDatabase
             }
         }
         #region simpan sound 
-        public void SaveSound(string fileName, string filePath)
+        public void SaveSound(string soundFile, string fileName)
         {
-            string query = "INSERT INTO Sounds (FileName, FilePath) VALUES (@FileName, @FilePath)";
+            byte[] soundFileByte = File.ReadAllBytes(soundFile);
 
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            string query = "INSERT INTO Sounds (FileName, SoundFile) VALUES (@FileName, @SoundFile)";
+
+            using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 connection.Open();
 
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@FileName", fileName);
-                    command.Parameters.AddWithValue("@FilePath", filePath);
+                    command.Parameters.AddWithValue("@SoundFile", soundFileByte);
                     command.ExecuteNonQuery();
                 }
             }
@@ -55,9 +59,9 @@ namespace BelSekolah.BelSekolahDatabase
         {
             List<string> soundsList = new List<string>();
 
-            string query = "SELECT FileName, FilePath FROM Sounds";
+            string query = "SELECT FileName, SoundFile FROM Sounds";
 
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 connection.Open();
 
@@ -78,7 +82,39 @@ namespace BelSekolah.BelSekolahDatabase
             return soundsList;
         }
         #endregion 
+
+        public void PlaySoundFromDatabase(int soundId)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+                string query = @"SELECT SoundFile FROM Sounds WHERE SoundID = @SoundID";
+                using (var cmd = new SQLiteCommand(query, Conn))
+                {
+                    cmd.Parameters.AddWithValue("@SoundID", soundId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            byte[] fileData = (byte[])reader["SoundFile"];
+                            var memori = new MemoryStream(fileData);
+
+                            _mp3FileReader = new Mp3FileReader(memori);
+                            _waveOutEvent = new WaveOutEvent();
+
+
+                            _waveOutEvent.Init(_mp3FileReader);
+                            _waveOutEvent.Play();
+                        }
+                    }
+
+                }
+            }
+        }
+
+
     }
 }
-
+ 
 
