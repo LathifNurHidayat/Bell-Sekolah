@@ -1,3 +1,5 @@
+using BelSekolah.BelSekolahForm;
+
 namespace BelSekolah
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace BelSekolah
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoadForm());
+            Application.Run(new BrowseMp3());
         }
     }
 }
