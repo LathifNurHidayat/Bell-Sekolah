@@ -52,7 +52,7 @@ namespace BelSekolah.BelSekolahDatabase
                 }
             }
         }
-        #endregion 
+        #endregion
 
         #region file sound
         public List<string> GetSounds()
