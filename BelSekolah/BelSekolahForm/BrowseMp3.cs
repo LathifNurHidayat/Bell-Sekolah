@@ -18,7 +18,7 @@ namespace BelSekolah.BelSekolahForm
         public BrowseMp3()
         {
             InitializeComponent();
-            database db = new database();
+            dbone db = new dbone();
             db.CreateTable();
         }
         private void BrowseMp3_Load(object sender, EventArgs e)
@@ -37,37 +37,33 @@ namespace BelSekolah.BelSekolahForm
         }
 
         private void Play_button_Click(object? sender, EventArgs e)
-        {
+        { 
+
             if (!string.IsNullOrEmpty(SoundPlay_text.Text))
             {
                 string selectedFile = SoundPlay_text.Text;
 
-                // Periksa apakah format string benar, yaitu ada " - " yang memisahkan FileName dan FilePath
-                if (selectedFile.Contains(" - "))
-                {
-                    var parts = selectedFile.Split(" - ");
-                    if (parts.Length == 2)
-                    {
-                        string fileName = parts[0];  // Nama file
-                        string filePath = parts[1];  // Path file
+                // Menentukan direktori tempat file audio disimpan (sesuaikan dengan direktori Anda)
+                string directory = @"C:\Users\Lenovo\source\repos\Bel_Sekolah\BelSekolah\sound";  // Gantilah dengan path yang sesuai
+                string filePath = Path.Combine(directory, selectedFile);
 
-                        // Panggil fungsi untuk memutar suara
-                        PlaySound(filePath);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Format file tidak valid. Pastikan formatnya adalah 'FileName - FilePath'.");
-                    }
+                // Periksa apakah file ada di path tersebut
+                if (File.Exists(filePath))
+                {
+                    // Panggil fungsi untuk memutar suara
+                    PlaySound(filePath);
                 }
                 else
                 {
-                    MessageBox.Show("Format file tidak valid. Pastikan formatnya adalah 'FileName - FilePath'.");
+                    MessageBox.Show("File tidak ditemukan. Periksa path file.");
                 }
             }
             else
             {
                 MessageBox.Show("Pilih suara terlebih dahulu.");
             }
+
+
         }
 
         private void SoundList_box_SelectedIndexChanged(object? sender, EventArgs e)
@@ -91,7 +87,8 @@ namespace BelSekolah.BelSekolahForm
         }
         private void PlaySound(string filePath)
         {
-            if (File.Exists(filePath))
+
+            try
             {
                 // Menggunakan NAudio untuk memutar file
                 using (var audioFile = new NAudio.Wave.AudioFileReader(filePath))
@@ -105,9 +102,9 @@ namespace BelSekolah.BelSekolahForm
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("File tidak ditemukan.");
+                MessageBox.Show($"Terjadi kesalahan saat memutar audio: {ex.Message}");
             }
         }
 
@@ -140,12 +137,13 @@ namespace BelSekolah.BelSekolahForm
                 return;
             }
             string fileName = System.IO.Path.GetFileName(filePath);
-            database db = new database();
-            db.SaveSound(fileName, filePath);
-
+            dbone db = new dbone();
+            db.SsaveSound(fileName, filePath);
             MessageBox.Show("data berhasil di simpan");
+            SoundList_box.Items.Add(fileName);
+            sound_text.Text = "";
 
-            DisplaySavedSounds();
+            //DisplaySavedSounds();
         }
         #endregion
 
@@ -153,7 +151,7 @@ namespace BelSekolah.BelSekolahForm
 
        private void DisplaySavedSounds()
         {
-            database db = new database();
+            dbone db = new dbone();
             var soundsList = db.GetSounds();
 
             SoundList_box.Items.Clear();
