@@ -15,6 +15,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         public EditJadwalForm()
         {
             InitializeComponent();
+            PausePlayButton.Text = "▶";
+            PausePlayButton.Text = "■";
+
+        }
+
+        private void EditJadwalForm_Load(object sender, EventArgs e)
+        {
+        
         }
     }
 }

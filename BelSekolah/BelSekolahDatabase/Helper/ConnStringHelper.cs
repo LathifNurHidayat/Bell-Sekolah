@@ -11,7 +11,7 @@ namespace BelSekolah.BelSekolahDatabase.Helper
     {
         public static string GetConn()
         {
-            return "Data Source=sounds.db;Version=3;";
+            return "Data Source=sounds.db; Version=3;";
         }
     }
 }

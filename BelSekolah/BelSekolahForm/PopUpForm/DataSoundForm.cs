@@ -1,5 +1,4 @@
-﻿using BelSekolah.BelSekolahBackEnd.Dal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BelSekolah.BelSekolahForm
+namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    public partial class MainForm : Form
+    public partial class DataSoundForm : Form
     {
-        private readonly CekDal cekDal;
-        public MainForm()
+        public DataSoundForm()
         {
             InitializeComponent();
-            cekDal = new CekDal();
         }
     }
 }

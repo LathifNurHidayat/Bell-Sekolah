@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="AddButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAALAAAACwARRqq2kAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAADI0lEQVRIS6WV60tTYRzHB4VIVPTGecvNRb7J6A+oN6PhdHNuyxi9qaAILMGyMlMQi8oyrCTMpY05
+        0zc5zU2KVBIvGGSFl00dqPNs81KoTHexlvPy6zync/J4draWfeHzas/z/Tzndy7jBAs3pyeTm93hjsnt
+        W4nNH+6NzjMdJn/6/yRnd+2Outi+xs1qBVwAsflmHJM9+fZoBLlk++Feev8TFVNsCkhumkfJpeGFX2YX
+        8B5YbQkllo2EuyN/ioMKcARqL8ItUHvqE8uX9pFV7OGV4uV4MQU3qy1cAYmnnqxiD3VyiuiczpCC+OIx
+        hsDrIqvYQy8nuDMCcQVfIO5GH0F8sQX2lzgIEkpnQFDhZgqArGJPgIAB/8m3gEImZBV72ErphBB4BOrl
+        t4JK71Oyij30sgnM4ccwDOh4PB5gxDY0D6cSdRBJVoQOXVDQgnkaPzmW6OhNTkunfbUbMba4XokL9qJ9
+        Kr0qQlwnvZzyUtIobZDfTzcoT0v1qhiilB66gA1qRAcqvc0cPexAe8S16eUiTerq8SoxIHAByAxKxDpO
+        nUSviiLKUehl7wamXGbr9Hc6llmXzeHeaD+mXdiD1qfoJN1UMYuAApO+zuSHLZhbXjuD1qKTM8sv6LOg
+        4rMaMownmJIBYZdwZxgj+roSVw270MzpY6EYnBgEn88H13vymQKQGRXntgjyDJinusfuolPWPd9OnB6/
+        ocxyhNlqJgSFvUWBAoOyY4uA7TF1Op0dv8cjbaJK0Vj6xwdgyGoC+5SdEEwsWWFwfggaxhrpgoW/j6hs
+        qhUJ8JvbRgnUvVVbDoEEVJy+xU2BUeEL+Ngx4T+a/kgIaqXPKYGoOhWuGK9B/ptCGLGNEgLtsA6KPtyC
+        s63n6VcwziH+C1iKKXiPZ2eQQKSRH6EEdELeA6PiGUdwD+PzH05iwa4EvWi8Ku8h4ipqJJNMQXO/AeZc
+        c8yTQ4ZB6Zc1nUxC+8KOTCdLEmnEfqaE5UUD/NORS277t4hrFEdFmrQfwQTo5BlGxVVy+fYi1AkjxXXp
+        2hRtmlP0Im1d8krux8vH0czlLfKD5DI8HM4vcjMIylFbU2IAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>
