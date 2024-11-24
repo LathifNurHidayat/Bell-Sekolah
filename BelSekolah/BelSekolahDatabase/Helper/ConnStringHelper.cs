@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
@@ -13,5 +14,6 @@ namespace BelSekolah.BelSekolahDatabase.Helper
         {
             return "Data Source=sounds.db;Version=3;";
         }
+
     }
 }

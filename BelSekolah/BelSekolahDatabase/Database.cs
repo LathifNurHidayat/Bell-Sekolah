@@ -20,12 +20,20 @@ namespace BelSekolah.BelSekolahDatabase
             {
                 connection.Open();
 
+                // Hapus tabel jika sudah ada
+               // string dropTableQuery = "DROP TABLE IF EXISTS Sounds;";
+                using (SQLiteCommand command = new SQLiteCommand(connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                // Membuat tabel baru
                 string createTableQuery = @"
-                    CREATE TABLE IF NOT EXISTS Sounds (
-                        SoundID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        FileName TEXT NOT NULL,
-                        SoundFile BLOB NOT NULL
-                    );";
+            CREATE TABLE IF NOT EXISTS Sounds (
+                SoundID INTEGER PRIMARY KEY AUTOINCREMENT,
+                FileName TEXT NOT NULL,
+                SoundFile BLOB NOT NULL
+            );";
 
                 using (SQLiteCommand command = new SQLiteCommand(createTableQuery, connection))
                 {
@@ -36,24 +44,32 @@ namespace BelSekolah.BelSekolahDatabase
         #region simpan sound 
         public void SaveSound(string soundFile, string fileName)
         {
-            byte[] soundFileByte = File.ReadAllBytes(soundFile);
-
-            string query = "INSERT INTO Sounds (FileName, SoundFile) VALUES (@FileName, @SoundFile)";
-
-            using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
+            // Cek jika file ada
+            if (File.Exists(soundFile))
             {
-                connection.Open();
+                byte[] soundFileByte = File.ReadAllBytes(soundFile);
 
-                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                string query = "INSERT INTO Sounds (FileName, SoundFile) VALUES (@FileName, @SoundFile)";
+
+                using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
                 {
-                    command.Parameters.AddWithValue("@FileName", fileName);
-                    command.Parameters.AddWithValue("@SoundFile", soundFileByte);
-                    command.ExecuteNonQuery();
+                    connection.Open();
+
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@FileName", fileName);
+                        command.Parameters.AddWithValue("@SoundFile", soundFileByte);
+                        command.ExecuteNonQuery();
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("File tidak ditemukan: " + soundFile);
             }
         }
         #endregion
-
+        
         #region file sound
         public List<string> GetSounds()
         {
