@@ -72,7 +72,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "LoadForm";
-            Load += LoadForm_Load;
+            StartPosition = FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

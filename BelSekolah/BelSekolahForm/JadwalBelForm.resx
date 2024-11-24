@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
-    Microsoft ResX Schema 
+    Microsoft ResX Schema
 
     Version 2.0
 
@@ -48,7 +48,7 @@
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
@@ -121,7 +121,7 @@
   <data name="AddButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        rQAAAK0BVE7WMAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMjSURBVEhLpZXr
+        qwAAAKsB1E2SqwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMjSURBVEhLpZXr
         S1NhHMcHhUhU9MZ5y81FvsnoD6g3o+F0c27LGL2poAgswbIyUxCLyjKsJMyljTnTNznNTYpUEi8YZIWX
         TR2o82zzUqhMd7GW8/LrPKdz8nh2tpZ94fNqz/P9POd3LuMECzenJ5Ob3eGOye1bic0f7o3OMx0mf/r/
         JGd37Y662L7GzWoFXACx+WYckz359mgEuWT74V56/xMVU2wKSG6aR8ml4YVfZhfwHlhtCSWWjYS7I3+K
@@ -138,7 +138,4 @@
         y8fRzOUt8oPkMjwczi9yMwjKUVtTYgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

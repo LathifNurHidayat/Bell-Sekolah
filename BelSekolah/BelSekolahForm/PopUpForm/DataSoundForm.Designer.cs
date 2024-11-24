@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSoundForm));
             panel2 = new Panel();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            DataSoundGrid = new DataGridView();
             panel1 = new Panel();
             AddButton = new Button();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataSoundGrid).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(555, 78);
+            panel2.Size = new Size(555, 63);
             panel2.TabIndex = 2;
             // 
             // label1
@@ -53,32 +54,32 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Yi Baiti", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(184, 18);
+            label1.Location = new Point(184, 10);
             label1.Name = "label1";
             label1.Size = new Size(187, 40);
             label1.TabIndex = 3;
             label1.Text = "Data Sound";
             // 
-            // dataGridView1
+            // DataSoundGrid
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(16, 15);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(498, 309);
-            dataGridView1.TabIndex = 3;
+            DataSoundGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DataSoundGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataSoundGrid.Location = new Point(16, 15);
+            DataSoundGrid.Name = "DataSoundGrid";
+            DataSoundGrid.RowHeadersWidth = 51;
+            DataSoundGrid.RowTemplate.Height = 29;
+            DataSoundGrid.Size = new Size(498, 310);
+            DataSoundGrid.TabIndex = 3;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.Gainsboro;
             panel1.Controls.Add(AddButton);
-            panel1.Controls.Add(dataGridView1);
-            panel1.Location = new Point(12, 90);
+            panel1.Controls.Add(DataSoundGrid);
+            panel1.Location = new Point(12, 81);
             panel1.Name = "panel1";
-            panel1.Size = new Size(531, 400);
+            panel1.Size = new Size(531, 401);
             panel1.TabIndex = 4;
             // 
             // AddButton
@@ -100,14 +101,18 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(555, 502);
+            ClientSize = new Size(555, 494);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "DataSoundForm";
-            Text = "DataSound";
+            StartPosition = FormStartPosition.CenterParent;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataSoundGrid).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -116,7 +121,7 @@
 
         private Panel panel2;
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView DataSoundGrid;
         private Panel panel1;
         private Button AddButton;
     }

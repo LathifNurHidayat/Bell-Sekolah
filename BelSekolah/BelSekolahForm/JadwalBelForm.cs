@@ -13,16 +13,17 @@ namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
     {
-        public JadwalBelForm()
+        private Form mainForm;
+        public JadwalBelForm(Form mainForm)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
+            this.WindowState = FormWindowState.Maximized;
+
+            RegisterControlEvent();
         }
 
-        private void JadwalBelForm_Load(object sender, EventArgs e)
-        {
-            evenbutton();
-        }
-        private void evenbutton()
+        private void RegisterControlEvent()
         {
             AddButton.Click += AddButton_Click;
         }
@@ -33,5 +34,5 @@ namespace BelSekolah.BelSekolahForm
             tambah.Show();
         }
 
-    }
+    } 
 }
