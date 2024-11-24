@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BelSekolah.BelSekolahForm.PopUpForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +17,21 @@ namespace BelSekolah.BelSekolahForm
         {
             InitializeComponent();
         }
+
+        private void JadwalBelForm_Load(object sender, EventArgs e)
+        {
+            evenbutton();
+        }
+        private void evenbutton()
+        {
+            AddButton.Click += AddButton_Click;
+        }
+
+        private void AddButton_Click(object? sender, EventArgs e)
+        {
+            InputJadwalForm tambah = new InputJadwalForm();
+            tambah.Show();
+        }
+
     }
 }

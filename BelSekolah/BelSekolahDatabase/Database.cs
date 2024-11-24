@@ -14,7 +14,7 @@ namespace BelSekolah.BelSekolahDatabase
     {
         private WaveOutEvent _waveOutEvent;
         private Mp3FileReader _mp3FileReader;
-        public void CreateTable()
+       /* public void CreateTable()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -129,7 +129,7 @@ namespace BelSekolah.BelSekolahDatabase
             }
         }
 
-
+*/
     }
 }
  
