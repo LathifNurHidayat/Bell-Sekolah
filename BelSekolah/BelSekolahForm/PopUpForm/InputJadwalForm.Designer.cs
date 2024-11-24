@@ -54,6 +54,7 @@
             SetiapSeninCheckBox = new CheckBox();
             panel1 = new Panel();
             WaktuPicker = new DateTimePicker();
+            JenisJadwalLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)AturVolumeTrack).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -66,7 +67,7 @@
             SelectSoundButton.BackgroundImageLayout = ImageLayout.Zoom;
             SelectSoundButton.FlatAppearance.BorderColor = Color.Black;
             SelectSoundButton.FlatStyle = FlatStyle.Flat;
-            SelectSoundButton.Location = new Point(377, 490);
+            SelectSoundButton.Location = new Point(380, 534);
             SelectSoundButton.Name = "SelectSoundButton";
             SelectSoundButton.Size = new Size(30, 30);
             SelectSoundButton.TabIndex = 62;
@@ -75,7 +76,7 @@
             // 
             // AturVolumeTrack
             // 
-            AturVolumeTrack.Location = new Point(163, 534);
+            AturVolumeTrack.Location = new Point(166, 578);
             AturVolumeTrack.Name = "AturVolumeTrack";
             AturVolumeTrack.Size = new Size(172, 56);
             AturVolumeTrack.TabIndex = 61;
@@ -84,7 +85,7 @@
             // 
             CancleButton.BackColor = Color.Silver;
             CancleButton.FlatAppearance.BorderColor = Color.Black;
-            CancleButton.Location = new Point(256, 620);
+            CancleButton.Location = new Point(259, 664);
             CancleButton.Name = "CancleButton";
             CancleButton.Size = new Size(115, 38);
             CancleButton.TabIndex = 60;
@@ -97,7 +98,7 @@
             SaveButton.FlatAppearance.BorderColor = Color.Black;
             SaveButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SaveButton.ForeColor = Color.White;
-            SaveButton.Location = new Point(393, 620);
+            SaveButton.Location = new Point(396, 664);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(115, 38);
             SaveButton.TabIndex = 59;
@@ -107,7 +108,7 @@
             // JarakPengulanganCheckBox
             // 
             JarakPengulanganCheckBox.AutoSize = true;
-            JarakPengulanganCheckBox.Location = new Point(44, 594);
+            JarakPengulanganCheckBox.Location = new Point(47, 638);
             JarakPengulanganCheckBox.Name = "JarakPengulanganCheckBox";
             JarakPengulanganCheckBox.Size = new Size(153, 24);
             JarakPengulanganCheckBox.TabIndex = 56;
@@ -119,7 +120,7 @@
             BrowseButton.BackColor = Color.Gainsboro;
             BrowseButton.FlatAppearance.BorderColor = Color.Black;
             BrowseButton.FlatStyle = FlatStyle.Flat;
-            BrowseButton.Location = new Point(414, 491);
+            BrowseButton.Location = new Point(417, 535);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(94, 29);
             BrowseButton.TabIndex = 58;
@@ -129,7 +130,7 @@
             // UlangiCheckBox
             // 
             UlangiCheckBox.AutoSize = true;
-            UlangiCheckBox.Location = new Point(44, 564);
+            UlangiCheckBox.Location = new Point(47, 608);
             UlangiCheckBox.Name = "UlangiCheckBox";
             UlangiCheckBox.Size = new Size(74, 24);
             UlangiCheckBox.TabIndex = 54;
@@ -142,7 +143,7 @@
             PausePlayButton.BackgroundImageLayout = ImageLayout.Zoom;
             PausePlayButton.FlatAppearance.BorderColor = Color.Black;
             PausePlayButton.FlatStyle = FlatStyle.Flat;
-            PausePlayButton.Location = new Point(341, 490);
+            PausePlayButton.Location = new Point(344, 534);
             PausePlayButton.Name = "PausePlayButton";
             PausePlayButton.Size = new Size(30, 30);
             PausePlayButton.TabIndex = 57;
@@ -151,7 +152,7 @@
             // AturVolumeCheckBox
             // 
             AturVolumeCheckBox.AutoSize = true;
-            AturVolumeCheckBox.Location = new Point(44, 534);
+            AturVolumeCheckBox.Location = new Point(47, 578);
             AturVolumeCheckBox.Name = "AturVolumeCheckBox";
             AturVolumeCheckBox.Size = new Size(113, 24);
             AturVolumeCheckBox.TabIndex = 52;
@@ -162,7 +163,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(44, 464);
+            label4.Location = new Point(47, 508);
             label4.Name = "label4";
             label4.Size = new Size(84, 23);
             label4.TabIndex = 55;
@@ -171,7 +172,7 @@
             // SoundFileText
             // 
             SoundFileText.BorderStyle = BorderStyle.FixedSingle;
-            SoundFileText.Location = new Point(44, 492);
+            SoundFileText.Location = new Point(47, 536);
             SoundFileText.Name = "SoundFileText";
             SoundFileText.Size = new Size(291, 27);
             SoundFileText.TabIndex = 53;
@@ -180,7 +181,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(44, 343);
+            label3.Location = new Point(47, 387);
             label3.Name = "label3";
             label3.Size = new Size(98, 23);
             label3.TabIndex = 51;
@@ -190,7 +191,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(44, 126);
+            label2.Location = new Point(47, 170);
             label2.Name = "label2";
             label2.Size = new Size(110, 23);
             label2.TabIndex = 50;
@@ -200,7 +201,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(44, 25);
+            label1.Location = new Point(47, 69);
             label1.Name = "label1";
             label1.Size = new Size(58, 23);
             label1.TabIndex = 46;
@@ -212,7 +213,7 @@
             panel3.BorderStyle = BorderStyle.FixedSingle;
             panel3.Controls.Add(BatasInputText);
             panel3.Controls.Add(KeteranganText);
-            panel3.Location = new Point(44, 369);
+            panel3.Location = new Point(47, 413);
             panel3.Name = "panel3";
             panel3.Size = new Size(464, 78);
             panel3.TabIndex = 49;
@@ -245,7 +246,7 @@
             panel2.Controls.Add(SetiapRabuCheckBox);
             panel2.Controls.Add(SetiapSelasaCheckBox);
             panel2.Controls.Add(SetiapSeninCheckBox);
-            panel2.Location = new Point(44, 152);
+            panel2.Location = new Point(47, 196);
             panel2.Name = "panel2";
             panel2.Size = new Size(464, 174);
             panel2.TabIndex = 48;
@@ -305,7 +306,7 @@
             panel1.BackColor = Color.Gainsboro;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(WaktuPicker);
-            panel1.Location = new Point(44, 51);
+            panel1.Location = new Point(47, 95);
             panel1.Name = "panel1";
             panel1.Size = new Size(464, 59);
             panel1.TabIndex = 47;
@@ -320,11 +321,22 @@
             WaktuPicker.Size = new Size(83, 27);
             WaktuPicker.TabIndex = 0;
             // 
+            // JenisJadwalLabel
+            // 
+            JenisJadwalLabel.AutoSize = true;
+            JenisJadwalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            JenisJadwalLabel.Location = new Point(239, 9);
+            JenisJadwalLabel.Name = "JenisJadwalLabel";
+            JenisJadwalLabel.Size = new Size(96, 23);
+            JenisJadwalLabel.TabIndex = 63;
+            JenisJadwalLabel.Text = "JenisJadwal";
+            // 
             // InputJadwalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(552, 683);
+            ClientSize = new Size(552, 728);
+            Controls.Add(JenisJadwalLabel);
             Controls.Add(SelectSoundButton);
             Controls.Add(AturVolumeTrack);
             Controls.Add(CancleButton);
@@ -383,5 +395,6 @@
         private CheckBox SetiapSeninCheckBox;
         private Panel panel1;
         private DateTimePicker WaktuPicker;
+        private Label JenisJadwalLabel;
     }
 }

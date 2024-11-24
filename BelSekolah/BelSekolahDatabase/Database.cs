@@ -10,37 +10,64 @@ using BelSekolah.BelSekolahDatabase.Helper;
 
 namespace BelSekolah.BelSekolahDatabase
 {
-    public class database
+    public class Database
     {
         private WaveOutEvent _waveOutEvent;
         private Mp3FileReader _mp3FileReader;
-       /* public void CreateTable()
+
+
+        public void CreateTable()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 connection.Open();
 
-                // Hapus tabel jika sudah ada
-               // string dropTableQuery = "DROP TABLE IF EXISTS Sounds;";
-                using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-                    command.ExecuteNonQuery();
-                }
+                string createTableSounds = @"
+                    CREATE TABLE IF NOT EXISTS Sounds (
+                        SoundID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        FileName TEXT NOT NULL,
+                        SoundFile BLOB NOT NULL
+                    );";
 
-                // Membuat tabel baru
-                string createTableQuery = @"
-            CREATE TABLE IF NOT EXISTS Sounds (
-                SoundID INTEGER PRIMARY KEY AUTOINCREMENT,
-                FileName TEXT NOT NULL,
-                SoundFile BLOB NOT NULL
-            );";
+                string createTableJadwalKhusus = @"
+                    CREATE TABLE IF NOT EXISTS JadwalKhusus(
+                        JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        IsTrue INTEGER NOT NULL,
+                        SoundID INTEGER NOT NULL,
+                        Waktu TEXT NOT NULL,
+                        Hari TEXT NOT NULL,
+                        Keterangan TEXT NOT NULL,
+                        FOREIGN KEY (SoundID) REFERENCES Sounds(SoundID) ON DELETE CASCADE
+                    );";
 
-                using (SQLiteCommand command = new SQLiteCommand(createTableQuery, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
+                string createTableJadwalNormal = @"
+                    CREATE TABLE IF NOT EXISTS JadwalNormal(
+                        JadwalNormalID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        IsTrue INTEGER NOT NULL,
+                        SoundID INTEGER NOT NULL,
+                        Waktu TEXT NOT NULL,
+                        Hari TEXT NOT NULL,
+                        Keterangan TEXT NOT NULL,
+                        FOREIGN KEY (SoundID) REFERENCES Sounds(SoundID) ON DELETE CASCADE
+                    );";
+
+                ExecuteNonQuery(createTableSounds, connection);
+                ExecuteNonQuery(createTableJadwalKhusus, connection);
+                ExecuteNonQuery(createTableJadwalNormal, connection);
             }
         }
+
+        private void ExecuteNonQuery(string query, SQLiteConnection connection)
+        {
+            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
+
+
+
         #region simpan sound 
         public void SaveSound(string soundFile, string fileName)
         {
@@ -69,7 +96,7 @@ namespace BelSekolah.BelSekolahDatabase
             }
         }
         #endregion
-        
+
         #region file sound
         public List<string> GetSounds()
         {
@@ -129,8 +156,8 @@ namespace BelSekolah.BelSekolahDatabase
             }
         }
 
-*/
+
     }
 }
- 
+
 

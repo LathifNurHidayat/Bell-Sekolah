@@ -4,7 +4,7 @@ using CSCore.XAudio2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using System.Data; 
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
@@ -16,9 +16,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class InputJadwalForm : Form
     {
-        public InputJadwalForm()
+        public InputJadwalForm(string Jenis)
         {
             InitializeComponent();
+            JenisJadwalLabel.Text = Jenis;
         }
 
         private void InputJadwalForm_Load(object sender, EventArgs e)

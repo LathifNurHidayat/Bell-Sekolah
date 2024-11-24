@@ -30,29 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JadwalBelForm));
             panel1 = new Panel();
-            AddButton = new Button();
+            AddNormalButton = new Button();
             panel2 = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             JadwalBelGrid = new DataGridView();
             panel3 = new Panel();
-            panel4 = new Panel();
-            JamKhususRadio = new RadioButton();
-            JamNormalRadio = new RadioButton();
-            HariText = new Label();
-            JamKhususGrid = new DataGridView();
-            JamNormalGrid = new DataGridView();
-            UbahWaktuNormalButton = new Button();
-            UbahWaktuKhususButton = new Button();
-            TambahNormalButton = new Button();
-            TambahKhususButton = new Button();
+            NormalCheckBox = new CheckBox();
+            KhususCheckBox = new CheckBox();
+            AddKhususButton = new Button();
+            dataGridView1 = new DataGridView();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)JadwalBelGrid).BeginInit();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)JamKhususGrid).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)JamNormalGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -65,21 +57,21 @@
             panel1.Size = new Size(987, 39);
             panel1.TabIndex = 0;
             // 
-            // AddButton
+            // AddNormalButton
             // 
-            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            AddButton.BackColor = Color.Goldenrod;
-            AddButton.BackgroundImageLayout = ImageLayout.Zoom;
-            AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AddButton.ForeColor = Color.White;
-            AddButton.Image = (Image)resources.GetObject("AddButton.Image");
-            AddButton.Location = new Point(847, 166);
-            AddButton.Name = "AddButton";
-            AddButton.Size = new Size(109, 39);
-            AddButton.TabIndex = 2;
-            AddButton.Text = "Add";
-            AddButton.TextImageRelation = TextImageRelation.TextBeforeImage;
-            AddButton.UseVisualStyleBackColor = false;
+            AddNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            AddNormalButton.BackColor = Color.Goldenrod;
+            AddNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
+            AddNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AddNormalButton.ForeColor = Color.White;
+            AddNormalButton.Image = (Image)resources.GetObject("AddNormalButton.Image");
+            AddNormalButton.Location = new Point(847, 401);
+            AddNormalButton.Name = "AddNormalButton";
+            AddNormalButton.Size = new Size(109, 39);
+            AddNormalButton.TabIndex = 2;
+            AddNormalButton.Text = "Add";
+            AddNormalButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            AddNormalButton.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -118,11 +110,11 @@
             JadwalBelGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             JadwalBelGrid.BackgroundColor = SystemColors.Control;
             JadwalBelGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JadwalBelGrid.Location = new Point(5, 5);
+            JadwalBelGrid.Location = new Point(5, 46);
             JadwalBelGrid.Name = "JadwalBelGrid";
             JadwalBelGrid.RowHeadersWidth = 51;
             JadwalBelGrid.RowTemplate.Height = 29;
-            JadwalBelGrid.Size = new Size(951, 156);
+            JadwalBelGrid.Size = new Size(951, 349);
             JadwalBelGrid.TabIndex = 2;
             // 
             // panel3
@@ -130,154 +122,70 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.BackColor = Color.LightGray;
             panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(AddButton);
+            panel3.Controls.Add(NormalCheckBox);
+            panel3.Controls.Add(KhususCheckBox);
+            panel3.Controls.Add(AddKhususButton);
+            panel3.Controls.Add(dataGridView1);
+            panel3.Controls.Add(AddNormalButton);
             panel3.Controls.Add(JadwalBelGrid);
             panel3.Location = new Point(12, 131);
             panel3.Name = "panel3";
-            panel3.Size = new Size(963, 210);
+            panel3.Size = new Size(963, 806);
             panel3.TabIndex = 3;
             // 
-            // panel4
+            // NormalCheckBox
             // 
-            panel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel4.BackColor = Color.LightGray;
-            panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Controls.Add(TambahKhususButton);
-            panel4.Controls.Add(TambahNormalButton);
-            panel4.Controls.Add(UbahWaktuKhususButton);
-            panel4.Controls.Add(UbahWaktuNormalButton);
-            panel4.Controls.Add(JamKhususRadio);
-            panel4.Controls.Add(JamNormalRadio);
-            panel4.Controls.Add(HariText);
-            panel4.Controls.Add(JamKhususGrid);
-            panel4.Controls.Add(JamNormalGrid);
-            panel4.Location = new Point(12, 353);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(963, 375);
-            panel4.TabIndex = 4;
+            NormalCheckBox.AutoSize = true;
+            NormalCheckBox.Location = new Point(5, 16);
+            NormalCheckBox.Name = "NormalCheckBox";
+            NormalCheckBox.Size = new Size(130, 24);
+            NormalCheckBox.TabIndex = 6;
+            NormalCheckBox.Text = "Jadwal Normal";
+            NormalCheckBox.UseVisualStyleBackColor = true;
             // 
-            // JamKhususRadio
+            // KhususCheckBox
             // 
-            JamKhususRadio.AutoSize = true;
-            JamKhususRadio.Location = new Point(482, 79);
-            JamKhususRadio.Name = "JamKhususRadio";
-            JamKhususRadio.Size = new Size(101, 24);
-            JamKhususRadio.TabIndex = 7;
-            JamKhususRadio.TabStop = true;
-            JamKhususRadio.Text = "JamKhusus";
-            JamKhususRadio.UseVisualStyleBackColor = true;
+            KhususCheckBox.AutoSize = true;
+            KhususCheckBox.Location = new Point(5, 457);
+            KhususCheckBox.Name = "KhususCheckBox";
+            KhususCheckBox.Size = new Size(125, 24);
+            KhususCheckBox.TabIndex = 5;
+            KhususCheckBox.Text = "Jadwal Khusus";
+            KhususCheckBox.UseVisualStyleBackColor = true;
             // 
-            // JamNormalRadio
+            // AddKhususButton
             // 
-            JamNormalRadio.AutoSize = true;
-            JamNormalRadio.Location = new Point(21, 79);
-            JamNormalRadio.Name = "JamNormalRadio";
-            JamNormalRadio.Size = new Size(110, 24);
-            JamNormalRadio.TabIndex = 6;
-            JamNormalRadio.TabStop = true;
-            JamNormalRadio.Text = "Jam Normal";
-            JamNormalRadio.UseVisualStyleBackColor = true;
+            AddKhususButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            AddKhususButton.BackColor = Color.Goldenrod;
+            AddKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
+            AddKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AddKhususButton.ForeColor = Color.White;
+            AddKhususButton.Image = (Image)resources.GetObject("AddKhususButton.Image");
+            AddKhususButton.Location = new Point(847, 758);
+            AddKhususButton.Name = "AddKhususButton";
+            AddKhususButton.Size = new Size(109, 39);
+            AddKhususButton.TabIndex = 4;
+            AddKhususButton.Text = "Add";
+            AddKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            AddKhususButton.UseVisualStyleBackColor = false;
             // 
-            // HariText
+            // dataGridView1
             // 
-            HariText.AutoSize = true;
-            HariText.Font = new Font("Segoe UI Semibold", 19.8000011F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
-            HariText.Location = new Point(21, 11);
-            HariText.Name = "HariText";
-            HariText.Size = new Size(106, 46);
-            HariText.TabIndex = 5;
-            HariText.Text = "Senin";
-            // 
-            // JamKhususGrid
-            // 
-            JamKhususGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            JamKhususGrid.BackgroundColor = SystemColors.Control;
-            JamKhususGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JamKhususGrid.Location = new Point(492, 109);
-            JamKhususGrid.Name = "JamKhususGrid";
-            JamKhususGrid.RowHeadersWidth = 51;
-            JamKhususGrid.RowTemplate.Height = 29;
-            JamKhususGrid.Size = new Size(449, 156);
-            JamKhususGrid.TabIndex = 4;
-            // 
-            // JamNormalGrid
-            // 
-            JamNormalGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            JamNormalGrid.BackgroundColor = SystemColors.Control;
-            JamNormalGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JamNormalGrid.Location = new Point(21, 109);
-            JamNormalGrid.Name = "JamNormalGrid";
-            JamNormalGrid.RowHeadersWidth = 51;
-            JamNormalGrid.RowTemplate.Height = 29;
-            JamNormalGrid.Size = new Size(449, 156);
-            JamNormalGrid.TabIndex = 3;
-            // 
-            // UbahWaktuNormalButton
-            // 
-            UbahWaktuNormalButton.BackColor = Color.Gray;
-            UbahWaktuNormalButton.FlatAppearance.BorderColor = Color.White;
-            UbahWaktuNormalButton.FlatStyle = FlatStyle.Flat;
-            UbahWaktuNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            UbahWaktuNormalButton.ForeColor = Color.White;
-            UbahWaktuNormalButton.ImageAlign = ContentAlignment.MiddleRight;
-            UbahWaktuNormalButton.Location = new Point(137, 71);
-            UbahWaktuNormalButton.Name = "UbahWaktuNormalButton";
-            UbahWaktuNormalButton.Size = new Size(118, 32);
-            UbahWaktuNormalButton.TabIndex = 5;
-            UbahWaktuNormalButton.Text = "Ubah Waktu";
-            UbahWaktuNormalButton.UseVisualStyleBackColor = false;
-            // 
-            // UbahWaktuKhususButton
-            // 
-            UbahWaktuKhususButton.BackColor = Color.Gray;
-            UbahWaktuKhususButton.FlatAppearance.BorderColor = Color.White;
-            UbahWaktuKhususButton.FlatStyle = FlatStyle.Flat;
-            UbahWaktuKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            UbahWaktuKhususButton.ForeColor = Color.White;
-            UbahWaktuKhususButton.ImageAlign = ContentAlignment.MiddleRight;
-            UbahWaktuKhususButton.Location = new Point(589, 71);
-            UbahWaktuKhususButton.Name = "UbahWaktuKhususButton";
-            UbahWaktuKhususButton.Size = new Size(118, 32);
-            UbahWaktuKhususButton.TabIndex = 9;
-            UbahWaktuKhususButton.Text = "Ubah Waktu";
-            UbahWaktuKhususButton.UseVisualStyleBackColor = false;
-            // 
-            // TambahNormalButton
-            // 
-            TambahNormalButton.BackColor = Color.Gray;
-            TambahNormalButton.FlatAppearance.BorderColor = Color.White;
-            TambahNormalButton.FlatStyle = FlatStyle.Flat;
-            TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TambahNormalButton.ForeColor = Color.White;
-            TambahNormalButton.ImageAlign = ContentAlignment.MiddleRight;
-            TambahNormalButton.Location = new Point(352, 271);
-            TambahNormalButton.Name = "TambahNormalButton";
-            TambahNormalButton.Size = new Size(118, 33);
-            TambahNormalButton.TabIndex = 10;
-            TambahNormalButton.Text = "Ubah Waktu";
-            TambahNormalButton.UseVisualStyleBackColor = false;
-            // 
-            // TambahKhususButton
-            // 
-            TambahKhususButton.BackColor = Color.Gray;
-            TambahKhususButton.FlatAppearance.BorderColor = Color.White;
-            TambahKhususButton.FlatStyle = FlatStyle.Flat;
-            TambahKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TambahKhususButton.ForeColor = Color.White;
-            TambahKhususButton.ImageAlign = ContentAlignment.MiddleRight;
-            TambahKhususButton.Location = new Point(823, 271);
-            TambahKhususButton.Name = "TambahKhususButton";
-            TambahKhususButton.Size = new Size(118, 33);
-            TambahKhususButton.TabIndex = 11;
-            TambahKhususButton.Text = "Ubah Waktu";
-            TambahKhususButton.UseVisualStyleBackColor = false;
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = SystemColors.Control;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(5, 487);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 29;
+            dataGridView1.Size = new Size(951, 265);
+            dataGridView1.TabIndex = 3;
             // 
             // JadwalBelForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(987, 739);
-            Controls.Add(panel4);
+            ClientSize = new Size(987, 949);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel2);
@@ -289,10 +197,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)JadwalBelGrid).EndInit();
             panel3.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)JamKhususGrid).EndInit();
-            ((System.ComponentModel.ISupportInitialize)JamNormalGrid).EndInit();
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -302,19 +208,13 @@
         private Panel panel2;
         private Label label1;
         private PictureBox pictureBox1;
-        private Button AddButton;
+        private Button AddNormalButton;
         private DataGridView JadwalBelGrid;
         private Panel panel3;
-        private Panel panel4;
-        private DataGridView JamNormalGrid;
-        private Label HariText;
-        private DataGridView JamKhususGrid;
-        private RadioButton JamKhususRadio;
-        private RadioButton JamNormalRadio;
         private Button button2;
-        private Button UbahWaktuNormalButton;
-        private Button UbahWaktuKhususButton;
-        private Button TambahNormalButton;
-        private Button TambahKhususButton;
+        private Button AddKhususButton;
+        private DataGridView dataGridView1;
+        private CheckBox NormalCheckBox;
+        private CheckBox KhususCheckBox;
     }
 }
