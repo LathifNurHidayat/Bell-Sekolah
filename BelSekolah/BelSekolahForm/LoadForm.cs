@@ -1,4 +1,5 @@
-﻿using BelSekolah.BelSekolahForm;
+﻿using BelSekolah.BelSekolahDatabase.Helper;
+using BelSekolah.BelSekolahForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,8 @@ namespace BelSekolah
             this._opacityTimer.Tick += _opacityTimer_Tick;
             this._delayTimer.Interval = 2000;
             this._delayTimer.Tick += _delayTimer_Tick;
+
+            ConnStringHelper.GetConn();
         }
 
         private void LoadForm_Load(object? sender, EventArgs e)

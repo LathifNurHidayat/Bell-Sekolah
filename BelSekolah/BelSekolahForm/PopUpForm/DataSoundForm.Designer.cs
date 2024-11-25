@@ -33,7 +33,7 @@
             label1 = new Label();
             DataSoundGrid = new DataGridView();
             panel1 = new Panel();
-            AddButton = new Button();
+            AddSoundButton = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DataSoundGrid).BeginInit();
             panel1.SuspendLayout();
@@ -68,34 +68,35 @@
             DataSoundGrid.Name = "DataSoundGrid";
             DataSoundGrid.RowHeadersWidth = 51;
             DataSoundGrid.RowTemplate.Height = 29;
-            DataSoundGrid.Size = new Size(498, 310);
+            DataSoundGrid.Size = new Size(496, 308);
             DataSoundGrid.TabIndex = 3;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.Gainsboro;
-            panel1.Controls.Add(AddButton);
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(AddSoundButton);
             panel1.Controls.Add(DataSoundGrid);
             panel1.Location = new Point(12, 81);
             panel1.Name = "panel1";
             panel1.Size = new Size(531, 401);
             panel1.TabIndex = 4;
             // 
-            // AddButton
+            // AddSoundButton
             // 
-            AddButton.BackColor = Color.FromArgb(0, 192, 0);
-            AddButton.BackgroundImageLayout = ImageLayout.Zoom;
-            AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AddButton.ForeColor = Color.White;
-            AddButton.ImageAlign = ContentAlignment.TopLeft;
-            AddButton.Location = new Point(405, 347);
-            AddButton.Name = "AddButton";
-            AddButton.Size = new Size(109, 35);
-            AddButton.TabIndex = 4;
-            AddButton.Text = "Add";
-            AddButton.TextImageRelation = TextImageRelation.TextBeforeImage;
-            AddButton.UseVisualStyleBackColor = false;
+            AddSoundButton.BackColor = Color.FromArgb(0, 192, 0);
+            AddSoundButton.BackgroundImageLayout = ImageLayout.Zoom;
+            AddSoundButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AddSoundButton.ForeColor = Color.White;
+            AddSoundButton.ImageAlign = ContentAlignment.TopLeft;
+            AddSoundButton.Location = new Point(405, 347);
+            AddSoundButton.Name = "AddSoundButton";
+            AddSoundButton.Size = new Size(109, 35);
+            AddSoundButton.TabIndex = 4;
+            AddSoundButton.Text = "Add Sound";
+            AddSoundButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            AddSoundButton.UseVisualStyleBackColor = false;
             // 
             // DataSoundForm
             // 
@@ -123,6 +124,6 @@
         private Label label1;
         private DataGridView DataSoundGrid;
         private Panel panel1;
-        private Button AddButton;
+        private Button AddSoundButton;
     }
 }

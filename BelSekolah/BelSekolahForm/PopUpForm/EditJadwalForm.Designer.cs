@@ -29,15 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditJadwalForm));
-            SelectSoundButton = new Button();
-            AturVolumeTrack = new TrackBar();
             CancleButton = new Button();
             SaveButton = new Button();
             JarakPengulanganCheckBox = new CheckBox();
             BrowseButton = new Button();
             UlangiCheckBox = new CheckBox();
             PausePlayButton = new Button();
-            AturVolumeCheckBox = new CheckBox();
             label4 = new Label();
             SoundFileText = new TextBox();
             label3 = new Label();
@@ -54,31 +51,10 @@
             SetiapSeninCheckBox = new CheckBox();
             panel1 = new Panel();
             WaktuPicker = new DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)AturVolumeTrack).BeginInit();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // SelectSoundButton
-            // 
-            SelectSoundButton.BackColor = Color.Gainsboro;
-            SelectSoundButton.BackgroundImageLayout = ImageLayout.Zoom;
-            SelectSoundButton.FlatAppearance.BorderColor = Color.Black;
-            SelectSoundButton.FlatStyle = FlatStyle.Flat;
-            SelectSoundButton.Location = new Point(371, 502);
-            SelectSoundButton.Name = "SelectSoundButton";
-            SelectSoundButton.Size = new Size(30, 30);
-            SelectSoundButton.TabIndex = 79;
-            SelectSoundButton.Text = "......";
-            SelectSoundButton.UseVisualStyleBackColor = false;
-            // 
-            // AturVolumeTrack
-            // 
-            AturVolumeTrack.Location = new Point(157, 546);
-            AturVolumeTrack.Name = "AturVolumeTrack";
-            AturVolumeTrack.Size = new Size(172, 56);
-            AturVolumeTrack.TabIndex = 78;
             // 
             // CancleButton
             // 
@@ -107,7 +83,7 @@
             // JarakPengulanganCheckBox
             // 
             JarakPengulanganCheckBox.AutoSize = true;
-            JarakPengulanganCheckBox.Location = new Point(38, 606);
+            JarakPengulanganCheckBox.Location = new Point(38, 583);
             JarakPengulanganCheckBox.Name = "JarakPengulanganCheckBox";
             JarakPengulanganCheckBox.Size = new Size(153, 24);
             JarakPengulanganCheckBox.TabIndex = 73;
@@ -129,7 +105,7 @@
             // UlangiCheckBox
             // 
             UlangiCheckBox.AutoSize = true;
-            UlangiCheckBox.Location = new Point(38, 576);
+            UlangiCheckBox.Location = new Point(38, 553);
             UlangiCheckBox.Name = "UlangiCheckBox";
             UlangiCheckBox.Size = new Size(74, 24);
             UlangiCheckBox.TabIndex = 71;
@@ -142,21 +118,11 @@
             PausePlayButton.BackgroundImageLayout = ImageLayout.Zoom;
             PausePlayButton.FlatAppearance.BorderColor = Color.Black;
             PausePlayButton.FlatStyle = FlatStyle.Flat;
-            PausePlayButton.Location = new Point(335, 502);
+            PausePlayButton.Location = new Point(362, 503);
             PausePlayButton.Name = "PausePlayButton";
             PausePlayButton.Size = new Size(30, 30);
             PausePlayButton.TabIndex = 74;
             PausePlayButton.UseVisualStyleBackColor = false;
-            // 
-            // AturVolumeCheckBox
-            // 
-            AturVolumeCheckBox.AutoSize = true;
-            AturVolumeCheckBox.Location = new Point(38, 546);
-            AturVolumeCheckBox.Name = "AturVolumeCheckBox";
-            AturVolumeCheckBox.Size = new Size(113, 24);
-            AturVolumeCheckBox.TabIndex = 69;
-            AturVolumeCheckBox.Text = "Atur Volume";
-            AturVolumeCheckBox.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -173,7 +139,7 @@
             SoundFileText.BorderStyle = BorderStyle.FixedSingle;
             SoundFileText.Location = new Point(38, 504);
             SoundFileText.Name = "SoundFileText";
-            SoundFileText.Size = new Size(291, 27);
+            SoundFileText.Size = new Size(304, 27);
             SoundFileText.TabIndex = 70;
             // 
             // label3
@@ -326,15 +292,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(540, 706);
-            Controls.Add(SelectSoundButton);
-            Controls.Add(AturVolumeTrack);
             Controls.Add(CancleButton);
             Controls.Add(SaveButton);
             Controls.Add(JarakPengulanganCheckBox);
             Controls.Add(BrowseButton);
             Controls.Add(UlangiCheckBox);
             Controls.Add(PausePlayButton);
-            Controls.Add(AturVolumeCheckBox);
             Controls.Add(label4);
             Controls.Add(SoundFileText);
             Controls.Add(label3);
@@ -349,7 +312,6 @@
             MinimizeBox = false;
             Name = "EditJadwalForm";
             StartPosition = FormStartPosition.CenterParent;
-            ((System.ComponentModel.ISupportInitialize)AturVolumeTrack).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel2.ResumeLayout(false);
@@ -360,16 +322,12 @@
         }
 
         #endregion
-
-        private Button SelectSoundButton;
-        private TrackBar AturVolumeTrack;
         private Button CancleButton;
         private Button SaveButton;
         private CheckBox JarakPengulanganCheckBox;
         private Button BrowseButton;
         private CheckBox UlangiCheckBox;
         private Button PausePlayButton;
-        private CheckBox AturVolumeCheckBox;
         private Label label4;
         private TextBox SoundFileText;
         private Label label3;
