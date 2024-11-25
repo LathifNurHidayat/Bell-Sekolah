@@ -40,14 +40,40 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             string filePath = SoundFileText.Text;
             if (string.IsNullOrEmpty(filePath))
             {
-                MessageBox.Show(" mohon pilih file ");
+                MessageBox.Show("Mohon pilih file.");
                 return;
             }
             string fileName = System.IO.Path.GetFileName(filePath);
-            string time = WaktuPicker.Value.ToString("HH:mm"); 
-            string description = KeteranganText.Text;  
+
+            byte[] fileBytes;
+            try
+            {
+                fileBytes = File.ReadAllBytes(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal membaca file: {ex.Message}");
+                return;
+            }
+            string time = WaktuPicker.Value.ToString("HH:mm");
+            string description = KeteranganText.Text;
             string day = GetSelectedDays();
-            db.SaveSound(fileName, filePath, time, day, description);
+            if (string.IsNullOrEmpty(description) || string.IsNullOrEmpty(day))
+            {
+                MessageBox.Show("Mohon lengkapi semua input.");
+                return;
+            }
+            try
+            {
+                bool isTrue = true;
+                db.SaveSound(time, day, description, fileName, fileBytes, isTrue);
+
+                MessageBox.Show("Data berhasil disimpan!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat menyimpan data: {ex.Message}");
+            }
         }
         private string GetSelectedDays()
         {
