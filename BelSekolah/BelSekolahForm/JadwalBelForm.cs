@@ -25,14 +25,13 @@ namespace BelSekolah.BelSekolahForm
 
         private void RegisterControlEvent()
         {
-            AddNormalButton.Click += AddButton_Click;
-            AddKhususButton.Click += AddKhususButton_Click;
+            AddButton.Click += AddButton_Click;
+            this.FormClosed += JadwalBelForm_FormClosed;
         }
 
-        private void AddKhususButton_Click(object? sender, EventArgs e)
+        private void JadwalBelForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            InputJadwalForm tambah = new InputJadwalForm("Jadwal Khusus");
-            tambah.ShowDialog();
+            Application.Exit();
         }
 
         private void AddButton_Click(object? sender, EventArgs e)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,17 @@ namespace BelSekolah
     {
         private System.Windows.Forms.Timer _opacityTimer;
         private System.Windows.Forms.Timer _delayTimer;
+        private readonly BelSekolahDatabase.Database _database;
 
         public LoadForm()
         {
             InitializeComponent();
+            _database = new BelSekolahDatabase.Database();
+
             this.ControlBox = false;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.None;
-
 
             this.Opacity = 0;
             this._opacityTimer = new System.Windows.Forms.Timer();
@@ -37,6 +40,8 @@ namespace BelSekolah
             this._delayTimer.Tick += _delayTimer_Tick;
 
             ConnStringHelper.GetConn();
+            _database.CreateTable();   
+
         }
 
         private void LoadForm_Load(object? sender, EventArgs e)
