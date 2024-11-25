@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BelSekolah.BelSekolahBackEnd.Dal
 {
-    internal class CekDal
+    public class JadwalKhusus
     {
+
     }
 }
