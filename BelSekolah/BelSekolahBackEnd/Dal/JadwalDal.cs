@@ -12,46 +12,28 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalDal
     {
-        public List<JadwalModel> GetJadwalModels()
+
+        public List<JadwalModel> GetJadwalModelsByJenisJadwalAndDay(string jenisJadwal, string currentDay)
         {
             using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
-                connection.Open();
-
                 string query = @"
-                            SELECT 
-                                JH.HariID AS HariID,
-                                'Normal' AS JenisJadwal,
-                                JH.Hari AS Hari,
-                                JN.Waktu AS Waktu,
-                                JN.Keterangan AS Keterangan,
-                                JN.SoundName AS SoundName,
-                                JN.SoundPath AS SoundPath
-                            FROM 
-                                JadwalNormal JN
-                            INNER JOIN 
-                                JadwalHari JH ON JN.HariID = JH.HariID
+            SELECT *
+            FROM {0}
+            WHERE HariID = (
+                SELECT HariID 
+                FROM JadwalHari 
+                WHERE Hari = @Hari AND JenisJadwal = @JenisJadwal
+            )";
 
-                            UNION
+                // Ganti tabel sesuai jenis jadwal
+                string tableName = jenisJadwal.Equals("JadwalKhusus", StringComparison.OrdinalIgnoreCase)
+                    ? "JadwalKhusus"
+                    : "JadwalNormal";
 
-                            SELECT 
-                                JH.HariID AS HariID,
-                                'Khusus' AS JenisJadwal,
-                                JH.Hari AS Hari,
-                                JK.Waktu AS Waktu,
-                                JK.Keterangan AS Keterangan,
-                                JK.SoundName AS SoundName,
-                                JK.SoundPath AS SoundPath
-                            FROM 
-                                JadwalKhusus JK
-                            INNER JOIN 
-                                JadwalHari JH ON JK.HariID = JH.HariID
+                query = string.Format(query, tableName);
 
-                            ORDER BY 
-                                HariID, Waktu";
-
-                var jadwalModelList = connection.Query<JadwalModel>(query).ToList();
-                return jadwalModelList;
+                return connection.Query<JadwalModel>(query, new { Hari = currentDay, JenisJadwal = jenisJadwal }).ToList();
             }
         }
 

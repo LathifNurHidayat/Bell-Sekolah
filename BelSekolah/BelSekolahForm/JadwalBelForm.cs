@@ -3,11 +3,13 @@ using BelSekolah.BelSekolahBackEnd.Model;
 using BelSekolah.BelSekolahDatabase;
 using BelSekolah.BelSekolahDatabase.Helper;
 using BelSekolah.BelSekolahForm.PopUpForm;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,6 +30,7 @@ namespace BelSekolah.BelSekolahForm
         private enum GridAktif { None, JadwalNormal, JadwalKhusus};
         private GridAktif _gridAktif = GridAktif.None;
         
+
         public JadwalBelForm(Form mainForm)
         {   
             InitializeComponent();
@@ -43,6 +46,8 @@ namespace BelSekolah.BelSekolahForm
             InitialCombo();
             LoadJadwal();
             LoadJadwalDetil(_jadwalHariID);
+
+            StartScheduleChecker();
 
         }
 
@@ -142,88 +147,96 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-
-
-        private string GetDayInIndonesian(DayOfWeek dayOfWeek)
+        private string GetCurrentDayInIndonesian()
         {
-            switch (dayOfWeek)
+            return DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+        }
+
+        private string GetJenisJadwalByCurrentDay()
+        {
+            string currentDay = GetCurrentDayInIndonesian();
+
+            using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
-                case DayOfWeek.Monday: return "Senin";
-                case DayOfWeek.Tuesday: return "Selasa";
-                case DayOfWeek.Wednesday: return "Rabu";
-                case DayOfWeek.Thursday: return "Kamis";
-                case DayOfWeek.Friday: return "Jumat";
-                case DayOfWeek.Saturday: return "Sabtu";
-                case DayOfWeek.Sunday: return "Minggu";
-                default: return "";
+                string query = "SELECT JenisJadwal FROM JadwalHari WHERE Hari = @Hari";
+                var jenisJadwal = connection.QuerySingleOrDefault<string>(query, new { Hari = currentDay });
+
+                return jenisJadwal; /
             }
         }
 
-
-        private void CheckAndPlayBell()
+        private void StartScheduleChecker()
         {
-            var currentDay = DateTime.Now.DayOfWeek; // Hari sekarang dalam bahasa Inggris
-            string currentDayInIndonesian = GetDayInIndonesian(currentDay); // Mengonversi ke bahasa Indonesia
+            string jenisJadwal = GetJenisJadwalByCurrentDay();
 
-            var jadwalModelList = _jadwalDal.GetJadwalModels(); // Misalnya, Anda sudah memiliki list jadwal dari database atau sumber lain
-
-            foreach (var jadwal in jadwalModelList)
+            if (string.IsNullOrEmpty(jenisJadwal))
             {
-                // Mengecek apakah hari dalam jadwal cocok dengan hari saat ini
-                if (jadwal.Hari == currentDayInIndonesian)
-                {
-                    CheckAndPlayBellForEachSchedule(jadwal);
-                }
-            }
-        }
-
-        private void CheckAndPlayBellForEachSchedule(JadwalModel jadwal)
-        {
-            // Cek untuk Jadwal Normal
-            foreach (var normal in jadwal.JadwalNormal)
-            {
-                if (CheckTime(normal.Waktu))
-                {
-                    PlaySound(normal.SoundPath); // Mainkan suara bel
-                }
+                Console.WriteLine("Tidak ada jenis jadwal untuk hari ini.");
+                return;
             }
 
-            // Cek untuk Jadwal Khusus
-            foreach (var khusus in jadwal.JadwalKhusus)
-            {
-                if (CheckTime(khusus.Waktu))
-                {
-                    PlaySound(khusus.SoundPath); // Mainkan suara bel
-                }
-            }
+            ExecuteSchedule(jenisJadwal);
         }
 
 
-        private bool CheckTime(string timeString)
+
+
+
+        private void ExecuteSchedule(string jenisJadwal)
         {
-            TimeSpan scheduleTime;
-            if (TimeSpan.TryParse(timeString, out scheduleTime))
+            string currentDay = GetCurrentDayInIndonesian();
+
+            var schedules = _jadwalDal.GetJadwalModelsByJenisJadwalAndDay(jenisJadwal, currentDay);
+            foreach (var schedule in schedules)
             {
-                // Bandingkan dengan waktu saat ini
-                var currentTime = DateTime.Now.TimeOfDay;
-                return currentTime.Hours == scheduleTime.Hours && currentTime.Minutes == scheduleTime.Minutes;
+                Console.WriteLine($"Loaded schedule: {schedule.Waktu}, {schedule.SoundPath}");
             }
-            return false;
+
+            PlayScheduledSounds(schedules);
+        }
+
+
+        private void PlayScheduledSounds(List<JadwalModel> schedules)
+        {
+            foreach (var schedule in schedules)
+            {
+                Console.WriteLine($"Schedule: Waktu = {schedule.Waktu}, SoundPath = {schedule.SoundPath}");
+                if (CheckTime(schedule.Waktu))
+                {
+                    PlaySound(schedule.SoundPath);
+                }
+            }
+
+        }
+
+
+
+
+        private bool CheckTime(string waktu)
+        {
+            DateTime jadwalTime = DateTime.Parse(waktu);
+            DateTime currentTime = DateTime.Now;
+
+            Console.WriteLine($"Checking time: Jadwal = {jadwalTime}, Current = {currentTime}");
+            return jadwalTime.Hour == currentTime.Hour && jadwalTime.Minute == currentTime.Minute;
         }
 
 
         private void PlaySound(string soundPath)
         {
-            try
+            if (!string.IsNullOrEmpty(soundPath) && System.IO.File.Exists(soundPath))
             {
+                Console.WriteLine($"Playing sound from {soundPath}");
                 var player = new System.Media.SoundPlayer(soundPath);
                 player.Play();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Error playing sound: {ex.Message}");
+                Console.WriteLine($"Sound file not found: {soundPath}");
             }
         }
+
+
 
 
 
