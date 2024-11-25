@@ -25,6 +25,8 @@ namespace BelSekolah.BelSekolahForm
         private readonly JadwalNormalDal _jadwalNormalDal;
 
         private int _jadwalHariID;
+        private enum GridAktif { None, JadwalNormal, JadwalKhusus};
+        private GridAktif _gridAktif = GridAktif.None;
         
         public JadwalBelForm(Form mainForm)
         {   
@@ -62,14 +64,12 @@ namespace BelSekolah.BelSekolahForm
             JadwalNormalGrid.DataSource = jadwalNormal;
             JadwalNormalGrid.Columns["JadwalNormalID"].Visible = false;
             JadwalNormalGrid.Columns["HariID"].Visible = false;
-            JadwalNormalGrid.Columns["SoundName"].Visible = false;
             JadwalNormalGrid.Columns["SoundPath"].Visible = false;
 
             var jadwalKhusus = _jadwalKhususDal.ListData(HariID);
             JadwalKhususGrid.DataSource = jadwalKhusus;
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
             JadwalKhususGrid.Columns["HariID"].Visible = false;
-            JadwalKhususGrid.Columns["SoundName"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
 
         }
@@ -158,6 +158,85 @@ namespace BelSekolah.BelSekolahForm
             JadwalHariGrid.CellMouseClick += JadwalHariGrid_CellMouseClick;
             JadwalHariGrid.SelectionChanged += JadwalHariGrid_SelectionChanged;
             deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
+
+            JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
+            JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
+            deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
+            editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
+        }
+
+        private void EditToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            if (_gridAktif == GridAktif.JadwalNormal)
+            {
+                int jadwalNormalID = Convert.ToInt32(JadwalNormalGrid.CurrentRow.Cells["JadwalNormalID"].Value);
+                EditJadwalForm editJadwalForm = new EditJadwalForm("Jadwal Normal", jadwalNormalID);
+                editJadwalForm.ShowDialog();
+            }
+            else if (_gridAktif == GridAktif.JadwalKhusus)
+            {
+                int jadwalKhususID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
+                EditJadwalForm editJadwalForm = new EditJadwalForm("Jadwal Khusus", jadwalKhususID);
+                editJadwalForm.ShowDialog();
+            }
+
+            LoadJadwalDetil(_jadwalHariID);
+        }
+
+        private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
+        {
+            if (_gridAktif == GridAktif.JadwalNormal)
+            {
+                if (MessageBox.Show("Anda yakin ingin menghapus data Jadwal Normal?", "Perhatian", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    int jadwalNormalID = Convert.ToInt32(JadwalNormalGrid.CurrentRow.Cells["JadwalNormalID"].Value);
+                    _jadwalNormalDal.Delete(jadwalNormalID);
+                    LoadJadwalDetil(_jadwalHariID);
+                }
+            }
+            else if (_gridAktif == GridAktif.JadwalKhusus)
+            {
+                if (MessageBox.Show("Anda yakin ingin menghapus data Jadwal Khusus?", "Perhatian", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    int jadwalKhususID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
+                    _jadwalKhususDal.Delete(jadwalKhususID);
+                    LoadJadwalDetil(_jadwalHariID);
+                }
+            }
+        }
+
+        private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex  >= 0)
+            {
+                _gridAktif = GridAktif.JadwalKhusus;
+
+                JadwalKhususGrid.ClearSelection();
+                JadwalKhususGrid.CurrentCell = JadwalKhususGrid[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip2.Show(Cursor.Position);
+
+                if (JadwalKhususGrid.CurrentRow?.Cells["JadwalKhususID"].Value != null)
+                {
+                    GetData();
+                }
+            }
+        }
+
+        private void JadwalNormalGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                _gridAktif = GridAktif.JadwalNormal;
+
+                JadwalNormalGrid.ClearSelection();
+                JadwalNormalGrid.CurrentCell = JadwalNormalGrid[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip2.Show(Cursor.Position);
+
+                if (JadwalNormalGrid.CurrentRow?.Cells["JadwalNormalID"].Value != null)
+                {
+                    GetData();
+                }
+            }
         }
 
         private void JadwalHariGrid_SelectionChanged(object? sender, EventArgs e)
@@ -165,10 +244,9 @@ namespace BelSekolah.BelSekolahForm
             if (JadwalHariGrid.CurrentRow?.Cells["HariID"].Value != null)
             {
                 _jadwalHariID = Convert.ToInt32(JadwalHariGrid.CurrentRow.Cells["HariID"].Value);
-                LoadJadwalDetil(_jadwalHariID);
-                GetData();
-                MessageBox.Show(_jadwalHariID.ToString());
 
+                GetData();
+                LoadJadwalDetil(_jadwalHariID);
             }
         }
 
@@ -215,18 +293,20 @@ namespace BelSekolah.BelSekolahForm
 
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
+            MessageBox.Show(_jadwalHariID.ToString());
+
             InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Normal", _jadwalHariID);
-            if (inputJadwalForm.ShowDialog() == DialogResult.OK)
-                LoadJadwalDetil(_jadwalHariID);            
+            inputJadwalForm.ShowDialog();
+            LoadJadwalDetil(_jadwalHariID);            
 
         }
 
         private void TambahKhususButton_Click(object? sender, EventArgs e)
         {
             InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Khusus", _jadwalHariID);
-            if (inputJadwalForm.ShowDialog() == DialogResult.OK)
-                LoadJadwalDetil(_jadwalHariID);
-        }
+            inputJadwalForm.ShowDialog();
+            LoadJadwalDetil(_jadwalHariID);
+        } 
 
         private void SaveButton_Click(object? sender, EventArgs e)
         {

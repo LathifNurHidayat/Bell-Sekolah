@@ -25,7 +25,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private bool _isPlaying = false;
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
-        private int _hariId;
+        private int _hariId = 0;
 
         public InputJadwalForm(string Jenis, int HariId)
         {
@@ -51,7 +51,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            if (WaktuPicker.Value.TimeOfDay == DateTime.Today.TimeOfDay || KeteranganText.Text == "" || SoundFileText.Text == "")
+            if (KeteranganText.Text == "" || SoundFileText.Text == "")
             {
                 MessageBox.Show("Data Harus Lengkap", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -206,12 +206,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     SoundName = SoundFileText.Text,
                     SoundPath = filePath
                 };
-
-                if (_hariId == 0)
-                {
-                    _jadwalNormalDal.Insert(jadwalNormal);
-                }
-
+                  _jadwalNormalDal.Insert(jadwalNormal);
             }
 
             if (JenisJadwalLabel.Text == "Jadwal Khusus")
@@ -219,16 +214,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 var jadwalKhusus = new JadwalKhususModel
                 {
                     HariID = _hariId,
-                    Waktu = WaktuPicker.Value.ToString(),
+                    Waktu = WaktuPicker.Value.ToString("HH:mm"),
                     Keterangan = KeteranganText.Text,
                     SoundName = SoundFileText.Text,
                     SoundPath = filePath
                 };
-
-                if (_hariId == 0)
-                {
-                    _jadwalKhususDal.Insert(jadwalKhusus);
-                }
+                  _jadwalKhususDal.Insert(jadwalKhusus);
             }
         }
     }

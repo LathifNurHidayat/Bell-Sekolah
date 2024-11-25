@@ -99,5 +99,23 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 Conn.Execute(sql, new { JadwalKhususID = JadwalKhususId});
             }
         }
+
+        public JadwalKhususModel? GetData(int JadwalID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            SELECT 
+                                JadwalKhususID, HariID, Waktu, Keterangan, SoundName, SoundPath
+                            FROM 
+                                JadwalKhusus
+                            WHERE 
+                                JadwalKhususID = @JadwalKhususID";
+
+                return Conn.Query<JadwalKhususModel>(sql, new { JadwalKhususID = JadwalID }).FirstOrDefault();
+            }
+        }
     }
 }
