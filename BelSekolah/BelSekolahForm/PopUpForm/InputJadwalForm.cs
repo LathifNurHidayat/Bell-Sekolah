@@ -20,7 +20,60 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             InitializeComponent();
             JenisJadwalLabel.Text = Jenis;
+            RegisterControlEvent();
+
+            PausePlayButton.Text = "▶";
+
         }
+
+        private void RegisterControlEvent()
+        {
+            BrowseButton.Click += BrowseButton_Click;
+            PausePlayButton.Click += PausePlayButton_Click;
+        }
+
+        private void PausePlayButton_Click(object? sender, EventArgs e)
+        {
+            PausePlayButton.Text = (PausePlayButton.Text == "■") ? "▶" : "■";
+        }
+
+        private void BrowseButton_Click(object? sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Sound Files (*.mp3)|*.mp3";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string FilePath = openFileDialog.FileName;
+                string NamaFile = Path.GetFileName(FilePath);
+                SoundFileText.Text = NamaFile;
+
+                SelectAndReplace(FilePath);
+            }
+        }
+
+        private void SelectAndReplace(string FilePath)
+        {
+            string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound");
+
+            if (!Directory.Exists(tujuanFolder))
+            {
+                Directory.CreateDirectory(tujuanFolder);
+            }
+
+            string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(FilePath));
+
+            File.Copy(FilePath, tujuanPath, true);
+        }
+
+
+
+
+
+
+
+
+
 
         private void InputJadwalForm_Load(object sender, EventArgs e)
         {
@@ -29,7 +82,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void evenButton()
         {
             CancleButton.Click += CancleButton_Click;
-            BrowseButton.Click += BrowseButton_Click;
+          //  BrowseButton.Click += BrowseButton_Click;
             SaveButton.Click += SaveButton_Click;
         }
         #region Save
@@ -104,7 +157,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         #endregion
 
         #region Browse
-        private void BrowseButton_Click(object? sender, EventArgs e)
+       /* private void BrowseButton_Click(object? sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -117,7 +170,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     SoundFileText.Text = selectedFilePath;
                 }
             }
-        }
+        }*/
         #endregion
 
 

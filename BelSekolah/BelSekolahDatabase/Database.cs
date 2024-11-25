@@ -29,7 +29,7 @@ namespace BelSekolah.BelSekolahDatabase
                         Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL
+                        SoundPath TEXT NOT NULL
                     )";
 
                 string createTableJadwalNormal = @"
@@ -39,7 +39,7 @@ namespace BelSekolah.BelSekolahDatabase
                         Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL
+                        SoundPath TEXT NOT NULL
                     )";
 
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
