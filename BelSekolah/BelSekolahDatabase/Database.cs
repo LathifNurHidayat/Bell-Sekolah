@@ -25,24 +25,22 @@ namespace BelSekolah.BelSekolahDatabase
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
                         JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        IsTrue INTEGER NOT NULL,
                         Waktu TEXT NOT NULL,
                         Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL,
-                    );";
+                        Sound BLOB  NOT NULL
+                    )";
 
                 string createTableJadwalNormal = @"
                     CREATE TABLE IF NOT EXISTS JadwalNormal(
                         JadwalNormalID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        IsTrue INTEGER NOT NULL,
                         Waktu TEXT NOT NULL,
                         Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL,
-                    );";
+                        Sound BLOB  NOT NULL
+                    )";
 
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
                 ExecuteNonQuery(createTableJadwalNormal, connection);
