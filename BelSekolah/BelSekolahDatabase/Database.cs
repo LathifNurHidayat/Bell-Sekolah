@@ -23,12 +23,12 @@ namespace BelSekolah.BelSekolahDatabase
                 connection.Open();
 
                 string createTableJadwalHari = @"
-                    CREATE TABLE IF NOT EXISTS Hari(
+                    CREATE TABLE IF NOT EXISTS JadwalHari(
                         HariID INTEGER PRIMARY KEY AUTOINCREMENT,
                         JenisJadwal TEXT NOT NULL,
                         Hari TEXT NOT NULL
                     )";
-
+                 
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
                         HariID INTEGER NOT NULL,
