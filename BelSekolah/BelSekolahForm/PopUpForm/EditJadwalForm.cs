@@ -12,19 +12,24 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class EditJadwalForm : Form
     {
-        public EditJadwalForm()
+        public EditJadwalForm(string Jenis)
         {
             InitializeComponent();
-            PausePlayButton.Text = "▶";
-            PausePlayButton.Text = "■";
-
+            JenisJadwalLabel.Text = Jenis;
             RegisterControlEvent();
 
+            PausePlayButton.Text = "▶";
         }
 
         private void RegisterControlEvent()
         {
             BrowseButton.Click += BrowseButton_Click;
+            PausePlayButton.Click += PausePlayButton_Click;
+        }
+
+        private void PausePlayButton_Click(object? sender, EventArgs e)
+        {
+            PausePlayButton.Text = (PausePlayButton.Text == "■") ? "▶" : "■";
         }
 
         private void BrowseButton_Click(object? sender, EventArgs e)
@@ -35,6 +40,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string FilePath = openFileDialog.FileName;
+                string NamaFile = Path.GetFileName(FilePath);
+                SoundFileText.Text = NamaFile;
 
                 SelectAndReplace(FilePath);
             }
@@ -50,8 +57,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
             string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(FilePath));
-
-            File.Copy(FilePath, tujuanPath, true); 
+            File.Copy(FilePath, tujuanPath, true);
         }
+
+
+
     }
 }

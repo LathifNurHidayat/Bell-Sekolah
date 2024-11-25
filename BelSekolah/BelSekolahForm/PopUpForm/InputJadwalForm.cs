@@ -146,9 +146,20 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
             string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(FilePath));
-
             File.Copy(FilePath, tujuanPath, true);
         }
+
+
+
+
+
+
+
+
+
+
+
+
         private void InputJadwalForm_Load(object sender, EventArgs e)
         {
             evenButton();
