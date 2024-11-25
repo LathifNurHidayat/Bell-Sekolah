@@ -1,8 +1,12 @@
-﻿using BelSekolah.BelSekolahForm.PopUpForm;
+﻿using BelSekolah.BelSekolahBackEnd.Dal;
+using BelSekolah.BelSekolahDatabase;
+using BelSekolah.BelSekolahDatabase.Helper;
+using BelSekolah.BelSekolahForm.PopUpForm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,13 +17,15 @@ namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
     {
+        private readonly JadwalKhususDal jk = new JadwalKhususDal();
         private Form mainForm;
+        private readonly JadwalKhususDal jadwalKhusus;
         public JadwalBelForm(Form mainForm)
-        {
+        {   
             InitializeComponent();
             this.mainForm = mainForm;
             this.WindowState = FormWindowState.Maximized;
-
+            initgrid();
             RegisterControlEvent();
             InsertUpdateLabel.Text = "Update Data";
 

@@ -65,40 +65,72 @@ namespace BelSekolah.BelSekolahDatabase
 
 
         #region simpan sound 
-        public void SaveSound(string soundFile, string fileName)
+        public void SaveSound(string waktu, string hari, string keterangan, string soundName, byte[] sound, bool isTrue)
         {
-            // Cek jika file ada
-            if (File.Exists(soundFile))
+            // Validasi input agar tidak ada parameter kosong
+            if (string.IsNullOrEmpty(waktu) ||
+                string.IsNullOrEmpty(hari) ||
+                string.IsNullOrEmpty(keterangan) ||
+                string.IsNullOrEmpty(soundName) ||
+                sound == null || sound.Length == 0)
             {
-                byte[] soundFileByte = File.ReadAllBytes(soundFile);
+                throw new ArgumentException("Semua parameter harus diisi.");
+            }
 
-                string query = "INSERT INTO Sounds (FileName, SoundFile) VALUES (@FileName, @SoundFile)";
+            // Query SQL untuk menyisipkan data ke tabel JadwalKhusus
+            string query = @"
+        INSERT INTO JadwalKhusus (IsTrue, Waktu, Hari, Keterangan, SoundName, Sound) 
+        VALUES (@IsTrue, @Waktu, @Hari, @Keterangan, @SoundName, @Sound)";
 
-                using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
+            try
+            {
+                // Membuka koneksi SQLite
+                using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
                 {
                     connection.Open();
 
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@FileName", fileName);
-                        command.Parameters.AddWithValue("@SoundFile", soundFileByte);
+                        // Menambahkan nilai parameter ke query
+                        command.Parameters.AddWithValue("@IsTrue", isTrue ? 1 : 0); // Konversi bool ke INTEGER
+                        command.Parameters.AddWithValue("@Waktu", waktu);
+                        command.Parameters.AddWithValue("@Hari", hari);
+                        command.Parameters.AddWithValue("@Keterangan", keterangan);
+                        command.Parameters.AddWithValue("@SoundName", soundName);
+                        command.Parameters.AddWithValue("@Sound", sound);
+
+                        // Menjalankan perintah SQL
                         command.ExecuteNonQuery();
                     }
                 }
+
+                // Menampilkan pesan sukses
+                MessageBox.Show("Data berhasil disimpan!");
             }
-            else
+            catch (SQLiteException ex)
             {
-                Console.WriteLine("File tidak ditemukan: " + soundFile);
+                // Menangkap kesalahan database
+                MessageBox.Show($"Kesalahan database: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Menangkap kesalahan umum lainnya
+                MessageBox.Show($"Terjadi kesalahan: {ex.Message}");
             }
         }
+
+
         #endregion
 
-        #region file sound
-        public List<string> GetSounds()
-        {
-            List<string> soundsList = new List<string>();
 
-            string query = "SELECT FileName, SoundFile FROM Sounds";
+        // benahi get sound
+        #region file sound 
+        public List<string> GetJadwalKhusus()
+        {
+            List<string> jadwalList = new List<string>();
+
+            // Menyesuaikan query untuk mengambil data dari tabel JadwalKhusus
+            string query = "SELECT SoundName, Waktu, Hari, Keterangan FROM JadwalKhusus";
 
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -108,18 +140,24 @@ namespace BelSekolah.BelSekolahDatabase
                 {
                     using (SQLiteDataReader reader = command.ExecuteReader())
                     {
+                        // Membaca data dari query dan menambahkannya ke list
                         while (reader.Read())
                         {
-                            string fileName = reader["FileName"].ToString();
-                            string filePath = reader["FilePath"].ToString();
-                            soundsList.Add($"{fileName} - {filePath}"); // Gabungkan nama file dan path
+                            string soundName = reader["SoundName"].ToString();
+                            string waktu = reader["Waktu"].ToString();
+                            string hari = reader["Hari"].ToString();
+                            string keterangan = reader["Keterangan"].ToString();
+
+                            // Menyusun format data yang ingin ditampilkan, misalnya:
+                            jadwalList.Add($"Sound: {soundName}, Waktu: {waktu}, Hari: {hari}, Keterangan: {keterangan}");
                         }
                     }
                 }
             }
 
-            return soundsList;
+            return jadwalList;
         }
+
         #endregion 
 
         public void PlaySoundFromDatabase(int soundId)
@@ -141,8 +179,6 @@ namespace BelSekolah.BelSekolahDatabase
 
                             _mp3FileReader = new Mp3FileReader(memori);
                             _waveOutEvent = new WaveOutEvent();
-
-
                             _waveOutEvent.Init(_mp3FileReader);
                             _waveOutEvent.Play();
                         }

@@ -17,12 +17,12 @@ namespace BelSekolah
     {
         private System.Windows.Forms.Timer _opacityTimer;
         private System.Windows.Forms.Timer _delayTimer;
-        private readonly BelSekolahDatabase.Database _database;
+        //private readonly BelSekolahDatabase.Database _database;
 
         public LoadForm()
         {
             InitializeComponent();
-            _database = new BelSekolahDatabase.Database();
+            //_database = new BelSekolahDatabase.Database();
 
             this.ControlBox = false;
             this.MinimizeBox = false;
@@ -40,7 +40,7 @@ namespace BelSekolah
             this._delayTimer.Tick += _delayTimer_Tick;
 
             ConnStringHelper.GetConn();
-            _database.CreateTable();   
+           // _database.CreateTable();   
 
         }
 
