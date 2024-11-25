@@ -68,7 +68,15 @@ namespace BelSekolah.BelSekolahForm
             InsertUpdateLabel.Text = "Tambahkan Data Baru";
         }
 
-
+        private void initgrid()
+        {
+            JadwalBelGrid.DataSource = jk.ListJadwalKhusus().
+    Select(x => new
+    {
+        hari = x.Hari,
+        waktu = x.Waktu
+    }).ToList();
+        }
 
     } 
 }
