@@ -12,11 +12,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using NAudio.Wave;
+using Microsoft.VisualBasic.ApplicationServices;
+using CSCore.SoundOut;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class InputJadwalForm : Form
     {
+        // private readonly Database db;
+
+        private IWavePlayer waveOutDevice;
+        private AudioFileReader audioFileReader; // menggunakan ini untuk memutar sound
+        private bool _isPlaying = false;
+        public InputJadwalForm(string Jenis)
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
         private int _hariId;
@@ -31,7 +41,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             RegisterControlEvent();
 
             PausePlayButton.Text = "▶";
-
         }
 
       
@@ -57,6 +66,81 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void PausePlayButton_Click(object? sender, EventArgs e)
         {
             PausePlayButton.Text = (PausePlayButton.Text == "■") ? "▶" : "■";
+            string soundFolder = @"C:\Users\Lenovo\source\repos\Bel_Sekolah\BelSekolah\sound"; // mencari file di folder sound
+
+            if (!Directory.Exists(soundFolder))
+            {
+                MessageBox.Show("Folder suara tidak ditemukan!");
+                return;
+            }
+
+            string fileName = SoundFileText.Text.Trim(); 
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                MessageBox.Show("Nama file suara harus diisi!");
+                return;
+            }
+
+            // jalur lengkap file suara
+            string filePath = Path.Combine(soundFolder, fileName);
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show($"File suara '{fileName}' tidak ditemukan di folder '{soundFolder}'!");
+                return;
+            }
+
+            // Inisialisasi atau reload SoundPlayer jika file berubah
+            if (waveOutDevice == null || audioFileReader == null || audioFileReader.FileName != filePath)
+            {
+                try
+                {
+                    // Menghentikan dan membersihkan resource sebelumnya
+                    waveOutDevice?.Stop();
+                    waveOutDevice?.Dispose();
+                    audioFileReader?.Dispose();
+
+                    // Membaca file MP3
+                    audioFileReader = new AudioFileReader(filePath);
+                    waveOutDevice = new WaveOutEvent();
+                    waveOutDevice.Init(audioFileReader);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Tidak dapat memuat file suara: {ex.Message}");
+                    return;
+                }
+            }
+
+            // Jika belum memutar, mulai pemutaran suara
+            if (!_isPlaying)
+            {
+                try
+                {
+                    waveOutDevice.Play();
+                    PausePlayButton.Text = "■"; // Ganti ikon tombol
+                    _isPlaying = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal memutar suara: {ex.Message}");
+                }
+            }
+            else
+            {
+                // Jika sedang memutar, hentikan suara
+                try
+                {
+                    waveOutDevice.Stop();
+                    PausePlayButton.Text = "▶"; // Ganti ikon tombol
+                    _isPlaying = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Gagal menghentikan suara: {ex.Message}");
+                }
+            }
         }
 
         private void BrowseButton_Click(object? sender, EventArgs e)
