@@ -22,26 +22,32 @@ namespace BelSekolah.BelSekolahDatabase
             {
                 connection.Open();
 
+                string createTableJadwalHari = @"
+                    CREATE TABLE IF NOT EXISTS Hari(
+                        HariID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        JenisJadwal TEXT NOT NULL,
+                        Hari TEXT NOT NULL
+                    )";
+
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
-                        JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        HariID INTEGER NOT NULL,
                         Waktu TEXT NOT NULL,
-                        Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL
+                        SoundPath TEXT NOT NULL
                     )";
 
                 string createTableJadwalNormal = @"
                     CREATE TABLE IF NOT EXISTS JadwalNormal(
-                        JadwalNormalID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        HariID INTEGER NOT NULL,
                         Waktu TEXT NOT NULL,
-                        Hari TEXT NOT NULL,
                         Keterangan TEXT NOT NULL,
                         SoundName TEXT NOT NULL,
-                        Sound BLOB  NOT NULL
+                        SoundPath TEXT NOT NULL
                     )";
 
+                ExecuteNonQuery(createTableJadwalHari, connection);
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
                 ExecuteNonQuery(createTableJadwalNormal, connection);
             }
