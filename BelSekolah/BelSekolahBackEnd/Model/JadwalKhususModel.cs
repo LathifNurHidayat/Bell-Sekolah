@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BelSekolah.BelSekolahBackEnd.Model
 {
-    public class JadwalKhusus
+    public class JadwalKhususModel
     {
         public int JadwalKhususID { get; set; }
         public string Waktu { get; set; }

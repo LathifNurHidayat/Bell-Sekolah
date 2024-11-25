@@ -1,4 +1,5 @@
-﻿using BelSekolah.BelSekolahDatabase;
+﻿using BelSekolah.BelSekolahBackEnd.Dal;
+using BelSekolah.BelSekolahDatabase;
 using BelSekolah.BelSekolahDatabase.Helper;
 using BelSekolah.BelSekolahForm.PopUpForm;
 using System;
@@ -16,8 +17,9 @@ namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
     {
+        private readonly JadwalKhususDal jk = new JadwalKhususDal();
         private Form mainForm;
-        private readonly BelSekolahDatabase.Database db;
+        private readonly JadwalKhususDal jadwalKhusus;
         public JadwalBelForm(Form mainForm)
         {   
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace BelSekolah.BelSekolahForm
             this.WindowState = FormWindowState.Maximized;
             initgrid();
             RegisterControlEvent();
-            db = new BelSekolahDatabase.Database();
+            jadwalKhusus = new JadwalKhususDal();
         }
 
         private void RegisterControlEvent()
@@ -46,15 +48,15 @@ namespace BelSekolah.BelSekolahForm
         }
 
         private void initgrid()
-        {   
-            List<string> jadwalList = db.GetJadwalKhusus();
-            JadwalBelGrid.Rows.Clear();
-            foreach (var jadwal in jadwalList)
-            {
-                var splitData = jadwal.Split(new string[] { ", " }, StringSplitOptions.None);
-                JadwalBelGrid.Rows.Add(splitData);
-            }
+        {
+            JadwalBelGrid.DataSource = jk.ListJadwalKhusus().
+               Select(x => new
+               {
+                   sound = x.Sound,
+                   waktu = x.Waktu,
+                   hari = x.Hari,
+                   keterangan = x.Keterangan
+               }).ToList();
         }
-
     } 
 }

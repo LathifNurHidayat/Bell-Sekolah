@@ -16,11 +16,11 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class InputJadwalForm : Form
     {
-        private readonly Database db;
+       // private readonly Database db;
         public InputJadwalForm(string Jenis)
         {
             InitializeComponent();
-            db = new Database();
+           // db = new Database();
             JenisJadwalLabel.Text = Jenis;
         }
 
@@ -66,7 +66,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             try
             {
                 bool isTrue = true;
-                db.SaveSound(time, day, description, fileName, fileBytes, isTrue);
+                //db.SaveSound(time, day, description, fileName, fileBytes, isTrue);
 
                 MessageBox.Show("Data berhasil disimpan!");
             }
