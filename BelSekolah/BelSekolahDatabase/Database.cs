@@ -16,7 +16,7 @@ namespace BelSekolah.BelSekolahDatabase
         private Mp3FileReader _mp3FileReader;
 
 
-        public void CreateTable()
+        public  void CreateTable()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -28,39 +28,44 @@ namespace BelSekolah.BelSekolahDatabase
                         JenisJadwal TEXT NOT NULL,
                         Hari TEXT NOT NULL
                     )";
-                 
+
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
+                        JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
                         HariID INTEGER NOT NULL,
-                        Waktu TEXT NOT NULL,
-                        Keterangan TEXT NOT NULL,
-                        SoundName TEXT NOT NULL,
-                        SoundPath TEXT NOT NULL
+                        Waktu TEXT,
+                        Keterangan TEXT,
+                        SoundName TEXT,
+                        SoundPath TEXT,
+
+                        FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE
                     )";
 
                 string createTableJadwalNormal = @"
                     CREATE TABLE IF NOT EXISTS JadwalNormal(
+                        JadwalNormalID INTEGER PRIMARY KEY AUTOINCREMENT,
                         HariID INTEGER NOT NULL,
-                        Waktu TEXT NOT NULL,
-                        Keterangan TEXT NOT NULL,
-                        SoundName TEXT NOT NULL,
-                        SoundPath TEXT NOT NULL
+                        Waktu TEXT ,
+                        Keterangan TEXT,
+                        SoundName TEXT,
+                        SoundPath TEXT,
+
+                        FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE
                     )";
 
                 ExecuteNonQuery(createTableJadwalHari, connection);
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
                 ExecuteNonQuery(createTableJadwalNormal, connection);
+
+                void ExecuteNonQuery(string query, SQLiteConnection connection)
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
         }
-
-        private void ExecuteNonQuery(string query, SQLiteConnection connection)
-        {
-            using (SQLiteCommand command = new SQLiteCommand(query, connection))
-            {
-                command.ExecuteNonQuery();
-            }
-        }
-
 
 
 

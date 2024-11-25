@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace BelSekolah.BelSekolahBackEnd.Dal
 {
-    public class JadwalKhususDal
+    public class JadwalNormalDal
     {
-        public void Insert(JadwalKhususModel model)
+        public void Insert(JadwalNormalModel model)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
 
                 const string sql = @"
-                                INSERT INTO JadwalKhusus
+                                INSERT INTO JadwalNormal
                                     (HariID, Waktu, Keterangan, SoundName, SoundPath)
                                 VALUES
                                     (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
@@ -38,7 +38,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
         }
 
 
-        public void Update(JadwalKhususModel model)
+        public void Update(JadwalNormalModel model)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -46,18 +46,18 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                                     UPDATE 
-                                        JadwalKhusus
+                                        JadwalNormal
                                     SET 
                                         Waktu = @Waktu,
                                         Keterangan = @Keterangan,
                                         SoundName = @SoundName,
                                         SoundPath = @SoundPath
                                     WHERE 
-                                        JadwalKhususID = @JadwalKhususID";
+                                        JadwalNormalID = @JadwalNormalID";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
-                    cmd.Parameters.AddWithValue("@JadwalKhususID", model.JadwalKhususID);
+                    cmd.Parameters.AddWithValue("@JadwalNormalID", model.JadwalNormalID);
                     cmd.Parameters.AddWithValue("@Waktu", model.Waktu);
                     cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
                     cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
@@ -68,7 +68,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public IEnumerable<JadwalKhususModel> ListData(int HariId)
+        public IEnumerable<JadwalNormalModel> ListData(int HariId)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -76,27 +76,27 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             SELECT 
-                                JadwalKhususID, HariID, Waktu, Keterangan, SoundName, SoundPath
+                                JadwalNormalID, HariID, Waktu, Keterangan, SoundName, SoundPath
                             FROM 
-                                JadwalKhusus
+                                JadwalNormal
                             WHERE 
                                 HariID = @HariID";
 
-                return Conn.Query<JadwalKhususModel>(sql, new { HariID = HariId });
+                return Conn.Query<JadwalNormalModel>(sql, new { HariID = HariId });
             }
         }
 
 
 
-        public void Delete(int JadwalKhususId)
+        public void Delete(int JadwalNormalId)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
 
-                const string sql = @"DELETE FROM JadwalKhusus WHERE JadwalKhususID = @JadwalKhususID";
+                const string sql = @"DELETE FROM JadwalNormal WHERE JadwalNormalID = @JadwalNormalID";
 
-                Conn.Execute(sql, new { JadwalKhususID = JadwalKhususId});
+                Conn.Execute(sql, new { JadwalNormalID = JadwalNormalId });
             }
         }
     }

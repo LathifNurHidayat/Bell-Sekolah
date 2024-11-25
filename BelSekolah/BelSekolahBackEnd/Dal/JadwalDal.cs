@@ -61,8 +61,10 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public <Ienumerable> ListData(int HariId)
+        public IEnumerable<JadwalModel> ListData()
         {
+            var jadwalList = new List<JadwalModel>();
+
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
@@ -71,17 +73,48 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                                     SELECT 
                                         HariID, JenisJadwal, Hari
                                     FROM 
-                                        JadwalHari
-                                    WHERE 
-                                        HariID = @HariID";
+                                        JadwalHari";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
-                    cmd.Parameters.AddWithValue("@HariID", HariId);
-                   
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var jadwal = new JadwalModel
+                            {
+                                HariID = reader.GetInt32(0),
+                                JenisJadwal = reader.GetString(1),  
+                                Hari = reader.GetString(2)  
+                            };
+
+                            jadwalList.Add(jadwal);
+                        }
+                    }
+                }
+            }
+
+            return jadwalList;
+        }
+
+
+        public void Delete(int HariID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"DELETE FROM JadwalHari WHERE HariID = @HariID";
+
+                using (var cmd = new SQLiteCommand(sql, Conn))
+                {
+                    cmd.Parameters.AddWithValue("@HariID", HariID);
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+       
     }
 }

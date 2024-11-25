@@ -13,21 +13,15 @@ namespace BelSekolah.BelSekolahDatabase.Helper
     {
         public static string GetConn()
         {
-            /*string folderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BelSekolah");
-            if (!System.IO.Directory.Exists(folderPath))
+            string databasePath = Path.Combine("Database.db");
+            if (!File.Exists(databasePath))
             {
-                System.IO.Directory.CreateDirectory(folderPath);
+                SQLiteConnection.CreateFile(databasePath);
             }
-            string databasePath = System.IO.Path.Combine(folderPath, "Database.db");
-            if (!System.IO.File.Exists(databasePath))
-            {
-                System.IO.File.Copy(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database.db"), databasePath);
-            }
-
-            return $@"Data Source={databasePath};Version=3;";*/
-
-            return @"Data Source = D:\Database\Database.db;Version = 3;";
+      
+            return $@"Data Source={databasePath};Version=3;";
+           
         }
-
+         
     }
 }

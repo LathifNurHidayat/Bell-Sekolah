@@ -17,11 +17,11 @@ namespace BelSekolah.UjiCoba
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.DataSource = jk.ListJadwalKhusus().
+           /* dataGridView1.DataSource = jk.ListJadwalKhusus().
                 Select(x => new
                 {
                    waktu = x.Waktu
-                }).ToList();
+                }).ToList();*/
         }
     }
 }

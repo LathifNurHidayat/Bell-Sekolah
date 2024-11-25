@@ -1,6 +1,7 @@
-﻿using BelSekolah.BelSekolahDatabase;
+﻿using BelSekolah.BelSekolahBackEnd.Dal;
+using BelSekolah.BelSekolahBackEnd.Model;
+using BelSekolah.BelSekolahDatabase;
 using BelSekolah.BelSekolahDatabase.Helper;
-using CSCore.XAudio2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +17,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class InputJadwalForm : Form
     {
-       // private readonly Database db;
-        public InputJadwalForm(string Jenis)
+        private readonly JadwalKhususDal _jadwalKhususDal;
+        private readonly JadwalNormalDal _jadwalNormalDal;
+        private int _hariId;
+        public InputJadwalForm(string Jenis, int HariId)
         {
             InitializeComponent();
-           // db = new Database();
+            _jadwalKhususDal = new JadwalKhususDal();
+            _jadwalNormalDal = new JadwalNormalDal();
+
+            _hariId = HariId;
             JenisJadwalLabel.Text = Jenis;
             RegisterControlEvent();
 
@@ -28,10 +34,24 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         }
 
+      
+
         private void RegisterControlEvent()
         {
             BrowseButton.Click += BrowseButton_Click;
             PausePlayButton.Click += PausePlayButton_Click;
+            SaveButton.Click += SaveButton_Click;
+        }
+
+        private void SaveButton_Click(object? sender, EventArgs e)
+        {
+            if (WaktuPicker.Value.TimeOfDay == DateTime.Today.TimeOfDay || KeteranganText.Text == "" || SoundFileText.Text == "")
+            {
+                MessageBox.Show("Data Harus Lengkap", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            SaveData();
+            this.Close();
         }
 
         private void PausePlayButton_Click(object? sender, EventArgs e)
@@ -67,7 +87,45 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             File.Copy(FilePath, tujuanPath, true);
         }
 
+        private void SaveData()
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", SoundFileText.Text);
 
+            if (JenisJadwalLabel.Text == "Jadwal Normal")
+            {
+                var jadwalNormal = new JadwalNormalModel
+                {
+                    HariID = _hariId,
+                    Waktu = WaktuPicker.Value.ToString(),
+                    Keterangan = KeteranganText.Text,
+                    SoundName = SoundFileText.Text,
+                    SoundPath = filePath
+                };
+
+                if (_hariId == 0)
+                {
+                    _jadwalNormalDal.Insert(jadwalNormal);
+                }
+
+            }
+
+            if (JenisJadwalLabel.Text == "Jadwal Khusus")
+            {
+                var jadwalKhusus = new JadwalKhususModel
+                {
+                    HariID = _hariId,
+                    Waktu = WaktuPicker.Value.ToString(),
+                    Keterangan = KeteranganText.Text,
+                    SoundName = SoundFileText.Text,
+                    SoundPath = filePath
+                };
+
+                if (_hariId == 0)
+                {
+                    _jadwalKhususDal.Insert(jadwalKhusus);
+                }
+            }
+        }
 
 
 
@@ -86,10 +144,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             CancleButton.Click += CancleButton_Click;
           //  BrowseButton.Click += BrowseButton_Click;
-            SaveButton.Click += SaveButton_Click;
+           // SaveButton.Click += SaveButton_Click;
         }
         #region Save
-        private void SaveButton_Click(object? sender, EventArgs e)
+     /*   private void SaveButton_Click(object? sender, EventArgs e)
         {
             string filePath = SoundFileText.Text;
             if (string.IsNullOrEmpty(filePath))
@@ -128,8 +186,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 MessageBox.Show($"Terjadi kesalahan saat menyimpan data: {ex.Message}");
             }
-        }
-        private string GetSelectedDays()
+        }*/
+       /* private string GetSelectedDays()
         {
             List<string> selectedDays = new List<string>();
 
@@ -145,7 +203,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 selectedDays.Add("Jumat");
 
             return string.Join(", ", selectedDays);
-        }
+        }*/
 
         public void SaveSoundd(string fileName, string filePath, string time, string day, string description)
         {

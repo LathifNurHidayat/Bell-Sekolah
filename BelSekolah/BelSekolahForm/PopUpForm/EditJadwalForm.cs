@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BelSekolah.BelSekolahBackEnd.Dal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,15 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 {
     public partial class EditJadwalForm : Form
     {
+        private readonly JadwalKhususDal _jadwalKhususDal;
+        private readonly JadwalNormalDal _jadwalNormalDal;
+
         public EditJadwalForm(string Jenis)
         {
             InitializeComponent();
+            _jadwalKhususDal = new JadwalKhususDal();
+            _jadwalNormalDal = new JadwalNormalDal();
+
             JenisJadwalLabel.Text = Jenis;
             RegisterControlEvent();
 

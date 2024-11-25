@@ -11,5 +11,8 @@ namespace BelSekolah.BelSekolahBackEnd.Model
         public int HariID { get; set; }
         public string JenisJadwal { get; set; }
         public string Hari { get; set; }
+
+        public List<JadwalNormalModel> JadwalNormal { get; set; }
+        public List<JadwalKhususModel> JadwalKhusus { get; set; }
     }
 }

@@ -110,6 +110,7 @@
             SoundFileText.BorderStyle = BorderStyle.FixedSingle;
             SoundFileText.Location = new Point(20, 301);
             SoundFileText.Name = "SoundFileText";
+            SoundFileText.ReadOnly = true;
             SoundFileText.Size = new Size(251, 27);
             SoundFileText.TabIndex = 70;
             // 
