@@ -69,35 +69,51 @@ namespace BelSekolah.BelSekolahDatabase
 
 
         #region simpan sound 
-        public void SaveSound(string soundFile, string fileName)
+        public void SaveSound(string fileName, string filePath, string time, string day, string description)
         {
-            // Cek jika file ada
-            if (File.Exists(soundFile))
+            if (string.IsNullOrEmpty(fileName) ||
+                string.IsNullOrEmpty(filePath) ||
+                string.IsNullOrEmpty(time) ||
+                string.IsNullOrEmpty(day) ||
+                string.IsNullOrEmpty(description))
             {
-                byte[] soundFileByte = File.ReadAllBytes(soundFile);
+                throw new ArgumentException("Semua parameter harus diisi.");
+            }
 
-                string query = "INSERT INTO Sounds (FileName, SoundFile) VALUES (@FileName, @SoundFile)";
+            string query = "INSERT INTO Sounds (FileName, FilePath, Time, Day, Description) VALUES (@FileName, @FilePath, @Time, @Day, @Description)";
 
-                using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
+            try
+            {
+                using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
                 {
                     connection.Open();
-
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    using (var command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@FileName", fileName);
-                        command.Parameters.AddWithValue("@SoundFile", soundFileByte);
+                        command.Parameters.AddWithValue("@FilePath", filePath);
+                        command.Parameters.AddWithValue("@Time", time);
+                        command.Parameters.AddWithValue("@Day", day);
+                        command.Parameters.AddWithValue("@Description", description);
+
                         command.ExecuteNonQuery();
                     }
                 }
             }
-            else
+            catch (SQLiteException ex)
             {
-                Console.WriteLine("File tidak ditemukan: " + soundFile);
+                throw new Exception($"Kesalahan database: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Terjadi kesalahan: {ex.Message}");
             }
         }
+
         #endregion
 
-        #region file sound
+
+        // benahi get sound
+        #region file sound 
         public List<string> GetSounds()
         {
             List<string> soundsList = new List<string>();
@@ -145,8 +161,6 @@ namespace BelSekolah.BelSekolahDatabase
 
                             _mp3FileReader = new Mp3FileReader(memori);
                             _waveOutEvent = new WaveOutEvent();
-
-
                             _waveOutEvent.Init(_mp3FileReader);
                             _waveOutEvent.Play();
                         }
