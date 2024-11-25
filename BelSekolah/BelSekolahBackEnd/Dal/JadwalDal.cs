@@ -1,5 +1,6 @@
 ﻿using BelSekolah.BelSekolahBackEnd.Model;
 using BelSekolah.BelSekolahDatabase.Helper;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -11,6 +12,51 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalDal
     {
+        public List<JadwalModel> GetJadwalModels()
+        {
+            using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                connection.Open();
+
+                string query = @"
+                            SELECT 
+                                JH.HariID AS HariID,
+                                'Normal' AS JenisJadwal,
+                                JH.Hari AS Hari,
+                                JN.Waktu AS Waktu,
+                                JN.Keterangan AS Keterangan,
+                                JN.SoundName AS SoundName,
+                                JN.SoundPath AS SoundPath
+                            FROM 
+                                JadwalNormal JN
+                            INNER JOIN 
+                                JadwalHari JH ON JN.HariID = JH.HariID
+
+                            UNION
+
+                            SELECT 
+                                JH.HariID AS HariID,
+                                'Khusus' AS JenisJadwal,
+                                JH.Hari AS Hari,
+                                JK.Waktu AS Waktu,
+                                JK.Keterangan AS Keterangan,
+                                JK.SoundName AS SoundName,
+                                JK.SoundPath AS SoundPath
+                            FROM 
+                                JadwalKhusus JK
+                            INNER JOIN 
+                                JadwalHari JH ON JK.HariID = JH.HariID
+
+                            ORDER BY 
+                                HariID, Waktu";
+
+                var jadwalModelList = connection.Query<JadwalModel>(query).ToList();
+                return jadwalModelList;
+            }
+        }
+
+
+
         public int Insert(JadwalModel model)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))

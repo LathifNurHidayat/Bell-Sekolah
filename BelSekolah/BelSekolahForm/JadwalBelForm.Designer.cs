@@ -77,6 +77,7 @@
             // 
             // AddButton
             // 
+            AddButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             AddButton.BackColor = Color.Goldenrod;
             AddButton.BackgroundImageLayout = ImageLayout.Zoom;
             AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);

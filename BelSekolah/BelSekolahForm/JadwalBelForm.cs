@@ -144,6 +144,91 @@ namespace BelSekolah.BelSekolahForm
 
 
 
+        private string GetDayInIndonesian(DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday: return "Senin";
+                case DayOfWeek.Tuesday: return "Selasa";
+                case DayOfWeek.Wednesday: return "Rabu";
+                case DayOfWeek.Thursday: return "Kamis";
+                case DayOfWeek.Friday: return "Jumat";
+                case DayOfWeek.Saturday: return "Sabtu";
+                case DayOfWeek.Sunday: return "Minggu";
+                default: return "";
+            }
+        }
+
+
+        private void CheckAndPlayBell()
+        {
+            var currentDay = DateTime.Now.DayOfWeek; // Hari sekarang dalam bahasa Inggris
+            string currentDayInIndonesian = GetDayInIndonesian(currentDay); // Mengonversi ke bahasa Indonesia
+
+            var jadwalModelList = _jadwalDal.GetJadwalModels(); // Misalnya, Anda sudah memiliki list jadwal dari database atau sumber lain
+
+            foreach (var jadwal in jadwalModelList)
+            {
+                // Mengecek apakah hari dalam jadwal cocok dengan hari saat ini
+                if (jadwal.Hari == currentDayInIndonesian)
+                {
+                    CheckAndPlayBellForEachSchedule(jadwal);
+                }
+            }
+        }
+
+        private void CheckAndPlayBellForEachSchedule(JadwalModel jadwal)
+        {
+            // Cek untuk Jadwal Normal
+            foreach (var normal in jadwal.JadwalNormal)
+            {
+                if (CheckTime(normal.Waktu))
+                {
+                    PlaySound(normal.SoundPath); // Mainkan suara bel
+                }
+            }
+
+            // Cek untuk Jadwal Khusus
+            foreach (var khusus in jadwal.JadwalKhusus)
+            {
+                if (CheckTime(khusus.Waktu))
+                {
+                    PlaySound(khusus.SoundPath); // Mainkan suara bel
+                }
+            }
+        }
+
+
+        private bool CheckTime(string timeString)
+        {
+            TimeSpan scheduleTime;
+            if (TimeSpan.TryParse(timeString, out scheduleTime))
+            {
+                // Bandingkan dengan waktu saat ini
+                var currentTime = DateTime.Now.TimeOfDay;
+                return currentTime.Hours == scheduleTime.Hours && currentTime.Minutes == scheduleTime.Minutes;
+            }
+            return false;
+        }
+
+
+        private void PlaySound(string soundPath)
+        {
+            try
+            {
+                var player = new System.Media.SoundPlayer(soundPath);
+                player.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error playing sound: {ex.Message}");
+            }
+        }
+
+
+
+
+
         #region EVENT
 
         private void RegisterControlEvent()
