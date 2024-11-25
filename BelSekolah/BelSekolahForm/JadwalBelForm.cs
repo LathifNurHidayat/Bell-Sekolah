@@ -21,12 +21,35 @@ namespace BelSekolah.BelSekolahForm
             this.WindowState = FormWindowState.Maximized;
 
             RegisterControlEvent();
+            InsertUpdateLabel.Text = "Update Data";
+
         }
 
         private void RegisterControlEvent()
         {
             AddButton.Click += AddButton_Click;
             this.FormClosed += JadwalBelForm_FormClosed;
+            SaveButton.Click += SaveButton_Click;
+
+            TambahKhususButton.Click += TambahKhususButton_Click;
+            TambahNormalButton.Click += TambahNormalButton_Click;
+        }
+
+        private void TambahNormalButton_Click(object? sender, EventArgs e)
+        {
+            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Normal");
+            inputJadwalForm.ShowDialog();
+        }
+
+        private void TambahKhususButton_Click(object? sender, EventArgs e)
+        {
+            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Khusus");
+            inputJadwalForm.ShowDialog();
+        }
+
+        private void SaveButton_Click(object? sender, EventArgs e)
+        {
+            InsertUpdateLabel.Text = "Update Data";
         }
 
         private void JadwalBelForm_FormClosed(object? sender, FormClosedEventArgs e)
@@ -36,9 +59,10 @@ namespace BelSekolah.BelSekolahForm
 
         private void AddButton_Click(object? sender, EventArgs e)
         {
-            InputJadwalForm tambah = new InputJadwalForm("Jadwal Normal");
-            tambah.ShowDialog();
+            InsertUpdateLabel.Text = "Tambahkan Data Baru";
         }
+
+
 
     } 
 }

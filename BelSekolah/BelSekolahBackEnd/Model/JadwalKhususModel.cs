@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BelSekolah.BelSekolahBackEnd.Model
 {
-    public class JadwalNormal
+    public class JadwalKhususModel
     {
-        public int JadwalNormalID { get; set; }
+        public int JadwalKhususID { get; set; }
         public string Waktu { get; set; }
-        public string Hari { get; set; }
+        public string Hari {  get; set; }
         public string Keterangan { get; set; }
         public string SoundName { get; set; }
         public byte[] Sound { get; set; }
