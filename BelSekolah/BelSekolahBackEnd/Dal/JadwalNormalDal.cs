@@ -18,24 +18,30 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             {
                 Conn.Open();
 
-                const string sql = @"
-                                INSERT INTO JadwalNormal
-                                    (HariID, Waktu, Keterangan, SoundName, SoundPath)
-                                VALUES
-                                    (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
-
-                using (var cmd = new SQLiteCommand(sql, Conn))
+                using (var transaction = Conn.BeginTransaction())
                 {
-                    cmd.Parameters.AddWithValue("@HariID", model.HariID);
-                    cmd.Parameters.AddWithValue("@Waktu", model.Waktu);
-                    cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
-                    cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
-                    cmd.Parameters.AddWithValue("@SoundPath", model.SoundPath);
+                    const string sql = @"
+                    INSERT INTO JadwalNormal
+                        (HariID, Waktu, Keterangan, SoundName, SoundPath)
+                    VALUES
+                        (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
 
-                    cmd.ExecuteNonQuery();
+                    using (var cmd = new SQLiteCommand(sql, Conn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@HariID", model.HariID);
+                        cmd.Parameters.AddWithValue("@Waktu", model.Waktu);
+                        cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
+                        cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
+                        cmd.Parameters.AddWithValue("@SoundPath", model.SoundPath);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
                 }
             }
         }
+
 
 
         public void Update(JadwalNormalModel model)

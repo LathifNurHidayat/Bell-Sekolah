@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalForm));
             JenisJadwalLabel = new Label();
-            CancleButton = new Button();
             SaveButton = new Button();
             BrowseButton = new Button();
             PausePlayButton = new Button();
@@ -56,17 +55,6 @@
             JenisJadwalLabel.Size = new Size(96, 23);
             JenisJadwalLabel.TabIndex = 89;
             JenisJadwalLabel.Text = "JenisJadwal";
-            // 
-            // CancleButton
-            // 
-            CancleButton.BackColor = Color.Silver;
-            CancleButton.FlatAppearance.BorderColor = Color.Black;
-            CancleButton.Location = new Point(186, 397);
-            CancleButton.Name = "CancleButton";
-            CancleButton.Size = new Size(115, 38);
-            CancleButton.TabIndex = 88;
-            CancleButton.Text = "Cancle";
-            CancleButton.UseVisualStyleBackColor = false;
             // 
             // SaveButton
             // 
@@ -200,7 +188,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(453, 449);
             Controls.Add(JenisJadwalLabel);
-            Controls.Add(CancleButton);
             Controls.Add(SaveButton);
             Controls.Add(BrowseButton);
             Controls.Add(PausePlayButton);
@@ -210,10 +197,10 @@
             Controls.Add(label1);
             Controls.Add(panel3);
             Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InputJadwalForm";
             StartPosition = FormStartPosition.CenterParent;
-            Load += InputJadwalForm_Load;
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
@@ -224,7 +211,6 @@
         #endregion
 
         private Label JenisJadwalLabel;
-        private Button CancleButton;
         private Button SaveButton;
         private Button BrowseButton;
         private Button PausePlayButton;

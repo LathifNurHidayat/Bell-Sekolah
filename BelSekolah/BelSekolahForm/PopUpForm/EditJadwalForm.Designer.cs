@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditJadwalForm));
-            CancleButton = new Button();
             SaveButton = new Button();
             BrowseButton = new Button();
             PausePlayButton = new Button();
@@ -46,17 +45,6 @@
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // CancleButton
-            // 
-            CancleButton.BackColor = Color.Silver;
-            CancleButton.FlatAppearance.BorderColor = Color.Black;
-            CancleButton.Location = new Point(186, 394);
-            CancleButton.Name = "CancleButton";
-            CancleButton.Size = new Size(115, 38);
-            CancleButton.TabIndex = 77;
-            CancleButton.Text = "Cancle";
-            CancleButton.UseVisualStyleBackColor = false;
             // 
             // SaveButton
             // 
@@ -201,7 +189,6 @@
             BackColor = SystemColors.Control;
             ClientSize = new Size(453, 449);
             Controls.Add(JenisJadwalLabel);
-            Controls.Add(CancleButton);
             Controls.Add(SaveButton);
             Controls.Add(BrowseButton);
             Controls.Add(PausePlayButton);
@@ -211,7 +198,7 @@
             Controls.Add(label1);
             Controls.Add(panel3);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
@@ -225,7 +212,6 @@
         }
 
         #endregion
-        private Button CancleButton;
         private Button SaveButton;
         private Button BrowseButton;
         private Button PausePlayButton;

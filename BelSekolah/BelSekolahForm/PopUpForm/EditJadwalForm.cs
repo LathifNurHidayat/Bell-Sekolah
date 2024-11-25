@@ -32,6 +32,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             BrowseButton.Click += BrowseButton_Click;
             PausePlayButton.Click += PausePlayButton_Click;
+            SaveButton.Click += SaveButton_Click;
+        }
+
+        private void SaveButton_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void PausePlayButton_Click(object? sender, EventArgs e)
