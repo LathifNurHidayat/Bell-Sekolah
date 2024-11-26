@@ -37,7 +37,6 @@
             label3 = new Label();
             label1 = new Label();
             panel3 = new Panel();
-            BatasInputText = new Label();
             KeteranganText = new TextBox();
             panel1 = new Panel();
             WaktuPicker = new DateTimePicker();
@@ -126,27 +125,17 @@
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(BatasInputText);
             panel3.Controls.Add(KeteranganText);
             panel3.Location = new Point(20, 176);
             panel3.Name = "panel3";
             panel3.Size = new Size(412, 78);
             panel3.TabIndex = 66;
             // 
-            // BatasInputText
-            // 
-            BatasInputText.AutoSize = true;
-            BatasInputText.BackColor = Color.White;
-            BatasInputText.Location = new Point(348, 42);
-            BatasInputText.Name = "BatasInputText";
-            BatasInputText.Size = new Size(47, 20);
-            BatasInputText.TabIndex = 5;
-            BatasInputText.Text = "30/30";
-            // 
             // KeteranganText
             // 
             KeteranganText.BorderStyle = BorderStyle.FixedSingle;
             KeteranganText.Location = new Point(3, 4);
+            KeteranganText.MaxLength = 30;
             KeteranganText.Multiline = true;
             KeteranganText.Name = "KeteranganText";
             KeteranganText.Size = new Size(404, 68);
@@ -220,7 +209,6 @@
         private Label label3;
         private Label label1;
         private Panel panel3;
-        private Label BatasInputText;
         private TextBox KeteranganText;
         private Panel panel1;
         private DateTimePicker WaktuPicker;

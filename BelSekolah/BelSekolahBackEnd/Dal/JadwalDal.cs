@@ -12,31 +12,23 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalDal
     {
-
-        public List<JadwalModel> GetJadwalModelsByJenisJadwalAndDay(string jenisJadwal, string currentDay)
+        public JadwalModel GetHaribyHari(string hari)
         {
-            using (var connection = new SQLiteConnection(ConnStringHelper.GetConn()))
+            using  (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
-                string query = @"
-            SELECT *
-            FROM {0}
-            WHERE HariID = (
-                SELECT HariID 
-                FROM JadwalHari 
-                WHERE Hari = @Hari AND JenisJadwal = @JenisJadwal
-            )";
+                Conn.Open();
 
-                // Ganti tabel sesuai jenis jadwal
-                string tableName = jenisJadwal.Equals("JadwalKhusus", StringComparison.OrdinalIgnoreCase)
-                    ? "JadwalKhusus"
-                    : "JadwalNormal";
+                const string sql = @"
+                                    SELECT 
+                                        *
+                                    FROM
+                                        JadwalHari
+                                    WHERE 
+                                        Hari = @Hari";
 
-                query = string.Format(query, tableName);
-
-                return connection.Query<JadwalModel>(query, new { Hari = currentDay, JenisJadwal = jenisJadwal }).ToList();
+                return Conn.QuerySingleOrDefault<JadwalModel>(sql, new { Hari = hari});
             }
         }
-
 
 
         public int Insert(JadwalModel model)

@@ -33,6 +33,7 @@
             panel1 = new Panel();
             AddButton = new Button();
             panel2 = new Panel();
+            JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
@@ -95,6 +96,7 @@
             // 
             panel2.BackColor = Color.LightGray;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(JamLabel);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Top;
@@ -102,6 +104,17 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1730, 77);
             panel2.TabIndex = 1;
+            // 
+            // JamLabel
+            // 
+            JamLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            JamLabel.AutoSize = true;
+            JamLabel.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JamLabel.Location = new Point(1620, 17);
+            JamLabel.Name = "JamLabel";
+            JamLabel.Size = new Size(88, 38);
+            JamLabel.TabIndex = 5;
+            JamLabel.Text = "00:00";
             // 
             // label1
             // 
@@ -384,5 +397,6 @@
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem1;
         private DataGridView JadwalKhususGrid;
+        private Label JamLabel;
     }
 }

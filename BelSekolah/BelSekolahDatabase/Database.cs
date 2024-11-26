@@ -12,9 +12,6 @@ namespace BelSekolah.BelSekolahDatabase
 {
     public class Database
     {
-        private WaveOutEvent _waveOutEvent;
-        private Mp3FileReader _mp3FileReader;
-
 
         public  void CreateTable()
         {

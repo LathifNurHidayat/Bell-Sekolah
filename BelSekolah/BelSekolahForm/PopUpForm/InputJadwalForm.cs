@@ -47,6 +47,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             BrowseButton.Click += BrowseButton_Click;
             PausePlayButton.Click += PausePlayButton_Click;
             SaveButton.Click += SaveButton_Click;
+            this.FormClosed += InputJadwalForm_FormClosed;
+        }
+
+        private void InputJadwalForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            StopPlayback();
         }
 
         private void SaveButton_Click(object? sender, EventArgs e)

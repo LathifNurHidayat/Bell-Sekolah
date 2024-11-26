@@ -12,6 +12,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalKhususDal
     {
+
         public void Insert(JadwalKhususModel model)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
