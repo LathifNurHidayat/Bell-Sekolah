@@ -110,11 +110,11 @@
             JamLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             JamLabel.AutoSize = true;
             JamLabel.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JamLabel.Location = new Point(1620, 17);
+            JamLabel.Location = new Point(1581, 17);
             JamLabel.Name = "JamLabel";
-            JamLabel.Size = new Size(88, 38);
+            JamLabel.Size = new Size(127, 38);
             JamLabel.TabIndex = 5;
-            JamLabel.Text = "00:00";
+            JamLabel.Text = "00:00:00";
             // 
             // label1
             // 
@@ -211,7 +211,7 @@
             SaveButton.BackgroundImageLayout = ImageLayout.Zoom;
             SaveButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SaveButton.ForeColor = Color.White;
-            SaveButton.Location = new Point(1564, 379);
+            SaveButton.Location = new Point(1564, 377);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(126, 37);
             SaveButton.TabIndex = 12;

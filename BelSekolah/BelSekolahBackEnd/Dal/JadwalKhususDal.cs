@@ -87,8 +87,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-
-
         public void Delete(int JadwalKhususId)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))

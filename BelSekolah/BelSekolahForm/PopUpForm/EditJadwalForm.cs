@@ -42,12 +42,11 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             PausePlayButton.Click += PausePlayButton_Click;
             SaveButton.Click += SaveButton_Click;
             this.FormClosed += EditJadwalForm_FormClosed;
-
         }
 
         private void EditJadwalForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            StopPlayback();
+            StopAudio();
         }
 
         private void SaveButton_Click(object? sender, EventArgs e)
@@ -62,13 +61,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         }
 
 
-
-
         private void PausePlayButton_Click(object? sender, EventArgs e)
         {
-            // Path folder suara
             string soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound");
-
             if (!Directory.Exists(soundFolder))
             {
                 MessageBox.Show("Folder suara tidak ditemukan!");
@@ -76,40 +71,45 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
             string fileName = SoundFileText.Text.Trim();
-
             if (string.IsNullOrEmpty(fileName))
             {
-                MessageBox.Show("Nama file suara harus diisi!");
+                MessageBox.Show("Pilih sound terlebih dahulu!");
                 return;
             }
 
-            // Jalur lengkap file suara
             string filePath = Path.Combine(soundFolder, fileName);
-
             if (!File.Exists(filePath))
             {
                 MessageBox.Show($"File suara '{fileName}' tidak ditemukan di folder '{soundFolder}'!");
                 return;
             }
 
-            // Jika suara sedang diputar, hentikan
             if (_isPlaying)
             {
-                StopPlayback();
+                StopAudio();
                 PausePlayButton.Text = "▶";
-                return;
             }
-
-            // Inisialisasi atau reload audio jika file berubah
-            if (audioFileReader == null || audioFileReader.FileName != filePath)
+            else
             {
-                ResetAudio(filePath);
+                PlayAudio(filePath);
+                PausePlayButton.Text = "■";
             }
+        }
 
+        private void PlayAudio(string filePath)
+        {
             try
             {
+                StopAudio();
+                audioFileReader = new AudioFileReader(filePath);
+                waveOutDevice = new WaveOutEvent();
+                waveOutDevice.PlaybackStopped += (s, e) =>
+                {
+                    StopAudio();
+                    PausePlayButton.Text = "▶";
+                };
+                waveOutDevice.Init(audioFileReader);
                 waveOutDevice.Play();
-                PausePlayButton.Text = "■";
                 _isPlaying = true;
             }
             catch (Exception ex)
@@ -118,27 +118,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
         }
 
-        // Fungsi reset audio untuk pemutaran ulang
-        private void ResetAudio(string filePath)
-        {
-            try
-            {
-                StopPlayback(); // Hentikan pemutaran sebelumnya
-
-                // Inisialisasi ulang audio
-                audioFileReader = new AudioFileReader(filePath);
-                waveOutDevice = new WaveOutEvent();
-                waveOutDevice.PlaybackStopped += OnPlaybackStopped;
-                waveOutDevice.Init(audioFileReader);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Tidak dapat memuat file suara: {ex.Message}");
-            }
-        }
-
-        // Fungsi untuk menghentikan pemutaran dan membersihkan resource
-        private void StopPlayback()
+        private void StopAudio()
         {
             if (waveOutDevice != null)
             {
@@ -155,16 +135,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             _isPlaying = false;
         }
-
-        // Event handler untuk PlaybackStopped
-        private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
-        {
-            StopPlayback();
-            PausePlayButton.Text = "▶";
-        }
-
-
-
 
         private void BrowseButton_Click(object? sender, EventArgs e)
         {

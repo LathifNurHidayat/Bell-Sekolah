@@ -3,6 +3,7 @@ using BelSekolah.BelSekolahDatabase.Helper;
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -12,24 +13,17 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalDal
     {
-        public JadwalModel GetHaribyHari(string hari)
+        
+        public JadwalModel? GetJenisJadwal(string hari)
         {
-            using  (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
+                const string sql = @"SELECT HariID, JenisJadwal FROM JadwalHari WHERE Hari = @Hari";
 
-                const string sql = @"
-                                    SELECT 
-                                        *
-                                    FROM
-                                        JadwalHari
-                                    WHERE 
-                                        Hari = @Hari";
-
-                return Conn.QuerySingleOrDefault<JadwalModel>(sql, new { Hari = hari});
+               return Conn.QueryFirstOrDefault<JadwalModel>(sql, new {Hari = hari});
             }
         }
-
 
         public int Insert(JadwalModel model)
         {
