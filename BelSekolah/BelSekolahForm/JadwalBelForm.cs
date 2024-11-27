@@ -71,11 +71,11 @@ namespace BelSekolah.BelSekolahForm
             _jam.Tick += (s, e) => JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
             _jam.Start();
 
-            _timer.Interval = 5000;
+            _timer.Interval = 30000;
             _timer.Tick += _timer_Tick;
         }
 
-        private string _lastPlayedSoundPath =null; 
+        private string _lastPlayedSoundPath = null; 
 
         private void _timer_Tick(object? sender, EventArgs e)
         {
@@ -83,15 +83,24 @@ namespace BelSekolah.BelSekolahForm
 
             if (_jenisJadwal == "Jadwal Normal")
             {
-                var normal = _jadwalNormalDal.ListData(_hariID)
-                                .FirstOrDefault(x => x.Waktu == _waktuSekarang);
-                MessageBox.Show($"SoundPath: {normal?.SoundPath}");
+                var normal = _jadwalNormalDal.GetWaktuByHari(_hariID);
 
+                if (normal?.Waktu.ToString() == _waktuSekarang)
+                {
+                    soundPath = normal.SoundPath;
+                }
             }
             else if (_jenisJadwal == "Jadwal Khusus")
             {
-                var khusus = _jadwalKhususDal.ListData(_hariID).Where(x => x.Waktu == _waktuSekarang).Select(x => x.SoundPath);
+                var khusus = _jadwalKhususDal.GetWaktuByHari(_hariID);
+                if (khusus?.Waktu.ToString() == _waktuSekarang)
+                {
+                    soundPath = khusus.SoundPath;
+                }
             }
+
+            MessageBox.Show(soundPath);
+
 
             if (!string.IsNullOrEmpty(soundPath) && soundPath != _lastPlayedSoundPath)
             {
