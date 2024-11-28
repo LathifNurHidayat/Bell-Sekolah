@@ -13,7 +13,7 @@ namespace BelSekolah.BelSekolahDatabase
     public class Database
     {
 
-        public  void CreateTable()
+        public void CreateTable()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
             {

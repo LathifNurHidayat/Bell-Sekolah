@@ -33,7 +33,6 @@
             panel1 = new Panel();
             AddButton = new Button();
             panel2 = new Panel();
-            MulaiButton = new Button();
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
@@ -55,8 +54,6 @@
             contextMenuStrip2 = new ContextMenuStrip(components);
             editToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem1 = new ToolStripMenuItem();
-            label2 = new Label();
-            label3 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
@@ -87,7 +84,7 @@
             AddButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AddButton.ForeColor = Color.White;
             AddButton.Image = (Image)resources.GetObject("AddButton.Image");
-            AddButton.Location = new Point(9, 273);
+            AddButton.Location = new Point(9, 230);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(109, 39);
             AddButton.TabIndex = 2;
@@ -99,7 +96,6 @@
             // 
             panel2.BackColor = Color.LightGray;
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(MulaiButton);
             panel2.Controls.Add(JamLabel);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox1);
@@ -108,22 +104,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1730, 77);
             panel2.TabIndex = 1;
-            // 
-            // MulaiButton
-            // 
-            MulaiButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            MulaiButton.BackColor = Color.Goldenrod;
-            MulaiButton.BackgroundImageLayout = ImageLayout.Zoom;
-            MulaiButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            MulaiButton.ForeColor = Color.White;
-            MulaiButton.Image = (Image)resources.GetObject("MulaiButton.Image");
-            MulaiButton.Location = new Point(1448, 22);
-            MulaiButton.Name = "MulaiButton";
-            MulaiButton.Size = new Size(109, 39);
-            MulaiButton.TabIndex = 3;
-            MulaiButton.Text = "Mulai";
-            MulaiButton.TextImageRelation = TextImageRelation.TextAboveImage;
-            MulaiButton.UseVisualStyleBackColor = false;
             // 
             // JamLabel
             // 
@@ -165,7 +145,7 @@
             panel3.Controls.Add(JadwalHariGrid);
             panel3.Location = new Point(12, 131);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1706, 324);
+            panel3.Size = new Size(1706, 281);
             panel3.TabIndex = 3;
             // 
             // JadwalHariGrid
@@ -178,7 +158,7 @@
             JadwalHariGrid.ReadOnly = true;
             JadwalHariGrid.RowHeadersWidth = 51;
             JadwalHariGrid.RowTemplate.Height = 29;
-            JadwalHariGrid.Size = new Size(1694, 257);
+            JadwalHariGrid.Size = new Size(1694, 214);
             JadwalHariGrid.TabIndex = 2;
             // 
             // MainPanel
@@ -195,9 +175,9 @@
             MainPanel.Controls.Add(JadwalNormalRadio);
             MainPanel.Controls.Add(panel5);
             MainPanel.Controls.Add(JadwalNormalGrid);
-            MainPanel.Location = new Point(12, 476);
+            MainPanel.Location = new Point(12, 439);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(1706, 431);
+            MainPanel.Size = new Size(1706, 468);
             MainPanel.TabIndex = 4;
             // 
             // JadwalKhususGrid
@@ -212,7 +192,7 @@
             JadwalKhususGrid.RowHeadersWidth = 51;
             JadwalKhususGrid.RowTemplate.Height = 29;
             JadwalKhususGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            JadwalKhususGrid.Size = new Size(829, 197);
+            JadwalKhususGrid.Size = new Size(829, 234);
             JadwalKhususGrid.TabIndex = 14;
             // 
             // HariCombo
@@ -231,7 +211,7 @@
             SaveButton.BackgroundImageLayout = ImageLayout.Zoom;
             SaveButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SaveButton.ForeColor = Color.White;
-            SaveButton.Location = new Point(1564, 377);
+            SaveButton.Location = new Point(1564, 417);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(126, 37);
             SaveButton.TabIndex = 12;
@@ -245,7 +225,7 @@
             TambahKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
             TambahKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             TambahKhususButton.ForeColor = Color.White;
-            TambahKhususButton.Location = new Point(861, 359);
+            TambahKhususButton.Location = new Point(861, 396);
             TambahKhususButton.Name = "TambahKhususButton";
             TambahKhususButton.Size = new Size(109, 39);
             TambahKhususButton.TabIndex = 10;
@@ -259,7 +239,7 @@
             TambahNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
             TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             TambahNormalButton.ForeColor = Color.White;
-            TambahNormalButton.Location = new Point(13, 359);
+            TambahNormalButton.Location = new Point(13, 396);
             TambahNormalButton.Name = "TambahNormalButton";
             TambahNormalButton.Size = new Size(109, 39);
             TambahNormalButton.TabIndex = 9;
@@ -293,8 +273,6 @@
             // 
             panel5.BackColor = Color.Silver;
             panel5.BorderStyle = BorderStyle.FixedSingle;
-            panel5.Controls.Add(label3);
-            panel5.Controls.Add(label2);
             panel5.Controls.Add(InsertUpdateLabel);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
@@ -324,7 +302,7 @@
             JadwalNormalGrid.RowHeadersWidth = 51;
             JadwalNormalGrid.RowTemplate.Height = 29;
             JadwalNormalGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            JadwalNormalGrid.Size = new Size(835, 197);
+            JadwalNormalGrid.Size = new Size(835, 234);
             JadwalNormalGrid.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -365,24 +343,6 @@
             deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
             deleteToolStripMenuItem1.Size = new Size(132, 28);
             deleteToolStripMenuItem1.Text = "Delete";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(427, 29);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 5;
-            label2.Text = "label2";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(483, 33);
-            label3.Name = "label3";
-            label3.Size = new Size(50, 20);
-            label3.TabIndex = 7;
-            label3.Text = "label3";
             // 
             // JadwalBelForm
             // 
@@ -438,8 +398,5 @@
         private ToolStripMenuItem deleteToolStripMenuItem1;
         private DataGridView JadwalKhususGrid;
         private Label JamLabel;
-        private Button MulaiButton;
-        private Label label3;
-        private Label label2;
     }
 }
