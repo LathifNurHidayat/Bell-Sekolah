@@ -33,6 +33,7 @@
             panel1 = new Panel();
             AddButton = new Button();
             panel2 = new Panel();
+            MulaiButton = new Button();
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
@@ -54,6 +55,8 @@
             contextMenuStrip2 = new ContextMenuStrip(components);
             editToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem1 = new ToolStripMenuItem();
+            label2 = new Label();
+            label3 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
@@ -96,6 +99,7 @@
             // 
             panel2.BackColor = Color.LightGray;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(MulaiButton);
             panel2.Controls.Add(JamLabel);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox1);
@@ -104,6 +108,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1730, 77);
             panel2.TabIndex = 1;
+            // 
+            // MulaiButton
+            // 
+            MulaiButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            MulaiButton.BackColor = Color.Goldenrod;
+            MulaiButton.BackgroundImageLayout = ImageLayout.Zoom;
+            MulaiButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            MulaiButton.ForeColor = Color.White;
+            MulaiButton.Image = (Image)resources.GetObject("MulaiButton.Image");
+            MulaiButton.Location = new Point(1448, 22);
+            MulaiButton.Name = "MulaiButton";
+            MulaiButton.Size = new Size(109, 39);
+            MulaiButton.TabIndex = 3;
+            MulaiButton.Text = "Mulai";
+            MulaiButton.TextImageRelation = TextImageRelation.TextAboveImage;
+            MulaiButton.UseVisualStyleBackColor = false;
             // 
             // JamLabel
             // 
@@ -273,6 +293,8 @@
             // 
             panel5.BackColor = Color.Silver;
             panel5.BorderStyle = BorderStyle.FixedSingle;
+            panel5.Controls.Add(label3);
+            panel5.Controls.Add(label2);
             panel5.Controls.Add(InsertUpdateLabel);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 0);
@@ -344,6 +366,24 @@
             deleteToolStripMenuItem1.Size = new Size(132, 28);
             deleteToolStripMenuItem1.Text = "Delete";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(427, 29);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 5;
+            label2.Text = "label2";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(483, 33);
+            label3.Name = "label3";
+            label3.Size = new Size(50, 20);
+            label3.TabIndex = 7;
+            label3.Text = "label3";
+            // 
             // JadwalBelForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -398,5 +438,8 @@
         private ToolStripMenuItem deleteToolStripMenuItem1;
         private DataGridView JadwalKhususGrid;
         private Label JamLabel;
+        private Button MulaiButton;
+        private Label label3;
+        private Label label2;
     }
 }

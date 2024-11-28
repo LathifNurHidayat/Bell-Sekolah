@@ -19,7 +19,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 Conn.Open();
 
                 const string sql = @"
-                            SELECT Waktu, SoundPath FROM JadwalNormal WHERE HariID = @HariID";
+                            SELECT Waktu, SoundPath FROM JadwalNormal WHERE HariID = @HariID" ;
 
                 return Conn.Query<JadwalNormalModel>(sql, new { HariID = hariId }).FirstOrDefault();
             }
