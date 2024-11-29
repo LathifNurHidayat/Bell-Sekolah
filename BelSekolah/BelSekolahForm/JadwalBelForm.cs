@@ -153,7 +153,7 @@ namespace BelSekolah.BelSekolahForm
                         _dataJadwalPutar.Add(item);
                     }
                 }
-                else if (_jenisJadwal == "Jadwal Normal")
+                else if (_jenisJadwal == "Jadwal Khusus")
                 {
                     var data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalDto
                     {
@@ -263,10 +263,9 @@ namespace BelSekolah.BelSekolahForm
         {
             AddButton.Click += AddButton_Click;
             this.FormClosed += JadwalBelForm_FormClosed;
-            SaveButton.Click += SaveButton_Click;
 
-            TambahKhususButton.Click += TambahKhususButton_Click;
-            TambahNormalButton.Click += TambahNormalButton_Click;
+            TambahKhususButton.Click += TambahButton_Click;
+            TambahNormalButton.Click += TambahButton_Click;
 
             JadwalHariGrid.CellMouseClick += JadwalHariGrid_CellMouseClick;
             JadwalHariGrid.SelectionChanged += JadwalHariGrid_SelectionChanged;
@@ -278,9 +277,19 @@ namespace BelSekolah.BelSekolahForm
             editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
 
             HariCombo.SelectedIndexChanged += HariCombo_SelectedIndexChanged;
+
+            SaveButton.Click += SaveButton_Click;
         }
 
+        private void SaveButton_Click(object? sender, EventArgs e)
+        {
+            int hariID = Convert.ToInt32(JadwalHariGrid.CurrentRow?.Cells["HariID"].Value?? 0);
 
+            SaveData();
+            LoadJadwal();
+            LoadJadwalDetil(hariID);
+        }
+          
         private void HariCombo_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (JadwalHariGrid.CurrentRow != null && JadwalHariGrid.CurrentRow.Cells["Hari"].Value != null && _jadwalHariID == 0)
@@ -420,10 +429,9 @@ namespace BelSekolah.BelSekolahForm
                 }
             }
             InsertUpdateLabel.Text = "Update Data";
-        }
+        } 
 
-
-        private void TambahNormalButton_Click(object? sender, EventArgs e)
+        private void TambahButton_Click(object? sender, EventArgs e)
         {
             if (HariCombo.SelectedIndex == 0)
             {
@@ -434,34 +442,9 @@ namespace BelSekolah.BelSekolahForm
             {
                 SaveData();
             }
-
-
             InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Normal", _jadwalHariID);
             inputJadwalForm.ShowDialog();
             LoadJadwalDetil(_jadwalHariID);
-        }
-
-        private void TambahKhususButton_Click(object? sender, EventArgs e)
-        {
-            if (HariCombo.SelectedIndex == 0)
-            {
-                MessageBox.Show("Pilih hari terlebih dahulu !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Khusus", _jadwalHariID);
-            inputJadwalForm.ShowDialog();
-            LoadJadwalDetil(_jadwalHariID);
-        }
-
-        private void SaveButton_Click(object? sender, EventArgs e)
-        {
-            int hariId = Convert.ToInt32(JadwalHariGrid.CurrentRow.Cells["HariID"].Value);
-
-            InsertUpdateLabel.Text = "Update Data";
-            SaveData();
-            LoadJadwal();
-            LoadJadwalDetil(hariId);
-            //_dataSoundDiputar.Clear();
         }
 
         private void JadwalBelForm_FormClosed(object? sender, FormClosedEventArgs e)
@@ -483,6 +466,5 @@ namespace BelSekolah.BelSekolahForm
             public TimeSpan Waktu { get; set; }
             public string SoundPath { get; set; }
         }
-
     }
 }
