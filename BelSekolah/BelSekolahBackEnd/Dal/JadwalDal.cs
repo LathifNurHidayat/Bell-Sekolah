@@ -25,29 +25,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public int Insert(JadwalModel model)
-        {
-            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
-            {
-                Conn.Open();
-
-                const string sql = @"
-                                    INSERT INTO JadwalHari
-                                        (JenisJadwal, Hari)
-                                    VALUES 
-                                        (@JenisJadwal, @Hari);";
-
-                using (var cmd = new SQLiteCommand(sql, Conn))
-                {
-                    cmd.Parameters.AddWithValue("@JenisJadwal", model.JenisJadwal);
-                    cmd.Parameters.AddWithValue("@Hari", model.Hari);
-
-                    cmd.ExecuteNonQuery();
-                    long idLastInsert = Conn.LastInsertRowId;
-                    return (int)idLastInsert;
-                }
-            }
-        }
 
         public void Update(JadwalModel model)
         {
@@ -121,25 +98,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
             return jadwalList;
         }
-
-
-        public void Delete(int HariID)
-        {
-            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
-            {
-                Conn.Open();
-
-                const string sql = @"DELETE FROM JadwalHari WHERE HariID = @HariID";
-
-                using (var cmd = new SQLiteCommand(sql, Conn))
-                {
-                    cmd.Parameters.AddWithValue("@HariID", HariID);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
        
     }
 }

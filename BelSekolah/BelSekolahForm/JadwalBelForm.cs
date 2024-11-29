@@ -249,6 +249,7 @@ namespace BelSekolah.BelSekolahForm
 
                 _isRunning = true;
                 AnimasiText();
+                AddDataToList();
 
             }
             else if (StartStopButton.Text == "Stop")
