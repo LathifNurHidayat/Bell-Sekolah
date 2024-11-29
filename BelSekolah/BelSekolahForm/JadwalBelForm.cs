@@ -92,7 +92,6 @@ namespace BelSekolah.BelSekolahForm
             if (data != null)
             {
                 string path = data.SoundPath;
-                MessageBox.Show("Data Sound ada");
                 PlaySound(path);
                 return;
             }
@@ -139,7 +138,7 @@ namespace BelSekolah.BelSekolahForm
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariSekarang)?.JenisJadwal;
             _hariID = Convert.ToInt32(_jadwalDal.GetJenisJadwal(_hariSekarang)?.HariID);
 
-            _jenisJadwal = jenis_jadwal.ToString();
+            _jenisJadwal = jenis_jadwal?.ToString()?? string.Empty;
             if (!string.IsNullOrEmpty(_jenisJadwal))
             {
                 if (_jenisJadwal == "Jadwal Normal")
