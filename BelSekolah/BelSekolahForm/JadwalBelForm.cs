@@ -19,15 +19,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
-    {
+    { 
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
         private enum GridAktif { None, JadwalNormal, JadwalKhusus };
         private GridAktif _gridAktif = GridAktif.None;
+        private enum ComboAktif{ ComboAktif, ComboNonAktif };
+        private ComboAktif _combo = ComboAktif.ComboAktif;
 
         private Form mainForm;
         private readonly JadwalDal _jadwalDal;
@@ -36,10 +39,10 @@ namespace BelSekolah.BelSekolahForm
         private readonly JadwalModel _jadwalModel;
 
         private int _hariID;
-        private int _jadwalHariID;
         private string _waktuSekarang;
         private string _hariSekarang;
         private string _jenisJadwal;
+        private bool _isRunning  = false;
 
         private System.Windows.Forms.Timer _timer;
         private System.Windows.Forms.Timer _jam;
@@ -57,26 +60,24 @@ namespace BelSekolah.BelSekolahForm
 
             _timer = new System.Windows.Forms.Timer();
             _jam = new System.Windows.Forms.Timer();
-
+                
             this.mainForm = mainForm;
-            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1300, 600);
 
-            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));    
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
-            InsertUpdateLabel.Text = "Update Data";
 
             RegisterControlEvent();
             InitialCombo();
-            LoadJadwal();
-            LoadJadwalDetil(_jadwalHariID);
 
             _jam.Interval = 1000;
             _jam.Tick += _jam_Tick; ;
             _jam.Start();
 
-
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
+
+            LoadJadwalDetil(_hariID);
         }
 
         private void _jam_Tick(object? sender, EventArgs e)
@@ -84,7 +85,7 @@ namespace BelSekolah.BelSekolahForm
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void _timer_Tick(object? sender, EventArgs e)
+        private void _timer_Tick(object? sender, EventArgs e) 
         {
             TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
@@ -117,30 +118,16 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-
-        private void InitialCombo()
+        private void AddDataToList()
         {
-            List<string> Hari = new List<string>() { "Pilih Hari", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu" };
-            HariCombo.DataSource = Hari;
-        }
+            var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
+            _hariID = (int)HariCombo.SelectedValue;
 
-        private void LoadJadwal()
-        {
-            var dataHari = _jadwalDal.ListData();
-            if (dataHari == null) return;
-            JadwalHariGrid.DataSource = dataHari;
-
-            JadwalHariGrid.Columns["Waktu"].Visible = false;
-            JadwalHariGrid.Columns["Keterangan"].Visible = false;
-            JadwalHariGrid.Columns["SoundName"].Visible = false;
-            JadwalHariGrid.Columns["SoundPath"].Visible = false;
-
-            var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariSekarang)?.JenisJadwal;
-            _hariID = Convert.ToInt32(_jadwalDal.GetJenisJadwal(_hariSekarang)?.HariID);
-
-            _jenisJadwal = jenis_jadwal?.ToString()?? string.Empty;
+            _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
             if (!string.IsNullOrEmpty(_jenisJadwal))
             {
+                _dataJadwalPutar.Clear();
+
                 if (_jenisJadwal == "Jadwal Normal")
                 {
                     var data = _jadwalNormalDal.ListData(_hariID).Select(x => new JadwalDto
@@ -165,9 +152,23 @@ namespace BelSekolah.BelSekolahForm
                         _dataJadwalPutar.Add(item);
                     }
                 }
-                _timer.Start();
             }
         }
+
+        private void InitialCombo()
+        {
+            var Hari = _jadwalDal.ListData();
+            HariCombo.DataSource = Hari;
+            HariCombo.DisplayMember = "Hari";
+            HariCombo.ValueMember = "HariID";
+
+            var selectedHari = Hari.FirstOrDefault(x => x.Hari.Equals(_hariSekarang, StringComparison.OrdinalIgnoreCase));
+            if (selectedHari != null)
+            {
+                HariCombo.SelectedItem = selectedHari;
+            }
+        }
+
 
         private void LoadJadwalDetil(int HariID)
         {
@@ -186,124 +187,95 @@ namespace BelSekolah.BelSekolahForm
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            AddDataToList();
         }
-
-        private void GetData()
-        {
-            var hari = JadwalHariGrid.CurrentRow.Cells["Hari"].Value.ToString();
-            var jenis = JadwalHariGrid.CurrentRow.Cells["JenisJadwal"].Value.ToString();
-
-            if (HariCombo.Items.Contains(hari))
-            {
-                HariCombo.SelectedItem = hari;
-            }
-
-            if (jenis == "Jadwal Normal")
-            {
-                JadwalNormalRadio.Checked = true;
-                JadwalKhususRadio.Checked = false;
-            }
-            else
-            {
-                JadwalNormalRadio.Checked = false;
-                JadwalKhususRadio.Checked = true;
-            }
-        }
-
-
-        private void ClearForm()
-        {
-            HariCombo.SelectedIndex = 0;
-            JadwalNormalRadio.Checked = false;
-            JadwalKhususRadio.Checked = false;
-            JadwalKhususGrid.DataSource = null;
-            JadwalNormalGrid.DataSource = null;
-        }
-
-        private void SaveData()
-        {
-            if (HariCombo.SelectedIndex == 0)
-            {
-                MessageBox.Show("Mohon pilih hari terlebih dahulu !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else if (!JadwalNormalRadio.Checked && !JadwalKhususRadio.Checked)
-            {
-                MessageBox.Show("Mohon pilih salah satu jenis jadwal !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string jenisJadwal = string.Empty;
-            if (JadwalNormalRadio.Checked == true) jenisJadwal = "Jadwal Normal";
-            if (JadwalKhususRadio.Checked == true) jenisJadwal = "Jadwal Khusus";
-
-            var jadwalHari = new JadwalModel
-            {
-                HariID = _jadwalHariID,
-                JenisJadwal = jenisJadwal,
-                Hari = (string)HariCombo.SelectedItem,
-            };
-
-
-            if (_jadwalHariID == 0)
-            {
-                _jadwalHariID = _jadwalDal.Insert(jadwalHari);
-
-            }
-            else
-            {
-                _jadwalDal.Update(jadwalHari);
-            }
-        }
-
 
         #region EVENT
 
         private void RegisterControlEvent()
         {
-            AddButton.Click += AddButton_Click;
             this.FormClosed += JadwalBelForm_FormClosed;
 
-            TambahKhususButton.Click += TambahButton_Click;
-            TambahNormalButton.Click += TambahButton_Click;
-
-            JadwalHariGrid.CellMouseClick += JadwalHariGrid_CellMouseClick;
-            JadwalHariGrid.SelectionChanged += JadwalHariGrid_SelectionChanged;
-            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
+            TambahKhususButton.Click += TambahKhususButton_Click;
+            TambahNormalButton.Click += TambahNormalButton_Click;
 
             JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
             deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
             editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
 
-            HariCombo.SelectedIndexChanged += HariCombo_SelectedIndexChanged;
+            JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
+            JadwalKhususRadio.CheckedChanged += JadwalRadio_CheckedChanged;
 
-            SaveButton.Click += SaveButton_Click;
+            StartStopButton.Click += StartStopButton_Click;
+            HariCombo.SelectedValueChanged += HariCombo_SelectedValueChanged;
         }
 
-        private void SaveButton_Click(object? sender, EventArgs e)
+        private void JadwalRadio_CheckedChanged(object? sender, EventArgs e)
         {
-            int hariID = Convert.ToInt32(JadwalHariGrid.CurrentRow?.Cells["HariID"].Value?? 0);
+            string value = "";
+            if (JadwalKhususRadio.Checked) value = "Jadwal Khusus";
+            if (JadwalNormalRadio.Checked) value = "Jadwal Normal";
 
-            SaveData();
-            LoadJadwal();
-            LoadJadwalDetil(hariID);
-        }
-          
-        private void HariCombo_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            if (JadwalHariGrid.CurrentRow != null && JadwalHariGrid.CurrentRow.Cells["Hari"].Value != null && _jadwalHariID == 0)
+            var data = new JadwalModel
             {
-                var hari = _jadwalDal.ListData().Select(x => x.Hari).ToList();
+                HariID = _hariID != 0 ? _hariID : 0,
+                JenisJadwal = value,
+            };
+            _jadwalDal.Update(data);
+        }
 
-                if (hari.Contains(HariCombo.SelectedItem))
-                {
-                    MessageBox.Show("Data hari sudah ada, mohon pilih hari yang lain!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    HariCombo.SelectedIndex = 0;
-                }
+        private void HariCombo_SelectedValueChanged(object? sender, EventArgs e)
+        {
+            var value = HariCombo.SelectedValue;
+            if (value != null && int.TryParse(value.ToString(), out _hariID))
+            {
+                var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
+                if (jenis_jadwal == "Jadwal Normal")JadwalNormalRadio.Checked = true;
+                if (jenis_jadwal == "Jadwal Khusus") JadwalKhususRadio.Checked = true;
+                LoadJadwalDetil(_hariID);
             }
         }
 
+        private void StartStopButton_Click(object? sender, EventArgs e)
+        {
+            if (StartStopButton.Text == "Start")
+            {
+                StartStopButton.Text = "Stop";
+                StartStopButton.BackColor = Color.Red;
+                _timer.Start();
+                _combo = ComboAktif.ComboNonAktif;
+
+                _isRunning = true;
+                AnimasiText();
+                AddDataToList();
+
+            }
+            else if (StartStopButton.Text == "Stop")
+            {
+                StartStopButton.Text = "Start";
+                StartStopButton.BackColor = Color.LimeGreen;
+                _timer.Stop();
+                _combo = ComboAktif.ComboAktif;
+
+                _isRunning = false;
+                RunningLabel.Text = "Stopped . . . .";
+                _dataJadwalPutar.Clear();
+            }
+        }
+
+        private async Task AnimasiText()
+        {
+            int titik = 0;
+
+            while (_isRunning)
+            {
+                titik = (titik % 4) + 1;
+                RunningLabel.Text = "Running " + string.Join(" ", new string('.', titik).ToCharArray());
+                await Task.Delay(500);
+            }
+        }
 
         private void EditToolStripMenuItem_Click(object? sender, EventArgs e)
         {
@@ -320,7 +292,7 @@ namespace BelSekolah.BelSekolahForm
                 editJadwalForm.ShowDialog();
             }
 
-            LoadJadwalDetil(_jadwalHariID);
+            LoadJadwalDetil(_hariID);
         }
 
         private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
@@ -331,7 +303,7 @@ namespace BelSekolah.BelSekolahForm
                 {
                     int jadwalNormalID = Convert.ToInt32(JadwalNormalGrid.CurrentRow.Cells["JadwalNormalID"].Value);
                     _jadwalNormalDal.Delete(jadwalNormalID);
-                    LoadJadwalDetil(_jadwalHariID);
+                    LoadJadwalDetil(_hariID);
                 }
             }
             else if (_gridAktif == GridAktif.JadwalKhusus)
@@ -340,7 +312,7 @@ namespace BelSekolah.BelSekolahForm
                 {
                     int jadwalKhususID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
                     _jadwalKhususDal.Delete(jadwalKhususID);
-                    LoadJadwalDetil(_jadwalHariID);
+                    LoadJadwalDetil(_hariID);
                 }
             }
         }
@@ -354,11 +326,6 @@ namespace BelSekolah.BelSekolahForm
                 JadwalKhususGrid.ClearSelection();
                 JadwalKhususGrid.CurrentCell = JadwalKhususGrid[e.ColumnIndex, e.RowIndex];
                 contextMenuStrip2.Show(Cursor.Position);
-
-                if (JadwalKhususGrid.CurrentRow?.Cells["JadwalKhususID"].Value != null)
-                {
-                    GetData();
-                }
             }
         }
 
@@ -371,94 +338,30 @@ namespace BelSekolah.BelSekolahForm
                 JadwalNormalGrid.ClearSelection();
                 JadwalNormalGrid.CurrentCell = JadwalNormalGrid[e.ColumnIndex, e.RowIndex];
                 contextMenuStrip2.Show(Cursor.Position);
-
-                if (JadwalNormalGrid.CurrentRow?.Cells["JadwalNormalID"].Value != null)
-                {
-                    GetData();
-                }
             }
         }
 
-        private void JadwalHariGrid_SelectionChanged(object? sender, EventArgs e)
+        private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
-            if (JadwalHariGrid.CurrentRow?.Cells["HariID"].Value != null)
-            {
-                _jadwalHariID = Convert.ToInt32(JadwalHariGrid.CurrentRow.Cells["HariID"].Value);
-
-                GetData();
-                LoadJadwalDetil(_jadwalHariID);
-            }
+            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Normal", _hariID);
+            if (inputJadwalForm.ShowDialog() == DialogResult.OK)
+                LoadJadwalDetil(_hariID);
         }
 
-        private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
+        private void TambahKhususButton_Click(object? sender, EventArgs e)
         {
-            if (MessageBox.Show("Anda yakin ingin menghapus data?", "Perhatian", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-            {
-                _jadwalDal.Delete(_jadwalHariID);
-                LoadJadwal();
-
-                if (JadwalHariGrid.Rows.Count > 0)
-                {
-                    _jadwalHariID = Convert.ToInt32(JadwalHariGrid.Rows[0].Cells["HariID"].Value);
-                    LoadJadwalDetil(_jadwalHariID);
-                }
-                else
-                {
-                    _jadwalHariID = 0;
-                }
-            }
+            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Khusus", _hariID);
+            if (inputJadwalForm.ShowDialog() == DialogResult.OK)
+                LoadJadwalDetil(_hariID);
         }
 
-
-        private void JadwalHariGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                if (e.Button == MouseButtons.Right)
-                {
-                    JadwalHariGrid.ClearSelection();
-                    JadwalHariGrid.CurrentCell = JadwalHariGrid[e.ColumnIndex, e.RowIndex];
-
-                    if (JadwalHariGrid.CurrentRow?.Cells["HariID"].Value != null)
-                    {
-                        _jadwalHariID = Convert.ToInt32(JadwalHariGrid.CurrentRow.Cells["HariID"].Value);
-                        contextMenuStrip1.Show(Cursor.Position);
-                        LoadJadwalDetil(_jadwalHariID);
-                        GetData();
-                    }
-                }
-            }
-            InsertUpdateLabel.Text = "Update Data";
-        } 
-
-        private void TambahButton_Click(object? sender, EventArgs e)
-        {
-            if (HariCombo.SelectedIndex == 0)
-            {
-                MessageBox.Show("Pilih hari terlebih dahulu !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (_jadwalHariID == 0)
-            {
-                SaveData();
-            }
-            InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Normal", _jadwalHariID);
-            inputJadwalForm.ShowDialog();
-            LoadJadwalDetil(_jadwalHariID);
-        }
 
         private void JadwalBelForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
 
-        private void AddButton_Click(object? sender, EventArgs e)
-        {
-            InsertUpdateLabel.Text = "Tambahkan Data Baru";
-            ClearForm();
-            _jadwalHariID = 0;
-        }
-
+     
         #endregion
 
         public class JadwalDto

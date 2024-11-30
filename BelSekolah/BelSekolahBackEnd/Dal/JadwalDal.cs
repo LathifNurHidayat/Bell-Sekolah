@@ -14,40 +14,17 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
     public class JadwalDal
     {
         
-        public JadwalModel? GetJenisJadwal(string hari)
+        public JadwalModel? GetJenisJadwal(int hari)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
-                const string sql = @"SELECT HariID, JenisJadwal FROM JadwalHari WHERE Hari = @Hari";
+                const string sql = @"SELECT HariID, JenisJadwal FROM JadwalHari WHERE HariID = @HariID";
 
-               return Conn.QueryFirstOrDefault<JadwalModel>(sql, new {Hari = hari});
+               return Conn.QueryFirstOrDefault<JadwalModel>(sql, new {HariID = hari});
             }
         }
 
-        public int Insert(JadwalModel model)
-        {
-            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
-            {
-                Conn.Open();
-
-                const string sql = @"
-                                    INSERT INTO JadwalHari
-                                        (JenisJadwal, Hari)
-                                    VALUES 
-                                        (@JenisJadwal, @Hari);";
-
-                using (var cmd = new SQLiteCommand(sql, Conn))
-                {
-                    cmd.Parameters.AddWithValue("@JenisJadwal", model.JenisJadwal);
-                    cmd.Parameters.AddWithValue("@Hari", model.Hari);
-
-                    cmd.ExecuteNonQuery();
-                    long idLastInsert = Conn.LastInsertRowId;
-                    return (int)idLastInsert;
-                }
-            }
-        }
 
         public void Update(JadwalModel model)
         {
@@ -59,8 +36,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                                     UPDATE 
                                         JadwalHari
                                     SET 
-                                        JenisJadwal = @JenisJadwal,
-                                        Hari = @Hari
+                                        JenisJadwal = @JenisJadwal
                                     WHERE 
                                         HariID = @HariID";
 
@@ -68,7 +44,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 {
                     cmd.Parameters.AddWithValue("@HariID", model.HariID);
                     cmd.Parameters.AddWithValue("@JenisJadwal", model.JenisJadwal);
-                    cmd.Parameters.AddWithValue("@Hari", model.Hari);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -85,9 +60,22 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                                     SELECT 
-                                        HariID, JenisJadwal, Hari
+                                        HariID, 
+                                        JenisJadwal, 
+                                        Hari
                                     FROM 
-                                        JadwalHari";
+                                        JadwalHari
+                                    ORDER BY 
+                                        CASE Hari
+                                            WHEN 'Senin' THEN 1
+                                            WHEN 'Selasa' THEN 2
+                                            WHEN 'Rabu' THEN 3
+                                            WHEN 'Kamis' THEN 4
+                                            WHEN 'Jumat' THEN 5
+                                            WHEN 'Sabtu' THEN 6
+                                            WHEN 'Minggu' THEN 7
+                                            ELSE 8 -- Untuk menangani nilai yang tidak dikenali
+                                        END;";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
@@ -110,25 +98,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
             return jadwalList;
         }
-
-
-        public void Delete(int HariID)
-        {
-            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
-            {
-                Conn.Open();
-
-                const string sql = @"DELETE FROM JadwalHari WHERE HariID = @HariID";
-
-                using (var cmd = new SQLiteCommand(sql, Conn))
-                {
-                    cmd.Parameters.AddWithValue("@HariID", HariID);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
        
     }
 }

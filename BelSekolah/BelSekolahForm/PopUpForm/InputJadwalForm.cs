@@ -63,6 +63,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 return;
             }
             SaveData();
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

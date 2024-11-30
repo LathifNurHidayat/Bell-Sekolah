@@ -12,18 +12,6 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 {
     public class JadwalKhususDal
     {
-        public JadwalKhususModel? GetWaktuByHari(int hariId)
-        {
-            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
-            {
-                Conn.Open();
-
-                const string sql = @"
-                            SELECT Waktu, SoundPath FROM JadwalKhusus WHERE HariID = @HariID";
-
-                return Conn.Query<JadwalKhususModel>(sql, new { HariID = hariId }).FirstOrDefault();
-            }
-        }
 
         public void Insert(JadwalKhususModel model)
         {
@@ -93,7 +81,9 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             FROM 
                                 JadwalKhusus
                             WHERE 
-                                HariID = @HariID";
+                                HariID = @HariID
+                            ORDER BY 
+                                Waktu ASC";
 
                 return Conn.Query<JadwalKhususModel>(sql, new { HariID = HariId });
             }
