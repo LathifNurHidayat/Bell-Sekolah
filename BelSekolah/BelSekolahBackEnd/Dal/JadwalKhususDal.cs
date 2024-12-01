@@ -21,13 +21,12 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                                 INSERT INTO JadwalKhusus
-                                    (HariID, Waktu, Keterangan, SoundName, SoundPath)
+                                    (Waktu, Keterangan, SoundName, SoundPath)
                                 VALUES
-                                    (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
+                                    (@Waktu, @Keterangan, @SoundName, @SoundPath)";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
-                    cmd.Parameters.AddWithValue("@HariID", model.HariID);
                     cmd.Parameters.AddWithValue("@Waktu", model.Waktu);
                     cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
                     cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
@@ -69,7 +68,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public IEnumerable<JadwalKhususModel> ListData(int HariId)
+        public IEnumerable<JadwalKhususModel> ListData()
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -77,15 +76,13 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             SELECT 
-                                JadwalKhususID, HariID, Waktu, Keterangan, SoundName, SoundPath
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath
                             FROM 
                                 JadwalKhusus
-                            WHERE 
-                                HariID = @HariID
                             ORDER BY 
                                 Waktu ASC";
 
-                return Conn.Query<JadwalKhususModel>(sql, new { HariID = HariId });
+                return Conn.Query<JadwalKhususModel>(sql);
             }
         }
 
@@ -109,7 +106,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             SELECT 
-                                JadwalKhususID, HariID, Waktu, Keterangan, SoundName, SoundPath
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath
                             FROM 
                                 JadwalKhusus
                             WHERE 

@@ -62,6 +62,8 @@ namespace BelSekolah.BelSekolahForm
             _jam = new System.Windows.Forms.Timer();
                 
             this.mainForm = mainForm;
+          
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1300, 600);
 
             _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));    
@@ -78,6 +80,23 @@ namespace BelSekolah.BelSekolahForm
             _timer.Tick += _timer_Tick;
 
             LoadJadwalDetil(_hariID);
+
+            CustomStyleGrid(JadwalNormalGrid);
+            CustomStyleGrid(JadwalKhususGrid);
+        }
+
+        private void CustomStyleGrid(DataGridView grid)
+        {
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Goldenrod; 
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;     
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); 
+            grid.EnableHeadersVisualStyles = false; 
+
+            grid.DefaultCellStyle.BackColor = Color.White;    
+            grid.DefaultCellStyle.ForeColor = Color.Black;    
+            grid.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular); 
+
+            grid.RowTemplate.Height = 30;
         }
 
         private void _jam_Tick(object? sender, EventArgs e)
@@ -90,6 +109,12 @@ namespace BelSekolah.BelSekolahForm
             TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
 
+            var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
+            if (stopSoundIsPlayed != null && (stopSoundIsPlayed.Waktu - timeNow).TotalSeconds <= 5)
+            {
+                StopAudio();
+            }
+
             if (data != null)
             {
                 string path = data.SoundPath;
@@ -97,6 +122,23 @@ namespace BelSekolah.BelSekolahForm
                 return;
             }
         }
+
+        private void StopAudio()
+        {
+            if (waveOutDevice != null)
+            {
+                waveOutDevice.Stop();
+                waveOutDevice.Dispose();
+                waveOutDevice = null;
+            }
+
+            if (audioFileReader != null)
+            {
+                audioFileReader.Dispose();
+                audioFileReader = null;
+            }
+        }
+
 
         private void PlaySound(string soundPath)
         {
@@ -108,9 +150,19 @@ namespace BelSekolah.BelSekolahForm
                 waveOutDevice.Play();
                 waveOutDevice.PlaybackStopped += (s, e) =>
                 {
-                    waveOutDevice.Dispose();
-                    audioFileReader.Dispose();
+                    if (waveOutDevice != null)
+                    {
+                        waveOutDevice.Dispose();
+                        waveOutDevice = null;
+                    }
+
+                    if (audioFileReader != null)
+                    {
+                        audioFileReader.Dispose();
+                        audioFileReader = null;
+                    }
                 };
+
             }
             catch (Exception ex)
             {
@@ -118,6 +170,19 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
+        private void ClearText()
+        {
+            HariText.Clear();
+            JenisJadwalText.Clear();
+        }
+
+        private void GetJadwalDiputar()
+        {
+            ClearText();
+            HariText.Text = _hariSekarang;
+            JenisJadwalText.Text = _jadwalDal.ListData().FirstOrDefault(x => x.Hari == _hariSekarang)?.JenisJadwal.ToString();
+        }
+        
         private void AddDataToList()
         {
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
@@ -132,6 +197,7 @@ namespace BelSekolah.BelSekolahForm
                 {
                     var data = _jadwalNormalDal.ListData(_hariID).Select(x => new JadwalDto
                     {
+                        HariID = x.HariID,
                         Waktu = TimeSpan.Parse(x.Waktu),
                         SoundPath = x.SoundPath,
                     });
@@ -142,7 +208,7 @@ namespace BelSekolah.BelSekolahForm
                 }
                 else if (_jenisJadwal == "Jadwal Khusus")
                 {
-                    var data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalDto
+                    var data = _jadwalKhususDal.ListData().Select(x => new JadwalDto
                     {
                         Waktu = TimeSpan.Parse(x.Waktu),
                         SoundPath = x.SoundPath,
@@ -180,10 +246,9 @@ namespace BelSekolah.BelSekolahForm
             JadwalNormalGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalNormalGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            var jadwalKhusus = _jadwalKhususDal.ListData(HariID);
+            var jadwalKhusus = _jadwalKhususDal.ListData();
             JadwalKhususGrid.DataSource = jadwalKhusus;
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
-            JadwalKhususGrid.Columns["HariID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -210,6 +275,21 @@ namespace BelSekolah.BelSekolahForm
 
             StartStopButton.Click += StartStopButton_Click;
             HariCombo.SelectedValueChanged += HariCombo_SelectedValueChanged;
+
+            JadwalKhususRadio.Click += JadwalRadio_Click;
+            JadwalNormalRadio.Click += JadwalRadio_Click;
+        }
+
+        private void JadwalRadio_Click(object? sender, EventArgs e)
+        {
+            if (_isRunning)
+            {
+                if (sender == JadwalKhususRadio)
+                    JadwalNormalRadio.Checked = true;
+                if (sender == JadwalNormalRadio)
+                    JadwalKhususRadio.Checked = true;
+                MessageBox.Show("Matikan running terlebih dahulu", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void JadwalRadio_CheckedChanged(object? sender, EventArgs e)
@@ -250,6 +330,7 @@ namespace BelSekolah.BelSekolahForm
                 _isRunning = true;
                 AnimasiText();
                 AddDataToList();
+                GetJadwalDiputar();
 
             }
             else if (StartStopButton.Text == "Stop")
@@ -262,6 +343,8 @@ namespace BelSekolah.BelSekolahForm
                 _isRunning = false;
                 RunningLabel.Text = "Stopped . . . .";
                 _dataJadwalPutar.Clear();
+
+                ClearText();
             }
         }
 
@@ -366,6 +449,7 @@ namespace BelSekolah.BelSekolahForm
 
         public class JadwalDto
         {
+            public int HariID { get; set; }
             public TimeSpan Waktu { get; set; }
             public string SoundPath { get; set; }
         }

@@ -32,11 +32,11 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             InitializeComponent();
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
-
+             
             _hariId = HariId;
             JenisJadwalLabel.Text = Jenis;
             RegisterControlEvent();
-
+             
             PausePlayButton.Text = "▶";
         }
 
@@ -193,7 +193,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 var jadwalKhusus = new JadwalKhususModel
                 {
-                    HariID = _hariId,
                     Waktu = WaktuPicker.Value.ToString("HH:mm"),
                     Keterangan = KeteranganText.Text,
                     SoundName = SoundFileText.Text,
