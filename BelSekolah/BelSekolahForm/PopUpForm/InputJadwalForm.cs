@@ -33,6 +33,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
              
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
             _hariId = HariId;
             JenisJadwalLabel.Text = Jenis;
             RegisterControlEvent();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoadForm));
             label1 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
@@ -37,6 +38,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Microsoft Yi Baiti", 36F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(69, 210);
             label1.Name = "label1";
@@ -55,7 +57,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.bell;
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.BackgroundImage = Properties.Resources.school_bell;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Location = new Point(250, 63);
             pictureBox1.Name = "pictureBox1";
@@ -67,10 +70,15 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Black;
+            BackgroundImage = Properties.Resources.login;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(620, 328);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
+            DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoadForm";
             StartPosition = FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

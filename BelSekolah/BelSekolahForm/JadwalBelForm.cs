@@ -64,7 +64,7 @@ namespace BelSekolah.BelSekolahForm
             this.mainForm = mainForm;
           
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.Size = new Size(1300, 600);
+            this.Size = new Size(1600, 600);
 
             _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));    
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
@@ -87,7 +87,7 @@ namespace BelSekolah.BelSekolahForm
 
         private void CustomStyleGrid(DataGridView grid)
         {
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Goldenrod; 
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray; 
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;     
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); 
             grid.EnableHeadersVisualStyles = false; 

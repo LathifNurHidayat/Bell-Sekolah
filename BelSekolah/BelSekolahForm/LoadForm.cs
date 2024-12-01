@@ -24,7 +24,7 @@ namespace BelSekolah
             InitializeComponent();
 
             _database = new BelSekolahDatabase.Database();
-
+            this.TransparencyKey = Color.Black;
             this.ControlBox = false;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
