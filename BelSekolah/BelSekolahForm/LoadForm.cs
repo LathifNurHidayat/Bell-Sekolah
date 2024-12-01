@@ -53,7 +53,7 @@ namespace BelSekolah
         {
             if (this.Opacity < 1)
             {
-                this.Opacity += 0.5;
+                this.Opacity += 0.05; 
             }
             else
             {
@@ -69,5 +69,6 @@ namespace BelSekolah
             mainForm.Show();
             this.Hide();
         }
+
     }
 }

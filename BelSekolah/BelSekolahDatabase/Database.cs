@@ -26,17 +26,30 @@ namespace BelSekolah.BelSekolahDatabase
                         Hari TEXT NOT NULL
                     )";
 
+                string addHariKosong = @"
+                     WITH AllDays AS (
+                            SELECT 'Senin' AS Hari UNION ALL
+                            SELECT 'Selasa' UNION ALL
+                            SELECT 'Rabu' UNION ALL
+                            SELECT 'Kamis' UNION ALL
+                            SELECT 'Jumat' UNION ALL
+                            SELECT 'Sabtu' UNION ALL
+                            SELECT 'Minggu'
+                        )
+                        INSERT INTO JadwalHari (JenisJadwal, Hari)
+                        SELECT 'Jadwal Normal', AllDays.Hari
+                        FROM AllDays
+                        LEFT JOIN JadwalHari JH ON AllDays.Hari = JH.Hari
+                        WHERE JH.Hari IS NULL";
+
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
                         JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        HariID INTEGER NOT NULL,
                         Waktu TEXT,
                         Keterangan TEXT,
                         SoundName TEXT,
-                        SoundPath TEXT,
-
-                        FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE
-                    )";
+                        SoundPath TEXT
+                     )";
 
                 string createTableJadwalNormal = @"
                     CREATE TABLE IF NOT EXISTS JadwalNormal(
@@ -51,6 +64,7 @@ namespace BelSekolah.BelSekolahDatabase
                     )";
 
                 ExecuteNonQuery(createTableJadwalHari, connection);
+                ExecuteNonQuery(addHariKosong, connection);
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
                 ExecuteNonQuery(createTableJadwalNormal, connection);
 
