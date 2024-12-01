@@ -186,7 +186,7 @@
             Controls.Add(label1);
             Controls.Add(panel3);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InputJadwalForm";
             StartPosition = FormStartPosition.CenterParent;
