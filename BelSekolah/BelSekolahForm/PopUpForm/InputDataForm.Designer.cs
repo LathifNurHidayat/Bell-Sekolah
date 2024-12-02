@@ -1280,10 +1280,11 @@
             IntervalText.BorderStyle = BorderStyle.FixedSingle;
             IntervalText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             IntervalText.Location = new Point(141, 11);
+            IntervalText.MaxLength = 2;
             IntervalText.Name = "IntervalText";
-            IntervalText.ReadOnly = true;
-            IntervalText.Size = new Size(69, 30);
+            IntervalText.Size = new Size(62, 30);
             IntervalText.TabIndex = 166;
+            IntervalText.TextAlign = HorizontalAlignment.Center;
             // 
             // label28
             // 
@@ -1313,9 +1314,9 @@
             UbahButton.FlatAppearance.BorderColor = Color.Black;
             UbahButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             UbahButton.ForeColor = Color.White;
-            UbahButton.Location = new Point(215, 6);
+            UbahButton.Location = new Point(211, 6);
             UbahButton.Name = "UbahButton";
-            UbahButton.Size = new Size(83, 38);
+            UbahButton.Size = new Size(87, 38);
             UbahButton.TabIndex = 83;
             UbahButton.Text = "Ubah";
             UbahButton.UseVisualStyleBackColor = false;

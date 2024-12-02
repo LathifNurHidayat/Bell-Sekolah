@@ -31,11 +31,11 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JadwalBelForm));
             MainPanel = new Panel();
+            TambahNormalButton = new Button();
             StartStopButton = new Button();
             JadwalKhususGrid = new DataGridView();
             HariCombo = new ComboBox();
             TambahKhususButton = new Button();
-            TambahNormalButton = new Button();
             JadwalKhususRadio = new RadioButton();
             JadwalNormalRadio = new RadioButton();
             panel5 = new Panel();
@@ -52,6 +52,8 @@
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            DeleteNormalButton = new Button();
+            DeleteKhususButton = new Button();
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
             panel5.SuspendLayout();
@@ -66,6 +68,8 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = Color.Silver;
             MainPanel.BorderStyle = BorderStyle.FixedSingle;
+            MainPanel.Controls.Add(DeleteKhususButton);
+            MainPanel.Controls.Add(DeleteNormalButton);
             MainPanel.Controls.Add(TambahNormalButton);
             MainPanel.Controls.Add(StartStopButton);
             MainPanel.Controls.Add(JadwalKhususGrid);
@@ -79,6 +83,22 @@
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(1208, 551);
             MainPanel.TabIndex = 0;
+            // 
+            // TambahNormalButton
+            // 
+            TambahNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            TambahNormalButton.BackColor = Color.Goldenrod;
+            TambahNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
+            TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TambahNormalButton.ForeColor = Color.White;
+            TambahNormalButton.ImageAlign = ContentAlignment.MiddleLeft;
+            TambahNormalButton.Location = new Point(9, 501);
+            TambahNormalButton.Name = "TambahNormalButton";
+            TambahNormalButton.Size = new Size(109, 39);
+            TambahNormalButton.TabIndex = 2;
+            TambahNormalButton.Text = "Tambah";
+            TambahNormalButton.TextImageRelation = TextImageRelation.TextAboveImage;
+            TambahNormalButton.UseVisualStyleBackColor = false;
             // 
             // StartStopButton
             // 
@@ -135,21 +155,6 @@
             TambahKhususButton.Text = "Tambah";
             TambahKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             TambahKhususButton.UseVisualStyleBackColor = false;
-            // 
-            // TambahNormalButton
-            // 
-            TambahNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            TambahNormalButton.BackColor = Color.Goldenrod;
-            TambahNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
-            TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TambahNormalButton.ForeColor = Color.White;
-            TambahNormalButton.Location = new Point(9, 501);
-            TambahNormalButton.Name = "TambahNormalButton";
-            TambahNormalButton.Size = new Size(109, 39);
-            TambahNormalButton.TabIndex = 2;
-            TambahNormalButton.Text = "Tambah";
-            TambahNormalButton.TextImageRelation = TextImageRelation.TextBeforeImage;
-            TambahNormalButton.UseVisualStyleBackColor = false;
             // 
             // JadwalKhususRadio
             // 
@@ -332,6 +337,36 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
+            // DeleteNormalButton
+            // 
+            DeleteNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DeleteNormalButton.BackColor = Color.Red;
+            DeleteNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
+            DeleteNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            DeleteNormalButton.ForeColor = Color.White;
+            DeleteNormalButton.Location = new Point(124, 501);
+            DeleteNormalButton.Name = "DeleteNormalButton";
+            DeleteNormalButton.Size = new Size(109, 39);
+            DeleteNormalButton.TabIndex = 15;
+            DeleteNormalButton.Text = "Delete";
+            DeleteNormalButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            DeleteNormalButton.UseVisualStyleBackColor = false;
+            // 
+            // DeleteKhususButton
+            // 
+            DeleteKhususButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DeleteKhususButton.BackColor = Color.Red;
+            DeleteKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
+            DeleteKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            DeleteKhususButton.ForeColor = Color.White;
+            DeleteKhususButton.Location = new Point(744, 501);
+            DeleteKhususButton.Name = "DeleteKhususButton";
+            DeleteKhususButton.Size = new Size(109, 39);
+            DeleteKhususButton.TabIndex = 16;
+            DeleteKhususButton.Text = "Delete";
+            DeleteKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+            DeleteKhususButton.UseVisualStyleBackColor = false;
+            // 
             // JadwalBelForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -378,5 +413,7 @@
         private Label label4;
         private TextBox JenisJadwalText;
         private Label label3;
+        private Button DeleteNormalButton;
+        private Button DeleteKhususButton;
     }
 }

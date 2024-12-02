@@ -16,7 +16,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
     public partial class EditJadwalForm : Form
     {
         private IWavePlayer waveOutDevice;
-        private AudioFileReader audioFileReader; // menggunakan ini untuk memutar sound
+        private AudioFileReader audioFileReader;
         private bool _isPlaying = false;
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
