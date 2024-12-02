@@ -9,6 +9,7 @@ namespace BelSekolah.BelSekolahBackEnd.Model
     public class JadwalKhususModel
     {
         public int JadwalKhususID { get; set; }
+        public int HariID { get; set; }
         public string Waktu { get; set; }
         public string Keterangan { get; set; }
         public string SoundName { get; set; }

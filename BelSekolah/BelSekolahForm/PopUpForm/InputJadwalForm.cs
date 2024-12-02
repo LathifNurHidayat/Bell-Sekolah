@@ -141,7 +141,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 audioFileReader.Dispose();
                 audioFileReader = null;
             }
-
             _isPlaying = false;
         }
 
@@ -196,6 +195,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 var jadwalKhusus = new JadwalKhususModel
                 {
+                    HariID = _hariId != 0 ? _hariId : 0,
                     Waktu = WaktuPicker.Value.ToString("HH:mm"),
                     Keterangan = KeteranganText.Text,
                     SoundName = SoundFileText.Text,

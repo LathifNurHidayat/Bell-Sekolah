@@ -45,6 +45,7 @@ namespace BelSekolah.BelSekolahDatabase
                 string createTableJadwalKhusus = @"
                     CREATE TABLE IF NOT EXISTS JadwalKhusus(
                         JadwalKhususID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        HariID INTEGER,
                         Waktu TEXT,
                         Keterangan TEXT,
                         SoundName TEXT,

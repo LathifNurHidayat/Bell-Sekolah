@@ -51,9 +51,9 @@
             JenisJadwalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             JenisJadwalLabel.Location = new Point(175, 14);
             JenisJadwalLabel.Name = "JenisJadwalLabel";
-            JenisJadwalLabel.Size = new Size(96, 23);
+            JenisJadwalLabel.Size = new Size(101, 23);
             JenisJadwalLabel.TabIndex = 89;
-            JenisJadwalLabel.Text = "JenisJadwal";
+            JenisJadwalLabel.Text = "Jenis Jadwal";
             // 
             // SaveButton
             // 

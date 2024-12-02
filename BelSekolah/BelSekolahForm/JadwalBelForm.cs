@@ -64,7 +64,7 @@ namespace BelSekolah.BelSekolahForm
             this.mainForm = mainForm;
           
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.Size = new Size(1600, 600);
+            this.Size = new Size(1600, 800);
 
             _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));    
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
@@ -208,7 +208,8 @@ namespace BelSekolah.BelSekolahForm
                 }
                 else if (_jenisJadwal == "Jadwal Khusus")
                 {
-                    var data = _jadwalKhususDal.ListData().Select(x => new JadwalDto
+                    
+                    var data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalDto
                     {
                         Waktu = TimeSpan.Parse(x.Waktu),
                         SoundPath = x.SoundPath,
@@ -246,7 +247,7 @@ namespace BelSekolah.BelSekolahForm
             JadwalNormalGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalNormalGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            var jadwalKhusus = _jadwalKhususDal.ListData();
+            var jadwalKhusus = _jadwalKhususDal.ListData(HariID);
             JadwalKhususGrid.DataSource = jadwalKhusus;
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
@@ -346,6 +347,9 @@ namespace BelSekolah.BelSekolahForm
 
                 ClearText();
             }
+
+            InputDataForm hh = new InputDataForm("Senin", 0, "Jadwal Normal");
+            hh.ShowDialog();
         }
 
         private async Task AnimasiText()
@@ -432,7 +436,7 @@ namespace BelSekolah.BelSekolahForm
         }
 
         private void TambahKhususButton_Click(object? sender, EventArgs e)
-        {
+        {                
             InputJadwalForm inputJadwalForm = new InputJadwalForm("Jadwal Khusus", _hariID);
             if (inputJadwalForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);

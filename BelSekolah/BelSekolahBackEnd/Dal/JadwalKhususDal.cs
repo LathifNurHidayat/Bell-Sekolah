@@ -21,12 +21,13 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                                 INSERT INTO JadwalKhusus
-                                    (Waktu, Keterangan, SoundName, SoundPath)
+                                    (HariID, Waktu, Keterangan, SoundName, SoundPath)
                                 VALUES
-                                    (@Waktu, @Keterangan, @SoundName, @SoundPath)";
+                                    (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
+                    cmd.Parameters.AddWithValue("@HariID", model.HariID);
                     cmd.Parameters.AddWithValue("@Waktu", model.Waktu);
                     cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
                     cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
@@ -68,21 +69,23 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public IEnumerable<JadwalKhususModel> ListData()
+        public IEnumerable<JadwalKhususModel> ListData(int hariID)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
 
-                const string sql = @"
+                const string sql = $@"
                             SELECT 
                                 JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath
                             FROM 
                                 JadwalKhusus
+                            WHERE 
+                                HariID = @HariID
                             ORDER BY 
                                 Waktu ASC";
 
-                return Conn.Query<JadwalKhususModel>(sql);
+                return Conn.Query<JadwalKhususModel>(sql, new {HariID = hariID});
             }
         }
 

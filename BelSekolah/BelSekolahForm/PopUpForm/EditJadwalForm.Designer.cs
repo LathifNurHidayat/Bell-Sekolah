@@ -31,16 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditJadwalForm));
             SaveButton = new Button();
             BrowseButton = new Button();
-            PausePlayButton = new Button();
             label4 = new Label();
-            SoundFileText = new TextBox();
             label3 = new Label();
-            label1 = new Label();
             panel3 = new Panel();
             KeteranganText = new TextBox();
             panel1 = new Panel();
-            WaktuPicker = new DateTimePicker();
             JenisJadwalLabel = new Label();
+            label1 = new Label();
+            SoundFileText = new TextBox();
+            WaktuPicker = new DateTimePicker();
+            PausePlayButton = new Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -63,24 +63,13 @@
             BrowseButton.BackColor = Color.Gainsboro;
             BrowseButton.FlatAppearance.BorderColor = Color.Black;
             BrowseButton.FlatStyle = FlatStyle.Flat;
+            BrowseButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             BrowseButton.Location = new Point(338, 300);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(94, 29);
             BrowseButton.TabIndex = 75;
             BrowseButton.Text = "Browse";
             BrowseButton.UseVisualStyleBackColor = false;
-            // 
-            // PausePlayButton
-            // 
-            PausePlayButton.BackColor = Color.Gainsboro;
-            PausePlayButton.BackgroundImageLayout = ImageLayout.Zoom;
-            PausePlayButton.FlatAppearance.BorderColor = Color.Black;
-            PausePlayButton.FlatStyle = FlatStyle.Flat;
-            PausePlayButton.Location = new Point(292, 300);
-            PausePlayButton.Name = "PausePlayButton";
-            PausePlayButton.Size = new Size(30, 30);
-            PausePlayButton.TabIndex = 74;
-            PausePlayButton.UseVisualStyleBackColor = false;
             // 
             // label4
             // 
@@ -92,15 +81,6 @@
             label4.TabIndex = 72;
             label4.Text = "SoundFile";
             // 
-            // SoundFileText
-            // 
-            SoundFileText.BorderStyle = BorderStyle.FixedSingle;
-            SoundFileText.Location = new Point(20, 301);
-            SoundFileText.Name = "SoundFileText";
-            SoundFileText.ReadOnly = true;
-            SoundFileText.Size = new Size(251, 27);
-            SoundFileText.TabIndex = 70;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -110,16 +90,6 @@
             label3.Size = new Size(98, 23);
             label3.TabIndex = 68;
             label3.Text = "Keterangan";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(20, 42);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 23);
-            label1.TabIndex = 63;
-            label1.Text = "Waktu";
             // 
             // panel3
             // 
@@ -151,16 +121,6 @@
             panel1.Size = new Size(412, 59);
             panel1.TabIndex = 64;
             // 
-            // WaktuPicker
-            // 
-            WaktuPicker.CustomFormat = "HH:mm";
-            WaktuPicker.Format = DateTimePickerFormat.Custom;
-            WaktuPicker.Location = new Point(14, 16);
-            WaktuPicker.Name = "WaktuPicker";
-            WaktuPicker.ShowUpDown = true;
-            WaktuPicker.Size = new Size(83, 27);
-            WaktuPicker.TabIndex = 0;
-            // 
             // JenisJadwalLabel
             // 
             JenisJadwalLabel.AutoSize = true;
@@ -170,6 +130,49 @@
             JenisJadwalLabel.Size = new Size(96, 23);
             JenisJadwalLabel.TabIndex = 78;
             JenisJadwalLabel.Text = "JenisJadwal";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(20, 42);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 23);
+            label1.TabIndex = 63;
+            label1.Text = "Waktu";
+            // 
+            // SoundFileText
+            // 
+            SoundFileText.BorderStyle = BorderStyle.FixedSingle;
+            SoundFileText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            SoundFileText.Location = new Point(20, 301);
+            SoundFileText.Name = "SoundFileText";
+            SoundFileText.ReadOnly = true;
+            SoundFileText.Size = new Size(251, 30);
+            SoundFileText.TabIndex = 70;
+            // 
+            // WaktuPicker
+            // 
+            WaktuPicker.CustomFormat = "HH:mm";
+            WaktuPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            WaktuPicker.Format = DateTimePickerFormat.Custom;
+            WaktuPicker.Location = new Point(13, 14);
+            WaktuPicker.Name = "WaktuPicker";
+            WaktuPicker.ShowUpDown = true;
+            WaktuPicker.Size = new Size(83, 30);
+            WaktuPicker.TabIndex = 0;
+            // 
+            // PausePlayButton
+            // 
+            PausePlayButton.BackColor = Color.Gainsboro;
+            PausePlayButton.BackgroundImageLayout = ImageLayout.Zoom;
+            PausePlayButton.FlatAppearance.BorderColor = Color.Black;
+            PausePlayButton.FlatStyle = FlatStyle.Flat;
+            PausePlayButton.Location = new Point(292, 300);
+            PausePlayButton.Name = "PausePlayButton";
+            PausePlayButton.Size = new Size(30, 30);
+            PausePlayButton.TabIndex = 74;
+            PausePlayButton.UseVisualStyleBackColor = false;
             // 
             // EditJadwalForm
             // 
@@ -203,15 +206,15 @@
         #endregion
         private Button SaveButton;
         private Button BrowseButton;
-        private Button PausePlayButton;
         private Label label4;
-        private TextBox SoundFileText;
         private Label label3;
-        private Label label1;
         private Panel panel3;
         private TextBox KeteranganText;
         private Panel panel1;
-        private DateTimePicker WaktuPicker;
         private Label JenisJadwalLabel;
+        private DateTimePicker WaktuPicker;
+        private Label label1;
+        private TextBox SoundFileText;
+        private Button PausePlayButton;
     }
 }
