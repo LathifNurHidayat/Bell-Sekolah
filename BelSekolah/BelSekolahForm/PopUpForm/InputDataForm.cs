@@ -209,6 +209,43 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                         _jadwalKhususDal.Insert(khususModel);
                     }
                 }
+
+                if (_status == "Edit")
+                {
+                    if (_jenisJadwal == "Jadwal Normal")
+                    {
+                        foreach (var jadwal in jadwalData)
+                        {
+                            var normalModel = new JadwalNormalModel
+                            {
+                                HariID = jadwal.HariID,
+                                Keterangan = jadwal.Keterangan,
+                                Waktu = jadwal.Waktu,
+                                SoundName = jadwal.SoundName,
+                                SoundPath = jadwal.SoundPath
+                            };
+
+                            _jadwalNormalDal.Update(normalModel);
+                        }
+                    }
+                    else if (_jenisJadwal == "Jadwal Khusus")
+                    {
+                        foreach (var jadwal in jadwalData)
+                        {
+                            var khususModel = new JadwalKhususModel
+                            {
+                                HariID = jadwal.HariID,
+                                Keterangan = jadwal.Keterangan,
+                                Waktu = jadwal.Waktu,
+                                SoundName = jadwal.SoundName,
+                                SoundPath = jadwal.SoundPath
+                            };
+
+                            _jadwalKhususDal.Update(khususModel);
+                        }
+                    }
+                }
+
             }
         }
 
@@ -226,6 +263,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             BrowseIstirahat2Button.Click += BrowseButton_Click;
             BrowseJam7Button.Click += BrowseButton_Click;
             BrowseJam8Button.Click += BrowseButton_Click;
+            BrowseJam9Button.Click += BrowseButton_Click;
             BrowseJam10Button.Click += BrowseButton_Click;
             BrowseKepulanganButton.Click += BrowseButton_Click;
 
@@ -241,6 +279,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             PlayJamIstirahat2Button.Click += PlayJamButton_Click;
             PlayJam7Button.Click += PlayJamButton_Click;
             PlayJam8Button.Click += PlayJamButton_Click;
+            PlayJam9Button.Click += PlayJamButton_Click;
             PlayJam10Button.Click += PlayJamButton_Click;
             PlayJamKepulanganButton.Click += PlayJamButton_Click;
 
@@ -258,11 +297,20 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void UbahButton_Click(object? sender, EventArgs e)
         {
-            if (!int.TryParse(IntervalText.Text, out int interval))
+            string mulai = "";
+            int interval = 0;
+            int istirahat_1 = 0;
+            int istirahat_2 = 0;
+
+            IntervalForm intervalForm = new IntervalForm();
+            if (intervalForm.ShowDialog(this) == DialogResult.OK)
             {
-                MessageBox.Show("Masukkan interval yang valid.", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                mulai = intervalForm.mulai;
+                interval = intervalForm.interval;
+                istirahat_1 = intervalForm.istirahat_1;
+                istirahat_2 = intervalForm.istirahat_2;
             }
+
 
             List<DateTimePicker> datePickerControls = new List<DateTimePicker>
             {
@@ -271,31 +319,30 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam10Picker, JamKepulanganPicker
             };
 
-            DateTime startTime = Jam1Picker.Value;
+            DateTimePicker selectedPicker = datePickerControls.FirstOrDefault( x => x.Name.Equals(mulai, StringComparison.OrdinalIgnoreCase));
+            if (selectedPicker == null) return;
+
+            DateTime startTime = selectedPicker.Value;
 
             foreach (var picker in datePickerControls)
             {
-                if (picker == Jam4Picker)
+                if (picker == JamIstirahat1Picker)
                 {
-                    startTime = startTime.AddMinutes(15 - interval);
-                    picker.Value = startTime;  // Atur nilai ke picker
+                    picker.Value = startTime;
+                    startTime = startTime.AddMinutes(istirahat_1);
                 }
-                else if (picker == Jam7Picker)
+                else if (picker == JamIstirahat2Picker)
                 {
-                    startTime = startTime.AddMinutes(30 - interval);
-                    picker.Value = startTime;  // Atur nilai ke picker
+                    picker.Value = startTime;
+                    startTime = startTime.AddMinutes(istirahat_2);
                 }
                 else
                 {
-                    picker.Value = startTime;  // Atur nilai ke picker untuk interval normal
+                    picker.Value = startTime;
                     startTime = startTime.AddMinutes(interval);
                 }
             }
-
-
-
-            MessageBox.Show("Interval waktu berhasil diubah!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            MessageBox.Show("Interval waktu berhasil diubah!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 

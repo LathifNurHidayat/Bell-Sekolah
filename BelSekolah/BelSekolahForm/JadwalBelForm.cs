@@ -364,7 +364,6 @@ namespace BelSekolah.BelSekolahForm
         private void EditToolStripMenuItem_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            MessageBox.Show(hari);
 
             if (_gridAktif == GridAktif.JadwalNormal)
             {
