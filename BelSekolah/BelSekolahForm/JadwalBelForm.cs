@@ -250,6 +250,7 @@ namespace BelSekolah.BelSekolahForm
             var jadwalKhusus = _jadwalKhususDal.ListData(HariID);
             JadwalKhususGrid.DataSource = jadwalKhusus;
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
+            JadwalNormalGrid.Columns["HariID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -268,7 +269,8 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
-            deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
+            //deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
+            deleteToolStripMenuItem1.Visible = false;
             editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
 
             JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
@@ -381,7 +383,7 @@ namespace BelSekolah.BelSekolahForm
             LoadJadwalDetil(_hariID);
         }
 
-        private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
+       /* private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
             if (_gridAktif == GridAktif.JadwalNormal)
             {
@@ -401,7 +403,7 @@ namespace BelSekolah.BelSekolahForm
                     LoadJadwalDetil(_hariID);
                 }
             }
-        }
+        }*/
 
         private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
@@ -429,8 +431,9 @@ namespace BelSekolah.BelSekolahForm
 
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
+
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, 0, "Jadwal Normal", "Tambah");
+            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Normal", "Tambah");
             if (inputDataForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
@@ -438,7 +441,7 @@ namespace BelSekolah.BelSekolahForm
         private void TambahKhususButton_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, 0, "Jadwal Khusus", "Tambah");
+            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", "Tambah");
             if (inputDataForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }

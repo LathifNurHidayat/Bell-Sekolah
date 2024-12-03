@@ -26,7 +26,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            IntervalText.Text = "45";
             JamIstirahat1Text.Text = "15";
             JamIstirahat2Text.Text = "30";
 
@@ -36,6 +35,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void AturButton_Click(object? sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(IntervalText.Text) || string.IsNullOrWhiteSpace(JamIstirahat1Text.Text) || string.IsNullOrWhiteSpace(JamIstirahat2Text.Text))
+            {
+                MessageBox.Show("Data tidak boleh kosong", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             List<string> dataPicker = new List<string>
             {
                 "Jam ke-0", "Jam ke-1", "Jam ke-2", "Jam ke-3", "Istirahat 1",

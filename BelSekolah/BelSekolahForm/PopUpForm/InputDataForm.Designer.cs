@@ -116,7 +116,6 @@
             Jam0Picker = new DateTimePicker();
             Jam0Label = new Label();
             panel3 = new Panel();
-            IntervalText = new TextBox();
             label28 = new Label();
             label2 = new Label();
             UbahButton = new Button();
@@ -1265,7 +1264,6 @@
             // 
             panel3.BackColor = Color.LightGray;
             panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(IntervalText);
             panel3.Controls.Add(label28);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(UbahButton);
@@ -1275,23 +1273,12 @@
             panel3.Size = new Size(729, 52);
             panel3.TabIndex = 86;
             // 
-            // IntervalText
-            // 
-            IntervalText.BorderStyle = BorderStyle.FixedSingle;
-            IntervalText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            IntervalText.Location = new Point(141, 11);
-            IntervalText.MaxLength = 2;
-            IntervalText.Name = "IntervalText";
-            IntervalText.Size = new Size(62, 30);
-            IntervalText.TabIndex = 166;
-            IntervalText.TextAlign = HorizontalAlignment.Center;
-            // 
             // label28
             // 
             label28.AutoSize = true;
             label28.BackColor = Color.Transparent;
             label28.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label28.Location = new Point(128, 14);
+            label28.Location = new Point(189, 14);
             label28.Name = "label28";
             label28.Size = new Size(14, 23);
             label28.TabIndex = 159;
@@ -1302,7 +1289,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.LightGray;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(16, 14);
+            label2.Location = new Point(28, 14);
             label2.Name = "label2";
             label2.Size = new Size(118, 23);
             label2.TabIndex = 84;
@@ -1355,7 +1342,6 @@
         private Panel panel2;
         private Button SaveButton;
         private Button SimpanButton;
-        private TextBox IntervalText;
         private Button BrowseJam0Button;
         private Button PlayJam0Button;
         private TextBox Jam0Text;

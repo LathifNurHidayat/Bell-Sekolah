@@ -177,75 +177,68 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             if (_status == "Tambah")
             {
+
+                MessageBox.Show("Tambah");
+
                 if (_jenisJadwal == "Jadwal Normal")
                 {
                     foreach (var jadwal in jadwalData)
                     {
-                        var normalModel = new JadwalNormalModel
+                        _jadwalNormalDal.Insert(new JadwalNormalModel
                         {
                             HariID = jadwal.HariID,
                             Keterangan = jadwal.Keterangan,
                             Waktu = jadwal.Waktu,
                             SoundName = jadwal.SoundName,
                             SoundPath = jadwal.SoundPath
-                        };
-
-                        _jadwalNormalDal.Insert(normalModel);
+                        });
                     }
                 }
                 else if (_jenisJadwal == "Jadwal Khusus")
                 {
                     foreach (var jadwal in jadwalData)
                     {
-                        var khususModel = new JadwalKhususModel
+                        _jadwalKhususDal.Insert(new JadwalKhususModel
                         {
                             HariID = jadwal.HariID,
                             Keterangan = jadwal.Keterangan,
                             Waktu = jadwal.Waktu,
                             SoundName = jadwal.SoundName,
                             SoundPath = jadwal.SoundPath
-                        };
-
-                        _jadwalKhususDal.Insert(khususModel);
+                        });
                     }
                 }
-
-                if (_status == "Edit")
+            }
+            else if (_status == "Edit")
+            {
+                if (_jenisJadwal == "Jadwal Normal")
                 {
-                    if (_jenisJadwal == "Jadwal Normal")
+                    foreach (var jadwal in jadwalData)
                     {
-                        foreach (var jadwal in jadwalData)
+                        _jadwalNormalDal.Update(new JadwalNormalModel
                         {
-                            var normalModel = new JadwalNormalModel
-                            {
-                                HariID = jadwal.HariID,
-                                Keterangan = jadwal.Keterangan,
-                                Waktu = jadwal.Waktu,
-                                SoundName = jadwal.SoundName,
-                                SoundPath = jadwal.SoundPath
-                            };
-
-                            _jadwalNormalDal.Update(normalModel);
-                        }
-                    }
-                    else if (_jenisJadwal == "Jadwal Khusus")
-                    {
-                        foreach (var jadwal in jadwalData)
-                        {
-                            var khususModel = new JadwalKhususModel
-                            {
-                                HariID = jadwal.HariID,
-                                Keterangan = jadwal.Keterangan,
-                                Waktu = jadwal.Waktu,
-                                SoundName = jadwal.SoundName,
-                                SoundPath = jadwal.SoundPath
-                            };
-
-                            _jadwalKhususDal.Update(khususModel);
-                        }
+                            HariID = jadwal.HariID,
+                            Keterangan = jadwal.Keterangan,
+                            Waktu = jadwal.Waktu,
+                            SoundName = jadwal.SoundName,
+                            SoundPath = jadwal.SoundPath
+                        });
                     }
                 }
-
+                else if (_jenisJadwal == "Jadwal Khusus")
+                {
+                    foreach (var jadwal in jadwalData)
+                    {
+                        _jadwalKhususDal.Update(new JadwalKhususModel
+                        {
+                            HariID = jadwal.HariID,
+                            Keterangan = jadwal.Keterangan,
+                            Waktu = jadwal.Waktu,
+                            SoundName = jadwal.SoundName,
+                            SoundPath = jadwal.SoundPath
+                        });
+                    }
+                }
             }
         }
 
@@ -286,10 +279,30 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             UbahButton.Click += UbahButton_Click;
             SimpanButton.Click += SimpanButton_Click;
 
+            this.FormClosed += InputDataForm_FormClosed;
+        }
+
+        private void InputDataForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            StopAudio();
         }
 
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
+            List<TextBox> textBoxes = new List<TextBox>()
+            {
+                Jam0Text, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text,
+                Jam5Text, Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text,
+                Jam10Text, JamKepulanganText
+            };
+            foreach (var box in textBoxes)
+            {
+                if (box.Text == string.Empty)
+                {
+                    MessageBox.Show("Semua data wajib diisi !","Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
             SaveData();
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -297,6 +310,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void UbahButton_Click(object? sender, EventArgs e)
         {
+            StopAudio();
+
             string mulai = "";
             int interval = 0;
             int istirahat_1 = 0;
@@ -306,11 +321,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (intervalForm.ShowDialog(this) == DialogResult.OK)
             {
                 mulai = intervalForm.mulai;
-                interval = intervalForm.interval;
+                interval = intervalForm.interval; 
                 istirahat_1 = intervalForm.istirahat_1;
                 istirahat_2 = intervalForm.istirahat_2;
             }
-
 
             List<DateTimePicker> datePickerControls = new List<DateTimePicker>
             {
@@ -319,13 +333,19 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam10Picker, JamKepulanganPicker
             };
 
-            DateTimePicker selectedPicker = datePickerControls.FirstOrDefault( x => x.Name.Equals(mulai, StringComparison.OrdinalIgnoreCase));
+            DateTimePicker selectedPicker = datePickerControls.FirstOrDefault(x => x.Name.Equals(mulai, StringComparison.OrdinalIgnoreCase));
+
             if (selectedPicker == null) return;
+
+            int startIndex = datePickerControls.IndexOf(selectedPicker);
+            if (startIndex == -1) return;
 
             DateTime startTime = selectedPicker.Value;
 
-            foreach (var picker in datePickerControls)
+            for (int i = startIndex; i < datePickerControls.Count; i++)
             {
+                var picker = datePickerControls[i];
+
                 if (picker == JamIstirahat1Picker)
                 {
                     picker.Value = startTime;
@@ -342,6 +362,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     startTime = startTime.AddMinutes(interval);
                 }
             }
+
             MessageBox.Show("Interval waktu berhasil diubah!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -365,7 +386,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
                 if (File.Exists(FilePath))
                 {
-
                     if (_isPlaying)
                     {
                         StopAudio();
@@ -373,14 +393,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     }
                     else
                     {
-                        PlayAudio(FilePath);
+                        PlayAudio(FilePath, button);
                         button.Text = "■";
                     }
                 }
             }
         }
 
-        private void PlayAudio(string filePath)
+        private void PlayAudio(string filePath, Button button)
         {
             try
             {
@@ -390,6 +410,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 waveOutDevice.PlaybackStopped += (s, e) =>
                 {
                     StopAudio();
+                    button.Text = "▶";
                 };
                 waveOutDevice.Init(audioFileReader);
                 waveOutDevice.Play();
@@ -419,10 +440,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _isPlaying = false;
         }
 
-
+        
         private void BrowseButton_Click(object? sender, EventArgs e)
         {
             Button button = (Button)sender;
+            StopAudio();
+
             if (button == null) return;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
