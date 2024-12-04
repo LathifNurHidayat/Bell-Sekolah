@@ -52,8 +52,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 GetData();
             }
-
-            Jam0Picker.Value = DateTime.Today;
         }
 
 
@@ -132,16 +130,17 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             foreach (var item in data)
             {
-                for (int i = 0; i < labelControls.Count; i++)
+                for (int i = 0; i <= labelControls.Count; i++)
                 {
                     if (labelControls[i].Text == item.Keterangan)
                     {
-                        _datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out var waktu) ? waktu : DateTime.Today;
+                        _datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out DateTime waktu) ? waktu : DateTime.Today;
                         textBoxControls[i].Text = item.SoundName;
                         break; 
                     }
                 }
             }
+
         }
 
 
