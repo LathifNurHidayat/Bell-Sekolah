@@ -1,5 +1,6 @@
 ﻿using BelSekolah.BelSekolahBackEnd.Dal;
 using BelSekolah.BelSekolahBackEnd.Model;
+using NAudio.MediaFoundation;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private string _status;
         private bool _isPlaying = false;
 
+        private List<DateTimePicker> _datePickerControls = new List<DateTimePicker>();
+
         private List<JadwalPutarDto> _jadwalPutarDto = new List<JadwalPutarDto>();
 
         public InputDataForm(string Hari, int HariID, string JenisJadwal, string Status)
@@ -42,42 +45,46 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             this.MaximizeBox = false;
 
             HariText.Text = $"{Hari} - {JenisJadwal}";
-            InitialPlayButton();
+            InitialButtonPicker();
             RegisterControlEvent();
 
             if (_status == "Edit")
             {
                 GetData();
             }
+
+            Jam0Picker.Value = DateTime.Today;
         }
 
 
-        private void InitialPlayButton()
+        private void InitialButtonPicker()
         {
             List<Button> buttons = new List<Button>
             {
-                PlayJam0Button,
-                PlayJam1Button,
-                PlayJam2Button,
-                PlayJam3Button,
-                PlayJam4Button,
-                PlayJam5Button,
-                PlayJam6Button,
-                PlayJam7Button,
-                PlayJam8Button,
-                PlayJam9Button,
-                PlayJam10Button,
-                PlayJamKepulanganButton,
-                PlayJamIstirahat1Button,
-                PlayJamIstirahat2Button
-
+                PlayJam0Button, PlayJam1Button, PlayJam2Button, PlayJam3Button, PlayJam4Button,
+                PlayJam5Button, PlayJam6Button, PlayJam7Button, PlayJam8Button, PlayJam9Button,
+                PlayJam10Button, PlayJamKepulanganButton, PlayJamIstirahat1Button, PlayJamIstirahat2Button
             };
 
             foreach (Button button in buttons)
             {
                 button.Text = "▶";
             }
+
+            List<DateTimePicker> datePickerControls = new List<DateTimePicker>
+            {
+                Jam0Picker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Jam4Picker,
+                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Jam7Picker, Jam8Picker, Jam9Picker,
+                Jam10Picker, JamKepulanganPicker
+            };
+            _datePickerControls.AddRange(datePickerControls);
+
+            foreach (DateTimePicker picker in _datePickerControls)
+            {
+                picker.Value = DateTime.Today;
+            }
         }
+
 
         private void GetData()
         {
@@ -86,13 +93,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam0Label, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
                 Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
-            };
-
-            List<DateTimePicker> datePickerControls = new List<DateTimePicker>
-            {
-                Jam0Picker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Jam4Picker,
-                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Jam7Picker, Jam8Picker, Jam9Picker,
-                Jam10Picker, JamKepulanganPicker
             };
 
             List<TextBox> textBoxControls = new List<TextBox>
@@ -114,6 +114,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     SoundName = x.SoundName ?? "",
                     SoundPath = x.SoundPath ?? ""
                 }).ToList();
+
             }
             else if (_jenisJadwal == "Jadwal Normal")
             {
@@ -126,20 +127,26 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     SoundName = x.SoundName ?? "",
                     SoundPath = x.SoundPath ?? ""
                 }).ToList();
+
             }
 
-            for (int i = 0; i < data.Count && i < labelControls.Count; i++)
+            foreach (var item in data)
             {
-                var item = data[i];
-                labelControls[i].Text = item.Keterangan;
-                datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out var waktu) ? waktu : DateTime.Now;
-                textBoxControls[i].Text = item.SoundName;
+                for (int i = 0; i < labelControls.Count; i++)
+                {
+                    if (labelControls[i].Text == item.Keterangan)
+                    {
+                        _datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out var waktu) ? waktu : DateTime.Today;
+                        textBoxControls[i].Text = item.SoundName;
+                        break; 
+                    }
+                }
             }
         }
 
 
         private void SaveData()
-        {
+        {   
             List<Label> labels = new List<Label>()
             {
                 Jam0Label, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
@@ -163,23 +170,26 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             var jadwalData = new List<JadwalPutarDto>();
 
+
             for (int i = 0; i < labels.Count; i++)
             {
-                jadwalData.Add(new JadwalPutarDto
+                if (datePickers[i].Value.TimeOfDay != TimeSpan.Zero && !string.IsNullOrWhiteSpace(textBoxes[i].Text))
                 {
-                    HariID = _hariID,
-                    Keterangan = labels[i].Text,
-                    Waktu = datePickers[i].Value.ToString("HH:mm"),
-                    SoundName = textBoxes[i].Text,
-                    SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", textBoxes[i].Text)
-                });
+                    jadwalData.Add(new JadwalPutarDto
+                    {
+                        JadwalID = _jadwalPutarDto.FirstOrDefault(x => x.Keterangan == labels[i].Text)?.JadwalID ?? default(int),
+                        HariID = _hariID,
+                        Keterangan = labels[i].Text,
+                        Waktu = datePickers[i].Value.ToString("HH:mm"),
+                        SoundName = textBoxes[i].Text,
+                        SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", textBoxes[i].Text)
+                    });
+                }
             }
+
 
             if (_status == "Tambah")
             {
-
-                MessageBox.Show("Tambah");
-
                 if (_jenisJadwal == "Jadwal Normal")
                 {
                     foreach (var jadwal in jadwalData)
@@ -213,9 +223,11 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 if (_jenisJadwal == "Jadwal Normal")
                 {
+                    _jadwalNormalDal.Delete(_hariID);
+
                     foreach (var jadwal in jadwalData)
                     {
-                        _jadwalNormalDal.Update(new JadwalNormalModel
+                        _jadwalNormalDal.Insert(new JadwalNormalModel
                         {
                             HariID = jadwal.HariID,
                             Keterangan = jadwal.Keterangan,
@@ -227,9 +239,11 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 }
                 else if (_jenisJadwal == "Jadwal Khusus")
                 {
+                    _jadwalKhususDal.Delete(_hariID);
+
                     foreach (var jadwal in jadwalData)
                     {
-                        _jadwalKhususDal.Update(new JadwalKhususModel
+                        _jadwalKhususDal.Insert(new JadwalKhususModel
                         {
                             HariID = jadwal.HariID,
                             Keterangan = jadwal.Keterangan,
@@ -289,20 +303,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
-            List<TextBox> textBoxes = new List<TextBox>()
-            {
-                Jam0Text, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text,
-                Jam5Text, Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text,
-                Jam10Text, JamKepulanganText
-            };
-            foreach (var box in textBoxes)
-            {
-                if (box.Text == string.Empty)
-                {
-                    MessageBox.Show("Semua data wajib diisi !","Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
+
             SaveData();
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -400,6 +401,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
         }
 
+
         private void PlayAudio(string filePath, Button button)
         {
             try
@@ -445,8 +447,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             Button button = (Button)sender;
             StopAudio();
-
             if (button == null) return;
+
+
+            DateTimePicker picker = (DateTimePicker)panel2.Controls.OfType<DateTimePicker>().FirstOrDefault(x => x.Tag?.ToString() == button.Tag?.ToString());
+            if (picker?.Value == DateTime.Today)
+            {
+                MessageBox.Show("Mohon atur jam terlebih dahulu !","Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+           
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound File (*.mp3)|*.mp3";

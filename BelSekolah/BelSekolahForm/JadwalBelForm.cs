@@ -236,7 +236,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-
         private void LoadJadwalDetil(int HariID)
         {
             var jadwalNormal = _jadwalNormalDal.ListData(HariID);
@@ -250,7 +249,7 @@ namespace BelSekolah.BelSekolahForm
             var jadwalKhusus = _jadwalKhususDal.ListData(HariID);
             JadwalKhususGrid.DataSource = jadwalKhusus;
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
-            JadwalNormalGrid.Columns["HariID"].Visible = false;
+            JadwalKhususGrid.Columns["HariID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -269,8 +268,8 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
-            //deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
-            deleteToolStripMenuItem1.Visible = false;
+            deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
+            //deleteToolStripMenuItem1.Visible = false;
             editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
 
             JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
@@ -383,7 +382,7 @@ namespace BelSekolah.BelSekolahForm
             LoadJadwalDetil(_hariID);
         }
 
-       /* private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
+        private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
             if (_gridAktif == GridAktif.JadwalNormal)
             {
@@ -403,7 +402,7 @@ namespace BelSekolah.BelSekolahForm
                     LoadJadwalDetil(_hariID);
                 }
             }
-        }*/
+        }
 
         private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {

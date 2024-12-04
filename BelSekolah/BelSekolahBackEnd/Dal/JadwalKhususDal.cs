@@ -89,15 +89,15 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public void Delete(int JadwalKhususId)
+        public void Delete(int hariID)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
                 Conn.Open();
 
-                const string sql = @"DELETE FROM JadwalKhusus WHERE JadwalKhususID = @JadwalKhususID";
+                const string sql = @"DELETE FROM JadwalKhusus WHERE HariID = @HariID";
 
-                Conn.Execute(sql, new { JadwalKhususID = JadwalKhususId});
+                Conn.Execute(sql, new { HariID = hariID});
             }
         }
 
