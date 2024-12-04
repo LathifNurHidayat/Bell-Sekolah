@@ -83,6 +83,8 @@ namespace BelSekolah.BelSekolahForm
 
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
+
+          
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -308,16 +310,24 @@ namespace BelSekolah.BelSekolahForm
 
         private void MainPanel_Resize(object? sender, EventArgs e)
         {
-            int centerScreen = mainForm.Width;
+            int centerScreen = MainPanel.Width / 2;
 
-            int panelWidth = centerScreen / 2;
+            JadwalNormalGrid.Width = centerScreen - 20;
+            JadwalKhususGrid.Width = centerScreen - 30;
 
-      /*      JadwalKhususPanel.Width = panelWidth;
-            JadwalKhususPanel.Location = new Point(0, 0); 
+            JadwalNormalGrid.Location = new Point(20, 140);
+            JadwalKhususGrid.Location = new Point(centerScreen + 10, 140);
 
-            JadwalNormalPanel.Width = panelWidth;
-            JadwalNormalPanel.Location = new Point(panelWidth, 0); */
+            JadwalKhususRadio.Location = new Point(centerScreen + 10, 102);
+
+            TambahKhususButton.Location = new Point(centerScreen + 10, MainPanel.Height - TambahKhususButton.Height - 20);
+
+            DeleteKhususButton.Location = new Point(
+                centerScreen + 10 + TambahKhususButton.Width + 10,
+                MainPanel.Height - DeleteKhususButton.Height - 20
+            );
         }
+
 
 
         private void JadwalRadio_Click(object? sender, EventArgs e)
@@ -334,6 +344,17 @@ namespace BelSekolah.BelSekolahForm
 
         private void JadwalRadio_CheckedChanged(object? sender, EventArgs e)
         {
+            if (sender is RadioButton rb && rb.Checked)
+            {
+                foreach (var control in this.Controls.OfType<RadioButton>())
+                {
+                    if (control != rb && control.Checked)
+                    {
+                        control.Checked = false;
+                    }
+                }
+            }
+
             string value = "";
             if (JadwalKhususRadio.Checked) value = "Jadwal Khusus";
             if (JadwalNormalRadio.Checked) value = "Jadwal Normal";

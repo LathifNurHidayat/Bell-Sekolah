@@ -31,16 +31,16 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JadwalBelForm));
             MainPanel = new Panel();
-            panel1 = new Panel();
+            JadwalNormalRadio = new RadioButton();
             TambahNormalButton = new Button();
             DeleteNormalButton = new Button();
-            JadwalNormalRadio = new RadioButton();
             JadwalNormalGrid = new DataGridView();
+            JadwalKhususGrid = new DataGridView();
             TambahKhususButton = new Button();
             DeleteKhususButton = new Button();
+            JadwalKhususRadio = new RadioButton();
             StartStopButton = new Button();
             HariCombo = new ComboBox();
-            JadwalKhususRadio = new RadioButton();
             panel5 = new Panel();
             RunningLabel = new Label();
             label4 = new Label();
@@ -54,17 +54,13 @@
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            panel3 = new Panel();
-            JadwalKhususGrid = new DataGridView();
             MainPanel.SuspendLayout();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalNormalGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
             panel5.SuspendLayout();
             contextMenuStrip2.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
             SuspendLayout();
             // 
             // MainPanel
@@ -72,8 +68,14 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = Color.LightGray;
             MainPanel.BorderStyle = BorderStyle.FixedSingle;
-            MainPanel.Controls.Add(panel3);
-            MainPanel.Controls.Add(panel1);
+            MainPanel.Controls.Add(JadwalNormalRadio);
+            MainPanel.Controls.Add(TambahNormalButton);
+            MainPanel.Controls.Add(DeleteNormalButton);
+            MainPanel.Controls.Add(JadwalNormalGrid);
+            MainPanel.Controls.Add(JadwalKhususGrid);
+            MainPanel.Controls.Add(TambahKhususButton);
+            MainPanel.Controls.Add(DeleteKhususButton);
+            MainPanel.Controls.Add(JadwalKhususRadio);
             MainPanel.Controls.Add(StartStopButton);
             MainPanel.Controls.Add(HariCombo);
             MainPanel.Controls.Add(panel5);
@@ -82,16 +84,16 @@
             MainPanel.Size = new Size(1208, 576);
             MainPanel.TabIndex = 0;
             // 
-            // panel1
+            // JadwalNormalRadio
             // 
-            panel1.Controls.Add(TambahNormalButton);
-            panel1.Controls.Add(DeleteNormalButton);
-            panel1.Controls.Add(JadwalNormalRadio);
-            panel1.Controls.Add(JadwalNormalGrid);
-            panel1.Location = new Point(3, 90);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(597, 475);
-            panel1.TabIndex = 17;
+            JadwalNormalRadio.AutoSize = true;
+            JadwalNormalRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalNormalRadio.Location = new Point(20, 102);
+            JadwalNormalRadio.Name = "JadwalNormalRadio";
+            JadwalNormalRadio.Size = new Size(145, 27);
+            JadwalNormalRadio.TabIndex = 24;
+            JadwalNormalRadio.Text = "Jadwal Normal";
+            JadwalNormalRadio.UseVisualStyleBackColor = true;
             // 
             // TambahNormalButton
             // 
@@ -101,10 +103,10 @@
             TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             TambahNormalButton.ForeColor = Color.White;
             TambahNormalButton.ImageAlign = ContentAlignment.MiddleLeft;
-            TambahNormalButton.Location = new Point(17, 423);
+            TambahNormalButton.Location = new Point(20, 513);
             TambahNormalButton.Name = "TambahNormalButton";
             TambahNormalButton.Size = new Size(109, 39);
-            TambahNormalButton.TabIndex = 2;
+            TambahNormalButton.TabIndex = 23;
             TambahNormalButton.Text = "Tambah";
             TambahNormalButton.TextImageRelation = TextImageRelation.TextAboveImage;
             TambahNormalButton.UseVisualStyleBackColor = false;
@@ -116,31 +118,20 @@
             DeleteNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
             DeleteNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             DeleteNormalButton.ForeColor = Color.White;
-            DeleteNormalButton.Location = new Point(132, 423);
+            DeleteNormalButton.Location = new Point(135, 513);
             DeleteNormalButton.Name = "DeleteNormalButton";
             DeleteNormalButton.Size = new Size(109, 39);
-            DeleteNormalButton.TabIndex = 15;
+            DeleteNormalButton.TabIndex = 25;
             DeleteNormalButton.Text = "Delete";
             DeleteNormalButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             DeleteNormalButton.UseVisualStyleBackColor = false;
             // 
-            // JadwalNormalRadio
-            // 
-            JadwalNormalRadio.AutoSize = true;
-            JadwalNormalRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JadwalNormalRadio.Location = new Point(17, 3);
-            JadwalNormalRadio.Name = "JadwalNormalRadio";
-            JadwalNormalRadio.Size = new Size(145, 27);
-            JadwalNormalRadio.TabIndex = 6;
-            JadwalNormalRadio.Text = "Jadwal Normal";
-            JadwalNormalRadio.UseVisualStyleBackColor = true;
-            // 
             // JadwalNormalGrid
             // 
-            JadwalNormalGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            JadwalNormalGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             JadwalNormalGrid.BackgroundColor = SystemColors.Control;
             JadwalNormalGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JadwalNormalGrid.Location = new Point(17, 50);
+            JadwalNormalGrid.Location = new Point(20, 140);
             JadwalNormalGrid.MultiSelect = false;
             JadwalNormalGrid.Name = "JadwalNormalGrid";
             JadwalNormalGrid.ReadOnly = true;
@@ -148,8 +139,24 @@
             JadwalNormalGrid.RowTemplate.Height = 29;
             JadwalNormalGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             JadwalNormalGrid.Size = new Size(561, 357);
-            JadwalNormalGrid.TabIndex = 0;
+            JadwalNormalGrid.TabIndex = 22;
             JadwalNormalGrid.TabStop = false;
+            // 
+            // JadwalKhususGrid
+            // 
+            JadwalKhususGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            JadwalKhususGrid.BackgroundColor = SystemColors.Control;
+            JadwalKhususGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            JadwalKhususGrid.Location = new Point(615, 140);
+            JadwalKhususGrid.MultiSelect = false;
+            JadwalKhususGrid.Name = "JadwalKhususGrid";
+            JadwalKhususGrid.ReadOnly = true;
+            JadwalKhususGrid.RowHeadersWidth = 51;
+            JadwalKhususGrid.RowTemplate.Height = 29;
+            JadwalKhususGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            JadwalKhususGrid.Size = new Size(578, 357);
+            JadwalKhususGrid.TabIndex = 21;
+            JadwalKhususGrid.TabStop = false;
             // 
             // TambahKhususButton
             // 
@@ -158,10 +165,10 @@
             TambahKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
             TambahKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             TambahKhususButton.ForeColor = Color.White;
-            TambahKhususButton.Location = new Point(5, 423);
+            TambahKhususButton.Location = new Point(606, 513);
             TambahKhususButton.Name = "TambahKhususButton";
             TambahKhususButton.Size = new Size(109, 39);
-            TambahKhususButton.TabIndex = 3;
+            TambahKhususButton.TabIndex = 18;
             TambahKhususButton.Text = "Tambah";
             TambahKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             TambahKhususButton.UseVisualStyleBackColor = false;
@@ -173,13 +180,24 @@
             DeleteKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
             DeleteKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             DeleteKhususButton.ForeColor = Color.White;
-            DeleteKhususButton.Location = new Point(120, 423);
+            DeleteKhususButton.Location = new Point(721, 513);
             DeleteKhususButton.Name = "DeleteKhususButton";
             DeleteKhususButton.Size = new Size(109, 39);
-            DeleteKhususButton.TabIndex = 16;
+            DeleteKhususButton.TabIndex = 20;
             DeleteKhususButton.Text = "Delete";
             DeleteKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             DeleteKhususButton.UseVisualStyleBackColor = false;
+            // 
+            // JadwalKhususRadio
+            // 
+            JadwalKhususRadio.AutoSize = true;
+            JadwalKhususRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalKhususRadio.Location = new Point(606, 102);
+            JadwalKhususRadio.Name = "JadwalKhususRadio";
+            JadwalKhususRadio.Size = new Size(142, 27);
+            JadwalKhususRadio.TabIndex = 19;
+            JadwalKhususRadio.Text = "Jadwal Khusus";
+            JadwalKhususRadio.UseVisualStyleBackColor = true;
             // 
             // StartStopButton
             // 
@@ -188,7 +206,7 @@
             StartStopButton.BackgroundImageLayout = ImageLayout.Zoom;
             StartStopButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             StartStopButton.ForeColor = Color.White;
-            StartStopButton.Location = new Point(1072, 49);
+            StartStopButton.Location = new Point(1076, 49);
             StartStopButton.Name = "StartStopButton";
             StartStopButton.Size = new Size(109, 39);
             StartStopButton.TabIndex = 0;
@@ -201,21 +219,10 @@
             HariCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             HariCombo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             HariCombo.FormattingEnabled = true;
-            HariCombo.Location = new Point(23, 48);
+            HariCombo.Location = new Point(20, 54);
             HariCombo.Name = "HariCombo";
             HariCombo.Size = new Size(151, 36);
             HariCombo.TabIndex = 1;
-            // 
-            // JadwalKhususRadio
-            // 
-            JadwalKhususRadio.AutoSize = true;
-            JadwalKhususRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JadwalKhususRadio.Location = new Point(5, 3);
-            JadwalKhususRadio.Name = "JadwalKhususRadio";
-            JadwalKhususRadio.Size = new Size(142, 27);
-            JadwalKhususRadio.TabIndex = 7;
-            JadwalKhususRadio.Text = "Jadwal Khusus";
-            JadwalKhususRadio.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -360,33 +367,6 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(JadwalKhususGrid);
-            panel3.Controls.Add(TambahKhususButton);
-            panel3.Controls.Add(DeleteKhususButton);
-            panel3.Controls.Add(JadwalKhususRadio);
-            panel3.Location = new Point(606, 90);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(598, 475);
-            panel3.TabIndex = 18;
-            // 
-            // JadwalKhususGrid
-            // 
-            JadwalKhususGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            JadwalKhususGrid.BackgroundColor = SystemColors.Control;
-            JadwalKhususGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JadwalKhususGrid.Location = new Point(5, 50);
-            JadwalKhususGrid.MultiSelect = false;
-            JadwalKhususGrid.Name = "JadwalKhususGrid";
-            JadwalKhususGrid.ReadOnly = true;
-            JadwalKhususGrid.RowHeadersWidth = 51;
-            JadwalKhususGrid.RowTemplate.Height = 29;
-            JadwalKhususGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            JadwalKhususGrid.Size = new Size(578, 357);
-            JadwalKhususGrid.TabIndex = 17;
-            JadwalKhususGrid.TabStop = false;
-            // 
             // JadwalBelForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -398,18 +378,15 @@
             Name = "JadwalBelForm";
             StartPosition = FormStartPosition.CenterScreen;
             MainPanel.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalNormalGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).EndInit();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             contextMenuStrip2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).EndInit();
             ResumeLayout(false);
         }
 
@@ -436,9 +413,9 @@
         private Button DeleteKhususButton;
         private Button TambahNormalButton;
         private Button DeleteNormalButton;
-        private RadioButton JadwalNormalRadio;
-        private Panel panel1;
-        private Panel panel3;
+        private Panel JadwalNormalPanel;
+        private Panel JadwalKhususPanel;
         private DataGridView JadwalKhususGrid;
+        private RadioButton JadwalNormalRadio;
     }
 }

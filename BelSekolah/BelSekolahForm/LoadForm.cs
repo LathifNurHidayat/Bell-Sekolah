@@ -66,6 +66,7 @@ namespace BelSekolah
         {
             this._delayTimer.Stop();
             JadwalBelForm mainForm = new JadwalBelForm(this);
+            mainForm.WindowState = FormWindowState.Maximized;
             mainForm.Show();
             this.Hide();
         }
