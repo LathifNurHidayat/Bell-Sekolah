@@ -84,7 +84,8 @@ namespace BelSekolah.BelSekolahForm
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
 
-          
+            
+
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -306,6 +307,31 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalKhususRadio.Click += JadwalRadio_Click;
             JadwalNormalRadio.Click += JadwalRadio_Click;
+
+            DeleteKhususButton.Click += DeleteButton_Click;
+            DeleteNormalButton.Click += DeleteButton_Click;
+        }
+
+        private void DeleteButton_Click(object? sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                if ((button == DeleteNormalButton && JadwalNormalGrid.RowCount < 1) ||
+                    (button == DeleteKhususButton && JadwalKhususGrid.RowCount < 1))
+                {
+                    MessageBox.Show("Tidak ada data di dalam tabel!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (MessageBox.Show("Anda yakin akan menghapus semua data didalam tabel ?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (sender as Button == DeleteNormalButton)
+                        _jadwalNormalDal.Delete(_hariID);
+                    if (sender as Button == DeleteKhususButton)
+                        _jadwalKhususDal.Delete(_hariID);
+                    LoadJadwalDetil(_hariID);
+                }
+            }
         }
 
         private void MainPanel_Resize(object? sender, EventArgs e)
