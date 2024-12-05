@@ -24,12 +24,12 @@ using System.Xml;
 namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
-    { 
+    {
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
         private enum GridAktif { None, JadwalNormal, JadwalKhusus };
         private GridAktif _gridAktif = GridAktif.None;
-        private enum ComboAktif{ ComboAktif, ComboNonAktif };
+        private enum ComboAktif { ComboAktif, ComboNonAktif };
         private ComboAktif _combo = ComboAktif.ComboAktif;
 
         private Form mainForm;
@@ -42,7 +42,7 @@ namespace BelSekolah.BelSekolahForm
         private string _waktuSekarang;
         private string _hariSekarang;
         private string _jenisJadwal;
-        private bool _isRunning  = false;
+        private bool _isRunning = false;
 
         private System.Windows.Forms.Timer _timer;
         private System.Windows.Forms.Timer _jam;
@@ -60,13 +60,13 @@ namespace BelSekolah.BelSekolahForm
 
             _timer = new System.Windows.Forms.Timer();
             _jam = new System.Windows.Forms.Timer();
-                
+
             this.mainForm = mainForm;
-          
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1600, 800);
 
-            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));    
+            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
 
             RegisterControlEvent();
@@ -84,20 +84,20 @@ namespace BelSekolah.BelSekolahForm
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
 
-            
+
 
         }
 
         private void CustomStyleGrid(DataGridView grid)
         {
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray; 
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;     
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold); 
-            grid.EnableHeadersVisualStyles = false; 
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            grid.EnableHeadersVisualStyles = false;
 
-            grid.DefaultCellStyle.BackColor = Color.White;    
-            grid.DefaultCellStyle.ForeColor = Color.Black;    
-            grid.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular); 
+            grid.DefaultCellStyle.BackColor = Color.White;
+            grid.DefaultCellStyle.ForeColor = Color.Black;
+            grid.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
 
             grid.RowTemplate.Height = 30;
         }
@@ -107,7 +107,7 @@ namespace BelSekolah.BelSekolahForm
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void _timer_Tick(object? sender, EventArgs e) 
+        private void _timer_Tick(object? sender, EventArgs e)
         {
             TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
@@ -185,7 +185,7 @@ namespace BelSekolah.BelSekolahForm
             HariText.Text = _hariSekarang;
             JenisJadwalText.Text = _jadwalDal.ListData().FirstOrDefault(x => x.Hari == _hariSekarang)?.JenisJadwal.ToString();
         }
-        
+
         private void AddDataToList()
         {
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
@@ -211,7 +211,7 @@ namespace BelSekolah.BelSekolahForm
                 }
                 else if (_jenisJadwal == "Jadwal Khusus")
                 {
-                    
+
                     var data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalDto
                     {
                         Waktu = TimeSpan.Parse(x.Waktu),
@@ -295,10 +295,7 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
-    /*        deleteToolStripMenuItem1.Click += DeleteToolStripMenuItem1_Click;
-            //deleteToolStripMenuItem1.Visible = false;
-            editToolStripMenuItem.Click += EditToolStripMenuItem_Click;*/
-
+            
             JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
             JadwalKhususRadio.CheckedChanged += JadwalRadio_CheckedChanged;
 
@@ -310,6 +307,25 @@ namespace BelSekolah.BelSekolahForm
 
             DeleteKhususButton.Click += DeleteButton_Click;
             DeleteNormalButton.Click += DeleteButton_Click;
+
+            JadwalKhususToolStripMenuItem.Click += JadwalKhususToolStripMenuItem_Click;
+            JadwalUjianToolStripMenuItem1.Click += JadwalUjianToolStripMenuItem1_Click;
+        }
+
+        private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
+        {
+            string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, true);
+            if (inputDataForm.ShowDialog() == DialogResult.OK)
+                LoadJadwalDetil(_hariID);
+        }
+
+        private void JadwalKhususToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+            if (inputDataForm.ShowDialog() == DialogResult.OK)
+                LoadJadwalDetil(_hariID);
         }
 
         private void DeleteButton_Click(object? sender, EventArgs e)
@@ -354,8 +370,6 @@ namespace BelSekolah.BelSekolahForm
             );
         }
 
-
-
         private void JadwalRadio_Click(object? sender, EventArgs e)
         {
             if (_isRunning)
@@ -399,7 +413,7 @@ namespace BelSekolah.BelSekolahForm
             if (value != null && int.TryParse(value.ToString(), out _hariID))
             {
                 var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
-                if (jenis_jadwal == "Jadwal Normal")JadwalNormalRadio.Checked = true;
+                if (jenis_jadwal == "Jadwal Normal") JadwalNormalRadio.Checked = true;
                 if (jenis_jadwal == "Jadwal Khusus") JadwalKhususRadio.Checked = true;
                 LoadJadwalDetil(_hariID);
             }
@@ -447,47 +461,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-      /*  private void EditToolStripMenuItem_Click(object? sender, EventArgs e)
-        {
-            string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-
-            if (_gridAktif == GridAktif.JadwalNormal)
-            {
-                InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Normal", "Edit");
-                if (inputDataForm.ShowDialog() == DialogResult.OK)
-                    LoadJadwalDetil(_hariID);
-            }
-            else if (_gridAktif == GridAktif.JadwalKhusus)
-            {
-                InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", "Edit");
-                if (inputDataForm.ShowDialog() == DialogResult.OK)
-                    LoadJadwalDetil(_hariID);
-            }
-
-            LoadJadwalDetil(_hariID);
-        }
-
-        private void DeleteToolStripMenuItem1_Click(object? sender, EventArgs e)
-        {
-            if (_gridAktif == GridAktif.JadwalNormal)
-            {
-                if (MessageBox.Show("Anda yakin ingin menghapus data Jadwal Normal?", "Perhatian", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                {
-                    int jadwalNormalID = Convert.ToInt32(JadwalNormalGrid.CurrentRow.Cells["JadwalNormalID"].Value);
-                    _jadwalNormalDal.Delete(jadwalNormalID);
-                    LoadJadwalDetil(_hariID);
-                }
-            }
-            else if (_gridAktif == GridAktif.JadwalKhusus)
-            {
-                if (MessageBox.Show("Anda yakin ingin menghapus data Jadwal Khusus?", "Perhatian", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                {
-                    int jadwalKhususID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
-                    _jadwalKhususDal.Delete(jadwalKhususID);
-                    LoadJadwalDetil(_hariID);
-                }
-            }
-        }*/
 
         private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
@@ -516,17 +489,14 @@ namespace BelSekolah.BelSekolahForm
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text);
+            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text, false);
             if (inputDataForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
 
         private void TambahKhususButton_Click(object? sender, EventArgs e)
         {
-            string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text);
-            if (inputDataForm.ShowDialog() == DialogResult.OK)
-                LoadJadwalDetil(_hariID);
+            contextMenuStrip2.Show(Cursor.Position);
         }
 
 
@@ -535,7 +505,7 @@ namespace BelSekolah.BelSekolahForm
             Application.Exit();
         }
 
-     
+
         #endregion
 
         public class JadwalDto
@@ -544,5 +514,6 @@ namespace BelSekolah.BelSekolahForm
             public TimeSpan Waktu { get; set; }
             public string SoundPath { get; set; }
         }
+
     }
 }

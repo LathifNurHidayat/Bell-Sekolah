@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm.Pilih_Jadwal
 {
-    public partial class PilihJadwalForm : Form
+    public partial class PilihSoundForm : Form
     {
-        public PilihJadwalForm()
+        public PilihSoundForm()
         {
             InitializeComponent();
         }

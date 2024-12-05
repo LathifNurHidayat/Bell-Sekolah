@@ -23,23 +23,27 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
         private int _hariID;
+        private string _hariName;
         private string _jenisJadwal;
         private string _status;
+        private bool _isUjian;
         private bool _isPlaying = false;
 
         private List<DateTimePicker> _datePickerControls = new List<DateTimePicker>();
 
         private List<JadwalPutarDto> _jadwalPutarDto = new List<JadwalPutarDto>();
 
-        public InputDataForm(string Hari, int HariID, string JenisJadwal, string Status)
+        public InputDataForm(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
             InitializeComponent();
 
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
             _hariID = HariID;
+            _hariName = Hari;
             _jenisJadwal = JenisJadwal;
             _status = Status;
+            _isUjian = Ujian;
 
             this.MinimizeBox = false;
             this.MaximizeBox = false;
@@ -49,10 +53,102 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             RegisterControlEvent();
 
             if (_status == "Edit")
-            {
                 GetData();
+            else
+                DefaultSound();
+        }
+
+        private void DefaultSound()
+        {
+            Dictionary<string, TextBox> soundMappings = new Dictionary<string, TextBox>();
+            string soundFolder = string.Empty;
+
+            if (_isUjian)
+            {
+                soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
+            }
+            else
+            {
+                soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+            }
+
+
+            if (_hariName == "Jumat")
+            {
+                Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
+                {
+                    { "Jam Ke - 1.mp3", Jam1Text },
+                    { "Jam Ke - 2.mp3", Jam2Text },
+                    { "Jam Ke - 3.mp3", Jam3Text },
+                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
+                    { "Jam Ke - 4.mp3", Jam4Text },
+                    { "Jam Ke - 5.mp3", Jam5Text },
+                    { "Jam Ke - 6.mp3", Jam6Text },
+                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
+                    { "Jam Ke - 7.mp3", Jam7Text },
+                    { "Jam Ke - 8.mp3", Jam8Text },
+                    { "Akhir Pekan.mp3", JamKepulanganText }
+                };
+                foreach (var item in sound)
+                {
+                    soundMappings.Add(item.Key, item.Value);
+                }
+            }
+
+            else
+            {
+                Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
+                {
+                    { "Jam Ke - 1.mp3", Jam1Text },
+                    { "Jam Ke - 2.mp3", Jam2Text },
+                    { "Jam Ke - 3.mp3", Jam3Text },
+                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
+                    { "Jam Ke - 4.mp3", Jam4Text },
+                    { "Jam Ke - 5.mp3", Jam5Text },
+                    { "Jam Ke - 6.mp3", Jam6Text },
+                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
+                    { "Jam Ke - 7.mp3", Jam7Text },
+                    { "Jam Ke - 8.mp3", Jam8Text },
+                    { "Jam Ke - 9.mp3", Jam9Text },
+                    { "Jam Ke - 10.mp3", Jam10Text },
+                    { "Akhir Jam Pelajaran.mp3", JamKepulanganText }
+                };
+                foreach (var item in sound)
+                {
+                    soundMappings.Add(item.Key, item.Value);
+                }
+            }
+
+
+            if (Directory.Exists(soundFolder))
+            {
+                var soundFiles = Directory.GetFiles(soundFolder, "*.mp3");
+
+                List<JadwalPutarDto> jadwalSound = new List<JadwalPutarDto>();
+
+                foreach (var soundPath in soundFiles)
+                {
+                    var soundName = Path.GetFileName(soundPath);
+
+                    if (soundMappings.TryGetValue(soundName, out TextBox targetTextBox))
+                    {
+                        targetTextBox.Text = soundName;
+
+                        jadwalSound.Add(new JadwalPutarDto
+                        {
+                            SoundName = soundName,
+                            SoundPath = soundPath
+                        });
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Folder sound tidak ditemukan!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void InitialButtonPicker()
@@ -140,6 +236,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     }
                 }
             }
+
+
+
 
         }
 

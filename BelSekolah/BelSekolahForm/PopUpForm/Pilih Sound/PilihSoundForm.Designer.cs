@@ -1,6 +1,6 @@
 ﻿namespace BelSekolah.BelSekolahForm.PopUpForm.Pilih_Jadwal
 {
-    partial class PilihJadwalForm
+    partial class PilihSoundForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PilihSoundForm));
             SuspendLayout();
             // 
-            // PilihJadwalForm
+            // PilihSoundForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(389, 321);
-            Name = "PilihJadwalForm";
-            Text = "PilihJadwalForm";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "PilihSoundForm";
             ResumeLayout(false);
         }
 

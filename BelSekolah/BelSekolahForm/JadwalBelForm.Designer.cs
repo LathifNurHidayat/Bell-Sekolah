@@ -49,8 +49,8 @@
             label3 = new Label();
             HariText = new TextBox();
             contextMenuStrip2 = new ContextMenuStrip(components);
-            editToolStripMenuItem = new ToolStripMenuItem();
-            deleteToolStripMenuItem1 = new ToolStripMenuItem();
+            JadwalKhususToolStripMenuItem = new ToolStripMenuItem();
+            JadwalUjianToolStripMenuItem1 = new ToolStripMenuItem();
             panel2 = new Panel();
             JamLabel = new Label();
             label1 = new Label();
@@ -317,25 +317,25 @@
             // contextMenuStrip2
             // 
             contextMenuStrip2.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, deleteToolStripMenuItem1 });
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { JadwalKhususToolStripMenuItem, JadwalUjianToolStripMenuItem1 });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(133, 60);
+            contextMenuStrip2.Size = new Size(195, 60);
             // 
-            // editToolStripMenuItem
+            // JadwalKhususToolStripMenuItem
             // 
-            editToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            editToolStripMenuItem.Image = Properties.Resources.pencil;
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(132, 28);
-            editToolStripMenuItem.Text = "Edit";
+            JadwalKhususToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalKhususToolStripMenuItem.Image = Properties.Resources.schedule;
+            JadwalKhususToolStripMenuItem.Name = "JadwalKhususToolStripMenuItem";
+            JadwalKhususToolStripMenuItem.Size = new Size(214, 28);
+            JadwalKhususToolStripMenuItem.Text = "Jadwal Khusus";
             // 
-            // deleteToolStripMenuItem1
+            // JadwalUjianToolStripMenuItem1
             // 
-            deleteToolStripMenuItem1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            deleteToolStripMenuItem1.Image = Properties.Resources.delete;
-            deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            deleteToolStripMenuItem1.Size = new Size(132, 28);
-            deleteToolStripMenuItem1.Text = "Delete";
+            JadwalUjianToolStripMenuItem1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalUjianToolStripMenuItem1.Image = Properties.Resources.time;
+            JadwalUjianToolStripMenuItem1.Name = "JadwalUjianToolStripMenuItem1";
+            JadwalUjianToolStripMenuItem1.Size = new Size(214, 28);
+            JadwalUjianToolStripMenuItem1.Text = "Jadwal Ujian";
             // 
             // panel2
             // 
@@ -416,8 +416,8 @@
         private RadioButton JadwalKhususRadio;
         private ComboBox HariCombo;
         private ContextMenuStrip contextMenuStrip2;
-        private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem deleteToolStripMenuItem1;
+        private ToolStripMenuItem JadwalKhususToolStripMenuItem;
+        private ToolStripMenuItem JadwalUjianToolStripMenuItem1;
         private Panel panel2;
         private Label JamLabel;
         private Label label1;
