@@ -3,6 +3,7 @@ using BelSekolah.BelSekolahBackEnd.Model;
 using BelSekolah.BelSekolahDatabase;
 using BelSekolah.BelSekolahDatabase.Helper;
 using BelSekolah.BelSekolahForm.PopUpForm;
+using BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form;
 using Dapper;
 using NAudio.Wave;
 using NAudio.Wave.Asio;
@@ -66,7 +67,7 @@ namespace BelSekolah.BelSekolahForm
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1600, 800);
 
-            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID")); 
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
 
             RegisterControlEvent();
@@ -289,10 +290,10 @@ namespace BelSekolah.BelSekolahForm
 
             TambahKhususButton.Click += TambahKhususButton_Click;
             TambahNormalButton.Click += TambahNormalButton_Click;
-
+/*
             JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
-            
+            */
             JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
             JadwalKhususRadio.CheckedChanged += JadwalRadio_CheckedChanged;
 
@@ -307,6 +308,14 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalKhususToolStripMenuItem.Click += JadwalKhususToolStripMenuItem_Click;
             JadwalUjianToolStripMenuItem1.Click += JadwalUjianToolStripMenuItem1_Click;
+
+            JadwalkanButton.Click += JadwalkanButton_Click;
+        }
+
+        private void JadwalkanButton_Click(object? sender, EventArgs e)
+        {
+            RencanakanJadwalForm jadwalkanBelForm = new RencanakanJadwalForm();
+            jadwalkanBelForm.ShowDialog(this);
         }
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
@@ -466,7 +475,7 @@ namespace BelSekolah.BelSekolahForm
         }
 
 
-        private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+   /*     private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -488,7 +497,7 @@ namespace BelSekolah.BelSekolahForm
                 JadwalNormalGrid.CurrentCell = JadwalNormalGrid[e.ColumnIndex, e.RowIndex];
                 contextMenuStrip2.Show(Cursor.Position);
             }
-        }
+        }*/
 
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {

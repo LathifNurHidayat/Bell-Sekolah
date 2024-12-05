@@ -48,7 +48,11 @@ namespace BelSekolah.BelSekolahDatabase
                         Waktu TEXT,
                         Keterangan TEXT,
                         SoundName TEXT,
-                        SoundPath TEXT
+                        SoundPath TEXT,
+                        RencanakanJadwalID INTEGER,
+
+                        FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE,
+                        FOREIGN KEY (RencanakanJadwalID) REFERENCES RencanakanJadwal(RencanakanJadwalID) ON DELETE CASCADE
                      )";
 
                 string createTableJadwalNormal = @"
@@ -63,10 +67,19 @@ namespace BelSekolah.BelSekolahDatabase
                         FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE
                     )";
 
+                string createTableRencanakanJadwal = @"
+                    CREATE TABLE IF NOT EXISTS RencanakanJadwal(
+                        RencanakanJadwalID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Hari TEXT,
+                        Tanggal TEXT,
+                        Keterangan TEXT
+                    )";
+
                 ExecuteNonQuery(createTableJadwalHari, connection);
                 ExecuteNonQuery(addHariKosong, connection);
                 ExecuteNonQuery(createTableJadwalKhusus, connection);
                 ExecuteNonQuery(createTableJadwalNormal, connection);
+                ExecuteNonQuery(createTableRencanakanJadwal, connection);
 
                 void ExecuteNonQuery(string query, SQLiteConnection connection)
                 {

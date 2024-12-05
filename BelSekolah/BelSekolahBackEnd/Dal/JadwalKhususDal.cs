@@ -112,7 +112,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                                 JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath
                             FROM 
                                 JadwalKhusus
-                            WHERE 
+                            WHERE  
                                 JadwalKhususID = @JadwalKhususID";
 
                 return Conn.Query<JadwalKhususModel>(sql, new { JadwalKhususID = JadwalID }).FirstOrDefault();
