@@ -106,7 +106,7 @@
             // 
             JadwalNormalRadio.AutoSize = true;
             JadwalNormalRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JadwalNormalRadio.Location = new Point(20, 102);
+            JadwalNormalRadio.Location = new Point(20, 93);
             JadwalNormalRadio.Name = "JadwalNormalRadio";
             JadwalNormalRadio.Size = new Size(145, 27);
             JadwalNormalRadio.TabIndex = 24;
@@ -115,7 +115,7 @@
             // 
             // TambahNormalButton
             // 
-            TambahNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            TambahNormalButton.Anchor = AnchorStyles.None;
             TambahNormalButton.BackColor = Color.Goldenrod;
             TambahNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
             TambahNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -131,7 +131,7 @@
             // 
             // DeleteNormalButton
             // 
-            DeleteNormalButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DeleteNormalButton.Anchor = AnchorStyles.None;
             DeleteNormalButton.BackColor = Color.Red;
             DeleteNormalButton.BackgroundImageLayout = ImageLayout.Zoom;
             DeleteNormalButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -156,7 +156,7 @@
             JadwalNormalGrid.RowHeadersWidth = 51;
             JadwalNormalGrid.RowTemplate.Height = 29;
             JadwalNormalGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            JadwalNormalGrid.Size = new Size(561, 357);
+            JadwalNormalGrid.Size = new Size(561, 334);
             JadwalNormalGrid.TabIndex = 22;
             JadwalNormalGrid.TabStop = false;
             // 
@@ -172,13 +172,13 @@
             JadwalKhususGrid.RowHeadersWidth = 51;
             JadwalKhususGrid.RowTemplate.Height = 29;
             JadwalKhususGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            JadwalKhususGrid.Size = new Size(570, 357);
+            JadwalKhususGrid.Size = new Size(570, 334);
             JadwalKhususGrid.TabIndex = 21;
             JadwalKhususGrid.TabStop = false;
             // 
             // TambahKhususButton
             // 
-            TambahKhususButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            TambahKhususButton.Anchor = AnchorStyles.None;
             TambahKhususButton.BackColor = Color.Goldenrod;
             TambahKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
             TambahKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -193,7 +193,7 @@
             // 
             // DeleteKhususButton
             // 
-            DeleteKhususButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            DeleteKhususButton.Anchor = AnchorStyles.None;
             DeleteKhususButton.BackColor = Color.Red;
             DeleteKhususButton.BackgroundImageLayout = ImageLayout.Zoom;
             DeleteKhususButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -210,7 +210,7 @@
             // 
             JadwalKhususRadio.AutoSize = true;
             JadwalKhususRadio.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            JadwalKhususRadio.Location = new Point(606, 102);
+            JadwalKhususRadio.Location = new Point(600, 93);
             JadwalKhususRadio.Name = "JadwalKhususRadio";
             JadwalKhususRadio.Size = new Size(142, 27);
             JadwalKhususRadio.TabIndex = 19;
@@ -326,7 +326,7 @@
             JadwalKhususToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             JadwalKhususToolStripMenuItem.Image = Properties.Resources.schedule;
             JadwalKhususToolStripMenuItem.Name = "JadwalKhususToolStripMenuItem";
-            JadwalKhususToolStripMenuItem.Size = new Size(214, 28);
+            JadwalKhususToolStripMenuItem.Size = new Size(194, 28);
             JadwalKhususToolStripMenuItem.Text = "Jadwal Khusus";
             // 
             // JadwalUjianToolStripMenuItem1
@@ -334,7 +334,7 @@
             JadwalUjianToolStripMenuItem1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             JadwalUjianToolStripMenuItem1.Image = Properties.Resources.time;
             JadwalUjianToolStripMenuItem1.Name = "JadwalUjianToolStripMenuItem1";
-            JadwalUjianToolStripMenuItem1.Size = new Size(214, 28);
+            JadwalUjianToolStripMenuItem1.Size = new Size(194, 28);
             JadwalUjianToolStripMenuItem1.Text = "Jadwal Ujian";
             // 
             // panel2

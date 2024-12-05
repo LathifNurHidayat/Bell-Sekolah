@@ -83,9 +83,6 @@ namespace BelSekolah.BelSekolahForm
 
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
-
-
-
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -141,7 +138,7 @@ namespace BelSekolah.BelSekolahForm
                 audioFileReader = null;
             }
         }
-
+         
 
         private void PlaySound(string soundPath)
         {
@@ -357,8 +354,8 @@ namespace BelSekolah.BelSekolahForm
             JadwalNormalGrid.Width = centerScreen - 20;
             JadwalKhususGrid.Width = centerScreen - 30;
 
-            JadwalNormalGrid.Location = new Point(20, 140);
-            JadwalKhususGrid.Location = new Point(centerScreen + 10, 140);
+            JadwalNormalGrid.Location = new Point(20, 160);
+            JadwalKhususGrid.Location = new Point(centerScreen + 10, 160);
 
             JadwalKhususRadio.Location = new Point(centerScreen + 10, 102);
 
@@ -366,6 +363,13 @@ namespace BelSekolah.BelSekolahForm
 
             DeleteKhususButton.Location = new Point(
                 centerScreen + 10 + TambahKhususButton.Width + 10,
+                MainPanel.Height - DeleteKhususButton.Height - 20
+            );
+
+
+            TambahNormalButton.Location = new Point(15, MainPanel.Height - TambahKhususButton.Height - 20);
+
+            DeleteNormalButton.Location = new Point(15 + TambahNormalButton.Width + 10,
                 MainPanel.Height - DeleteKhususButton.Height - 20
             );
         }

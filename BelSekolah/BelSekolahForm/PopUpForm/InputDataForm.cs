@@ -514,7 +514,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (textbox != null && textbox.Text != null)
             {
                 string FileName = textbox.Text;
-                string FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", FileName);
+                string FilePath = string.Empty;
+
+                if (_isUjian)
+                    FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian",  FileName);
+                else
+                    FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", FileName);
 
                 if (File.Exists(FilePath))
                 {
@@ -609,6 +614,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     textBox.Text = SoundName;
                 }
                 SelectAndReplace(SoundPath);
+                MessageBox.Show(SoundPath);
             }
         }
 
