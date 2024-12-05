@@ -120,8 +120,10 @@
             label2 = new Label();
             UbahButton = new Button();
             panel1 = new Panel();
-            textBox1 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            label1 = new Label();
+            TanggalPicker = new DateTimePicker();
+            KeteranganText = new TextBox();
+            label3 = new Label();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
@@ -1313,36 +1315,61 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.Gainsboro;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(dateTimePicker1);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(TanggalPicker);
+            panel1.Controls.Add(KeteranganText);
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
             panel1.Size = new Size(655, 78);
             panel1.TabIndex = 160;
             // 
-            // textBox1
+            // label1
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(335, 14);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(251, 30);
-            textBox1.TabIndex = 168;
-            textBox1.TabStop = false;
-            textBox1.Tag = "Jam0";
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(11, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 23);
+            label1.TabIndex = 169;
+            label1.Text = "Tanggal";
             // 
-            // dateTimePicker1
+            // TanggalPicker
             // 
-            dateTimePicker1.CustomFormat = "dddd, dd-MM-yyyy";
-            dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(20, 17);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 30);
-            dateTimePicker1.TabIndex = 160;
+            TanggalPicker.CustomFormat = "dddd, dd-MM-yyyy";
+            TanggalPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TanggalPicker.Format = DateTimePickerFormat.Custom;
+            TanggalPicker.Location = new Point(11, 36);
+            TanggalPicker.Name = "TanggalPicker";
+            TanggalPicker.Size = new Size(273, 30);
+            TanggalPicker.TabIndex = 160;
+            // 
+            // KeteranganText
+            // 
+            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
+            KeteranganText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            KeteranganText.Location = new Point(313, 36);
+            KeteranganText.MaxLength = 30;
+            KeteranganText.Name = "KeteranganText";
+            KeteranganText.Size = new Size(325, 30);
+            KeteranganText.TabIndex = 168;
+            KeteranganText.TabStop = false;
+            KeteranganText.Tag = "";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(313, 10);
+            label3.Name = "label3";
+            label3.Size = new Size(179, 23);
+            label3.TabIndex = 170;
+            label3.Text = "Keterangan (Optional)";
             // 
             // InputData
             // 
@@ -1456,7 +1483,9 @@
         private DateTimePicker JamKepulanganPicker;
         private Label JamKepulanganLabel;
         private Panel panel1;
-        private DateTimePicker dateTimePicker1;
-        private TextBox textBox1;
+        private DateTimePicker TanggalPicker;
+        private TextBox KeteranganText;
+        private Label label1;
+        private Label label3;
     }
 }

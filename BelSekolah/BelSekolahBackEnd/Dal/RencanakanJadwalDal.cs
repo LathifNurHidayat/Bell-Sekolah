@@ -30,5 +30,65 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
+        public void Insert(RencanakanJadwalModel model)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            INSERT INTO RencanakanJadwal
+                            (HariID, Tanggal, Keterangan)
+                            VALUES
+                            (@HariID, @Tanggal, @Keterangan)";
+
+                var Dp = new DynamicParameters();
+                Dp.Add("@HariID", model.HariID, System.Data.DbType.Int32);
+                Dp.Add("@Tanggal", model.Tanggal, System.Data.DbType.String);
+                Dp.Add("@Keterangan", model.Keterangan, System.Data.DbType.String);
+
+                Conn.Execute(sql,Dp);
+            }
+        }
+
+        public void Update(RencanakanJadwalModel model)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            UPDATE RencanakanJadwal
+                            SET
+                            HariID = @HariID, Tanggal = @Tanggal, Keterangan = @Keterangan)
+                            WHERE
+                            RencanakanJadwalID = @RencanakanJadwalID";
+
+                var Dp = new DynamicParameters();
+                Dp.Add("@RencanakanJadwalID", model.RencanakanJadwalID, System.Data.DbType.Int32);
+                Dp.Add("@HariID", model.HariID, System.Data.DbType.Int32);
+                Dp.Add("@Tanggal", model.Tanggal, System.Data.DbType.String);
+                Dp.Add("@Keterangan", model.Keterangan, System.Data.DbType.String);
+
+                Conn.Execute(sql, Dp);
+            }
+        }
+
+
+        public void Delete(int RencanakanJadwalID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            DELETE FROM 
+                                RencanakanJadwal 
+                            WHERE
+                            RencanakanJadwalID = @RencanakanJadwalID";
+
+                Conn.Execute(sql, new { RencanakanJadwalID = RencanakanJadwalID});
+            }
+        }
     }
 }

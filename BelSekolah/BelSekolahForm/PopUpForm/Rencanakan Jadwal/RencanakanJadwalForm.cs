@@ -24,6 +24,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
             this.MinimizeBox = false;
             
             LoadData();
+            RegisterControlEvent();
         }
 
         private void LoadData() 

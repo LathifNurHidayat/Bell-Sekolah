@@ -70,7 +70,7 @@ namespace BelSekolah.BelSekolahDatabase
                 string createTableRencanakanJadwal = @"
                     CREATE TABLE IF NOT EXISTS RencanakanJadwal(
                         RencanakanJadwalID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Hari TEXT,
+                        HariID INTEGER,
                         Tanggal TEXT,
                         Keterangan TEXT
                     )";

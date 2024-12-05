@@ -37,7 +37,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         public InputData(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
-            new System.Globalization.CultureInfo("id-ID");
             InitializeComponent();
 
             _jadwalKhususDal = new JadwalKhususDal();
@@ -47,6 +46,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jenisJadwal = JenisJadwal;
             _status = Status;
             _isUjian = Ujian;
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
 
             this.MinimizeBox = false;
             this.MaximizeBox = false;
@@ -58,8 +60,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 GetData();
             else
                 DefaultSound();
-        }
 
+        }
+         
         private void DefaultSound()
         {
             Dictionary<string, TextBox> soundMappings = new Dictionary<string, TextBox>();
