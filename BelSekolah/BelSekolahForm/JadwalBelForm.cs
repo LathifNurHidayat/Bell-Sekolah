@@ -285,7 +285,7 @@ namespace BelSekolah.BelSekolahForm
 
         private void RegisterControlEvent()
         {
-            this.FormClosed += JadwalBelForm_FormClosed;
+            this.FormClosing += JadwalBelForm_FormClosing;
             MainPanel.Resize += MainPanel_Resize;
 
             TambahKhususButton.Click += TambahKhususButton_Click;
@@ -310,6 +310,15 @@ namespace BelSekolah.BelSekolahForm
             JadwalUjianToolStripMenuItem1.Click += JadwalUjianToolStripMenuItem1_Click;
 
             JadwalkanButton.Click += JadwalkanButton_Click;
+        }
+
+        private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                e.Cancel = true;
+            else
+                Application.Exit();
+
         }
 
         private void JadwalkanButton_Click(object? sender, EventArgs e)
@@ -523,10 +532,6 @@ namespace BelSekolah.BelSekolahForm
         }
 
 
-        private void JadwalBelForm_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
 
         #endregion

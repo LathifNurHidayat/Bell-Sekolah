@@ -57,7 +57,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void TambahButton_Click(object? sender, EventArgs e)
         {
-            InputData input = new InputData("", 0, "", "", true);
+            
+            InputData input = new InputData(0, 0, "", "", true);
             input.ShowDialog(this);
         }
     }

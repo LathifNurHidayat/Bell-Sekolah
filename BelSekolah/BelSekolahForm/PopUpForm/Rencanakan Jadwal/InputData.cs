@@ -23,8 +23,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private AudioFileReader audioFileReader;
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
+        private readonly RencanakanJadwalDal _rencanakanJadwalDal;
         private int _hariID;
-        private string _hariName;
+        private int _rencanakanJadwalID;
         private string _jenisJadwal;
         private string _status;
         private bool _isUjian;
@@ -35,14 +36,15 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputData(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
+        public InputData (int RencanakanJadwalID, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
             InitializeComponent();
 
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
+            _rencanakanJadwalDal = new RencanakanJadwalDal();
             _hariID = HariID;
-            _hariName = Hari;
+            _rencanakanJadwalID = RencanakanJadwalID;
             _jenisJadwal = JenisJadwal;
             _status = Status;
             _isUjian = Ujian;
@@ -78,30 +80,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
 
-            if (_hariName == "Jumat")
-            {
-                Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
-                {
-                    { "Jam Ke - 1.mp3", Jam1Text },
-                    { "Jam Ke - 2.mp3", Jam2Text },
-                    { "Jam Ke - 3.mp3", Jam3Text },
-                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
-                    { "Jam Ke - 4.mp3", Jam4Text },
-                    { "Jam Ke - 5.mp3", Jam5Text },
-                    { "Jam Ke - 6.mp3", Jam6Text },
-                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
-                    { "Jam Ke - 7.mp3", Jam7Text },
-                    { "Jam Ke - 8.mp3", Jam8Text },
-                    { "Akhir Pekan.mp3", JamKepulanganText }
-                };
-                foreach (var item in sound)
-                {
-                    soundMappings.Add(item.Key, item.Value);
-                }
-            }
-
-            else
-            {
                 Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
                 {
                     { "Jam Ke - 1.mp3", Jam1Text },
@@ -122,7 +100,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 {
                     soundMappings.Add(item.Key, item.Value);
                 }
-            }
 
 
             if (Directory.Exists(soundFolder))
@@ -292,24 +269,19 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
 
-            if (_status == "Tambah")
+          if (_status == "Tambah")
             {
-                if (_jenisJadwal == "Jadwal Normal")
+                if (_jenisJadwal == "Jadwal Khusus")
                 {
-                    foreach (var jadwal in jadwalData)
+                    var data = new RencanakanJadwalModel
                     {
-                        _jadwalNormalDal.Insert(new JadwalNormalModel
-                        {
-                            HariID = jadwal.HariID,
-                            Keterangan = jadwal.Keterangan,
-                            Waktu = jadwal.Waktu,
-                            SoundName = jadwal.SoundName,
-                            SoundPath = jadwal.SoundPath
-                        });
-                    }
-                }
-                else if (_jenisJadwal == "Jadwal Khusus")
-                {
+                        HariID = _hariID,
+                        Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
+                        Keterangan = KeteranganText.Text
+                    };
+                    _rencanakanJadwalDal.Insert(data);
+
+
                     foreach (var jadwal in jadwalData)
                     {
                         _jadwalKhususDal.Insert(new JadwalKhususModel
@@ -323,26 +295,20 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     }
                 }
             }
+            
             else if (_status == "Edit")
             {
-                if (_jenisJadwal == "Jadwal Normal")
+                if (_jenisJadwal == "Jadwal Khusus")
                 {
-                    _jadwalNormalDal.Delete(_hariID);
-
-                    foreach (var jadwal in jadwalData)
+                    var data = new RencanakanJadwalModel
                     {
-                        _jadwalNormalDal.Insert(new JadwalNormalModel
-                        {
-                            HariID = jadwal.HariID,
-                            Keterangan = jadwal.Keterangan,
-                            Waktu = jadwal.Waktu,
-                            SoundName = jadwal.SoundName,
-                            SoundPath = jadwal.SoundPath
-                        });
-                    }
-                }
-                else if (_jenisJadwal == "Jadwal Khusus")
-                {
+                        RencanakanJadwalID = _rencanakanJadwalID,
+                        HariID = _hariID,
+                        Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
+                        Keterangan = KeteranganText.Text
+                    };
+                    _rencanakanJadwalDal.Update(data);
+
                     _jadwalKhususDal.Delete(_hariID);
 
                     foreach (var jadwal in jadwalData)
