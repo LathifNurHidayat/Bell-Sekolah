@@ -496,7 +496,17 @@ namespace BelSekolah.BelSekolahForm
 
         private void TambahKhususButton_Click(object? sender, EventArgs e)
         {
-            contextMenuStrip2.Show(Cursor.Position);
+            if (TambahKhususButton.Text == "Edit")
+            {
+                string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+                InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+                if (inputDataForm.ShowDialog() == DialogResult.OK)
+                    LoadJadwalDetil(_hariID);
+            }
+            else
+            {
+                contextMenuStrip2.Show(Cursor.Position);
+            }
         }
 
 

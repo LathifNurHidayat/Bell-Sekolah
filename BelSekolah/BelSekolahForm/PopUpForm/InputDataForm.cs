@@ -30,8 +30,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private bool _isPlaying = false;
 
         private List<DateTimePicker> _datePickerControls = new List<DateTimePicker>();
-
         private List<JadwalPutarDto> _jadwalPutarDto = new List<JadwalPutarDto>();
+        private List<TextBox> _textBoxControls = new List<TextBox>();
+
 
         public InputDataForm(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
@@ -49,7 +50,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             this.MaximizeBox = false;
 
             HariText.Text = $"{Hari} - {JenisJadwal}";
-            InitialButtonPicker();
+            InitialComponenTolbox();
             RegisterControlEvent();
 
             if (_status == "Edit")
@@ -151,7 +152,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
 
 
-        private void InitialButtonPicker()
+        private void InitialComponenTolbox()
         {
             List<Button> buttons = new List<Button>
             {
@@ -177,6 +178,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 picker.Value = DateTime.Today;
             }
+
+            List<TextBox> textBox = new List<TextBox>
+            {
+                Jam0Text, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text, Jam5Text,
+                Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text, Jam10Text, JamKepulanganText
+            };
+            _textBoxControls.AddRange(textBox);
         }
 
 
@@ -187,12 +195,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam0Label, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,
                 Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
-            };
-
-            List<TextBox> textBoxControls = new List<TextBox>
-            {
-                Jam0Text, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text, Jam5Text,
-                Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text, Jam10Text, JamKepulanganText
             };
 
             List<JadwalPutarDto> data = new List<JadwalPutarDto>();
@@ -231,7 +233,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     if (labelControls[i].Text == item.Keterangan)
                     {
                         _datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out DateTime waktu) ? waktu : DateTime.Today;
-                        textBoxControls[i].Text = item.SoundName;
+                        _textBoxControls[i].Text = item.SoundName;
                         break; 
                     }
                 }
@@ -401,10 +403,41 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
+            bool isNull = false;
 
-            SaveData();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            foreach(var picker in _datePickerControls)
+            {
+                if (picker.Value == DateTime.Today)
+                {
+                    isNull = true;
+                    break;
+                }
+            }
+
+            foreach (var text in _textBoxControls)
+            {
+                if (text.Text == string.Empty)
+                {
+                    isNull = true;
+                    break;
+                }
+            }
+
+            if (isNull)
+            {
+                if (MessageBox.Show("Jika terdapat data kosong pada salah satu baris, data tersebut tidak akan disimpan! \nApakah Anda ingin tetap menyimpan data lainnya?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    SaveData();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            else
+            {
+                SaveData();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void UbahButton_Click(object? sender, EventArgs e)
@@ -559,6 +592,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound File (*.mp3)|*.mp3";
 
+            if (_isUjian)
+                openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
+            else
+                openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string SoundPath = openFileDialog.FileName;
@@ -575,14 +614,29 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SelectAndReplace(string SoundPath)
         {
-            string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound");
-
-            if (!Directory.Exists(tujuanFolder))
+            if (_isUjian)
             {
-                Directory.CreateDirectory(tujuanFolder);
+                string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
+
+                if (!Directory.Exists(tujuanFolder))
+                {
+                    Directory.CreateDirectory(tujuanFolder);
+                }
+                string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
+                File.Copy(SoundPath, tujuanPath, true);
             }
-            string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
-            File.Copy(SoundPath, tujuanPath, true);
+            else
+            {
+                string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+
+                if (!Directory.Exists(tujuanFolder))
+                {
+                    Directory.CreateDirectory(tujuanFolder);
+                }
+                string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
+                File.Copy(SoundPath, tujuanPath, true);
+            }
+            
         }
 
 
