@@ -20,10 +20,12 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             SELECT 
-                                RencanakanJadwalID, HariID, Tanggal, Keterangan
+                                aa.RencanakanJadwalID, aa.HariID,  aa.Tanggal, aa.Keterangan, 
+                                IFNULL(bb.Hari, ' ') AS Hari
                             FROM 
-                                RencanakanJadwal
-                            ORDER BY 
+                                RencanakanJadwal aa
+                                LEFT JOIN JadwalHari bb ON aa.HariID = bb.HariID
+                            ORDER BY
                                 Tanggal ASC";
 
                 return Conn.Query<RencanakanJadwalModel>(sql);

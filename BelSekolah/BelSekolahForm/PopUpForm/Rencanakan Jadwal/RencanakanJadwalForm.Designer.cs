@@ -28,15 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RencanakanJadwalForm));
             RencanakanJadwalGrid = new DataGridView();
             TambahButton = new Button();
             panel1 = new Panel();
             label2 = new Label();
             pictureBox1 = new PictureBox();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            JadwalPelajaranToolStripMenuItem = new ToolStripMenuItem();
+            JadwalUjianToolStripMenuItem1 = new ToolStripMenuItem();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            editToolStripMenuItem = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)RencanakanJadwalGrid).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            contextMenuStrip2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // RencanakanJadwalGrid
@@ -105,6 +114,52 @@
             pictureBox1.TabIndex = 25;
             pictureBox1.TabStop = false;
             // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { JadwalPelajaranToolStripMenuItem, JadwalUjianToolStripMenuItem1 });
+            contextMenuStrip2.Name = "contextMenuStrip2";
+            contextMenuStrip2.Size = new Size(210, 60);
+            // 
+            // JadwalPelajaranToolStripMenuItem
+            // 
+            JadwalPelajaranToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalPelajaranToolStripMenuItem.Image = Properties.Resources.schedule;
+            JadwalPelajaranToolStripMenuItem.Name = "JadwalPelajaranToolStripMenuItem";
+            JadwalPelajaranToolStripMenuItem.Size = new Size(209, 28);
+            JadwalPelajaranToolStripMenuItem.Text = "Jadwal Pelajaran";
+            // 
+            // JadwalUjianToolStripMenuItem1
+            // 
+            JadwalUjianToolStripMenuItem1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            JadwalUjianToolStripMenuItem1.Image = Properties.Resources.time;
+            JadwalUjianToolStripMenuItem1.Name = "JadwalUjianToolStripMenuItem1";
+            JadwalUjianToolStripMenuItem1.Size = new Size(209, 28);
+            JadwalUjianToolStripMenuItem1.Text = "Jadwal Ujian";
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, deleteToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(133, 60);
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            editToolStripMenuItem.Image = Properties.Resources.pencil;
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(132, 28);
+            editToolStripMenuItem.Text = "Edit";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            deleteToolStripMenuItem.Image = Properties.Resources.delete;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(132, 28);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
             // RencanakanJadwalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -119,6 +174,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            contextMenuStrip2.ResumeLayout(false);
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -129,5 +186,11 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private Label label2;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem JadwalPelajaranToolStripMenuItem;
+        private ToolStripMenuItem JadwalUjianToolStripMenuItem1;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

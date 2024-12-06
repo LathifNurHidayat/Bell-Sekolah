@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -24,12 +25,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
         private readonly RencanakanJadwalDal _rencanakanJadwalDal;
+        private readonly JadwalDal _jadwalDal;
         private int _hariID;
         private int _rencanakanJadwalID;
         private string _jenisJadwal;
         private string _status;
         private bool _isUjian;
         private bool _isPlaying = false;
+        private string _hariName;
 
         private List<DateTimePicker> _datePickerControls = new List<DateTimePicker>();
         private List<JadwalPutarDto> _jadwalPutarDto = new List<JadwalPutarDto>();
@@ -43,6 +46,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
             _rencanakanJadwalDal = new RencanakanJadwalDal();
+            _jadwalDal = new JadwalDal();
             _hariID = HariID;
             _rencanakanJadwalID = RencanakanJadwalID;
             _jenisJadwal = JenisJadwal;
@@ -79,7 +83,30 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
             }
 
+            if (_hariName == "Jumat")
+            {
+                Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
+                {
+                    { "Jam Ke - 1.mp3", Jam1Text },
+                    { "Jam Ke - 2.mp3", Jam2Text },
+                    { "Jam Ke - 3.mp3", Jam3Text },
+                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
+                    { "Jam Ke - 4.mp3", Jam4Text },
+                    { "Jam Ke - 5.mp3", Jam5Text },
+                    { "Jam Ke - 6.mp3", Jam6Text },
+                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
+                    { "Jam Ke - 7.mp3", Jam7Text },
+                    { "Jam Ke - 8.mp3", Jam8Text },
+                    { "Akhir Pekan.mp3", JamKepulanganText }
+                };
+                foreach (var item in sound)
+                {
+                    soundMappings.Add(item.Key, item.Value);
+                }
+            }
 
+            else
+            {
                 Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
                 {
                     { "Jam Ke - 1.mp3", Jam1Text },
@@ -100,6 +127,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 {
                     soundMappings.Add(item.Key, item.Value);
                 }
+            }
 
 
             if (Directory.Exists(soundFolder))
@@ -364,6 +392,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             SimpanButton.Click += SimpanButton_Click;
 
             this.FormClosed += InputDataForm_FormClosed;
+            TanggalPicker.ValueChanged += TanggalPicker_ValueChanged;
+        }
+
+        private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
+        {
+            _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+            DefaultSound();
+            _hariID = _jadwalDal.GetIdByHari(_hariName);
         }
 
         private void InputDataForm_FormClosed(object? sender, FormClosedEventArgs e)

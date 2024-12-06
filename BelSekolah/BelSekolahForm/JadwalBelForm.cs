@@ -290,10 +290,7 @@ namespace BelSekolah.BelSekolahForm
 
             TambahKhususButton.Click += TambahKhususButton_Click;
             TambahNormalButton.Click += TambahNormalButton_Click;
-/*
-            JadwalNormalGrid.CellMouseClick += JadwalNormalGrid_CellMouseClick;
-            JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
-            */
+
             JadwalNormalRadio.CheckedChanged += JadwalRadio_CheckedChanged;
             JadwalKhususRadio.CheckedChanged += JadwalRadio_CheckedChanged;
 
@@ -483,30 +480,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-
-   /*     private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                _gridAktif = GridAktif.JadwalKhusus;
-
-                JadwalKhususGrid.ClearSelection();
-                JadwalKhususGrid.CurrentCell = JadwalKhususGrid[e.ColumnIndex, e.RowIndex];
-                contextMenuStrip2.Show(Cursor.Position);
-            }
-        }
-
-        private void JadwalNormalGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                _gridAktif = GridAktif.JadwalNormal;
-
-                JadwalNormalGrid.ClearSelection();
-                JadwalNormalGrid.CurrentCell = JadwalNormalGrid[e.ColumnIndex, e.RowIndex];
-                contextMenuStrip2.Show(Cursor.Position);
-            }
-        }*/
 
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {

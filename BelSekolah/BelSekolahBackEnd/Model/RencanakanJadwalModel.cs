@@ -10,6 +10,7 @@ namespace BelSekolah.BelSekolahBackEnd.Model
     {
         public int RencanakanJadwalID { get; set; }
         public int HariID { get; set; }
+        public string Hari { get; set; }
         public string Tanggal { get; set; }
         public string Keterangan { get; set; }
     }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,6 +98,17 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
 
             return jadwalList;
+        }
+
+        public int GetIdByHari(string hari)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+                const string sql = @"SELECT HariID From JadwalHari WHERE Hari = @Hari";
+
+                return Conn.QueryFirstOrDefault<int>(sql);
+            }
         }
        
     }
