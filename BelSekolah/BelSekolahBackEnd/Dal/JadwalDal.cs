@@ -107,7 +107,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 Conn.Open();
                 const string sql = @"SELECT HariID From JadwalHari WHERE Hari = @Hari";
 
-                return Conn.QueryFirstOrDefault<int>(sql);
+                return Conn.QueryFirstOrDefault<int>(sql, new { Hari = hari});
             }
         }
        

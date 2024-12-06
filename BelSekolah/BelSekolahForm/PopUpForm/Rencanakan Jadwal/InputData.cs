@@ -22,10 +22,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
     {
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
+
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
         private readonly RencanakanJadwalDal _rencanakanJadwalDal;
         private readonly JadwalDal _jadwalDal;
+
         private int _hariID;
         private int _rencanakanJadwalID;
         private string _jenisJadwal;
@@ -52,6 +54,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jenisJadwal = JenisJadwal;
             _status = Status;
             _isUjian = Ujian;
+            _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
 
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
@@ -247,10 +250,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     }
                 }
             }
-
-
-
-
         }
 
 
@@ -620,36 +619,29 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     textBox.Text = SoundName;
                 }
                 SelectAndReplace(SoundPath);
-                MessageBox.Show(SoundPath);
             }
         }
 
         private void SelectAndReplace(string SoundPath)
         {
+            string tujuanFolder;
+            string tujuanPath;
+
             if (_isUjian)
-            {
-                string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
-
-                if (!Directory.Exists(tujuanFolder))
-                {
-                    Directory.CreateDirectory(tujuanFolder);
-                }
-                string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
-                File.Copy(SoundPath, tujuanPath, true);
-            }
+                tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
             else
-            {
-                string tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+                tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
 
-                if (!Directory.Exists(tujuanFolder))
-                {
-                    Directory.CreateDirectory(tujuanFolder);
-                }
-                string tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
-                File.Copy(SoundPath, tujuanPath, true);
-            }
-            
+            if (!Directory.Exists(tujuanFolder))
+                Directory.CreateDirectory(tujuanFolder);
+
+            tujuanPath = Path.Combine(tujuanFolder, Path.GetFileName(SoundPath));
+
+            if (!File.Exists(tujuanPath))
+                File.Copy(SoundPath, tujuanPath);
         }
+
+    }
 
 
         public class JadwalPutarDto
@@ -662,4 +654,3 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             public string SoundPath { get; set; }
         }
     }
-}

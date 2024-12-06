@@ -33,7 +33,8 @@ namespace BelSekolah.BelSekolahDatabase
                             SELECT 'Rabu' UNION ALL
                             SELECT 'Kamis' UNION ALL
                             SELECT 'Jumat' UNION ALL
-                            SELECT 'Sabtu'
+                            SELECT 'Sabtu' UNION ALL
+                            SELECT 'Minggu' 
                         )
                         INSERT INTO JadwalHari (JenisJadwal, Hari)
                         SELECT 'Jadwal Normal', AllDays.Hari
