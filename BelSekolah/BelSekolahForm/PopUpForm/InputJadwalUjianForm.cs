@@ -101,6 +101,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             if (e.RowIndex >= 0)
             {
+                StopAudio();
                 _jadwalID = Convert.ToInt32(JadwalUjianGrid.Rows[e.RowIndex]?.Cells["JadwalKhususID"]?.Value);
                 var data = _jadwalKhususDal.GetData(_jadwalID);
                 if (data == null) return;

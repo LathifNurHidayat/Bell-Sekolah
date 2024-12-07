@@ -168,7 +168,7 @@
             // 
             JadwalUjianGrid.BackgroundColor = Color.White;
             JadwalUjianGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            JadwalUjianGrid.GridColor = Color.White;
+            JadwalUjianGrid.GridColor = Color.Black;
             JadwalUjianGrid.Location = new Point(13, 295);
             JadwalUjianGrid.Name = "JadwalUjianGrid";
             JadwalUjianGrid.RowHeadersWidth = 51;

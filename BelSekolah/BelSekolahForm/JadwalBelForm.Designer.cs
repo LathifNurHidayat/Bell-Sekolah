@@ -55,6 +55,8 @@
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalNormalGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
@@ -62,6 +64,7 @@
             contextMenuStrip2.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // MainPanel
@@ -385,6 +388,21 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(133, 32);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            deleteToolStripMenuItem.Image = Properties.Resources.delete;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(132, 28);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
             // JadwalBelForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -405,6 +423,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -436,5 +455,7 @@
         private DataGridView JadwalKhususGrid;
         private RadioButton JadwalNormalRadio;
         private Button JadwalkanButton;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

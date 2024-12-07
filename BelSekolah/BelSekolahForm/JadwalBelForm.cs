@@ -308,16 +308,35 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalKhususToolStripMenuItem.Click += JadwalKhususToolStripMenuItem_Click;
             JadwalUjianToolStripMenuItem1.Click += JadwalUjianToolStripMenuItem1_Click;
+            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
 
+            JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
             JadwalkanButton.Click += JadwalkanButton_Click;
+        }
+
+        private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            int jadwalID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
+            if (MessageBox.Show("Anda yakin ingin menghapus data ?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                _jadwalKhususDal.DeleteOneRow(jadwalID); LoadJadwalDetil(_hariID);
+        }
+
+        private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                JadwalKhususGrid.ClearSelection();
+                JadwalKhususGrid.CurrentCell = JadwalKhususGrid[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip1.Show(Cursor.Position);
+            }
         }
 
         private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                e.Cancel = true;
+                e.Cancel = true; 
             else
-                Application.Exit();
+                this.mainForm.Close();
         }
 
         private void JadwalkanButton_Click(object? sender, EventArgs e)
@@ -536,6 +555,5 @@ namespace BelSekolah.BelSekolahForm
             public TimeSpan Waktu { get; set; }
             public string SoundPath { get; set; }
         }
-
     }
 }

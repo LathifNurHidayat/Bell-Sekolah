@@ -103,6 +103,18 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
+        public void DeleteOneRow(int jadwalID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"DELETE FROM JadwalKhusus WHERE JadwalKhususID = @JadwalKhususID";
+
+                Conn.Execute(sql, new { JadwalKhususID = jadwalID });
+            }
+        }
+
         public JadwalKhususModel? GetData(int JadwalKhususId)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))

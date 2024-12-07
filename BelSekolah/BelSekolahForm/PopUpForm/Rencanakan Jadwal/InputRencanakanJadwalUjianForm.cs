@@ -25,8 +25,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private bool _isPlaying = false;
         private readonly JadwalKhususDal _jadwalKhususDal;
         private int _hariId = 0;
+        private int _jadwalID = 0;
 
-        public InputRencanakanJadwalUjianForm(int HariId)
+        public InputRencanakanJadwalUjianForm()
         {
             InitializeComponent();
             _jadwalKhususDal = new JadwalKhususDal();
@@ -34,7 +35,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            _hariId = HariId;
+         //   _hariId = HariId;
             RegisterControlEvent();
 
             PausePlayButton.Text = "▶";
@@ -75,7 +76,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }).ToList();
 
             JadwalUjianGrid.DataSource = data;
-            JadwalUjianGrid.Columns["JadwalKhusuID"].Visible = false;
+            JadwalUjianGrid.Columns["JadwalKhususID"].Visible = false;
         }
 
         private void RegisterControlEvent()
@@ -85,8 +86,24 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             SaveButton.Click += SaveButton_Click;
             this.FormClosed += InputJadwalForm_FormClosed;
             NewButton.Click += NewButton_Click;
+            JadwalUjianGrid.RowEnter += JadwalUjianGrid_RowEnter;
         }
 
+        private void JadwalUjianGrid_RowEnter(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                StopAudio();
+                _jadwalID = Convert.ToInt32(JadwalUjianGrid.Rows[e.RowIndex]?.Cells["JadwalKhususID"]?.Value);
+                var data = _jadwalKhususDal.GetData(_jadwalID);
+                if (data == null) return;
+
+                WaktuPicker.Value = DateTime.Parse(data.Waktu);
+                KeteranganText.Text = data.Keterangan;
+                SoundFileText.Text = data.SoundName;
+            }
+        }
+                           
         private void NewButton_Click(object? sender, EventArgs e)
         {
             ClearForm();
@@ -95,6 +112,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void InputJadwalForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
             StopAudio();
+            this.DialogResult = DialogResult.OK;
         }
 
         private void SaveButton_Click(object? sender, EventArgs e)
@@ -111,7 +129,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void PausePlayButton_Click(object? sender, EventArgs e)
         {
-            string soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound");
+            string soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
             if (!Directory.Exists(soundFolder))
             {
                 MessageBox.Show("Folder suara tidak ditemukan!");
@@ -233,7 +251,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     IsUjian = 1
                 };
                   _jadwalKhususDal.Insert(jadwalKhusus);
-            
         }
     }
 }
