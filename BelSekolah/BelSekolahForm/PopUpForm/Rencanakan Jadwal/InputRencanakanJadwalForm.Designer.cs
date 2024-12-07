@@ -1,6 +1,6 @@
 ﻿namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    partial class InputDataForm
+    partial class InputRencanakanJadwalForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputDataForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputRencanakanJadwalForm));
             panel2 = new Panel();
             SimpanButton = new Button();
             label29 = new Label();
@@ -119,9 +119,14 @@
             label28 = new Label();
             label2 = new Label();
             UbahButton = new Button();
-            HariText = new Label();
+            panel1 = new Panel();
+            label1 = new Label();
+            TanggalPicker = new DateTimePicker();
+            KeteranganText = new TextBox();
+            label3 = new Label();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
@@ -215,9 +220,9 @@
             panel2.Controls.Add(Jam0Picker);
             panel2.Controls.Add(Jam0Label);
             panel2.Controls.Add(panel3);
-            panel2.Location = new Point(12, 81);
+            panel2.Location = new Point(12, 95);
             panel2.Name = "panel2";
-            panel2.Size = new Size(656, 629);
+            panel2.Size = new Size(656, 627);
             panel2.TabIndex = 1;
             // 
             // SimpanButton
@@ -1308,33 +1313,80 @@
             UbahButton.Text = "Ubah";
             UbahButton.UseVisualStyleBackColor = false;
             // 
-            // HariText
+            // panel1
             // 
-            HariText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            HariText.BackColor = Color.LightGray;
-            HariText.BorderStyle = BorderStyle.FixedSingle;
-            HariText.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            HariText.Location = new Point(12, 13);
-            HariText.Name = "HariText";
-            HariText.Size = new Size(655, 56);
-            HariText.TabIndex = 86;
-            HariText.Text = "Senin - Jadwal Normal";
-            HariText.TextAlign = ContentAlignment.MiddleCenter;
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BackColor = Color.Gainsboro;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(TanggalPicker);
+            panel1.Controls.Add(KeteranganText);
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(655, 78);
+            panel1.TabIndex = 160;
             // 
-            // InputDataForm
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(11, 10);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 23);
+            label1.TabIndex = 169;
+            label1.Text = "Tanggal";
+            // 
+            // TanggalPicker
+            // 
+            TanggalPicker.CustomFormat = "dddd, dd-MM-yyyy";
+            TanggalPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TanggalPicker.Format = DateTimePickerFormat.Custom;
+            TanggalPicker.Location = new Point(11, 36);
+            TanggalPicker.Name = "TanggalPicker";
+            TanggalPicker.Size = new Size(273, 30);
+            TanggalPicker.TabIndex = 160;
+            // 
+            // KeteranganText
+            // 
+            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
+            KeteranganText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            KeteranganText.Location = new Point(313, 36);
+            KeteranganText.MaxLength = 30;
+            KeteranganText.Name = "KeteranganText";
+            KeteranganText.Size = new Size(325, 30);
+            KeteranganText.TabIndex = 168;
+            KeteranganText.TabStop = false;
+            KeteranganText.Tag = "";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(313, 10);
+            label3.Name = "label3";
+            label3.Size = new Size(179, 23);
+            label3.TabIndex = 170;
+            label3.Text = "Keterangan (Optional)";
+            // 
+            // InputData
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(680, 722);
-            Controls.Add(HariText);
+            ClientSize = new Size(680, 734);
+            Controls.Add(panel1);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "InputDataForm";
+            Name = "InputData";
             StartPosition = FormStartPosition.CenterParent;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1350,7 +1402,6 @@
         private Label label2;
         private Button UbahButton;
         private Panel panel3;
-        private Label HariText;
         private Button BrowseJam10Button;
         private Button PlayJam10Button;
         private TextBox Jam10Text;
@@ -1431,5 +1482,10 @@
         private TextBox JamKepulanganText;
         private DateTimePicker JamKepulanganPicker;
         private Label JamKepulanganLabel;
+        private Panel panel1;
+        private DateTimePicker TanggalPicker;
+        private TextBox KeteranganText;
+        private Label label1;
+        private Label label3;
     }
 }

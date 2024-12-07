@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    public partial class InputDataForm : Form
+    public partial class InputJadwalKhusus : Form
     {
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
@@ -34,7 +34,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputDataForm(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
+        public InputJadwalKhusus(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
             InitializeComponent();
 

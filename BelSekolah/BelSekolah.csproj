@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BelSekolahForm\PopUpForm\Rencanakan Jadwal\InputData.cs">
+    <Compile Update="BelSekolahForm\PopUpForm\Rencanakan Jadwal\InputRencanakanJadwalForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

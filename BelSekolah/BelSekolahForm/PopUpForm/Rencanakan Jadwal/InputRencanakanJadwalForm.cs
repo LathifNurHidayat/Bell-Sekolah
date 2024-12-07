@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    public partial class InputData : Form
+    public partial class InputRencanakanJadwalForm : Form
     {
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
@@ -41,7 +41,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputData (int RencanakanJadwalID, int HariID, string JenisJadwal, string Status, bool Ujian)
+        public InputRencanakanJadwalForm (int RencanakanJadwalID, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
             InitializeComponent();
 
@@ -611,14 +611,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string SoundPath = openFileDialog.FileName;
-                string SoundName = Path.GetFileName(SoundPath);
+                 string SoundName = Path.GetFileName(SoundPath);
 
             TextBox textBox = (TextBox)panel2.Controls.OfType<TextBox>().FirstOrDefault(x => x.Tag?.ToString() == button.Tag?.ToString());
                 if (textBox != null)
-                {
+                { 
                     textBox.Text = SoundName;
                 }
-                SelectAndReplace(SoundPath);
+                SelectAndReplace(SoundPath); 
             }
         }
 
@@ -641,8 +641,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 File.Copy(SoundPath, tujuanPath);
         }
 
-    }
-
 
         public class JadwalPutarDto
         {
@@ -653,4 +651,5 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             public string SoundName { get; set; }
             public string SoundPath { get; set; }
         }
-    }
+    }       
+}

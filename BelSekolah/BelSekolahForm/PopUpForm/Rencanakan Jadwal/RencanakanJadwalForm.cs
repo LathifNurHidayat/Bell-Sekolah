@@ -93,14 +93,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
-            InputData input = new InputData(0, 0, "Jadwal Khusus", "Tambah", true);
+            InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(0, 0, "Jadwal Khusus", "Tambah", true);
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();
         }
 
         private void JadwalPelajaranToolStripMenuItem_Click(object? sender, EventArgs e)
         {
-            InputData input = new InputData(0, 0, "Jadwal Khusus", "Tambah", false);
+            InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(0, 0, "Jadwal Khusus", "Tambah", false);
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();
         }

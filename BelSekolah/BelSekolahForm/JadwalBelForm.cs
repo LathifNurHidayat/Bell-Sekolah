@@ -315,7 +315,6 @@ namespace BelSekolah.BelSekolahForm
                 e.Cancel = true;
             else
                 Application.Exit();
-
         }
 
         private void JadwalkanButton_Click(object? sender, EventArgs e)
@@ -326,16 +325,16 @@ namespace BelSekolah.BelSekolahForm
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
-            string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+        /*    string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
             InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, true);
             if (inputDataForm.ShowDialog() == DialogResult.OK)
-                LoadJadwalDetil(_hariID);
+                LoadJadwalDetil(_hariID);*/
         }
 
         private void JadwalKhususToolStripMenuItem_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+            InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
             if (inputDataForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
@@ -484,7 +483,7 @@ namespace BelSekolah.BelSekolahForm
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text, false);
+            InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text, false);
             if (inputDataForm.ShowDialog() == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
@@ -494,7 +493,7 @@ namespace BelSekolah.BelSekolahForm
             if (TambahKhususButton.Text == "Edit")
             {
                 string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-                InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+                InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
                 if (inputDataForm.ShowDialog() == DialogResult.OK)
                     LoadJadwalDetil(_hariID);
             }

@@ -53,7 +53,7 @@
             RencanakanJadwalGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             RencanakanJadwalGrid.BackgroundColor = SystemColors.Control;
             RencanakanJadwalGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            RencanakanJadwalGrid.Location = new Point(12, 72);
+            RencanakanJadwalGrid.Location = new Point(14, 72);
             RencanakanJadwalGrid.MultiSelect = false;
             RencanakanJadwalGrid.Name = "RencanakanJadwalGrid";
             RencanakanJadwalGrid.ReadOnly = true;
