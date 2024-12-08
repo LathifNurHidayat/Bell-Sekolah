@@ -14,5 +14,7 @@ namespace BelSekolah.BelSekolahBackEnd.Model
         public string Keterangan { get; set; }
         public string SoundName { get; set; }
         public string SoundPath { get; set; }
+        public int IsUjian { get; set; }
+        public int RencanakanJadwalID { get; set; }
     }
 }

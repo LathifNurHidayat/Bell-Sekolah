@@ -252,8 +252,11 @@ namespace BelSekolah.BelSekolahForm
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
             JadwalKhususGrid.Columns["HariID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
+          //  JadwalKhususGrid.Columns["IsUjian"].Visible = false;
+            JadwalKhususGrid.Columns["RencanakanJadwalID"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
 
             if (JadwalNormalGrid.RowCount < 1)
             {
@@ -325,17 +328,23 @@ namespace BelSekolah.BelSekolahForm
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
-        /*    string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, true);
-            if (inputDataForm.ShowDialog() == DialogResult.OK)
-                LoadJadwalDetil(_hariID);*/
+            /*    string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+                InputDataForm inputDataForm = new InputDataForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, true);
+                if (inputDataForm.ShowDialog() == DialogResult.OK)
+                    LoadJadwalDetil(_hariID);*/
+
+            InputJadwalUjianForm inputUjianForm = new InputJadwalUjianForm(_hariID);
+            if (inputUjianForm.ShowDialog(this) == DialogResult.OK)
+            {
+                LoadJadwalDetil(_hariID);
+            }
         }
 
         private void JadwalKhususToolStripMenuItem_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
-            if (inputDataForm.ShowDialog() == DialogResult.OK)
+            InputJadwalForm inputDataForm = new InputJadwalForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+            if (inputDataForm.ShowDialog(this) == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
 
@@ -483,8 +492,8 @@ namespace BelSekolah.BelSekolahForm
         private void TambahNormalButton_Click(object? sender, EventArgs e)
         {
             string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-            InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text, false);
-            if (inputDataForm.ShowDialog() == DialogResult.OK)
+            InputJadwalForm inputDataForm = new InputJadwalForm(hari, _hariID, "Jadwal Normal", TambahNormalButton.Text, false);
+            if (inputDataForm.ShowDialog(this) == DialogResult.OK)
                 LoadJadwalDetil(_hariID);
         }
 
@@ -492,10 +501,23 @@ namespace BelSekolah.BelSekolahForm
         {
             if (TambahKhususButton.Text == "Edit")
             {
-                string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
-                InputJadwalKhusus inputDataForm = new InputJadwalKhusus(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
-                if (inputDataForm.ShowDialog() == DialogResult.OK)
-                    LoadJadwalDetil(_hariID);
+                bool isUjian = Convert.ToInt32(JadwalKhususGrid.Rows[0].Cells["IsUjian"]?.Value) == 1 ? true : false;
+
+                if (isUjian)
+                {
+                    InputJadwalUjianForm inputJadwalUjianForm = new InputJadwalUjianForm(_hariID);
+                    if (inputJadwalUjianForm.ShowDialog(this) == DialogResult.OK)
+                    {
+                        LoadJadwalDetil(_hariID);
+                    }
+                }
+                else
+                {
+                    string hari = ((JadwalModel)HariCombo.SelectedItem).Hari.ToString();
+                    InputJadwalForm inputDataForm = new InputJadwalForm(hari, _hariID, "Jadwal Khusus", TambahKhususButton.Text, false);
+                    if (inputDataForm.ShowDialog(this) == DialogResult.OK)
+                        LoadJadwalDetil(_hariID);
+                }
             }
             else
             {

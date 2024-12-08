@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    public partial class InputJadwalKhusus : Form
+    public partial class InputJadwalForm : Form
     {
         private IWavePlayer waveOutDevice;
         private AudioFileReader audioFileReader;
@@ -34,7 +34,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputJadwalKhusus(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
+        public InputJadwalForm(string Hari, int HariID, string JenisJadwal, string Status, bool Ujian)
         {
             InitializeComponent();
 
@@ -609,7 +609,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 {
                     textBox.Text = SoundName;
                 }
-                SelectAndReplace(SoundPath);
+                SelectAndReplace(SoundPath); 
             }
         }
 

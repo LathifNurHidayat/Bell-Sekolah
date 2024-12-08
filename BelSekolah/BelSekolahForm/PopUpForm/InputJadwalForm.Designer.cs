@@ -1,6 +1,6 @@
 ﻿namespace BelSekolah.BelSekolahForm.PopUpForm
 {
-    partial class InputJadwalKhusus
+    partial class InputJadwalForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalKhusus));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalForm));
             panel2 = new Panel();
             SimpanButton = new Button();
             label29 = new Label();

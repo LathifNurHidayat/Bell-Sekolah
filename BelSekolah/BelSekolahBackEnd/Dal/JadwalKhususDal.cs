@@ -21,9 +21,9 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                                 INSERT INTO JadwalKhusus
-                                    (HariID, Waktu, Keterangan, SoundName, SoundPath)
+                                    (HariID, Waktu, Keterangan, SoundName, SoundPath, IsUjian, RencanakanJadwalID)
                                 VALUES
-                                    (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath)";
+                                    (@HariID, @Waktu, @Keterangan, @SoundName, @SoundPath, @IsUjian, @RencanakanJadwalID)";
 
                 using (var cmd = new SQLiteCommand(sql, Conn))
                 {
@@ -32,6 +32,8 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                     cmd.Parameters.AddWithValue("@Keterangan", model.Keterangan);
                     cmd.Parameters.AddWithValue("@SoundName", model.SoundName);
                     cmd.Parameters.AddWithValue("@SoundPath", model.SoundPath);
+                    cmd.Parameters.AddWithValue("@IsUjian", model.IsUjian);
+                    cmd.Parameters.AddWithValue("@RencanakanJadwalID", model.RencanakanJadwalID);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -77,7 +79,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = $@"
                             SELECT 
-                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath, IsUjian
                             FROM 
                                 JadwalKhusus
                             WHERE 
@@ -101,7 +103,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public JadwalKhususModel? GetData(int JadwalID)
+        public JadwalKhususModel? GetData(int JadwalKhususId)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -113,9 +115,9 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             FROM 
                                 JadwalKhusus
                             WHERE  
-                                JadwalKhususID = @JadwalKhususID";
+                                IsUjian = 1 AND JadwalKhususID = @JadwalKhususID";
 
-                return Conn.Query<JadwalKhususModel>(sql, new { JadwalKhususID = JadwalID }).FirstOrDefault();
+                return Conn.Query<JadwalKhususModel>(sql, new { JadwalKhususID = JadwalKhususId}).FirstOrDefault();
             }
         }
     }

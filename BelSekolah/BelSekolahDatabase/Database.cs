@@ -9,10 +9,9 @@ using NAudio.Wave;
 using BelSekolah.BelSekolahDatabase.Helper;
 
 namespace BelSekolah.BelSekolahDatabase
-{
+{ 
     public class Database
     {
-
         public void CreateTable()
         {
             using (SQLiteConnection connection = new SQLiteConnection(ConnStringHelper.GetConn()))
@@ -50,6 +49,7 @@ namespace BelSekolah.BelSekolahDatabase
                         Keterangan TEXT,
                         SoundName TEXT,
                         SoundPath TEXT,
+                        IsUjian INTEGER,
                         RencanakanJadwalID INTEGER,
 
                         FOREIGN KEY (HariID) REFERENCES JadwalHari(HariID) ON DELETE CASCADE,
