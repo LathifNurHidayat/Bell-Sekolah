@@ -13,5 +13,6 @@ namespace BelSekolah.BelSekolahBackEnd.Model
         public string Hari { get; set; }
         public string Tanggal { get; set; }
         public string Keterangan { get; set; }
+        public int IsUjian { get; set; }
     }
 }

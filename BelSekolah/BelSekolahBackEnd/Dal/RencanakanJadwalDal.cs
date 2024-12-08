@@ -20,7 +20,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             SELECT 
-                                aa.RencanakanJadwalID, aa.HariID,  aa.Tanggal, aa.Keterangan, 
+                                aa.RencanakanJadwalID, aa.HariID,  aa.Tanggal, aa.Keterangan, aa.IsUjian,
                                 IFNULL(bb.Hari, ' ') AS Hari
                             FROM 
                                 RencanakanJadwal aa
@@ -40,14 +40,15 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = @"
                             INSERT INTO RencanakanJadwal
-                            (HariID, Tanggal, Keterangan)
+                            (HariID, Tanggal, Keterangan, IsUjian)
                             VALUES
-                            (@HariID, @Tanggal, @Keterangan)";
+                            (@HariID, @Tanggal, @Keterangan, @IsUjian)";
 
                 var Dp = new DynamicParameters();
                 Dp.Add("@HariID", model.HariID, System.Data.DbType.Int32);
                 Dp.Add("@Tanggal", model.Tanggal, System.Data.DbType.String);
                 Dp.Add("@Keterangan", model.Keterangan, System.Data.DbType.String);
+                Dp.Add("@IsUjian", model.IsUjian, System.Data.DbType.Int32);
 
                 Conn.Execute(sql,Dp);
             }
@@ -62,7 +63,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 const string sql = @"
                             UPDATE RencanakanJadwal
                             SET
-                            HariID = @HariID, Tanggal = @Tanggal, Keterangan = @Keterangan)
+                            HariID = @HariID, Tanggal = @Tanggal, Keterangan = @Keterangan
                             WHERE
                             RencanakanJadwalID = @RencanakanJadwalID";
 

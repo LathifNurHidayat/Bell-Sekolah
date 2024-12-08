@@ -32,7 +32,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private int _rencanakanJadwalID;
         private string _jenisJadwal;
         private string _status;
-        private bool _isUjian;
         private bool _isPlaying = false;
         private string _hariName;
 
@@ -41,7 +40,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputRencanakanJadwalForm (int RencanakanJadwalID, int HariID, string JenisJadwal, string Status, bool Ujian)
+        public InputRencanakanJadwalForm (int RencanakanJadwalID, string JenisJadwal, string Status)
         {
             InitializeComponent();
 
@@ -49,11 +48,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jadwalNormalDal = new JadwalNormalDal();
             _rencanakanJadwalDal = new RencanakanJadwalDal();
             _jadwalDal = new JadwalDal();
-            _hariID = HariID;
             _rencanakanJadwalID = RencanakanJadwalID;
             _jenisJadwal = JenisJadwal;
             _status = Status;
-            _isUjian = Ujian;
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
 
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
@@ -66,7 +63,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             RegisterControlEvent();
 
             if (_status == "Edit")
-                GetData();
+            { GetData(); MessageBox.Show("sdcsdc"); }
             else
                 DefaultSound();
 
@@ -77,14 +74,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             Dictionary<string, TextBox> soundMappings = new Dictionary<string, TextBox>();
             string soundFolder = string.Empty;
 
-            if (_isUjian)
-            {
-                soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
-            }
-            else
-            {
-                soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
-            }
+            soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
 
             if (_hariName == "Jumat")
             {
@@ -209,49 +199,39 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam10Label, JamKepulanganLabel
             };
 
+            var perencanaan = _rencanakanJadwalDal.ListData().Select(x => new { x.Tanggal, x.Keterangan });
+            foreach(var item in perencanaan)
+            {
+                TanggalPicker.Value = DateTime.Parse(item.Tanggal);
+                KeteranganText.Text = item.Keterangan;
+            }
+
             List<JadwalPutarDto> data = new List<JadwalPutarDto>();
 
-            if (_jenisJadwal == "Jadwal Khusus")
+            data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalPutarDto
             {
-                data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalPutarDto
-                {
-                    HariID = x.HariID,
-                    JadwalID = x.JadwalKhususID,
-                    Keterangan = x.Keterangan,
-                    Waktu = x.Waktu ?? "",
-                    SoundName = x.SoundName ?? "",
-                    SoundPath = x.SoundPath ?? ""
-                }).ToList();
-
-            }
-            else if (_jenisJadwal == "Jadwal Normal")
-            {
-                data = _jadwalNormalDal.ListData(_hariID).Select(x => new JadwalPutarDto
-                {
-                    HariID = x.HariID,
-                    JadwalID = x.JadwalNormalID,
-                    Keterangan = x.Keterangan,
-                    Waktu = x.Waktu ?? "",
-                    SoundName = x.SoundName ?? "",
-                    SoundPath = x.SoundPath ?? ""
-                }).ToList();
-
-            }
+                HariID = x.HariID,
+                JadwalID = x.JadwalKhususID,
+                Keterangan = x.Keterangan,
+                Waktu = x.Waktu ?? "",
+                SoundName = x.SoundName ?? "",
+                SoundPath = x.SoundPath ?? ""
+            }).ToList();
 
             foreach (var item in data)
             {
-                for (int i = 0; i <= labelControls.Count; i++)
+                for (int i = 0; i < labelControls.Count; i++)
                 {
                     if (labelControls[i].Text == item.Keterangan)
                     {
                         _datePickerControls[i].Value = DateTime.TryParse(item.Waktu, out DateTime waktu) ? waktu : DateTime.Today;
                         _textBoxControls[i].Text = item.SoundName;
-                        break; 
+                        break;
                     }
                 }
             }
-        }
 
+        }
 
         private void SaveData()
         {   
@@ -294,8 +274,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     });
                 }
             }
-
-
+ 
           if (_status == "Tambah")
             {
                 if (_jenisJadwal == "Jadwal Khusus")
@@ -304,7 +283,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     {
                         HariID = _hariID,
                         Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
-                        Keterangan = KeteranganText.Text
+                        Keterangan = KeteranganText.Text,
+                        IsUjian = 0
                     };
                     _rencanakanJadwalDal.Insert(data);
 
@@ -521,10 +501,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 string FileName = textbox.Text;
                 string FilePath = string.Empty;
 
-                if (_isUjian)
-                    FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian",  FileName);
-                else
-                    FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", FileName);
+            FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", FileName);
 
                 if (File.Exists(FilePath))
                 {
@@ -602,10 +579,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound File (*.mp3)|*.mp3";
 
-            if (_isUjian)
-                openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
-            else
-                openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+            openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
 
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -627,10 +601,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             string tujuanFolder;
             string tujuanPath;
 
-            if (_isUjian)
-                tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
-            else
-                tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
+          
+            tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
 
             if (!Directory.Exists(tujuanFolder))
                 Directory.CreateDirectory(tujuanFolder);

@@ -91,6 +91,26 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
+        public IEnumerable<JadwalKhususModel> ListDataForRencanakan(int rencanakanID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = $@"
+                            SELECT 
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath, IsUjian
+                            FROM 
+                                JadwalKhusus
+                            WHERE 
+                                RencanakanJadwalID = @RencanakanJadwalID
+                            ORDER BY 
+                                Waktu ASC";
+
+                return Conn.Query<JadwalKhususModel>(sql, new { RencanakanJadwalID = rencanakanID });
+            }
+        }
+
         public void Delete(int hariID)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))

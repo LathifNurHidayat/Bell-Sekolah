@@ -73,7 +73,8 @@ namespace BelSekolah.BelSekolahDatabase
                         RencanakanJadwalID INTEGER PRIMARY KEY AUTOINCREMENT,
                         HariID INTEGER,
                         Tanggal TEXT,
-                        Keterangan TEXT
+                        Keterangan TEXT,
+                        IsUjian INTEGER
                     )";
 
                 ExecuteNonQuery(createTableJadwalHari, connection);
@@ -93,5 +94,3 @@ namespace BelSekolah.BelSekolahDatabase
         }
     }
 }
-
-

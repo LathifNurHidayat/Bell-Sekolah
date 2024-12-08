@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.PeerToPeer.Collaboration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -66,6 +67,19 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void EditToolStripMenuItem_Click(object? sender, EventArgs e)
         {
+            int IsUjian = Convert.ToInt32(RencanakanJadwalGrid.CurrentRow.Cells["IsUjian"].Value);
+            int perencanaanID = Convert.ToInt32(RencanakanJadwalGrid.CurrentRow.Cells["RencanakanJadwalID"].Value);
+
+            if (IsUjian == 1)
+            {
+                InputRencanakanJadwalUjianForm input = new InputRencanakanJadwalUjianForm(perencanaanID);
+                if (input.ShowDialog(this) == DialogResult.OK) LoadData();
+            }
+            else
+            {
+                InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(perencanaanID, "Jadwal Khusus", "Edit");
+                if (input.ShowDialog(this) == DialogResult.OK) LoadData();
+            }
           /*  InputData input = new InputData(0, 0, "Jadwal Khusus", "Edit", true);
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();*/
@@ -93,14 +107,15 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
-            InputRencanakanJadwalUjianForm input = new InputRencanakanJadwalUjianForm();
+
+            InputRencanakanJadwalUjianForm input = new InputRencanakanJadwalUjianForm(0);
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();
         }
 
         private void JadwalPelajaranToolStripMenuItem_Click(object? sender, EventArgs e)
         {
-            InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(0, 0, "Jadwal Khusus", "Tambah", false);
+            InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(0, "Jadwal Khusus", "Tambah");
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();
         }
