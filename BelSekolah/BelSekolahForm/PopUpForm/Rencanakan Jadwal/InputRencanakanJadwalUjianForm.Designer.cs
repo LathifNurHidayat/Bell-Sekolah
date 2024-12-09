@@ -36,17 +36,17 @@
             SoundFileText = new TextBox();
             label3 = new Label();
             label1 = new Label();
-            KeteranganText = new TextBox();
+            KeteranganJadwalText = new TextBox();
             panel1 = new Panel();
-            WaktuPicker = new DateTimePicker();
+            NewButton = new Button();
             JadwalUjianGrid = new DataGridView();
             label2 = new Label();
-            NewButton = new Button();
+            WaktuPicker = new DateTimePicker();
             panel2 = new Panel();
             label5 = new Label();
             label6 = new Label();
             TanggalPicker = new DateTimePicker();
-            textBox1 = new TextBox();
+            KeteranganText = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).BeginInit();
             panel2.SuspendLayout();
@@ -114,9 +114,9 @@
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(140, 27);
             label3.Name = "label3";
-            label3.Size = new Size(112, 23);
+            label3.Size = new Size(153, 23);
             label3.TabIndex = 82;
-            label3.Text = "Jadwal Mapel";
+            label3.Text = "Keterangan Jadwal";
             // 
             // label1
             // 
@@ -128,15 +128,15 @@
             label1.TabIndex = 79;
             label1.Text = "Waktu";
             // 
-            // KeteranganText
+            // KeteranganJadwalText
             // 
-            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
-            KeteranganText.Location = new Point(140, 50);
-            KeteranganText.MaxLength = 30;
-            KeteranganText.Multiline = true;
-            KeteranganText.Name = "KeteranganText";
-            KeteranganText.Size = new Size(342, 30);
-            KeteranganText.TabIndex = 0;
+            KeteranganJadwalText.BorderStyle = BorderStyle.FixedSingle;
+            KeteranganJadwalText.Location = new Point(140, 50);
+            KeteranganJadwalText.MaxLength = 30;
+            KeteranganJadwalText.Multiline = true;
+            KeteranganJadwalText.Name = "KeteranganJadwalText";
+            KeteranganJadwalText.Size = new Size(342, 30);
+            KeteranganJadwalText.TabIndex = 0;
             // 
             // panel1
             // 
@@ -148,7 +148,7 @@
             panel1.Controls.Add(SaveButton);
             panel1.Controls.Add(JadwalUjianGrid);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(KeteranganText);
+            panel1.Controls.Add(KeteranganJadwalText);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(WaktuPicker);
             panel1.Controls.Add(PausePlayButton);
@@ -159,15 +159,18 @@
             panel1.Size = new Size(494, 499);
             panel1.TabIndex = 80;
             // 
-            // WaktuPicker
+            // NewButton
             // 
-            WaktuPicker.CustomFormat = "HH:mm";
-            WaktuPicker.Format = DateTimePickerFormat.Custom;
-            WaktuPicker.Location = new Point(11, 53);
-            WaktuPicker.Name = "WaktuPicker";
-            WaktuPicker.ShowUpDown = true;
-            WaktuPicker.Size = new Size(111, 27);
-            WaktuPicker.TabIndex = 0;
+            NewButton.BackColor = Color.DarkGray;
+            NewButton.FlatAppearance.BorderColor = Color.Black;
+            NewButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            NewButton.ForeColor = Color.White;
+            NewButton.Location = new Point(246, 446);
+            NewButton.Name = "NewButton";
+            NewButton.Size = new Size(115, 38);
+            NewButton.TabIndex = 90;
+            NewButton.Text = "New";
+            NewButton.UseVisualStyleBackColor = false;
             // 
             // JadwalUjianGrid
             // 
@@ -191,18 +194,15 @@
             label2.TabIndex = 89;
             label2.Text = "Jadwal Ujian";
             // 
-            // NewButton
+            // WaktuPicker
             // 
-            NewButton.BackColor = Color.DarkGray;
-            NewButton.FlatAppearance.BorderColor = Color.Black;
-            NewButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            NewButton.ForeColor = Color.White;
-            NewButton.Location = new Point(246, 446);
-            NewButton.Name = "NewButton";
-            NewButton.Size = new Size(115, 38);
-            NewButton.TabIndex = 90;
-            NewButton.Text = "New";
-            NewButton.UseVisualStyleBackColor = false;
+            WaktuPicker.CustomFormat = "HH:mm";
+            WaktuPicker.Format = DateTimePickerFormat.Custom;
+            WaktuPicker.Location = new Point(11, 53);
+            WaktuPicker.Name = "WaktuPicker";
+            WaktuPicker.ShowUpDown = true;
+            WaktuPicker.Size = new Size(111, 27);
+            WaktuPicker.TabIndex = 0;
             // 
             // panel2
             // 
@@ -212,7 +212,7 @@
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(TanggalPicker);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(KeteranganText);
             panel2.Location = new Point(9, 14);
             panel2.Name = "panel2";
             panel2.Size = new Size(494, 83);
@@ -250,17 +250,17 @@
             TanggalPicker.Size = new Size(227, 30);
             TanggalPicker.TabIndex = 160;
             // 
-            // textBox1
+            // KeteranganText
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(255, 36);
-            textBox1.MaxLength = 30;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(227, 30);
-            textBox1.TabIndex = 168;
-            textBox1.TabStop = false;
-            textBox1.Tag = "";
+            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
+            KeteranganText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            KeteranganText.Location = new Point(255, 36);
+            KeteranganText.MaxLength = 30;
+            KeteranganText.Name = "KeteranganText";
+            KeteranganText.Size = new Size(227, 30);
+            KeteranganText.TabIndex = 168;
+            KeteranganText.TabStop = false;
+            KeteranganText.Tag = "";
             // 
             // InputRencanakanJadwalUjianForm
             // 
@@ -289,7 +289,7 @@
         private TextBox SoundFileText;
         private Label label3;
         private Label label1;
-        private TextBox KeteranganText;
+        private TextBox KeteranganJadwalText;
         private Panel panel1;
         private DateTimePicker WaktuPicker;
         private DataGridView JadwalUjianGrid;
@@ -299,6 +299,6 @@
         private Label label5;
         private Label label6;
         private DateTimePicker TanggalPicker;
-        private TextBox textBox1;
+        private TextBox KeteranganText;
     }
 }

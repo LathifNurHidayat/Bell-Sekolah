@@ -152,5 +152,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 return Conn.Query<JadwalKhususModel>(sql, new { JadwalKhususID = JadwalKhususId}).FirstOrDefault();
             }
         }
+
+   
     }
 }

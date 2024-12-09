@@ -32,7 +32,25 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public void Insert(RencanakanJadwalModel model)
+        public RencanakanJadwalModel? GetDataUjian(int rencanakanID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            SELECT 
+                                RencanakanJadwalID, Tanggal , Keterangan
+                            FROM
+                                RencanakanJadwal
+                            WHERE  
+                                RencanakanJadwalID = @RencanakanJadwalID";
+
+                return Conn.Query<RencanakanJadwalModel>(sql, new { RencanakanJadwalID = rencanakanID }).FirstOrDefault();
+            }
+        }
+
+        public int Insert(RencanakanJadwalModel model)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -51,6 +69,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 Dp.Add("@IsUjian", model.IsUjian, System.Data.DbType.Int32);
 
                 Conn.Execute(sql,Dp);
+                return (int)Conn.LastInsertRowId;
             }
         }
 

@@ -31,10 +31,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void LoadData() 
         {
-            var data = _rencanakanJadwalDal.ListData();
+            var data = _rencanakanJadwalDal.ListData()/*.Select(x => new {x.RencanakanJadwalID, x.Tanggal, x.Hari, x.Keterangan, x.IsUjian})*/;
             RencanakanJadwalGrid.DataSource = data;
 
-            RencanakanJadwalGrid.Columns["RencanakanJadwalID"].Visible = false;
+            //RencanakanJadwalGrid.Columns["RencanakanJadwalID"].Visible = false;
             CustomStyleGrid(RencanakanJadwalGrid);
         }
 

@@ -49,10 +49,23 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             RegisterControlEvent();
 
+            if(perencanaanID != 0)
+                GetData(perencanaanID);
+
             PausePlayButton.Text = "▶";
             LoadData();
             CustomStyleGrid(JadwalUjianGrid);
             ClearForm();
+
+            
+        }
+
+        private void GetData(int rencanakanJadwalID)
+        {
+            var data = _rencanakanJadwalDal.GetDataUjian(rencanakanJadwalID);
+
+            TanggalPicker.Value = DateTime.TryParse(data.Tanggal, out DateTime waktu) ? waktu : DateTime.Today;
+            KeteranganJadwalText.Text = data.Keterangan;
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -73,7 +86,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void ClearForm()
         {
             WaktuPicker.Value = DateTime.Today;
-            KeteranganText.Clear();
+            KeteranganJadwalText.Clear();
             SoundFileText.Clear();
             _jadwalID = 0;
         }
@@ -119,7 +132,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 if (data == null) return;
 
                 WaktuPicker.Value = DateTime.Parse(data.Waktu);
-                KeteranganText.Text = data.Keterangan;
+                KeteranganJadwalText.Text = data.Keterangan;
                 SoundFileText.Text = data.SoundName;
             }
         }
@@ -137,14 +150,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
           
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            if (KeteranganText.Text == "" || SoundFileText.Text == "" || WaktuPicker.Value == DateTime.Today)
+            if (KeteranganJadwalText.Text == "" || SoundFileText.Text == "" || WaktuPicker.Value == DateTime.Today)
             {
                 MessageBox.Show("Data Harus Lengkap", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             SaveData();
-            ClearForm();
             LoadData();
+            ClearForm();
         }
 
         private void PausePlayButton_Click(object? sender, EventArgs e)
@@ -266,25 +279,33 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 {
                     HariID = _hariId,
                     Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
-                    Keterangan = KeteranganText.Text,
+                    Keterangan = KeteranganJadwalText.Text,
                     IsUjian = 1
                 };
-                _rencanakanJadwalDal.Insert(data);
+                _rencanaJadwalID = _rencanakanJadwalDal.Insert(data);
             }
             var jadwalKhusus = new JadwalKhususModel
             {
                 HariID = _hariId,
                 Waktu = WaktuPicker.Value.ToString("HH:mm"),
-                Keterangan = KeteranganText.Text,
+                Keterangan = KeteranganJadwalText.Text,
                 SoundName = SoundFileText.Text,
                 SoundPath = filePath,
-                IsUjian = 1
+                IsUjian = 1,
+                RencanakanJadwalID = _rencanaJadwalID
             };
 
             if (_jadwalID == 0)
+            {
                 _jadwalKhususDal.Insert(jadwalKhusus);
+                MessageBox.Show("insert");
+            }
             else
+            {
                 _jadwalKhususDal.Update(jadwalKhusus);
+                MessageBox.Show("Update");
+            }
+                
         }
     }
 }

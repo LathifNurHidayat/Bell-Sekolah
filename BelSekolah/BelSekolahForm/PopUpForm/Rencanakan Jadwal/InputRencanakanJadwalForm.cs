@@ -286,7 +286,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                         Keterangan = KeteranganText.Text,
                         IsUjian = 0
                     };
-                    _rencanakanJadwalDal.Insert(data);
+                    _rencanakanJadwalID = _rencanakanJadwalDal.Insert(data);
 
 
                     foreach (var jadwal in jadwalData)
@@ -297,7 +297,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                             Keterangan = jadwal.Keterangan,
                             Waktu = jadwal.Waktu,
                             SoundName = jadwal.SoundName,
-                            SoundPath = jadwal.SoundPath
+                            SoundPath = jadwal.SoundPath,
+                            IsUjian = 0,
+                            RencanakanJadwalID = _rencanakanJadwalID
                         });
                     }
                 }
@@ -326,7 +328,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                             Keterangan = jadwal.Keterangan,
                             Waktu = jadwal.Waktu,
                             SoundName = jadwal.SoundName,
-                            SoundPath = jadwal.SoundPath
+                            SoundPath = jadwal.SoundPath,
+                            IsUjian =  0,
+                            RencanakanJadwalID = _rencanakanJadwalID
                         });
                     }
                 }
