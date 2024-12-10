@@ -57,6 +57,7 @@
             pictureBox1 = new PictureBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             deleteToolStripMenuItem = new ToolStripMenuItem();
+            timer1 = new System.Windows.Forms.Timer(components);
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalNormalGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
@@ -457,5 +458,6 @@
         private Button JadwalkanButton;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }

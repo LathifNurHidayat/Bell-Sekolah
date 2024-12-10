@@ -48,6 +48,7 @@ namespace BelSekolah.BelSekolahForm
 
         private System.Windows.Forms.Timer _timer;
         private System.Windows.Forms.Timer _jam;
+        private System.Windows.Forms.Timer _cekJadwal;
 
         private List<JadwalDto> _dataJadwalPutar = new List<JadwalDto>();
 
@@ -64,6 +65,7 @@ namespace BelSekolah.BelSekolahForm
 
             _timer = new System.Windows.Forms.Timer();
             _jam = new System.Windows.Forms.Timer();
+            _cekJadwal = new System.Windows.Forms.Timer();
 
             this.mainForm = mainForm;
 
@@ -83,6 +85,9 @@ namespace BelSekolah.BelSekolahForm
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
 
+            _cekJadwal.Interval = 60000;
+            _cekJadwal.Tick += (s, e) => {AddDataToList(); };
+            
             LoadJadwalDetil(_hariID);
 
             CustomStyleGrid(JadwalNormalGrid);
@@ -105,12 +110,15 @@ namespace BelSekolah.BelSekolahForm
 
         private void _jam_Tick(object? sender, EventArgs e) 
         {
+            
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void _timer_Tick(object? sender, EventArgs e)
         {
-            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss")); 
+            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/
+            TimeSpan timeNow = TimeSpan.Parse(JamLabel.Text);
+
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
 
             var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
@@ -491,6 +499,7 @@ namespace BelSekolah.BelSekolahForm
                 StartStopButton.Text = "Stop";
                 StartStopButton.BackColor = Color.Red;
                 _timer.Start();
+                _cekJadwal.Start();
                 _combo = ComboAktif.ComboNonAktif;
 
                 _isRunning = true;
@@ -504,6 +513,7 @@ namespace BelSekolah.BelSekolahForm
                 StartStopButton.Text = "Start";
                 StartStopButton.BackColor = Color.LimeGreen;
                 _timer.Stop();
+                _cekJadwal.Stop();
                 _combo = ComboAktif.ComboAktif;
 
                 _isRunning = false;

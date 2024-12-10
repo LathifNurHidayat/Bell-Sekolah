@@ -98,7 +98,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             ClearForm();
         }
 
-        private void JadwalUjianGrid_RowEnter(object? sender, DataGridViewCellEventArgs e)
+        private void JadwalUjianGrid_RowEnter(object? sender, DataGridViewCellEventArgs e) 
         {
             if (e.RowIndex >= 0)
             {
@@ -128,7 +128,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             SaveData();
             LoadData();
             ClearForm();
-
         }
 
         private void PausePlayButton_Click(object? sender, EventArgs e)

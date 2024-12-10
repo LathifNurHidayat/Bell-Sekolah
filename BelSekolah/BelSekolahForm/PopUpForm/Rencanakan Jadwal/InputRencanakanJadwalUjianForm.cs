@@ -39,8 +39,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _jadwalDal = new JadwalDal();
             _rencanakanJadwalDal = new RencanakanJadwalDal();
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("id-ID");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("id-ID");
+          /*  Thread.CurrentThread.CurrentCulture = new CultureInfo("id-ID");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("id-ID");*/
 
             _rencanaJadwalID = perencanaanID;
 
@@ -155,6 +155,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
           
         private void SaveButton_Click(object? sender, EventArgs e)
         {
+            if (TanggalPicker.Value.ToString("dd-MM-yyyy") == DateTime.Today.ToString("dd-MM-yyyy"))
+            {
+                MessageBox.Show("Cek kembali tanggal yang anda masukan", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (KeteranganJadwalText.Text == "" || SoundFileText.Text == "" || WaktuPicker.Value == DateTime.Today)
             {
                 MessageBox.Show("Data Harus Lengkap", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -276,6 +282,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveData()
         {
+           
+
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian", SoundFileText.Text);
 
             var data = new RencanakanJadwalModel
@@ -297,13 +305,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 JadwalKhususID = _jadwalID,
                 HariID = _hariId,
-                Waktu = WaktuPicker.Value.ToString("HH:mm"),
+                Waktu = WaktuPicker.Value.ToString(@"HH:mm"),
                 Keterangan = KeteranganJadwalText.Text,
                 SoundName = SoundFileText.Text,
                 SoundPath = filePath,
                 IsUjian = 1,
                 RencanakanJadwalID = _rencanaJadwalID
             };
+            MessageBox.Show(jadwalKhusus.Waktu);
 
             if (_jadwalID == 0)
             {
