@@ -42,6 +42,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             LoadData();
             CustomStyleGrid(JadwalUjianGrid);
+            ClearForm();
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -125,8 +126,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 return;
             }
             SaveData();
-            ClearForm();
             LoadData();
+            ClearForm();
+
         }
 
         private void PausePlayButton_Click(object? sender, EventArgs e)

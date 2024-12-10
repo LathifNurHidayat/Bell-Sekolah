@@ -112,5 +112,26 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 Conn.Execute(sql, new { RencanakanJadwalID = RencanakanJadwalID});
             }
         }
+
+        public bool CekTanggal(string tanggal, int rencanakanID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                const string sql = @"SELECT COUNT(*) FROM RencanakanJadwal WHERE Tanggal = @Tanggal AND RencanakanJadwalID != @RencanakanJadwalID";
+
+                return Conn.QueryFirstOrDefault<bool>(sql, new { Tanggal = tanggal , RencanakanJadwalID  = rencanakanID});
+            }
+        }
+
+        public int  GetTanggal(string tanggal)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                const string sql = @"SELECT RencanakanJadwalID FROM RencanakanJadwal WHERE Tanggal = @Tanggal ";
+
+                return Conn.QueryFirstOrDefault<int>(sql, new { Tanggal = tanggal});
+            }
+        }
+
     }
 }

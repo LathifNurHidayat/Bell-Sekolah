@@ -38,6 +38,7 @@ namespace BelSekolah.BelSekolahForm
         private readonly JadwalKhususDal _jadwalKhususDal;
         private readonly JadwalNormalDal _jadwalNormalDal;
         private readonly JadwalModel _jadwalModel;
+        private readonly RencanakanJadwalDal _rencanakanJadwalDal;
 
         private int _hariID;
         private string _waktuSekarang;
@@ -58,6 +59,8 @@ namespace BelSekolah.BelSekolahForm
             _jadwalKhususDal = new JadwalKhususDal();
             _jadwalNormalDal = new JadwalNormalDal();
             _jadwalModel = new JadwalModel();
+            _rencanakanJadwalDal = new RencanakanJadwalDal();
+            
 
             _timer = new System.Windows.Forms.Timer();
             _jam = new System.Windows.Forms.Timer();
@@ -100,14 +103,14 @@ namespace BelSekolah.BelSekolahForm
             grid.RowTemplate.Height = 30;
         }
 
-        private void _jam_Tick(object? sender, EventArgs e)
+        private void _jam_Tick(object? sender, EventArgs e) 
         {
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void _timer_Tick(object? sender, EventArgs e)
         {
-            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));
+            TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss")); 
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
 
             var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
@@ -139,7 +142,6 @@ namespace BelSekolah.BelSekolahForm
                 audioFileReader = null;
             }
         }
-         
 
         private void PlaySound(string soundPath)
         {
@@ -186,6 +188,23 @@ namespace BelSekolah.BelSekolahForm
 
         private void AddDataToList()
         {
+            string tanggalHariIni = DateTime.Now.ToString("dd-MM-yyyy");
+            int cekRencanaJadwalID = _rencanakanJadwalDal.GetTanggal(tanggalHariIni);
+
+            if (cekRencanaJadwalID != 0)
+            {
+                var data = _jadwalKhususDal.ListDataForRencanakan(cekRencanaJadwalID).Select(x => new JadwalDto
+                {
+                    Waktu = TimeSpan.TryParse(x.Waktu, out TimeSpan waktu) ? waktu : DateTime.Now.TimeOfDay,
+                    SoundPath = x.SoundPath,
+                });
+                foreach (var item in data)
+                {
+                    _dataJadwalPutar.Add(item);
+                }
+                return;
+            }
+
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
             _hariID = (int)HariCombo.SelectedValue;
 

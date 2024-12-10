@@ -209,10 +209,10 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.Gainsboro;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(KeteranganText);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(TanggalPicker);
-            panel2.Controls.Add(KeteranganText);
             panel2.Location = new Point(9, 14);
             panel2.Name = "panel2";
             panel2.Size = new Size(494, 83);
@@ -253,14 +253,12 @@
             // KeteranganText
             // 
             KeteranganText.BorderStyle = BorderStyle.FixedSingle;
-            KeteranganText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             KeteranganText.Location = new Point(255, 36);
             KeteranganText.MaxLength = 30;
+            KeteranganText.Multiline = true;
             KeteranganText.Name = "KeteranganText";
             KeteranganText.Size = new Size(227, 30);
-            KeteranganText.TabIndex = 168;
-            KeteranganText.TabStop = false;
-            KeteranganText.Tag = "";
+            KeteranganText.TabIndex = 91;
             // 
             // InputRencanakanJadwalUjianForm
             // 

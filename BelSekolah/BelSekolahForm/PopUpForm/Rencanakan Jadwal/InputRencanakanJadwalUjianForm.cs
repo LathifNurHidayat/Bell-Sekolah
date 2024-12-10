@@ -56,8 +56,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             LoadData();
             CustomStyleGrid(JadwalUjianGrid);
             ClearForm();
-
-            
         }
 
         private void GetData(int rencanakanJadwalID)
@@ -65,7 +63,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             var data = _rencanakanJadwalDal.GetDataUjian(rencanakanJadwalID);
 
             TanggalPicker.Value = DateTime.TryParse(data.Tanggal, out DateTime waktu) ? waktu : DateTime.Today;
-            KeteranganJadwalText.Text = data.Keterangan;
+            KeteranganText.Text = data.Keterangan;
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -118,6 +116,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
         {
+            bool cekJadwal = _rencanakanJadwalDal.CekTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"), _rencanaJadwalID);
+            if (cekJadwal)
+            {
+                MessageBox.Show($"Sudah ada jadwal pada tanggal '{TanggalPicker.Value.ToString("dd-MM-yyyy")}'\n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
             _hariId = _jadwalDal.GetIdByHari(_hariName);
         }
@@ -165,21 +170,21 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             string soundFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
             if (!Directory.Exists(soundFolder))
             {
-                MessageBox.Show("Folder suara tidak ditemukan!");
+                MessageBox.Show("Folder suara tidak ditemukan!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             string fileName = SoundFileText.Text.Trim();
             if (string.IsNullOrEmpty(fileName))
             {
-                MessageBox.Show("Pilih sound terlebih dahulu!");
+                MessageBox.Show("Belum ada sound yang siap untuk diputar !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             string filePath = Path.Combine(soundFolder, fileName);
             if (!File.Exists(filePath))
             {
-                MessageBox.Show($"File suara '{fileName}' tidak ditemukan di folder '{soundFolder}'!");
+                MessageBox.Show($"File suara '{fileName}' tidak ditemukan di folder '{soundFolder}'!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -213,7 +218,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Gagal memutar suara: {ex.Message}");
+                MessageBox.Show($"Gagal memutar sound {ex.Message}", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -273,19 +278,24 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian", SoundFileText.Text);
 
-            if (_rencanaJadwalID == 0)
+            var data = new RencanakanJadwalModel
             {
-                var data = new RencanakanJadwalModel
-                {
-                    HariID = _hariId,
-                    Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
-                    Keterangan = KeteranganJadwalText.Text,
-                    IsUjian = 1
-                };
+                RencanakanJadwalID = _rencanaJadwalID,
+                HariID = _hariId,
+                Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
+                Keterangan = KeteranganText.Text,
+                IsUjian = 1
+            };
+
+            if (_rencanaJadwalID == 0)
                 _rencanaJadwalID = _rencanakanJadwalDal.Insert(data);
-            }
+            else
+                _rencanakanJadwalDal.Update(data);
+
+
             var jadwalKhusus = new JadwalKhususModel
             {
+                JadwalKhususID = _jadwalID,
                 HariID = _hariId,
                 Waktu = WaktuPicker.Value.ToString("HH:mm"),
                 Keterangan = KeteranganJadwalText.Text,

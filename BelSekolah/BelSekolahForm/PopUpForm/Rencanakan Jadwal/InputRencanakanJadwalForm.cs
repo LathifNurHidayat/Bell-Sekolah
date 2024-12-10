@@ -63,7 +63,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             RegisterControlEvent();
 
             if (_status == "Edit")
-            { GetData(); MessageBox.Show("sdcsdc"); }
+                GetData();
             else
                 DefaultSound();
 
@@ -270,7 +270,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                         Keterangan = labels[i].Text,
                         Waktu = datePickers[i].Value.ToString("HH:mm"),
                         SoundName = textBoxes[i].Text,
-                        SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", textBoxes[i].Text)
+                        SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", textBoxes[i].Text)
                     });
                 }
             }
@@ -282,6 +282,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     var data = new RencanakanJadwalModel
                     {
                         HariID = _hariID,
+                        Hari = _hariName,
                         Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
                         Keterangan = KeteranganText.Text,
                         IsUjian = 0
@@ -313,6 +314,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     {
                         RencanakanJadwalID = _rencanakanJadwalID,
                         HariID = _hariID,
+                        Hari = _hariName,
                         Tanggal = TanggalPicker.Value.ToString("dd-MM-yyyy"),
                         Keterangan = KeteranganText.Text
                     };
@@ -380,6 +382,15 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
         {
+            MessageBox.Show(TanggalPicker.Value.ToString("dd-MM-yyyy"));
+
+            bool cekJadwal = _rencanakanJadwalDal.CekTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"), _rencanakanJadwalID);
+            if (cekJadwal)
+            {
+                MessageBox.Show($"Sudah ada jadwal pada tanggal '{TanggalPicker.Value.ToString("dd-MM-yyyy")}'\n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
             DefaultSound();
             _hariID = _jadwalDal.GetIdByHari(_hariName);
