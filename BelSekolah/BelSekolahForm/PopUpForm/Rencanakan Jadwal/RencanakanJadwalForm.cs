@@ -33,7 +33,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
         {
             var data = _rencanakanJadwalDal.ListData();
             RencanakanJadwalGrid.DataSource = data;
-
+              
             CustomStyleGrid(RencanakanJadwalGrid);
         }
 
