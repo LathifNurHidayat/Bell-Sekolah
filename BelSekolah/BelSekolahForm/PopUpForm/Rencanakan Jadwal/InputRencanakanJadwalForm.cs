@@ -34,6 +34,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private string _status;
         private bool _isPlaying = false;
         private string _hariName;
+        private DateTime _tanggalDatetime;
 
         private List<DateTimePicker> _datePickerControls = new List<DateTimePicker>();
         private List<JadwalPutarDto> _jadwalPutarDto = new List<JadwalPutarDto>();
@@ -199,23 +200,21 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Jam10Label, JamKepulanganLabel
             };
 
-            var perencanaan = _rencanakanJadwalDal.ListData().Select(x => new { x.Tanggal, x.Keterangan });
-            foreach(var item in perencanaan)
-            {
-                TanggalPicker.Value = DateTime.Parse(item.Tanggal);
-                KeteranganText.Text = item.Keterangan;
-            }
+            var perencanaan = _rencanakanJadwalDal.GetDataJadwal(_rencanakanJadwalID);
+            if (perencanaan == null) return;
+                TanggalPicker.Value = DateTime.Parse(perencanaan.Tanggal);
+                KeteranganText.Text = perencanaan.Keterangan;
 
             List<JadwalPutarDto> data = new List<JadwalPutarDto>();
 
-            data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalPutarDto
+            data = _jadwalKhususDal.ListDataForJadwal(_rencanakanJadwalID).Select(x => new JadwalPutarDto
             {
-                HariID = x.HariID,
                 JadwalID = x.JadwalKhususID,
                 Keterangan = x.Keterangan,
                 Waktu = x.Waktu ?? "",
                 SoundName = x.SoundName ?? "",
-                SoundPath = x.SoundPath ?? ""
+                SoundPath = x.SoundPath ?? "",
+                IsUjian = x.IsUjian
             }).ToList();
 
             foreach (var item in data)
@@ -377,17 +376,22 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             SimpanButton.Click += SimpanButton_Click;
 
             this.FormClosed += InputDataForm_FormClosed;
-            TanggalPicker.ValueChanged += TanggalPicker_ValueChanged;
+            TanggalPicker.ValueChanged += TanggalPicker_ValueChanged;  // PAKAIIII CLOSEUP
+            TanggalPicker.DropDown += TanggalPicker_DropDown;
+        }
+
+        private void TanggalPicker_DropDown(object? sender, EventArgs e)
+        {
+            _tanggalDatetime = TanggalPicker.Value;
         }
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
         {
-            MessageBox.Show(TanggalPicker.Value.ToString("dd-MM-yyyy"));
-
             bool cekJadwal = _rencanakanJadwalDal.CekTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"), _rencanakanJadwalID);
             if (cekJadwal)
             {
-                MessageBox.Show($"Sudah ada jadwal pada tanggal '{TanggalPicker.Value.ToString("dd-MM-yyyy")}'\n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TanggalPicker.Value = _tanggalDatetime;
+                MessageBox.Show($"Sudah ada jadwal pada tanggal tersebut !\n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -403,6 +407,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
+            if (TanggalPicker.Value.ToString("dd-MM-yyyy") == DateTime.Today.ToString("dd-MM-yyyy"))
+            {
+                MessageBox.Show("Cek kembali tanggal yang anda masukan", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             bool isNull = false;
 
             foreach(var picker in _datePickerControls)
@@ -637,6 +647,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             public string Waktu { get; set; }
             public string SoundName { get; set; }
             public string SoundPath { get; set; }
+            public int IsUjian { get; set; }
         }
     }       
 }

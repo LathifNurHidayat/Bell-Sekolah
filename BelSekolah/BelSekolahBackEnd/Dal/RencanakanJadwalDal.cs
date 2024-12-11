@@ -44,7 +44,25 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             FROM
                                 RencanakanJadwal
                             WHERE  
-                                RencanakanJadwalID = @RencanakanJadwalID";
+                                RencanakanJadwalID = @RencanakanJadwalID AND IsUjian != 0";
+
+                return Conn.Query<RencanakanJadwalModel>(sql, new { RencanakanJadwalID = rencanakanID }).FirstOrDefault();
+            }
+        }
+
+        public RencanakanJadwalModel? GetDataJadwal(int rencanakanID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = @"
+                            SELECT 
+                                RencanakanJadwalID, Tanggal , Keterangan
+                            FROM
+                                RencanakanJadwal
+                            WHERE  
+                                RencanakanJadwalID = @RencanakanJadwalID AND IsUjian = 0";
 
                 return Conn.Query<RencanakanJadwalModel>(sql, new { RencanakanJadwalID = rencanakanID }).FirstOrDefault();
             }

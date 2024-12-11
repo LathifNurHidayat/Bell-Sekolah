@@ -43,10 +43,10 @@
             label2 = new Label();
             WaktuPicker = new DateTimePicker();
             panel2 = new Panel();
+            KeteranganText = new TextBox();
             label5 = new Label();
             label6 = new Label();
             TanggalPicker = new DateTimePicker();
-            KeteranganText = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).BeginInit();
             panel2.SuspendLayout();
@@ -179,6 +179,7 @@
             JadwalUjianGrid.GridColor = Color.Black;
             JadwalUjianGrid.Location = new Point(11, 212);
             JadwalUjianGrid.Name = "JadwalUjianGrid";
+            JadwalUjianGrid.ReadOnly = true;
             JadwalUjianGrid.RowHeadersWidth = 51;
             JadwalUjianGrid.RowTemplate.Height = 29;
             JadwalUjianGrid.Size = new Size(471, 204);
@@ -218,6 +219,16 @@
             panel2.Size = new Size(494, 83);
             panel2.TabIndex = 161;
             // 
+            // KeteranganText
+            // 
+            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
+            KeteranganText.Location = new Point(255, 36);
+            KeteranganText.MaxLength = 30;
+            KeteranganText.Multiline = true;
+            KeteranganText.Name = "KeteranganText";
+            KeteranganText.Size = new Size(227, 30);
+            KeteranganText.TabIndex = 91;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -242,23 +253,13 @@
             // 
             // TanggalPicker
             // 
-            TanggalPicker.CustomFormat = "dddd, dd-MM-yyyy";
+            TanggalPicker.CustomFormat = "dd-MM-yyyy";
             TanggalPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             TanggalPicker.Format = DateTimePickerFormat.Custom;
             TanggalPicker.Location = new Point(11, 36);
             TanggalPicker.Name = "TanggalPicker";
             TanggalPicker.Size = new Size(227, 30);
             TanggalPicker.TabIndex = 160;
-            // 
-            // KeteranganText
-            // 
-            KeteranganText.BorderStyle = BorderStyle.FixedSingle;
-            KeteranganText.Location = new Point(255, 36);
-            KeteranganText.MaxLength = 30;
-            KeteranganText.Multiline = true;
-            KeteranganText.Name = "KeteranganText";
-            KeteranganText.Size = new Size(227, 30);
-            KeteranganText.TabIndex = 91;
             // 
             // InputRencanakanJadwalUjianForm
             // 

@@ -44,20 +44,18 @@
             HariCombo = new ComboBox();
             panel5 = new Panel();
             RunningLabel = new Label();
-            label4 = new Label();
-            JenisJadwalText = new TextBox();
             label3 = new Label();
             HariText = new TextBox();
             contextMenuStrip2 = new ContextMenuStrip(components);
             JadwalKhususToolStripMenuItem = new ToolStripMenuItem();
             JadwalUjianToolStripMenuItem1 = new ToolStripMenuItem();
             panel2 = new Panel();
+            DetailJadwalLinkLabel = new LinkLabel();
             JamLabel = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             deleteToolStripMenuItem = new ToolStripMenuItem();
-            timer1 = new System.Windows.Forms.Timer(components);
             MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalNormalGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)JadwalKhususGrid).BeginInit();
@@ -268,31 +266,6 @@
             RunningLabel.TabIndex = 15;
             RunningLabel.Text = "Stopped . . . .";
             // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(787, 28);
-            label4.Name = "label4";
-            label4.Size = new Size(123, 22);
-            label4.TabIndex = 19;
-            label4.Text = "Jenis Jadwal :";
-            // 
-            // JenisJadwalText
-            // 
-            JenisJadwalText.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            JenisJadwalText.BackColor = Color.WhiteSmoke;
-            JenisJadwalText.BorderStyle = BorderStyle.FixedSingle;
-            JenisJadwalText.Font = new Font("Microsoft Sans Serif", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            JenisJadwalText.Location = new Point(911, 25);
-            JenisJadwalText.Name = "JenisJadwalText";
-            JenisJadwalText.ReadOnly = true;
-            JenisJadwalText.Size = new Size(151, 28);
-            JenisJadwalText.TabIndex = 18;
-            JenisJadwalText.TabStop = false;
-            JenisJadwalText.TextAlign = HorizontalAlignment.Center;
-            // 
             // label3
             // 
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -346,10 +319,9 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.LightGray;
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(label4);
+            panel2.Controls.Add(DetailJadwalLinkLabel);
             panel2.Controls.Add(JamLabel);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(JenisJadwalText);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(HariText);
@@ -357,6 +329,18 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1207, 75);
             panel2.TabIndex = 5;
+            // 
+            // DetailJadwalLinkLabel
+            // 
+            DetailJadwalLinkLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            DetailJadwalLinkLabel.AutoSize = true;
+            DetailJadwalLinkLabel.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            DetailJadwalLinkLabel.Location = new Point(823, 28);
+            DetailJadwalLinkLabel.Name = "DetailJadwalLinkLabel";
+            DetailJadwalLinkLabel.Size = new Size(215, 23);
+            DetailJadwalLinkLabel.TabIndex = 18;
+            DetailJadwalLinkLabel.TabStop = true;
+            DetailJadwalLinkLabel.Text = "Detail Jadwal Yang Diputar";
             // 
             // JamLabel
             // 
@@ -445,8 +429,6 @@
         private Button StartStopButton;
         private Label RunningLabel;
         private TextBox HariText;
-        private Label label4;
-        private TextBox JenisJadwalText;
         private Label label3;
         private Button DeleteKhususButton;
         private Button TambahNormalButton;
@@ -458,6 +440,6 @@
         private Button JadwalkanButton;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
+        private LinkLabel DetailJadwalLinkLabel;
     }
 }

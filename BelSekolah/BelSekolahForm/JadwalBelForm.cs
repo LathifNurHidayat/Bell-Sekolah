@@ -184,14 +184,12 @@ namespace BelSekolah.BelSekolahForm
         private void ClearText()
         {
             HariText.Clear();
-            JenisJadwalText.Clear();
         }
 
         private void GetJadwalDiputar()
         {
             ClearText();
             HariText.Text = _hariSekarang;
-            JenisJadwalText.Text = _jadwalDal.ListData().FirstOrDefault(x => x.Hari == _hariSekarang)?.JenisJadwal.ToString();
         }
 
         private void AddDataToList()
@@ -201,7 +199,7 @@ namespace BelSekolah.BelSekolahForm
 
             if (cekRencanaJadwalID != 0)
             {
-                var data = _jadwalKhususDal.ListDataForRencanakan(cekRencanaJadwalID).Select(x => new JadwalDto
+                var data = _jadwalKhususDal.ListDataForUjian(cekRencanaJadwalID).Select(x => new JadwalDto
                 {
                     Waktu = TimeSpan.TryParse(x.Waktu, out TimeSpan waktu) ? waktu : DateTime.Now.TimeOfDay,
                     SoundPath = x.SoundPath,
@@ -225,8 +223,10 @@ namespace BelSekolah.BelSekolahForm
                 {
                     var data = _jadwalNormalDal.ListData(_hariID).Select(x => new JadwalDto
                     {
+                        Keterangan = x.Keterangan,
                         HariID = x.HariID,
                         Waktu = TimeSpan.Parse(x.Waktu),
+                        SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
                     foreach (var item in data)
@@ -239,7 +239,10 @@ namespace BelSekolah.BelSekolahForm
 
                     var data = _jadwalKhususDal.ListData(_hariID).Select(x => new JadwalDto
                     {
+                        Keterangan = x.Keterangan,
+                        HariID = x.HariID,
                         Waktu = TimeSpan.Parse(x.Waktu),
+                        SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
                     foreach (var item in data)
@@ -339,7 +342,17 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
             JadwalkanButton.Click += JadwalkanButton_Click;
+
+            DetailJadwalLinkLabel.Click += DetailJadwalLinkLabel_Click;
         }
+
+        private void DetailJadwalLinkLabel_Click(object? sender, EventArgs e)
+        {
+            var form = new DataJadwalDiputarForm();
+            form.LoadData(_dataJadwalPutar ?? new List<JadwalDto>());
+            form.ShowDialog(this);
+        }
+
 
         private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
         {
@@ -453,6 +466,7 @@ namespace BelSekolah.BelSekolahForm
                     JadwalKhususRadio.Checked = true;
                 MessageBox.Show("Matikan running terlebih dahulu", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            AddDataToList();
         }
 
         private void JadwalRadio_CheckedChanged(object? sender, EventArgs e)
@@ -574,14 +588,14 @@ namespace BelSekolah.BelSekolahForm
         }
 
 
-
-
         #endregion
 
         public class JadwalDto
         {
+            public string Keterangan { get; set; }
             public int HariID { get; set; }
             public TimeSpan Waktu { get; set; }
+            public string SoundName { get; set; }
             public string SoundPath { get; set; }
         }
     }

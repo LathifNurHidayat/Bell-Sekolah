@@ -70,7 +70,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
             int IsUjian = Convert.ToInt32(RencanakanJadwalGrid.CurrentRow.Cells["IsUjian"].Value);
             int perencanaanID = Convert.ToInt32(RencanakanJadwalGrid.CurrentRow.Cells["RencanakanJadwalID"].Value);
 
-            if (IsUjian == 1)
+            if (IsUjian == 1 )
             {
                 InputRencanakanJadwalUjianForm input = new InputRencanakanJadwalUjianForm(perencanaanID);
                 if (input.ShowDialog(this) == DialogResult.OK) LoadData();

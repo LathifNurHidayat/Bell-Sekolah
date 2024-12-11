@@ -31,6 +31,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private string _hariName;
         private int _jadwalID = 0;
         private int _rencanaJadwalID;
+        private DateTime _jadwalDateTime;
 
         public InputRencanakanJadwalUjianForm(int perencanaanID)
         {
@@ -60,6 +61,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void GetData(int rencanakanJadwalID)
         {
+            MessageBox.Show(rencanakanJadwalID.ToString());
             var data = _rencanakanJadwalDal.GetDataUjian(rencanakanJadwalID);
 
             TanggalPicker.Value = DateTime.TryParse(data.Tanggal, out DateTime waktu) ? waktu : DateTime.Today;
@@ -91,7 +93,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void LoadData()
         {
-            var data = _jadwalKhususDal.ListDataForRencanakan(_rencanaJadwalID).Select(x => new
+            var data = _jadwalKhususDal.ListDataForUjian(_rencanaJadwalID).Select(x => new
             {
                 x.JadwalKhususID,
                 x.Waktu,
@@ -112,6 +114,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             NewButton.Click += NewButton_Click;
             JadwalUjianGrid.RowEnter += JadwalUjianGrid_RowEnter;
             TanggalPicker.ValueChanged += TanggalPicker_ValueChanged;
+            TanggalPicker.DropDown += TanggalPicker_DropDown;
+        }
+
+        private void TanggalPicker_DropDown(object? sender, EventArgs e)
+        {
+            _jadwalDateTime = TanggalPicker.Value;
         }
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
@@ -119,7 +127,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             bool cekJadwal = _rencanakanJadwalDal.CekTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"), _rencanaJadwalID);
             if (cekJadwal)
             {
-                MessageBox.Show($"Sudah ada jadwal pada tanggal '{TanggalPicker.Value.ToString("dd-MM-yyyy")}'\n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TanggalPicker.Value = _jadwalDateTime;
+                MessageBox.Show($"Sudah ada jadwal pada tanggal tersebut! \n Mohon pilih tanggal yang lain ", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -282,8 +291,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveData()
         {
-           
-
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian", SoundFileText.Text);
 
             var data = new RencanakanJadwalModel
@@ -312,17 +319,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 IsUjian = 1,
                 RencanakanJadwalID = _rencanaJadwalID
             };
-            MessageBox.Show(jadwalKhusus.Waktu);
 
             if (_jadwalID == 0)
             {
                 _jadwalKhususDal.Insert(jadwalKhusus);
-                MessageBox.Show("insert");
             }
             else
             {
                 _jadwalKhususDal.Update(jadwalKhusus);
-                MessageBox.Show("Update");
             }
                 
         }

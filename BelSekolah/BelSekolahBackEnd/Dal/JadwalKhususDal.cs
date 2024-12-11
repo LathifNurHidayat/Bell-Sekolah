@@ -83,7 +83,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             FROM 
                                 JadwalKhusus
                             WHERE 
-                                HariID = @HariID
+                                HariID = @HariID AND RencanakanJadwalID = 0
                             ORDER BY 
                                 Waktu ASC";
 
@@ -91,7 +91,9 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public IEnumerable<JadwalKhususModel> ListDataForRencanakan(int rencanakanID)
+
+
+        public IEnumerable<JadwalKhususModel> ListDataForUjian(int rencanakanID)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
             {
@@ -103,7 +105,27 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             FROM 
                                 JadwalKhusus
                             WHERE 
-                                RencanakanJadwalID = @RencanakanJadwalID
+                                RencanakanJadwalID = @RencanakanJadwalID AND IsUjian = 1
+                            ORDER BY 
+                                Waktu ASC";
+
+                return Conn.Query<JadwalKhususModel>(sql, new { RencanakanJadwalID = rencanakanID });
+            }
+        }
+
+        public IEnumerable<JadwalKhususModel> ListDataForJadwal(int rencanakanID)
+        {
+            using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
+            {
+                Conn.Open();
+
+                const string sql = $@"
+                            SELECT 
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath, IsUjian
+                            FROM 
+                                JadwalKhusus
+                            WHERE 
+                                RencanakanJadwalID = @RencanakanJadwalID AND IsUjian = 0
                             ORDER BY 
                                 Waktu ASC";
 

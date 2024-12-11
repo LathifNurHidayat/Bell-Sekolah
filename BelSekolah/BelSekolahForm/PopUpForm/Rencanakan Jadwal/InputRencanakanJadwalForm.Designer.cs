@@ -120,10 +120,10 @@
             label2 = new Label();
             UbahButton = new Button();
             panel1 = new Panel();
+            label3 = new Label();
             label1 = new Label();
             TanggalPicker = new DateTimePicker();
             KeteranganText = new TextBox();
-            label3 = new Label();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
@@ -1327,6 +1327,17 @@
             panel1.Size = new Size(655, 78);
             panel1.TabIndex = 160;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(313, 10);
+            label3.Name = "label3";
+            label3.Size = new Size(179, 23);
+            label3.TabIndex = 170;
+            label3.Text = "Keterangan (Optional)";
+            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -1340,7 +1351,7 @@
             // 
             // TanggalPicker
             // 
-            TanggalPicker.CustomFormat = "dddd, dd-MM-yyyy";
+            TanggalPicker.CustomFormat = "dd-MM-yyyy";
             TanggalPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             TanggalPicker.Format = DateTimePickerFormat.Custom;
             TanggalPicker.Location = new Point(11, 36);
@@ -1360,18 +1371,7 @@
             KeteranganText.TabStop = false;
             KeteranganText.Tag = "";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(313, 10);
-            label3.Name = "label3";
-            label3.Size = new Size(179, 23);
-            label3.TabIndex = 170;
-            label3.Text = "Keterangan (Optional)";
-            // 
-            // InputData
+            // InputRencanakanJadwalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -1379,7 +1379,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "InputData";
+            Name = "InputRencanakanJadwalForm";
             StartPosition = FormStartPosition.CenterParent;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
