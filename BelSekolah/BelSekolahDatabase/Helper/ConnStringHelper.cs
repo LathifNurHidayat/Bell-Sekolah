@@ -18,10 +18,9 @@ namespace BelSekolah.BelSekolahDatabase.Helper
             {
                 SQLiteConnection.CreateFile(databasePath);
             }
-      
+
             return $@"Data Source={databasePath};Version=3;";
-           
+            //return $@"Data Source = D:\Database\Database.db; Version=3";
         }
-         
     }
 }

@@ -61,7 +61,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void GetData(int rencanakanJadwalID)
         {
-            MessageBox.Show(rencanakanJadwalID.ToString());
             var data = _rencanakanJadwalDal.GetDataUjian(rencanakanJadwalID);
 
             TanggalPicker.Value = DateTime.TryParse(data.Tanggal, out DateTime waktu) ? waktu : DateTime.Today;

@@ -31,10 +31,9 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void LoadData() 
         {
-            var data = _rencanakanJadwalDal.ListData()/*.Select(x => new {x.RencanakanJadwalID, x.Tanggal, x.Hari, x.Keterangan, x.IsUjian})*/;
+            var data = _rencanakanJadwalDal.ListData();
             RencanakanJadwalGrid.DataSource = data;
 
-            //RencanakanJadwalGrid.Columns["RencanakanJadwalID"].Visible = false;
             CustomStyleGrid(RencanakanJadwalGrid);
         }
 
@@ -44,7 +43,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             grid.EnableHeadersVisualStyles = false;
-
+            grid.Columns["RencanakanJadwalID"].Visible = false;
+            grid.Columns["HariID"].Visible = false;
+            grid.Columns["IsUjian"].Visible = false;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             grid.DefaultCellStyle.BackColor = Color.White;
             grid.DefaultCellStyle.ForeColor = Color.Black;
             grid.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
@@ -80,9 +82,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
                 InputRencanakanJadwalForm input = new InputRencanakanJadwalForm(perencanaanID, "Jadwal Khusus", "Edit");
                 if (input.ShowDialog(this) == DialogResult.OK) LoadData();
             }
-          /*  InputData input = new InputData(0, 0, "Jadwal Khusus", "Edit", true);
-            if (input.ShowDialog(this) == DialogResult.OK)
-                LoadData();*/
         }
 
         private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
@@ -107,7 +106,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
         {
-
             InputRencanakanJadwalUjianForm input = new InputRencanakanJadwalUjianForm(0);
             if (input.ShowDialog(this) == DialogResult.OK)
                 LoadData();

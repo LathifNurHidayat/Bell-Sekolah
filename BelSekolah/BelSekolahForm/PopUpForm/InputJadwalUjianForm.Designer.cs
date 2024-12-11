@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalUjianForm));
             SaveButton = new Button();
             BrowseButton = new Button();
@@ -43,9 +44,12 @@
             label2 = new Label();
             JadwalUjianGrid = new DataGridView();
             NewButton = new Button();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // SaveButton
@@ -199,6 +203,21 @@
             NewButton.Text = "New";
             NewButton.UseVisualStyleBackColor = false;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(133, 32);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            deleteToolStripMenuItem.Image = Properties.Resources.delete;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(132, 28);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
             // InputJadwalUjianForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -224,6 +243,7 @@
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -243,5 +263,7 @@
         private Label label2;
         private DataGridView JadwalUjianGrid;
         private Button NewButton;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

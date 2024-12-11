@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BelSekolahDatabase\Database.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BelSekolahDatabase\Database.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="school-bell.ico" />
   </ItemGroup>
 

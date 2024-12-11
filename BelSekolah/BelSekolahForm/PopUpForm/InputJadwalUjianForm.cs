@@ -91,6 +91,25 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             JadwalUjianGrid.RowEnter += JadwalUjianGrid_RowEnter;
             NewButton.Click += NewButton_Click;
             this.FormClosed += (s, e) => this.DialogResult = DialogResult.OK;
+            JadwalUjianGrid.CellMouseClick += JadwalUjianGrid_CellMouseClick;
+            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
+        }
+
+        private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            int jadwalID = Convert.ToInt32(JadwalUjianGrid.CurrentRow.Cells["JadwalKhususID"].Value);
+            if (MessageBox.Show("Anda yakin ingin menghapus data ?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                _jadwalKhususDal.DeleteOneRow(jadwalID); LoadData();
+        }
+
+        private void JadwalUjianGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                JadwalUjianGrid.ClearSelection();
+                JadwalUjianGrid.CurrentCell = JadwalUjianGrid[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip1.Show(Cursor.Position);
+            }
         }
 
         private void NewButton_Click(object? sender, EventArgs e)

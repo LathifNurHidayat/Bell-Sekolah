@@ -278,7 +278,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                         Keterangan = labels[i].Text,
                         Waktu = datePickers[i].Value.ToString("HH:mm"),
                         SoundName = textBoxes[i].Text,
-                        SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", textBoxes[i].Text)
+                        SoundPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", textBoxes[i].Text)
                     });
                 }
             }

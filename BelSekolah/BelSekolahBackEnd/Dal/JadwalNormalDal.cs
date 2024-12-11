@@ -89,7 +89,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                             WHERE 
                                 HariID = @HariID
                             ORDER BY 
-                                Waktu ASC";
+                                JadwalNormalID ASC";
 
                 return Conn.Query<JadwalNormalModel>(sql, new { HariID = HariId });
             }

@@ -153,6 +153,7 @@ namespace BelSekolah.BelSekolahForm
 
         private void PlaySound(string soundPath)
         {
+            MessageBox.Show(soundPath);
             try
             {
                 audioFileReader = new AudioFileReader(soundPath);
@@ -338,9 +339,7 @@ namespace BelSekolah.BelSekolahForm
 
             JadwalKhususToolStripMenuItem.Click += JadwalKhususToolStripMenuItem_Click;
             JadwalUjianToolStripMenuItem1.Click += JadwalUjianToolStripMenuItem1_Click;
-            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
 
-            JadwalKhususGrid.CellMouseClick += JadwalKhususGrid_CellMouseClick;
             JadwalkanButton.Click += JadwalkanButton_Click;
 
             DetailJadwalLinkLabel.Click += DetailJadwalLinkLabel_Click;
@@ -354,22 +353,9 @@ namespace BelSekolah.BelSekolahForm
         }
 
 
-        private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
-        {
-            int jadwalID = Convert.ToInt32(JadwalKhususGrid.CurrentRow.Cells["JadwalKhususID"].Value);
-            if (MessageBox.Show("Anda yakin ingin menghapus data ?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                _jadwalKhususDal.DeleteOneRow(jadwalID); LoadJadwalDetil(_hariID);
-        }
+      
 
-        private void JadwalKhususGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                JadwalKhususGrid.ClearSelection();
-                JadwalKhususGrid.CurrentCell = JadwalKhususGrid[e.ColumnIndex, e.RowIndex];
-                contextMenuStrip1.Show(Cursor.Position);
-            }
-        }
+       
 
         private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
@@ -491,6 +477,7 @@ namespace BelSekolah.BelSekolahForm
                 HariID = _hariID != 0 ? _hariID : 0,
                 JenisJadwal = value,
             };
+
             _jadwalDal.Update(data);
         }
 

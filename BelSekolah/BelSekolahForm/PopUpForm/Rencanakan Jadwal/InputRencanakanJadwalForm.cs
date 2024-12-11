@@ -98,7 +98,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     soundMappings.Add(item.Key, item.Value);
                 }
             }
-
             else
             {
                 Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
@@ -122,7 +121,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     soundMappings.Add(item.Key, item.Value);
                 }
             }
-
 
             if (Directory.Exists(soundFolder))
             {
