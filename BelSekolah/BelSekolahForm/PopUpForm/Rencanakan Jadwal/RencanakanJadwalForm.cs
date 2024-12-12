@@ -64,6 +64,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form
             editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
 
             RencanakanJadwalGrid.CellMouseClick += RencanakanJadwalGrid_CellMouseClick;
+            this.FormClosed += (s, e) => { this.DialogResult = DialogResult.OK; };
 
         }
 

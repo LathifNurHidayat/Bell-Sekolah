@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.IO;
 using System.Data.SQLite;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BelSekolah.BelSekolahDatabase.Helper
 {
@@ -13,14 +8,23 @@ namespace BelSekolah.BelSekolahDatabase.Helper
     {
         public static string GetConn()
         {
-            string databasePath = Path.Combine("Database.db");
-            if (!File.Exists(databasePath))
+            string sourceDatabasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Database.db");
+            MessageBox.Show(sourceDatabasePath);
+
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "BelSekolah");
+            string targetDatabasePath = Path.Combine(appDataPath, "Database.db");
+
+            if (!Directory.Exists(appDataPath))
             {
-                SQLiteConnection.CreateFile(databasePath);
+                Directory.CreateDirectory(appDataPath);
             }
 
-            return $@"Data Source={databasePath};Version=3;";
-            //return $@"Data Source = D:\Database\Database.db; Version=3";
-        }
+            if (!File.Exists(targetDatabasePath))
+            {
+                File.Copy(sourceDatabasePath, targetDatabasePath);
+            }
+            return $@"Data Source={targetDatabasePath};Version=3;";
+
+        } 
     }
 }

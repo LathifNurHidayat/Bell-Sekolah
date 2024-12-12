@@ -85,7 +85,7 @@ namespace BelSekolah.BelSekolahForm
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
 
-            _cekJadwal.Interval = 60000;
+            _cekJadwal.Interval = 5000;
             _cekJadwal.Tick += (s, e) => {AddDataToList(); };
             
             LoadJadwalDetil(_hariID);
@@ -116,7 +116,7 @@ namespace BelSekolah.BelSekolahForm
 
         private void _timer_Tick(object? sender, EventArgs e)
         {
-            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/
+            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/ 
             TimeSpan timeNow = TimeSpan.Parse(JamLabel.Text);
 
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
@@ -153,7 +153,6 @@ namespace BelSekolah.BelSekolahForm
 
         private void PlaySound(string soundPath)
         {
-            MessageBox.Show(soundPath);
             try
             {
                 audioFileReader = new AudioFileReader(soundPath);
@@ -306,7 +305,7 @@ namespace BelSekolah.BelSekolahForm
                 TambahKhususButton.Text = "Tambah";
                 TambahKhususButton.BackColor = Color.Goldenrod;
             }
-            else
+            else 
             {
                 TambahKhususButton.Text = "Edit";
                 TambahKhususButton.BackColor = Color.Coral;
@@ -353,10 +352,6 @@ namespace BelSekolah.BelSekolahForm
         }
 
 
-      
-
-       
-
         private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
@@ -368,7 +363,10 @@ namespace BelSekolah.BelSekolahForm
         private void JadwalkanButton_Click(object? sender, EventArgs e)
         {
             RencanakanJadwalForm jadwalkanBelForm = new RencanakanJadwalForm();
-            jadwalkanBelForm.ShowDialog(this);
+            if (jadwalkanBelForm.ShowDialog(this) == DialogResult.OK)
+            {
+                AddDataToList();
+            }
         }
 
         private void JadwalUjianToolStripMenuItem1_Click(object? sender, EventArgs e)
@@ -492,7 +490,7 @@ namespace BelSekolah.BelSekolahForm
                 LoadJadwalDetil(_hariID);
             }
         }
-
+         
         private void StartStopButton_Click(object? sender, EventArgs e)
         {
             if (StartStopButton.Text == "Start")
@@ -507,7 +505,6 @@ namespace BelSekolah.BelSekolahForm
                 AnimasiText();
                 AddDataToList();
                 GetJadwalDiputar();
-
             }
             else if (StartStopButton.Text == "Stop")
             {
