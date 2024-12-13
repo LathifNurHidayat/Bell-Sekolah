@@ -257,7 +257,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 File.Copy(SoundPath, tujuanPath);
         }
 
-
         private void SaveData()
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian", SoundFileText.Text);

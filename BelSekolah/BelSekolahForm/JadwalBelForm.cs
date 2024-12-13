@@ -94,7 +94,7 @@ namespace BelSekolah.BelSekolahForm
             CustomStyleGrid(JadwalKhususGrid);
         }
 
-        private void CustomStyleGrid(DataGridView grid)
+        private void CustomStyleGrid(DataGridView grid) 
         {
             grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
@@ -116,7 +116,7 @@ namespace BelSekolah.BelSekolahForm
 
         private void _timer_Tick(object? sender, EventArgs e)
         {
-            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/ 
+            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/
             TimeSpan timeNow = TimeSpan.Parse(JamLabel.Text);
 
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);

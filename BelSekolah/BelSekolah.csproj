@@ -13,12 +13,87 @@
 
   <ItemGroup>
     <None Remove="BelSekolahDatabase\Database.db" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 2.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 1.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 10.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 2.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 3.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 4.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 5.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 6.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 7.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 8.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 9.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Mengerjakan Soal.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Peserta Memasuki Ruang.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian telah habis.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian tinggal 5 menit.mp3" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="BelSekolahDatabase\Database.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 2.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 1.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 10.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 2.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 3.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 4.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 5.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 6.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 7.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 8.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 9.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Mengerjakan Soal.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Peserta Memasuki Ruang.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian telah habis.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian tinggal 5 menit.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="school-bell.ico" />
   </ItemGroup>
 
