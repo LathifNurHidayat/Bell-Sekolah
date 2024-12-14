@@ -122,4 +122,10 @@
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BelSekolahDatabase\Sound\Lagu Lagu\Lagu Nasional\" />
+    <Folder Include="BelSekolahDatabase\Sound\Lagu Lagu\Lagu Religi\" />
+    <Folder Include="BelSekolahDatabase\Sound\Lagu Lagu\Lagu Gending Jawa\" />
+  </ItemGroup>
+
 </Project>
