@@ -12,13 +12,17 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
 {
     public partial class InputLaguForm : Form
     {
-        public string NamaSound { get; set; }
+        public string SoundName { get; set; }
+        private List<TextBox> listTextBox = new List<TextBox>();
+        private string _soundName;
 
-        public InputLaguForm()
+        public InputLaguForm(string SoundName)
         {
             InitializeComponent();
+            _soundName = SoundName;
             InitialTextBox();
-
+            RegisterControlEvent();
+            listTextBox.AddRange(new[] { Lagu1Text, Lagu2Text, Lagu3Text, Lagu4Text, Lagu5Text, Lagu6Text });
         }
 
         private void RegisterControlEvent()
@@ -44,12 +48,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
         {
             Button button = sender as Button;
             
-            List<TextBox> listTextBox = new List<TextBox>()
-            {
-                Lagu1Text,Lagu2Text, Lagu3Text,
-                Lagu4Text,Lagu5Text,Lagu6Text
-            };
-
             if (!string.IsNullOrWhiteSpace(listTextBox.FirstOrDefault(x => x.Tag == button.Tag).Text))
                 {
                 listTextBox.FirstOrDefault(x => x.Tag == button.Tag).Clear();
@@ -58,6 +56,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
 
         private void BrowseLaguButton_Click(object? sender, EventArgs e)
         {
+            Button button = sender as Button;
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound (*.mp3) |*.mp3";
             openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu");
@@ -70,30 +70,30 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
                 soundPath = openFileDialog.FileName;
                 soundName = Path.GetFileName(soundPath);
 
-                 
+                listTextBox.FirstOrDefault(x => x.Tag == button.Tag).Text = soundName;
             }
-            
-
         }
 
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
-            string Sound = string.Empty;
             var TextBox = new[] {Lagu1Text.Text, Lagu2Text.Text, Lagu3Text.Text, Lagu4Text.Text ,Lagu5Text.Text , Lagu6Text.Text };
 
-            Sound = string.Join("|", TextBox.Where(x => !string.IsNullOrWhiteSpace(x)));
+            SoundName = string.Join("|", TextBox.Where(x => !string.IsNullOrWhiteSpace(x)));
             this.DialogResult = DialogResult.OK;
         }
 
         private void InitialTextBox()
         {
-            string[] Sound = NamaSound.Split('|');
-            Lagu1Text.Text = Sound[0] ?? string.Empty;
-            Lagu2Text.Text = Sound[1] ?? string.Empty;
-            Lagu3Text.Text = Sound[2] ?? string.Empty;
-            Lagu4Text.Text = Sound[3] ?? string.Empty;
-            Lagu5Text.Text = Sound[4] ?? string.Empty;
-            Lagu6Text.Text = Sound[5] ?? string.Empty;  
+            if (string.IsNullOrEmpty(_soundName)) return;
+
+            string[] Sound = _soundName.Split('|');
+            var textBoxes = new[] { Lagu1Text, Lagu2Text, Lagu3Text, Lagu4Text, Lagu5Text, Lagu6Text };
+
+            for (int i = 0; i < textBoxes.Length; i++)
+            {
+                textBoxes[i].Text = i < Sound.Length ? Sound[i] : string.Empty;
+            }
+
         }
     }
 } 

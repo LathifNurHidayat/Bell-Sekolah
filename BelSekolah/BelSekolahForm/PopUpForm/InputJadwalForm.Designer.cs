@@ -30,9 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalForm));
             panel2 = new Panel();
+            TambahLaguButton = new Button();
+            label5 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            LaguText = new TextBox();
+            LaguPicker = new DateTimePicker();
             label4 = new Label();
             label1 = new Label();
             BrowseIndonesiaRayaButton = new Button();
@@ -130,9 +132,6 @@
             label2 = new Label();
             UbahButton = new Button();
             HariText = new Label();
-            button2 = new Button();
-            label5 = new Label();
-            BrowseLaguButton = new Button();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
@@ -142,12 +141,11 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.Gainsboro;
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(BrowseLaguButton);
+            panel2.Controls.Add(TambahLaguButton);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(button2);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(dateTimePicker1);
+            panel2.Controls.Add(LaguText);
+            panel2.Controls.Add(LaguPicker);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(BrowseIndonesiaRayaButton);
@@ -246,6 +244,32 @@
             panel2.Size = new Size(755, 705);
             panel2.TabIndex = 1;
             // 
+            // TambahLaguButton
+            // 
+            TambahLaguButton.BackColor = Color.Gainsboro;
+            TambahLaguButton.FlatAppearance.BorderColor = Color.Black;
+            TambahLaguButton.FlatStyle = FlatStyle.Flat;
+            TambahLaguButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            TambahLaguButton.Location = new Point(644, 58);
+            TambahLaguButton.Name = "TambahLaguButton";
+            TambahLaguButton.Size = new Size(94, 29);
+            TambahLaguButton.TabIndex = 182;
+            TambahLaguButton.Tag = "Jam0";
+            TambahLaguButton.Text = "Tambah";
+            TambahLaguButton.UseVisualStyleBackColor = false;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(11, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(125, 23);
+            label5.TabIndex = 181;
+            label5.Text = "Indonesia Raya";
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -258,30 +282,30 @@
             label3.Tag = "0";
             label3.Text = ":";
             // 
-            // textBox1
+            // LaguText
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(345, 60);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(251, 30);
-            textBox1.TabIndex = 176;
-            textBox1.TabStop = false;
-            textBox1.Tag = "Jam0";
+            LaguText.BorderStyle = BorderStyle.FixedSingle;
+            LaguText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            LaguText.Location = new Point(345, 60);
+            LaguText.Multiline = true;
+            LaguText.Name = "LaguText";
+            LaguText.ReadOnly = true;
+            LaguText.Size = new Size(290, 30);
+            LaguText.TabIndex = 176;
+            LaguText.TabStop = false;
+            LaguText.Tag = "Jam0";
             // 
-            // dateTimePicker1
+            // LaguPicker
             // 
-            dateTimePicker1.CustomFormat = "HH:mm";
-            dateTimePicker1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(251, 60);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.ShowUpDown = true;
-            dateTimePicker1.Size = new Size(83, 30);
-            dateTimePicker1.TabIndex = 174;
-            dateTimePicker1.Tag = "Jam0";
+            LaguPicker.CustomFormat = "HH:mm";
+            LaguPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            LaguPicker.Format = DateTimePickerFormat.Custom;
+            LaguPicker.Location = new Point(251, 60);
+            LaguPicker.Name = "LaguPicker";
+            LaguPicker.ShowUpDown = true;
+            LaguPicker.Size = new Size(83, 30);
+            LaguPicker.TabIndex = 174;
+            LaguPicker.Tag = "Jam0";
             // 
             // label4
             // 
@@ -1471,46 +1495,6 @@
             HariText.Text = "Senin - Jadwal Normal";
             HariText.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // button2
-            // 
-            button2.BackColor = Color.Gainsboro;
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.FlatAppearance.BorderColor = Color.Black;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(605, 60);
-            button2.Name = "button2";
-            button2.Size = new Size(30, 30);
-            button2.TabIndex = 180;
-            button2.TabStop = false;
-            button2.Tag = "Jam0";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.ForeColor = Color.Red;
-            label5.Location = new Point(11, 132);
-            label5.Name = "label5";
-            label5.Size = new Size(125, 23);
-            label5.TabIndex = 181;
-            label5.Text = "Indonesia Raya";
-            // 
-            // BrowseLaguButton
-            // 
-            BrowseLaguButton.BackColor = Color.Gainsboro;
-            BrowseLaguButton.FlatAppearance.BorderColor = Color.Black;
-            BrowseLaguButton.FlatStyle = FlatStyle.Flat;
-            BrowseLaguButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BrowseLaguButton.Location = new Point(644, 58);
-            BrowseLaguButton.Name = "BrowseLaguButton";
-            BrowseLaguButton.Size = new Size(94, 29);
-            BrowseLaguButton.TabIndex = 182;
-            BrowseLaguButton.Tag = "Jam0";
-            BrowseLaguButton.Text = "Browse";
-            BrowseLaguButton.UseVisualStyleBackColor = false;
-            // 
             // InputJadwalForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1628,11 +1612,10 @@
         private DateTimePicker IndonesiaRayaPicker;
         private Label IndonesiaRayaLabel;
         private Label label3;
-        private TextBox textBox1;
-        private DateTimePicker dateTimePicker1;
+        private TextBox LaguText;
+        private DateTimePicker LaguPicker;
         private Label label4;
         private Label label5;
-        private Button button2;
-        private Button BrowseLaguButton;
+        private Button TambahLaguButton;
     }
 }

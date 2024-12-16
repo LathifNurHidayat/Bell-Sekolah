@@ -1,5 +1,6 @@
 ﻿using BelSekolah.BelSekolahBackEnd.Dal;
 using BelSekolah.BelSekolahBackEnd.Model;
+using BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu;
 using NAudio.MediaFoundation;
 using NAudio.Wave;
 using System;
@@ -388,8 +389,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             UbahButton.Click += UbahButton_Click;
             SimpanButton.Click += SimpanButton_Click;
+            TambahLaguButton.Click += TambahLaguButton_Click;
 
             this.FormClosed += InputDataForm_FormClosed;
+        }
+
+        private void TambahLaguButton_Click(object? sender, EventArgs e)
+        {
+            InputLaguForm form = new InputLaguForm(LaguText.Text);
+            if (form.ShowDialog(this) == DialogResult.OK)
+                LaguText.Text = form.SoundName;
         }
 
         private void InputDataForm_FormClosed(object? sender, FormClosedEventArgs e)

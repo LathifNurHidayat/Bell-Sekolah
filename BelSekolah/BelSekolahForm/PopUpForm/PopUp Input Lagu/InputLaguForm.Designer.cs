@@ -239,7 +239,6 @@
             Lagu6Text.Size = new Size(356, 30);
             Lagu6Text.TabIndex = 190;
             Lagu6Text.Tag = "Lagu_6";
-            Lagu6Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label6
             // 
@@ -263,7 +262,6 @@
             Lagu5Text.Size = new Size(356, 30);
             Lagu5Text.TabIndex = 188;
             Lagu5Text.Tag = "Lagu_5";
-            Lagu5Text.TextAlign = HorizontalAlignment.Center;
             // 
             // BrowseLagu4Button
             // 
@@ -343,7 +341,6 @@
             Lagu4Text.Size = new Size(356, 30);
             Lagu4Text.TabIndex = 175;
             Lagu4Text.Tag = "Lagu_4";
-            Lagu4Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -367,7 +364,6 @@
             Lagu3Text.Size = new Size(356, 30);
             Lagu3Text.TabIndex = 173;
             Lagu3Text.Tag = "Lagu_3";
-            Lagu3Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label3
             // 
@@ -391,7 +387,6 @@
             Lagu2Text.Size = new Size(356, 30);
             Lagu2Text.TabIndex = 171;
             Lagu2Text.Tag = "Lagu_2";
-            Lagu2Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -428,7 +423,6 @@
             Lagu1Text.Size = new Size(356, 30);
             Lagu1Text.TabIndex = 169;
             Lagu1Text.Tag = "Lagu_1";
-            Lagu1Text.TextAlign = HorizontalAlignment.Center;
             // 
             // InputLaguForm
             // 
