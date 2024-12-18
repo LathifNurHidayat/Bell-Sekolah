@@ -35,7 +35,7 @@
             label3 = new Label();
             LaguText = new TextBox();
             LaguPicker = new DateTimePicker();
-            label4 = new Label();
+            LaguLabel = new Label();
             label1 = new Label();
             BrowseIndonesiaRayaButton = new Button();
             PlayIndonesiaRayaButton = new Button();
@@ -124,8 +124,8 @@
             Jam1Label = new Label();
             BrowseJamMasukButton = new Button();
             PlayJamMasukButton = new Button();
-            Jam0Text = new TextBox();
-            Jam0Picker = new DateTimePicker();
+            JamMasukText = new TextBox();
+            JamMasukPicker = new DateTimePicker();
             JamMasukLabel = new Label();
             panel3 = new Panel();
             label28 = new Label();
@@ -146,7 +146,7 @@
             panel2.Controls.Add(label3);
             panel2.Controls.Add(LaguText);
             panel2.Controls.Add(LaguPicker);
-            panel2.Controls.Add(label4);
+            panel2.Controls.Add(LaguLabel);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(BrowseIndonesiaRayaButton);
             panel2.Controls.Add(PlayIndonesiaRayaButton);
@@ -235,8 +235,8 @@
             panel2.Controls.Add(Jam1Label);
             panel2.Controls.Add(BrowseJamMasukButton);
             panel2.Controls.Add(PlayJamMasukButton);
-            panel2.Controls.Add(Jam0Text);
-            panel2.Controls.Add(Jam0Picker);
+            panel2.Controls.Add(JamMasukText);
+            panel2.Controls.Add(JamMasukPicker);
             panel2.Controls.Add(JamMasukLabel);
             panel2.Controls.Add(panel3);
             panel2.Location = new Point(12, 81);
@@ -254,7 +254,7 @@
             TambahLaguButton.Name = "TambahLaguButton";
             TambahLaguButton.Size = new Size(94, 29);
             TambahLaguButton.TabIndex = 182;
-            TambahLaguButton.Tag = "Jam0";
+            TambahLaguButton.Tag = "LaguLagu";
             TambahLaguButton.Text = "Tambah";
             TambahLaguButton.UseVisualStyleBackColor = false;
             // 
@@ -293,7 +293,7 @@
             LaguText.Size = new Size(290, 30);
             LaguText.TabIndex = 176;
             LaguText.TabStop = false;
-            LaguText.Tag = "Jam0";
+            LaguText.Tag = "LaguLagu";
             // 
             // LaguPicker
             // 
@@ -305,18 +305,18 @@
             LaguPicker.ShowUpDown = true;
             LaguPicker.Size = new Size(83, 30);
             LaguPicker.TabIndex = 174;
-            LaguPicker.Tag = "Jam0";
+            LaguPicker.Tag = "LaguLagu";
             // 
-            // label4
+            // LaguLabel
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(11, 60);
-            label4.Name = "label4";
-            label4.Size = new Size(101, 23);
-            label4.TabIndex = 175;
-            label4.Tag = "0";
-            label4.Text = "Lagu - Lagu";
+            LaguLabel.AutoSize = true;
+            LaguLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            LaguLabel.Location = new Point(11, 60);
+            LaguLabel.Name = "LaguLabel";
+            LaguLabel.Size = new Size(101, 23);
+            LaguLabel.TabIndex = 175;
+            LaguLabel.Tag = "LaguLagu";
+            LaguLabel.Text = "Lagu - Lagu";
             // 
             // label1
             // 
@@ -339,7 +339,7 @@
             BrowseIndonesiaRayaButton.Name = "BrowseIndonesiaRayaButton";
             BrowseIndonesiaRayaButton.Size = new Size(94, 29);
             BrowseIndonesiaRayaButton.TabIndex = 172;
-            BrowseIndonesiaRayaButton.Tag = "Jam4";
+            BrowseIndonesiaRayaButton.Tag = "IndonesiaRaya";
             BrowseIndonesiaRayaButton.Text = "Browse";
             BrowseIndonesiaRayaButton.UseVisualStyleBackColor = false;
             // 
@@ -354,7 +354,7 @@
             PlayIndonesiaRayaButton.Size = new Size(30, 30);
             PlayIndonesiaRayaButton.TabIndex = 171;
             PlayIndonesiaRayaButton.TabStop = false;
-            PlayIndonesiaRayaButton.Tag = "Jam4";
+            PlayIndonesiaRayaButton.Tag = "IndonesiaRaya";
             PlayIndonesiaRayaButton.UseVisualStyleBackColor = false;
             // 
             // IndonesiaRayaText
@@ -367,19 +367,19 @@
             IndonesiaRayaText.Size = new Size(251, 30);
             IndonesiaRayaText.TabIndex = 170;
             IndonesiaRayaText.TabStop = false;
-            IndonesiaRayaText.Tag = "Jam4";
+            IndonesiaRayaText.Tag = "IndonesiaRaya";
             // 
             // IndonesiaRayaPicker
             // 
             IndonesiaRayaPicker.CustomFormat = "HH:mm";
-            IndonesiaRayaPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            IndonesiaRayaPicker.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             IndonesiaRayaPicker.Format = DateTimePickerFormat.Custom;
             IndonesiaRayaPicker.Location = new Point(251, 312);
             IndonesiaRayaPicker.Name = "IndonesiaRayaPicker";
             IndonesiaRayaPicker.ShowUpDown = true;
             IndonesiaRayaPicker.Size = new Size(83, 30);
             IndonesiaRayaPicker.TabIndex = 168;
-            IndonesiaRayaPicker.Tag = "Jam4";
+            IndonesiaRayaPicker.Tag = "IndonesiaRaya";
             IndonesiaRayaPicker.Value = new DateTime(2024, 12, 16, 10, 0, 0, 0);
             // 
             // IndonesiaRayaLabel
@@ -391,6 +391,7 @@
             IndonesiaRayaLabel.Name = "IndonesiaRayaLabel";
             IndonesiaRayaLabel.Size = new Size(125, 23);
             IndonesiaRayaLabel.TabIndex = 169;
+            IndonesiaRayaLabel.Tag = "IndonesiaRaya";
             IndonesiaRayaLabel.Text = "Indonesia Raya";
             // 
             // SimpanButton
@@ -1380,7 +1381,7 @@
             BrowseJamMasukButton.Name = "BrowseJamMasukButton";
             BrowseJamMasukButton.Size = new Size(94, 29);
             BrowseJamMasukButton.TabIndex = 81;
-            BrowseJamMasukButton.Tag = "Jam0";
+            BrowseJamMasukButton.Tag = "JamMasuk";
             BrowseJamMasukButton.Text = "Browse";
             BrowseJamMasukButton.UseVisualStyleBackColor = false;
             // 
@@ -1395,32 +1396,32 @@
             PlayJamMasukButton.Size = new Size(30, 30);
             PlayJamMasukButton.TabIndex = 80;
             PlayJamMasukButton.TabStop = false;
-            PlayJamMasukButton.Tag = "Jam0";
+            PlayJamMasukButton.Tag = "JamMasuk";
             PlayJamMasukButton.UseVisualStyleBackColor = false;
             // 
-            // Jam0Text
+            // JamMasukText
             // 
-            Jam0Text.BorderStyle = BorderStyle.FixedSingle;
-            Jam0Text.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam0Text.Location = new Point(345, 96);
-            Jam0Text.Name = "Jam0Text";
-            Jam0Text.ReadOnly = true;
-            Jam0Text.Size = new Size(251, 30);
-            Jam0Text.TabIndex = 79;
-            Jam0Text.TabStop = false;
-            Jam0Text.Tag = "Jam0";
+            JamMasukText.BorderStyle = BorderStyle.FixedSingle;
+            JamMasukText.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            JamMasukText.Location = new Point(345, 96);
+            JamMasukText.Name = "JamMasukText";
+            JamMasukText.ReadOnly = true;
+            JamMasukText.Size = new Size(251, 30);
+            JamMasukText.TabIndex = 79;
+            JamMasukText.TabStop = false;
+            JamMasukText.Tag = "JamMasuk";
             // 
-            // Jam0Picker
+            // JamMasukPicker
             // 
-            Jam0Picker.CustomFormat = "HH:mm";
-            Jam0Picker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam0Picker.Format = DateTimePickerFormat.Custom;
-            Jam0Picker.Location = new Point(251, 96);
-            Jam0Picker.Name = "Jam0Picker";
-            Jam0Picker.ShowUpDown = true;
-            Jam0Picker.Size = new Size(83, 30);
-            Jam0Picker.TabIndex = 77;
-            Jam0Picker.Tag = "Jam0";
+            JamMasukPicker.CustomFormat = "HH:mm";
+            JamMasukPicker.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            JamMasukPicker.Format = DateTimePickerFormat.Custom;
+            JamMasukPicker.Location = new Point(251, 96);
+            JamMasukPicker.Name = "JamMasukPicker";
+            JamMasukPicker.ShowUpDown = true;
+            JamMasukPicker.Size = new Size(83, 30);
+            JamMasukPicker.TabIndex = 77;
+            JamMasukPicker.Tag = "JamMasuk";
             // 
             // JamMasukLabel
             // 
@@ -1431,7 +1432,7 @@
             JamMasukLabel.Name = "JamMasukLabel";
             JamMasukLabel.Size = new Size(94, 23);
             JamMasukLabel.TabIndex = 78;
-            JamMasukLabel.Tag = "0";
+            JamMasukLabel.Tag = "JamMasuk";
             JamMasukLabel.Text = "Jam Masuk";
             // 
             // panel3
@@ -1518,8 +1519,8 @@
         private Button SimpanButton;
         private Button BrowseJamMasukButton;
         private Button PlayJamMasukButton;
-        private TextBox Jam0Text;
-        private DateTimePicker Jam0Picker;
+        private TextBox JamMasukText;
+        private DateTimePicker JamMasukPicker;
         private Label JamMasukLabel;
         private Label label2;
         private Button UbahButton;
@@ -1614,7 +1615,7 @@
         private Label label3;
         private TextBox LaguText;
         private DateTimePicker LaguPicker;
-        private Label label4;
+        private Label LaguLabel;
         private Label label5;
         private Button TambahLaguButton;
     }
