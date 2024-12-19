@@ -115,7 +115,7 @@ namespace BelSekolah.BelSekolahForm
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void _timer_Tick(object? sender, EventArgs e)
+        private async void _timer_Tick(object? sender, EventArgs e)
         {
             /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/
             TimeSpan timeNow = TimeSpan.Parse(JamLabel.Text);
@@ -131,8 +131,22 @@ namespace BelSekolah.BelSekolahForm
             if (data != null)
             {
                 string path = data.SoundPath;
-                PlaySound(path);
-                return;
+
+                if (path.Contains("|"))
+                {
+                    string[] laguName = data.SoundName.Split('|');
+                    foreach (string lagu in laguName)
+                    {
+                        string laguPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu", lagu);
+                        await PlaySoundAsync(laguPath);
+                        await Task.Delay(000);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(path);
+                    await PlaySoundAsync(path);
+                }
             }
         }
 
@@ -152,10 +166,14 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-        private void PlaySound(string soundPath)
+        private async Task PlaySoundAsync(string soundPath)
         {
+            var tcs = new TaskCompletionSource<bool>();
+
             try
             {
+               // await StopSoundGraduallyAsync();
+
                 audioFileReader = new AudioFileReader(soundPath);
                 waveOutDevice = new WaveOutEvent();
                 waveOutDevice.Init(audioFileReader);
@@ -173,14 +191,43 @@ namespace BelSekolah.BelSekolahForm
                         audioFileReader.Dispose();
                         audioFileReader = null;
                     }
+
+                    tcs.SetResult(true); 
                 };
 
+                await tcs.Task;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Gagal memutar suara: {ex.Message}");
+                tcs.SetException(ex); 
             }
         }
+
+        private async Task StopSoundGraduallyAsync()
+        {
+            if (waveOutDevice != null && audioFileReader != null)
+            {
+                try
+                {
+                    int fadeOutDuration = 1000;
+                    float initialVolume = waveOutDevice.Volume;
+
+                    for (int i = 10; i >= 0; i--)
+                    {
+                        waveOutDevice.Volume = initialVolume * (i / 10f);
+                        await Task.Delay(fadeOutDuration / 10);
+                    }
+
+                    waveOutDevice.Stop();
+                }
+                catch
+                {
+                    
+                }
+            }
+        }
+
 
         private void ClearText()
         {
@@ -257,7 +304,7 @@ namespace BelSekolah.BelSekolahForm
         private void InitialCombo()
         {
             var Hari = _jadwalDal.ListData();
-            HariCombo.DataSource = Hari;
+            HariCombo.DataSource = Hari;  
             HariCombo.DisplayMember = "Hari";
             HariCombo.ValueMember = "HariID";
 

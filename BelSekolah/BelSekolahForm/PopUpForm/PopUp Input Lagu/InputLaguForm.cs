@@ -60,7 +60,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound (*.mp3) |*.mp3";
-            openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu");
+            string folderApk = openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu");
 
             string soundPath = string.Empty;
             string soundName = string.Empty;
@@ -71,6 +71,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
                 soundName = Path.GetFileName(soundPath);
 
                 listTextBox.FirstOrDefault(x => x.Tag == button.Tag).Text = soundName;
+
+                if (!Directory.Exists(folderApk)) 
+                    Directory.CreateDirectory(folderApk);
+
+                string tujuanCopy = Path.Combine(folderApk, soundName);
+
+                if (!File.Exists(tujuanCopy))
+                {
+                    File.Copy(soundPath, tujuanCopy);
+                }
             }
         }
 

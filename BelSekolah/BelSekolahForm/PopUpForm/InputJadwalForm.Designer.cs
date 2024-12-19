@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputJadwalForm));
             panel2 = new Panel();
             TambahLaguButton = new Button();
-            label5 = new Label();
             label3 = new Label();
             LaguText = new TextBox();
             LaguPicker = new DateTimePicker();
@@ -142,7 +141,6 @@
             panel2.BackColor = Color.Gainsboro;
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(TambahLaguButton);
-            panel2.Controls.Add(label5);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(LaguText);
             panel2.Controls.Add(LaguPicker);
@@ -257,18 +255,6 @@
             TambahLaguButton.Tag = "LaguLagu";
             TambahLaguButton.Text = "Tambah";
             TambahLaguButton.UseVisualStyleBackColor = false;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.ForeColor = Color.Red;
-            label5.Location = new Point(11, 132);
-            label5.Name = "label5";
-            label5.Size = new Size(125, 23);
-            label5.TabIndex = 181;
-            label5.Text = "Indonesia Raya";
             // 
             // label3
             // 
@@ -1365,11 +1351,11 @@
             // 
             Jam1Label.AutoSize = true;
             Jam1Label.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Jam1Label.Location = new Point(129, 132);
+            Jam1Label.Location = new Point(11, 132);
             Jam1Label.Name = "Jam1Label";
-            Jam1Label.Size = new Size(105, 23);
+            Jam1Label.Size = new Size(225, 23);
             Jam1Label.TabIndex = 88;
-            Jam1Label.Text = "+ Jam ke - 1";
+            Jam1Label.Text = "Indonesia Raya + Jam ke - 1";
             // 
             // BrowseJamMasukButton
             // 
@@ -1616,7 +1602,6 @@
         private TextBox LaguText;
         private DateTimePicker LaguPicker;
         private Label LaguLabel;
-        private Label label5;
         private Button TambahLaguButton;
     }
 }
