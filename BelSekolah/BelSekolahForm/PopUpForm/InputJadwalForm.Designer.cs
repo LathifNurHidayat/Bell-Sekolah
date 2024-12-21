@@ -239,7 +239,7 @@
             panel2.Controls.Add(panel3);
             panel2.Location = new Point(12, 81);
             panel2.Name = "panel2";
-            panel2.Size = new Size(755, 705);
+            panel2.Size = new Size(758, 705);
             panel2.TabIndex = 1;
             // 
             // TambahLaguButton
@@ -1431,7 +1431,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(753, 52);
+            panel3.Size = new Size(756, 52);
             panel3.TabIndex = 86;
             // 
             // label28
@@ -1477,7 +1477,7 @@
             HariText.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             HariText.Location = new Point(12, 13);
             HariText.Name = "HariText";
-            HariText.Size = new Size(754, 56);
+            HariText.Size = new Size(757, 56);
             HariText.TabIndex = 86;
             HariText.Text = "Senin - Jadwal Normal";
             HariText.TextAlign = ContentAlignment.MiddleCenter;
@@ -1486,7 +1486,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(779, 798);
+            ClientSize = new Size(782, 798);
             Controls.Add(HariText);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");

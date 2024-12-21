@@ -15,6 +15,9 @@
     <None Remove="BelSekolahDatabase\Database.db" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan Lagu Bagimu Negeri.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan lagu Indonesia Raya.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Berkibarlah Benderaku.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 2.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 1.mp3" />
@@ -27,18 +30,17 @@
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 7.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 8.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 9.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Menyanyikan Lagu Bagimu Negeri.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Menyanyikan Lagu Indonesia Raya.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Bel_Menyanyikan Lagu Bagimu Negeri.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Bel_Menyanyikan lagu Indonesia Raya.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Berkibarlah Benderaku.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Menyanyikan Lagu Bagimu Negeri.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Menyanyikan Lagu Indonesia Raya.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Mengerjakan Soal.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Peserta Memasuki Ruang.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian telah habis.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian tinggal 5 menit.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Bagimu Negeri.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Berkibarlah-Instrumental.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Gending Jawa - Musik Tenang dan Adem Instrumental.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\GENDING-GENDING NYAMLENG COCOK GAWE TOMBO KESEL  CS PURWO WILIS  KAESAR AUDIO.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Kumpulan Lagu Indonesia Merdeka.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Lagu Kebangsaan Nasional Cover by Putri Ariani Full Album.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Nissa Sabyan Sholawat.mp3" />
-    <None Remove="BelSekolahDatabase\Sound\Lagu Lagu\Rindu Muhammadku-Hadad Alwi.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +51,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan Lagu Bagimu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan lagu Indonesia Raya.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Berkibarlah Benderaku.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3">
@@ -87,6 +98,27 @@
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 9.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Menyanyikan Lagu Bagimu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Menyanyikan Lagu Indonesia Raya.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Bel_Menyanyikan Lagu Bagimu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Bel_Menyanyikan lagu Indonesia Raya.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Berkibarlah Benderaku.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Menyanyikan Lagu Bagimu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Menyanyikan Lagu Indonesia Raya.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Mengerjakan Soal.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -99,37 +131,10 @@
     <Content Include="BelSekolahDatabase\Sound\Jam Ujian\Ujian - Waktu ujian tinggal 5 menit.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Bagimu Negeri.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Berkibarlah-Instrumental.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Gending Jawa - Musik Tenang dan Adem Instrumental.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\GENDING-GENDING NYAMLENG COCOK GAWE TOMBO KESEL  CS PURWO WILIS  KAESAR AUDIO.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Kumpulan Lagu Indonesia Merdeka.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Nissa Sabyan Sholawat.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Rindu Muhammadku-Hadad Alwi.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="school-bell.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="BelSekolahDatabase\Sound\Lagu Lagu\Lagu Kebangsaan Nasional Cover by Putri Ariani Full Album.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -155,6 +160,10 @@
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BelSekolahDatabase\Sound\Lagu Lagu\" />
   </ItemGroup>
 
 </Project>
