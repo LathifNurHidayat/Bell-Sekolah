@@ -241,6 +241,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveData()
         {
+            int cekTanggal = _rencanakanJadwalDal.GetTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"));
+            if (cekTanggal != 0)
+            {
+                MessageBox.Show("Jadwal dengan tanggal tersebut sudah terdaftar.\nMohon pilih tanggal lain untuk melanjutkan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+            _hariID = _jadwalDal.GetIdByHari(_hariName);
+
             List<Label> labels = new List<Label>()
             {
                 LaguLabel,JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label,Istirahat1SelesaiLabel, Jam4Label,IndonesiaRayaLabel,
@@ -417,7 +427,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void TanggalPicker_DropDown(object? sender, EventArgs e)
         {
             _tanggalDatetime = TanggalPicker.Value;
-        }
+        } 
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
         {
@@ -430,7 +440,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             }
 
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
-            DefaultSound();
             _hariID = _jadwalDal.GetIdByHari(_hariName);
         }
 

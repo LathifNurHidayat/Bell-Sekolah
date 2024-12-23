@@ -285,6 +285,16 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveData()
         {
+            int cekTanggal = _rencanakanJadwalDal.GetTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"));
+            if (cekTanggal != 0)
+            {
+                MessageBox.Show("Jadwal dengan tanggal tersebut sudah terdaftar.\nMohon pilih tanggal lain untuk melanjutkan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+            _hariId = _jadwalDal.GetIdByHari(_hariName);
+
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian", SoundFileText.Text);
 
             var data = new RencanakanJadwalModel
