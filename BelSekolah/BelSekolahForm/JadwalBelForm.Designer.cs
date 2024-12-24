@@ -96,7 +96,7 @@
             JadwalkanButton.Location = new Point(922, 48);
             JadwalkanButton.Name = "JadwalkanButton";
             JadwalkanButton.Size = new Size(140, 39);
-            JadwalkanButton.TabIndex = 26;
+            JadwalkanButton.TabIndex = 7;
             JadwalkanButton.Text = "Jadwalkan Bel";
             JadwalkanButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             JadwalkanButton.UseVisualStyleBackColor = false;
@@ -108,7 +108,7 @@
             JadwalNormalRadio.Location = new Point(20, 93);
             JadwalNormalRadio.Name = "JadwalNormalRadio";
             JadwalNormalRadio.Size = new Size(145, 27);
-            JadwalNormalRadio.TabIndex = 24;
+            JadwalNormalRadio.TabIndex = 1;
             JadwalNormalRadio.Text = "Jadwal Normal";
             JadwalNormalRadio.UseVisualStyleBackColor = true;
             // 
@@ -123,7 +123,7 @@
             TambahNormalButton.Location = new Point(20, 513);
             TambahNormalButton.Name = "TambahNormalButton";
             TambahNormalButton.Size = new Size(109, 39);
-            TambahNormalButton.TabIndex = 23;
+            TambahNormalButton.TabIndex = 2;
             TambahNormalButton.Text = "Tambah";
             TambahNormalButton.TextImageRelation = TextImageRelation.TextAboveImage;
             TambahNormalButton.UseVisualStyleBackColor = false;
@@ -138,7 +138,7 @@
             DeleteNormalButton.Location = new Point(135, 513);
             DeleteNormalButton.Name = "DeleteNormalButton";
             DeleteNormalButton.Size = new Size(109, 39);
-            DeleteNormalButton.TabIndex = 25;
+            DeleteNormalButton.TabIndex = 3;
             DeleteNormalButton.Text = "Delete";
             DeleteNormalButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             DeleteNormalButton.UseVisualStyleBackColor = false;
@@ -185,7 +185,7 @@
             TambahKhususButton.Location = new Point(615, 513);
             TambahKhususButton.Name = "TambahKhususButton";
             TambahKhususButton.Size = new Size(109, 39);
-            TambahKhususButton.TabIndex = 18;
+            TambahKhususButton.TabIndex = 5;
             TambahKhususButton.Text = "Tambah";
             TambahKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             TambahKhususButton.UseVisualStyleBackColor = false;
@@ -200,7 +200,7 @@
             DeleteKhususButton.Location = new Point(730, 513);
             DeleteKhususButton.Name = "DeleteKhususButton";
             DeleteKhususButton.Size = new Size(109, 39);
-            DeleteKhususButton.TabIndex = 20;
+            DeleteKhususButton.TabIndex = 6;
             DeleteKhususButton.Text = "Delete";
             DeleteKhususButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             DeleteKhususButton.UseVisualStyleBackColor = false;
@@ -212,7 +212,7 @@
             JadwalKhususRadio.Location = new Point(600, 93);
             JadwalKhususRadio.Name = "JadwalKhususRadio";
             JadwalKhususRadio.Size = new Size(142, 27);
-            JadwalKhususRadio.TabIndex = 19;
+            JadwalKhususRadio.TabIndex = 4;
             JadwalKhususRadio.Text = "Jadwal Khusus";
             JadwalKhususRadio.UseVisualStyleBackColor = true;
             // 
@@ -226,7 +226,7 @@
             StartStopButton.Location = new Point(1076, 49);
             StartStopButton.Name = "StartStopButton";
             StartStopButton.Size = new Size(109, 39);
-            StartStopButton.TabIndex = 0;
+            StartStopButton.TabIndex = 8;
             StartStopButton.Text = "Start";
             StartStopButton.TextImageRelation = TextImageRelation.TextBeforeImage;
             StartStopButton.UseVisualStyleBackColor = false;
@@ -239,7 +239,7 @@
             HariCombo.Location = new Point(20, 54);
             HariCombo.Name = "HariCombo";
             HariCombo.Size = new Size(151, 36);
-            HariCombo.TabIndex = 1;
+            HariCombo.TabIndex = 0;
             // 
             // panel5
             // 
@@ -336,7 +336,6 @@
             DetailJadwalLinkLabel.Name = "DetailJadwalLinkLabel";
             DetailJadwalLinkLabel.Size = new Size(215, 23);
             DetailJadwalLinkLabel.TabIndex = 18;
-            DetailJadwalLinkLabel.TabStop = true;
             DetailJadwalLinkLabel.Text = "Detail Jadwal Yang Diputar";
             // 
             // JamLabel

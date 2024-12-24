@@ -61,7 +61,7 @@
             SaveButton.Location = new Point(309, 550);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(115, 38);
-            SaveButton.TabIndex = 87;
+            SaveButton.TabIndex = 3;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
             // 
@@ -73,7 +73,7 @@
             BrowseButton.Location = new Point(330, 279);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(94, 29);
-            BrowseButton.TabIndex = 86;
+            BrowseButton.TabIndex = 2;
             BrowseButton.Text = "Browse";
             BrowseButton.UseVisualStyleBackColor = false;
             // 
@@ -87,6 +87,7 @@
             PausePlayButton.Name = "PausePlayButton";
             PausePlayButton.Size = new Size(30, 30);
             PausePlayButton.TabIndex = 85;
+            PausePlayButton.TabStop = false;
             PausePlayButton.UseVisualStyleBackColor = false;
             // 
             // label4
@@ -107,6 +108,7 @@
             SoundFileText.ReadOnly = true;
             SoundFileText.Size = new Size(251, 27);
             SoundFileText.TabIndex = 83;
+            SoundFileText.TabStop = false;
             // 
             // label3
             // 
@@ -146,7 +148,7 @@
             KeteranganText.Multiline = true;
             KeteranganText.Name = "KeteranganText";
             KeteranganText.Size = new Size(404, 68);
-            KeteranganText.TabIndex = 0;
+            KeteranganText.TabIndex = 1;
             // 
             // panel1
             // 
@@ -189,6 +191,7 @@
             JadwalUjianGrid.RowTemplate.Height = 29;
             JadwalUjianGrid.Size = new Size(412, 182);
             JadwalUjianGrid.TabIndex = 90;
+            JadwalUjianGrid.TabStop = false;
             // 
             // NewButton
             // 
@@ -199,7 +202,7 @@
             NewButton.Location = new Point(188, 550);
             NewButton.Name = "NewButton";
             NewButton.Size = new Size(115, 38);
-            NewButton.TabIndex = 92;
+            NewButton.TabIndex = 4;
             NewButton.Text = "New";
             NewButton.UseVisualStyleBackColor = false;
             // 

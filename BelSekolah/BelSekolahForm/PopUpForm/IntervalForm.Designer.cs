@@ -53,7 +53,7 @@
             IntervalText.MaxLength = 2;
             IntervalText.Name = "IntervalText";
             IntervalText.Size = new Size(102, 30);
-            IntervalText.TabIndex = 169;
+            IntervalText.TabIndex = 1;
             IntervalText.TextAlign = HorizontalAlignment.Center;
             // 
             // label2
@@ -76,7 +76,7 @@
             AturButton.Location = new Point(94, 206);
             AturButton.Name = "AturButton";
             AturButton.Size = new Size(102, 38);
-            AturButton.TabIndex = 167;
+            AturButton.TabIndex = 4;
             AturButton.Text = "Atur";
             AturButton.UseVisualStyleBackColor = false;
             // 
@@ -117,7 +117,7 @@
             JamPelajaranCombo.Location = new Point(148, 17);
             JamPelajaranCombo.Name = "JamPelajaranCombo";
             JamPelajaranCombo.Size = new Size(129, 31);
-            JamPelajaranCombo.TabIndex = 175;
+            JamPelajaranCombo.TabIndex = 0;
             // 
             // label4
             // 
@@ -138,7 +138,7 @@
             JamIstirahat2Text.MaxLength = 2;
             JamIstirahat2Text.Name = "JamIstirahat2Text";
             JamIstirahat2Text.Size = new Size(102, 30);
-            JamIstirahat2Text.TabIndex = 173;
+            JamIstirahat2Text.TabIndex = 3;
             JamIstirahat2Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label3
@@ -160,7 +160,7 @@
             JamIstirahat1Text.MaxLength = 2;
             JamIstirahat1Text.Name = "JamIstirahat1Text";
             JamIstirahat1Text.Size = new Size(102, 30);
-            JamIstirahat1Text.TabIndex = 171;
+            JamIstirahat1Text.TabIndex = 2;
             JamIstirahat1Text.TextAlign = HorizontalAlignment.Center;
             // 
             // label1

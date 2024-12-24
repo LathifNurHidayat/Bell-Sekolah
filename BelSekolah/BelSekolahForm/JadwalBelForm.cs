@@ -144,7 +144,6 @@ namespace BelSekolah.BelSekolahForm
                 }
                 else
                 {
-                    MessageBox.Show(path);
                     await PlaySoundAsync(path);
                 }
             }
@@ -172,7 +171,7 @@ namespace BelSekolah.BelSekolahForm
 
             try
             {
-               // await StopSoundGraduallyAsync();
+                await StopSoundGraduallyAsync();
 
                 audioFileReader = new AudioFileReader(soundPath);
                 waveOutDevice = new WaveOutEvent();
