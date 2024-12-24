@@ -85,8 +85,8 @@ namespace BelSekolah.BelSekolahForm
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
 
-            _cekJadwal.Interval = 5000;
-            _cekJadwal.Tick += (s, e) => {AddDataToList(); };
+           /* _cekJadwal.Interval = 5000;
+            _cekJadwal.Tick += (s, e) => {AddDataToList(); };*/
             
             LoadJadwalDetil(_hariID);
 
@@ -139,7 +139,7 @@ namespace BelSekolah.BelSekolahForm
                     {
                         string laguPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu", lagu);
                         await PlaySoundAsync(laguPath);
-                        await Task.Delay(000);
+                        await Task.Delay(3000);
                     }
                 }
                 else
@@ -242,21 +242,26 @@ namespace BelSekolah.BelSekolahForm
 
         private void AddDataToList()
         {
+            _dataJadwalPutar.Clear();
+
             string tanggalHariIni = DateTime.Now.ToString("dd-MM-yyyy");
             int cekRencanaJadwalID = _rencanakanJadwalDal.GetTanggal(tanggalHariIni);
-
+            
             if (cekRencanaJadwalID != 0)
             {
-                var data = _jadwalKhususDal.ListDataForUjian(cekRencanaJadwalID).Select(x => new JadwalDto
+                var data = _jadwalKhususDal.ListDataAddToPlay(cekRencanaJadwalID).Select(x => new JadwalDto
                 {
-                    Waktu = TimeSpan.TryParse(x.Waktu, out TimeSpan waktu) ? waktu : DateTime.Now.TimeOfDay,
+                    Keterangan = x.Keterangan,
+                    HariID = x.HariID,
+                    Waktu = TimeSpan.Parse(x.Waktu),
+                    SoundName = x.SoundName,
                     SoundPath = x.SoundPath,
                 });
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
                 }
-                return;
+                return; 
             }
 
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
@@ -265,7 +270,6 @@ namespace BelSekolah.BelSekolahForm
             _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
             if (!string.IsNullOrEmpty(_jenisJadwal))
             {
-                _dataJadwalPutar.Clear();
 
                 if (_jenisJadwal == "Jadwal Normal")
                 {
@@ -330,7 +334,7 @@ namespace BelSekolah.BelSekolahForm
             JadwalKhususGrid.Columns["JadwalKhususID"].Visible = false;
             JadwalKhususGrid.Columns["HariID"].Visible = false;
             JadwalKhususGrid.Columns["SoundPath"].Visible = false;
-          //  JadwalKhususGrid.Columns["IsUjian"].Visible = false;
+            JadwalKhususGrid.Columns["IsUjian"].Visible = false;
             JadwalKhususGrid.Columns["RencanakanJadwalID"].Visible = false;
             JadwalKhususGrid.Columns["SoundName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             JadwalKhususGrid.Columns["Keterangan"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

@@ -13,10 +13,17 @@
 
   <ItemGroup>
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam_Persiapan Padamu Negeri.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan_Persiapan Padamu Negeri.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_IndonesiaRaya_Jam Ke - 1.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan Lagu Bagimu Negeri.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan lagu Indonesia Raya.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Berkibarlah Benderaku.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat  Ke - 1 _Mars_LSS.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Ke - 2 _ Mars_LSS.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_1.mp3" />
+    <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_2.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 2.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Ke - 1.mp3" />
@@ -46,7 +53,16 @@
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam_Persiapan Padamu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan_Persiapan Padamu Negeri.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_IndonesiaRaya_Jam Ke - 1.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Bel_Menyanyikan Lagu Bagimu Negeri.mp3">
@@ -56,6 +72,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Berkibarlah Benderaku.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat  Ke - 1 _Mars_LSS.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Ke - 2 _ Mars_LSS.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_2.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_1.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3">

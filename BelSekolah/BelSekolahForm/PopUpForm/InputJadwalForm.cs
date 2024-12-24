@@ -82,18 +82,20 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
                 {
                     { "Berkibarlah Benderaku.mp3", JamMasukText},
-                    { "Jam Ke - 1.mp3", Jam1Text },
+                    { "Bel_IndonesiaRaya_Jam Ke - 1.mp3", Jam1Text },
                     { "Jam Ke - 2.mp3", Jam2Text },
                     { "Jam Ke - 3.mp3", Jam3Text },
-                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
+                    { "Istirahat  Ke - 1 _Mars_LSS.mp3", JamIstirahat1Text },
+                    { "Istirahat Selesai.mp3", Istirahat1SelesaiText},
                     { "Jam Ke - 4.mp3", Jam4Text },
                     { "Menyanyikan Lagu Indonesia Raya.mp3", IndonesiaRayaText },
                     { "Jam Ke - 5.mp3", Jam5Text },
                     { "Jam Ke - 6.mp3", Jam6Text },
-                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
+                    { "Istirahat Ke - 2 _ Mars_LSS.mp3", JamIstirahat2Text },
+                    { "Istirahat Selesai.mp3", Istirahat2SelesaiText},
                     { "Jam Ke - 7.mp3", Jam7Text },
                     { "Jam Ke - 8.mp3", Jam8Text },
-                    { "Akhir Pekan.mp3", JamKepulanganText }
+                    { "Akhir Pekan_Persiapan Padamu Negeri.mp3", JamKepulanganText }
                 };
                 foreach (var item in sound)
                 {
@@ -106,20 +108,22 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 Dictionary<string, TextBox> sound = new Dictionary<string, TextBox>
                 {
                     { "Berkibarlah Benderaku.mp3", JamMasukText},
-                    { "Jam Ke - 1.mp3", Jam1Text },
+                    { "Bel_IndonesiaRaya_Jam Ke - 1.mp3", Jam1Text },
                     { "Jam Ke - 2.mp3", Jam2Text },
                     { "Jam Ke - 3.mp3", Jam3Text },
-                    { "Jam Istirahat Ke - 1.mp3", JamIstirahat1Text },
+                    { "Istirahat  Ke - 1 _Mars_LSS.mp3", JamIstirahat1Text },
+                    { "Istirahat Selesai_1.mp3", Istirahat1SelesaiText},
                     { "Jam Ke - 4.mp3", Jam4Text },
                     { "Menyanyikan Lagu Indonesia Raya.mp3", IndonesiaRayaText },
                     { "Jam Ke - 5.mp3", Jam5Text },
                     { "Jam Ke - 6.mp3", Jam6Text },
-                    { "Jam Istirahat Ke - 2.mp3", JamIstirahat2Text },
+                    { "Istirahat Ke - 2 _ Mars_LSS.mp3", JamIstirahat2Text },
+                    { "Istirahat Selesai_2.mp3", Istirahat2SelesaiText},
                     { "Jam Ke - 7.mp3", Jam7Text },
                     { "Jam Ke - 8.mp3", Jam8Text },
                     { "Jam Ke - 9.mp3", Jam9Text },
                     { "Jam Ke - 10.mp3", Jam10Text },
-                    { "Akhir Jam Pelajaran.mp3", JamKepulanganText }
+                    { "Akhir Jam_Persiapan Padamu Negeri.mp3", JamKepulanganText }
                 };
                 foreach (var item in sound)
                 {
@@ -165,7 +169,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             {
                 PlayJamMasukButton, PlayJam1Button, PlayJam2Button, PlayJam3Button, PlayJam4Button,
                 PlayIndonesiaRayaButton, PlayJam5Button, PlayJam6Button, PlayJam7Button, PlayJam8Button, PlayJam9Button,
-                PlayJam10Button, PlayJamKepulanganButton, PlayJamIstirahat1Button, PlayJamIstirahat2Button
+                PlayJam10Button, PlayJamKepulanganButton, PlayJamIstirahat1Button, PlayJamIstirahat2Button, PlayIstirahat1SelesaiButton, PlayIstirahat2SelesaiButton
             };
 
             foreach (Button button in buttons)
@@ -175,8 +179,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             List<DateTimePicker> datePickerControls = new List<DateTimePicker>
             {
-                LaguPicker, JamMasukPicker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Jam4Picker,IndonesiaRayaPicker,
-                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Jam7Picker, Jam8Picker, Jam9Picker,
+                LaguPicker, JamMasukPicker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Istirahat1SelesaiPicker, Jam4Picker,IndonesiaRayaPicker,
+                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Istirahat2SelesaiPicker, Jam7Picker, Jam8Picker, Jam9Picker,
                 Jam10Picker, JamKepulanganPicker
             };
             _datePickerControls.AddRange(datePickerControls);
@@ -199,8 +203,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             List<Label> labelControls = new List<Label>
             {
-                LaguLabel, JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label, IndonesiaRayaLabel,
-                Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
+                LaguLabel, JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label,JamIstirahat1Label, Jam4Label, IndonesiaRayaLabel,
+                Jam5Label, Jam6Label, JamIstirahat2Label,Istirahat2SelesaiLabel, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
             };
 
@@ -252,22 +256,22 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             List<Label> labels = new List<Label>()
             {
-                LaguLabel,JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Jam4Label,IndonesiaRayaLabel,
-                Jam5Label, Jam6Label, JamIstirahat2Label, Jam7Label, Jam8Label, Jam9Label,
+                LaguLabel,JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label,Istirahat1SelesaiLabel, Jam4Label,IndonesiaRayaLabel,
+                Jam5Label, Jam6Label, JamIstirahat2Label, Istirahat2SelesaiLabel, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
             };
 
             List<DateTimePicker> datePickers = new List<DateTimePicker>()
             {
-                LaguPicker,JamMasukPicker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Jam4Picker,IndonesiaRayaPicker,
-                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Jam7Picker, Jam8Picker, Jam9Picker,
+                LaguPicker,JamMasukPicker, Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker,Istirahat1SelesaiPicker, Jam4Picker,IndonesiaRayaPicker,
+                Jam5Picker, Jam6Picker, JamIstirahat2Picker,Istirahat2SelesaiPicker, Jam7Picker, Jam8Picker, Jam9Picker,
                 Jam10Picker, JamKepulanganPicker
             };
 
             List<TextBox> textBoxes = new List<TextBox>()
             {
-                LaguText, JamMasukText, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text,IndonesiaRayaText,
-                Jam5Text, Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text,
+                LaguText, JamMasukText, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text,Istirahat1SelesaiText, Jam4Text,IndonesiaRayaText,
+                Jam5Text, Jam6Text, JamIstirahat2Text, Istirahat2SelesaiText, Jam7Text, Jam8Text, Jam9Text,
                 Jam10Text, JamKepulanganText
             };
 
@@ -367,11 +371,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             BrowseJam2Button.Click += BrowseButton_Click;
             BrowseJam3Button.Click += BrowseButton_Click;
             BrowseIstirahat1Button.Click += BrowseButton_Click;
+            BrowseIstirahat1SelesaiButton.Click += BrowseButton_Click;
             BrowseJam4Button.Click += BrowseButton_Click;
             BrowseIndonesiaRayaButton.Click += BrowseButton_Click;
             BrowseJam5Button.Click += BrowseButton_Click;
             BrowseJam6Button.Click += BrowseButton_Click;
             BrowseIstirahat2Button.Click += BrowseButton_Click;
+            BrowseIstirahat2SelesaiButton.Click += BrowseButton_Click;
             BrowseJam7Button.Click += BrowseButton_Click;
             BrowseJam8Button.Click += BrowseButton_Click;
             BrowseJam9Button.Click += BrowseButton_Click;
@@ -384,11 +390,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             PlayJam2Button.Click += PlayJamButton_Click;
             PlayJam3Button.Click += PlayJamButton_Click;
             PlayJamIstirahat1Button.Click += PlayJamButton_Click;
+            PlayIstirahat1SelesaiButton.Click += PlayJamButton_Click;
             PlayJam4Button.Click += PlayJamButton_Click;
             PlayIndonesiaRayaButton.Click += PlayJamButton_Click;
             PlayJam5Button.Click += PlayJamButton_Click;
             PlayJam6Button.Click += PlayJamButton_Click;
             PlayJamIstirahat2Button.Click += PlayJamButton_Click;
+            PlayIstirahat2SelesaiButton.Click += PlayJamButton_Click;
             PlayJam7Button.Click += PlayJamButton_Click;
             PlayJam8Button.Click += PlayJamButton_Click;
             PlayJam9Button.Click += PlayJamButton_Click;
@@ -512,6 +520,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 {
                     picker.Value = startTime;
                     startTime = startTime.AddMinutes(istirahat_2);
+                }
+                else if (picker == Jam4Picker)
+                {
+                    picker.Value = Istirahat1SelesaiPicker.Value.AddMinutes(1);
+                }
+                else if (picker == Jam7Picker)
+                {
+                    picker.Value = Istirahat2SelesaiPicker.Value.AddMinutes(1);
                 }
                 else
                 {

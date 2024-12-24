@@ -163,11 +163,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
           
         private void SaveButton_Click(object? sender, EventArgs e)
         {
-            if (TanggalPicker.Value.ToString("dd-MM-yyyy") == DateTime.Today.ToString("dd-MM-yyyy"))
-            {
-                MessageBox.Show("Cek kembali tanggal yang anda masukan", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
 
             if (KeteranganJadwalText.Text == "" || SoundFileText.Text == "" || WaktuPicker.Value == DateTime.Today)
             {
