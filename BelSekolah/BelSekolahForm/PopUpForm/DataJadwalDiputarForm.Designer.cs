@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataJadwalDiputarForm));
             DataDiputarGrid = new DataGridView();
+            HariText = new Label();
             ((System.ComponentModel.ISupportInitialize)DataDiputarGrid).BeginInit();
             SuspendLayout();
             // 
@@ -38,19 +39,33 @@
             DataDiputarGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DataDiputarGrid.BackgroundColor = Color.WhiteSmoke;
             DataDiputarGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DataDiputarGrid.Location = new Point(12, 12);
+            DataDiputarGrid.Location = new Point(12, 55);
             DataDiputarGrid.Name = "DataDiputarGrid";
             DataDiputarGrid.ReadOnly = true;
             DataDiputarGrid.RowHeadersWidth = 51;
             DataDiputarGrid.RowTemplate.Height = 29;
-            DataDiputarGrid.Size = new Size(776, 426);
+            DataDiputarGrid.Size = new Size(776, 383);
             DataDiputarGrid.TabIndex = 0;
+            // 
+            // HariText
+            // 
+            HariText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            HariText.BackColor = Color.LightGray;
+            HariText.BorderStyle = BorderStyle.FixedSingle;
+            HariText.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            HariText.Location = new Point(12, 8);
+            HariText.Name = "HariText";
+            HariText.Size = new Size(776, 44);
+            HariText.TabIndex = 87;
+            HariText.Text = "Senin - Jadwal Normal";
+            HariText.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // DataJadwalDiputarForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(HariText);
             Controls.Add(DataDiputarGrid);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DataJadwalDiputarForm";
@@ -62,5 +77,6 @@
         #endregion
 
         private DataGridView DataDiputarGrid;
+        private Label HariText;
     }
 }

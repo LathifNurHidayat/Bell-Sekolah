@@ -241,13 +241,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void SaveData()
         {
-            int cekTanggal = _rencanakanJadwalDal.GetTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"));
-            if (cekTanggal != 0)
-            {
-                MessageBox.Show("Jadwal dengan tanggal tersebut sudah terdaftar.\nMohon pilih tanggal lain untuk melanjutkan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
             _hariID = _jadwalDal.GetIdByHari(_hariName);
 
@@ -469,6 +462,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     isNull = true;
                     break;
                 }
+            }
+
+            bool cekTanggal = _rencanakanJadwalDal.CekTanggal(TanggalPicker.Value.ToString("dd-MM-yyyy"), _rencanakanJadwalID);
+            if (cekTanggal)
+            {
+                MessageBox.Show("Jadwal dengan tanggal tersebut sudah terdaftar.\nMohon pilih tanggal lain untuk melanjutkan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
             if (string.IsNullOrWhiteSpace(KeteranganText.Text))
