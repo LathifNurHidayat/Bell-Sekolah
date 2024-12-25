@@ -14,6 +14,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
     public partial class DataJadwalDiputarForm : Form
     {
         public List<JadwalDto> _dataJadwalPutar { get; set; } = new List<JadwalDto>();
+
         public DataJadwalDiputarForm()
         {
             InitializeComponent();
@@ -26,7 +27,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _dataJadwalPutar = jadwalList;
             DataDiputarGrid.DataSource = null;
             DataDiputarGrid.DataSource = _dataJadwalPutar;
-
 
             DataDiputarGrid.Columns["HariID"].Visible = false;
             DataDiputarGrid.Columns["SoundPath"].Visible = false;
@@ -48,7 +48,5 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             grid.RowTemplate.Height = 30;
         }
-
-
     }
 }

@@ -236,9 +236,9 @@
             label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(255, 10);
             label5.Name = "label5";
-            label5.Size = new Size(179, 23);
+            label5.Size = new Size(98, 23);
             label5.TabIndex = 170;
-            label5.Text = "Keterangan (Optional)";
+            label5.Text = "Keterangan";
             // 
             // label6
             // 

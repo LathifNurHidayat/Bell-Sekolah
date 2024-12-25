@@ -402,7 +402,6 @@ namespace BelSekolah.BelSekolahForm
             form.ShowDialog(this);
         }
 
-
         private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
