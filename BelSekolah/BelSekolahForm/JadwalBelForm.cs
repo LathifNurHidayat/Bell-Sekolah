@@ -263,8 +263,8 @@ namespace BelSekolah.BelSekolahForm
                 return; 
             }
 
+            _hariID = _jadwalDal.GetIdByHari(_hariSekarang);
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
-            _hariID = (int)HariCombo.SelectedValue;
 
             _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
             if (!string.IsNullOrEmpty(_jenisJadwal))

@@ -192,8 +192,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             List<TextBox> textBox = new List<TextBox>
             {
-                LaguText, JamMasukText, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Jam4Text,IndonesiaRayaText, Jam5Text,
-                Jam6Text, JamIstirahat2Text, Jam7Text, Jam8Text, Jam9Text, Jam10Text, JamKepulanganText
+                LaguText, JamMasukText, Jam1Text, Jam2Text, Jam3Text, JamIstirahat1Text, Istirahat1SelesaiText, Jam4Text,IndonesiaRayaText, Jam5Text,
+                Jam6Text, JamIstirahat2Text, Istirahat2SelesaiText, Jam7Text, Jam8Text, Jam9Text, Jam10Text, JamKepulanganText
             };
             _textBoxControls.AddRange(textBox);
         }
@@ -203,8 +203,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             List<Label> labelControls = new List<Label>
             {
-                LaguLabel, JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label,JamIstirahat1Label, Jam4Label, IndonesiaRayaLabel,
-                Jam5Label, Jam6Label, JamIstirahat2Label,Istirahat2SelesaiLabel, Jam7Label, Jam8Label, Jam9Label,
+                LaguLabel, JamMasukLabel, Jam1Label, Jam2Label, Jam3Label, JamIstirahat1Label, Istirahat1SelesaiLabel, Jam4Label, IndonesiaRayaLabel,
+                Jam5Label, Jam6Label, JamIstirahat2Label, Istirahat2SelesaiLabel, Jam7Label, Jam8Label, Jam9Label,
                 Jam10Label, JamKepulanganLabel
             };
 
@@ -493,8 +493,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             List<DateTimePicker> datePickerControls = new List<DateTimePicker>
             {
-                Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Jam4Picker,
-                Jam5Picker, Jam6Picker, JamIstirahat2Picker, Jam7Picker, Jam8Picker, Jam9Picker,
+                Jam1Picker, Jam2Picker, Jam3Picker, JamIstirahat1Picker, Istirahat1SelesaiPicker, Jam4Picker,
+                Jam5Picker, Jam6Picker, JamIstirahat2Picker,Istirahat2SelesaiPicker, Jam7Picker, Jam8Picker, Jam9Picker,
                 Jam10Picker, JamKepulanganPicker
             };
 

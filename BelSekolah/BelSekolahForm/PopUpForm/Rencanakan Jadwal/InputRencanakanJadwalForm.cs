@@ -42,7 +42,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private List<TextBox> _textBoxControls = new List<TextBox>();
 
 
-        public InputRencanakanJadwalForm (int RencanakanJadwalID, string JenisJadwal, string Status)
+        public InputRencanakanJadwalForm(int RencanakanJadwalID, string JenisJadwal, string Status)
         {
             InitializeComponent();
 
@@ -55,8 +55,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _status = Status;
             _hariName = TanggalPicker.Value.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
 
-           /* System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");*/
+            /* System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
+             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");*/
 
             this.MinimizeBox = false;
             this.MaximizeBox = false;
@@ -70,7 +70,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 DefaultSound();
             IndonesiaRayaPicker.Value = DateTime.Parse("10:00");
         }
-         
+
         private void DefaultSound()
         {
             Dictionary<string, TextBox> soundMappings = new Dictionary<string, TextBox>();
@@ -209,8 +209,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             var perencanaan = _rencanakanJadwalDal.GetDataJadwal(_rencanakanJadwalID);
             if (perencanaan == null) return;
-                TanggalPicker.Value = DateTime.Parse(perencanaan.Tanggal);
-                KeteranganText.Text = perencanaan.Keterangan;
+            TanggalPicker.Value = DateTime.Parse(perencanaan.Tanggal);
+            KeteranganText.Text = perencanaan.Keterangan;
 
             List<JadwalPutarDto> data = new List<JadwalPutarDto>();
 
@@ -290,8 +290,8 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     });
                 }
             }
- 
-          if (_status == "Tambah")
+
+            if (_status == "Tambah")
             {
                 if (_jenisJadwal == "Jadwal Khusus")
                 {
@@ -321,7 +321,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     }
                 }
             }
-            
+
             else if (_status == "Edit")
             {
                 if (_jenisJadwal == "Jadwal Khusus")
@@ -347,7 +347,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                             Waktu = jadwal.Waktu,
                             SoundName = jadwal.SoundName,
                             SoundPath = jadwal.SoundPath,
-                            IsUjian =  0,
+                            IsUjian = 0,
                             RencanakanJadwalID = _rencanakanJadwalID
                         });
                     }
@@ -427,7 +427,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void TanggalPicker_DropDown(object? sender, EventArgs e)
         {
             _tanggalDatetime = TanggalPicker.Value;
-        } 
+        }
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
         {
@@ -453,7 +453,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
             bool isNull = false;
 
-            foreach(var picker in _datePickerControls)
+            foreach (var picker in _datePickerControls)
             {
                 if (picker.Value == DateTime.Today)
                 {
@@ -471,7 +471,13 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 }
             }
 
-            if (isNull)
+            if (string.IsNullOrWhiteSpace(KeteranganText.Text))
+            {
+                MessageBox.Show("Keterangan harus diisi !", "Perhatikan", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                return;
+            }
+
+            if (isNull) 
             {
                 if (MessageBox.Show("Jika terdapat data kosong pada salah satu baris, data tersebut tidak akan disimpan! \nApakah Anda ingin tetap menyimpan data lainnya?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
@@ -501,7 +507,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (intervalForm.ShowDialog(this) == DialogResult.OK)
             {
                 mulai = intervalForm.mulai;
-                interval = intervalForm.interval; 
+                interval = intervalForm.interval;
                 istirahat_1 = intervalForm.istirahat_1;
                 istirahat_2 = intervalForm.istirahat_2;
             }
@@ -554,7 +560,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             MessageBox.Show("Interval waktu berhasil diubah!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-
         private void PlayJamButton_Click(object? sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -572,7 +577,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 string FileName = textbox.Text;
                 string FilePath = string.Empty;
 
-            FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", FileName);
+                FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran", FileName);
 
                 if (File.Exists(FilePath))
                 {
@@ -589,7 +594,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 }
             }
         }
-
 
         private void PlayAudio(string filePath, Button button)
         {
@@ -631,7 +635,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             _isPlaying = false;
         }
 
-        
+
         private void BrowseButton_Click(object? sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -642,10 +646,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             DateTimePicker picker = (DateTimePicker)panel2.Controls.OfType<DateTimePicker>().FirstOrDefault(x => x.Tag?.ToString() == button.Tag?.ToString());
             if (picker?.Value == DateTime.Today)
             {
-                MessageBox.Show("Mohon atur jam terlebih dahulu !","Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Mohon atur jam terlebih dahulu !", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-           
+
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound File (*.mp3)|*.mp3";
@@ -656,14 +660,14 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string SoundPath = openFileDialog.FileName;
-                 string SoundName = Path.GetFileName(SoundPath);
+                string SoundName = Path.GetFileName(SoundPath);
 
-            TextBox textBox = (TextBox)panel2.Controls.OfType<TextBox>().FirstOrDefault(x => x.Tag?.ToString() == button.Tag?.ToString());
+                TextBox textBox = (TextBox)panel2.Controls.OfType<TextBox>().FirstOrDefault(x => x.Tag?.ToString() == button.Tag?.ToString());
                 if (textBox != null)
-                { 
+                {
                     textBox.Text = SoundName;
                 }
-                SelectAndReplace(SoundPath); 
+                SelectAndReplace(SoundPath);
             }
         }
 
@@ -672,7 +676,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             string tujuanFolder;
             string tujuanPath;
 
-          
+
             tujuanFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Pelajaran");
 
             if (!Directory.Exists(tujuanFolder))
@@ -695,5 +699,6 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             public string SoundPath { get; set; }
             public int IsUjian { get; set; }
         }
-    }       
+
+    }
 }
