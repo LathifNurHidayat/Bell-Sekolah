@@ -227,7 +227,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-
         private void ClearText()
         {
             HariText.Clear();
