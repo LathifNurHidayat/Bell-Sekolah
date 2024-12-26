@@ -257,7 +257,7 @@ namespace BelSekolah.BelSekolahForm
                     SoundPath = x.SoundPath
                 });
                 _keteranganJadwal = 
-                    $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString()??string.Empty} - Jadwal Khusus";
+                    $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString()??string.Empty} - Jadwal Khusus";
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
@@ -283,7 +283,7 @@ namespace BelSekolah.BelSekolahForm
                         SoundPath = x.SoundPath,
                     });
                     _keteranganJadwal =
-                        $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString() ?? string.Empty} - Jadwal Normal";
+                        $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty} - Jadwal Normal";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
@@ -301,7 +301,7 @@ namespace BelSekolah.BelSekolahForm
                         SoundPath = x.SoundPath,
                     });
                     _keteranganJadwal =
-                        $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString() ?? string.Empty} - Jadwal Khusus";
+                        $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty} - Jadwal Khusus";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
