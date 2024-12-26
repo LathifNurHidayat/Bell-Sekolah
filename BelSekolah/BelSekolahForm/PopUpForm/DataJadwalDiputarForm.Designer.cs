@@ -50,7 +50,7 @@
             // HariText
             // 
             HariText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            HariText.BackColor = Color.LightGray;
+            HariText.BackColor = Color.Gainsboro;
             HariText.BorderStyle = BorderStyle.FixedSingle;
             HariText.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             HariText.Location = new Point(12, 8);

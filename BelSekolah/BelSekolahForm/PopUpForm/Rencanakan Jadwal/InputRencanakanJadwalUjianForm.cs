@@ -118,7 +118,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
 
         private void TanggalPicker_DropDown(object? sender, EventArgs e)
         {
-            _jadwalDateTime = TanggalPicker.Value;
+            _jadwalDateTime = TanggalPicker.Value; 
         }
 
         private void TanggalPicker_ValueChanged(object? sender, EventArgs e)
