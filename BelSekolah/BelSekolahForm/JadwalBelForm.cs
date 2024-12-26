@@ -51,6 +51,7 @@ namespace BelSekolah.BelSekolahForm
         private System.Windows.Forms.Timer _cekJadwal;
 
         private List<JadwalDto> _dataJadwalPutar = new List<JadwalDto>();
+        private string _keteranganJadwal;
 
 
         public JadwalBelForm(Form mainForm)
@@ -79,7 +80,7 @@ namespace BelSekolah.BelSekolahForm
             InitialCombo();
 
             _jam.Interval = 1000;
-            _jam.Tick += _jam_Tick; ;
+            _jam.Tick += _jam_Tick;
             _jam.Start();
 
             _timer.Interval = 1000;
@@ -254,8 +255,10 @@ namespace BelSekolah.BelSekolahForm
                     HariID = x.HariID,
                     Waktu = TimeSpan.Parse(x.Waktu),
                     SoundName = x.SoundName,
-                    SoundPath = x.SoundPath,
+                    SoundPath = x.SoundPath
                 });
+                _keteranganJadwal = 
+                    $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString()??string.Empty} - Jadwal Khusus";
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
@@ -280,6 +283,8 @@ namespace BelSekolah.BelSekolahForm
                         SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
+                    _keteranganJadwal =
+                        $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString() ?? string.Empty} - Jadwal Normal";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
@@ -296,6 +301,8 @@ namespace BelSekolah.BelSekolahForm
                         SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
+                    _keteranganJadwal =
+                        $"{_jadwalDal.GetHariById(data.FirstOrDefault().HariID)?.Hari.ToString() ?? string.Empty} - Jadwal Khusus";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
@@ -398,7 +405,7 @@ namespace BelSekolah.BelSekolahForm
         private void DetailJadwalLinkLabel_Click(object? sender, EventArgs e)
         {
             var form = new DataJadwalDiputarForm();
-            form.LoadData(_dataJadwalPutar ?? new List<JadwalDto>());
+            form.LoadData(_dataJadwalPutar ?? new List<JadwalDto>(), _keteranganJadwal);
             form.ShowDialog(this);
         }
 

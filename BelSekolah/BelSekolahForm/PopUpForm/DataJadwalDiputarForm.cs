@@ -22,9 +22,10 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             this.MaximizeBox = false;
         }
 
-        public void LoadData(List<JadwalDto> jadwalList)
+        public void LoadData(List<JadwalDto> jadwalList, string keteranganJadwal)
         {
             _dataJadwalPutar = jadwalList;
+            HariText.Text = keteranganJadwal;
             DataDiputarGrid.DataSource = null;
             DataDiputarGrid.DataSource = _dataJadwalPutar;
 

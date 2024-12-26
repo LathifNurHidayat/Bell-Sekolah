@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BelSekolahDatabase\Database.db" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam_Persiapan Padamu Negeri.mp3" />
     <None Remove="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Pekan.mp3" />
@@ -50,6 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="BelSekolahDatabase\Database.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -110,6 +110,13 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 return Conn.QueryFirstOrDefault<int>(sql, new { Hari = hari});
             }
         }
+
+        public JadwalModel? GetHariById(int hariId)
+        {
+            using var koneksi = new SQLiteConnection(ConnStringHelper.GetConn());
+            const string sql = @"SELECT Hari FROM Jadwalhari WHERE HariID = @HariId";
+            return koneksi.QueryFirstOrDefault<JadwalModel>(sql, new {HariId=hariId});
+        }
        
     }
 }

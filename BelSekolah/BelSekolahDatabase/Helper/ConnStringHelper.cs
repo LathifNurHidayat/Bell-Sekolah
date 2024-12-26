@@ -40,7 +40,8 @@ namespace BelSekolah.BelSekolahDatabase.Helper
 
             if (!File.Exists(databasePath))
             {
-                string defaultDatabasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database.db");
+                string defaultDatabasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory+"BelSekolahDatabase", "Database.db");
+                MessageBox.Show("DefaultPatch = "+defaultDatabasePath+"\ndatabasePatch="+databasePath);
                 File.Copy(defaultDatabasePath, databasePath);
             }
 
