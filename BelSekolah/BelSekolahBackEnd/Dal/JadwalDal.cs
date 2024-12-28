@@ -111,11 +111,11 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
-        public JadwalModel? GetHariById(int hariId)
+        public string GetHariById(int hariId)
         {
             using var koneksi = new SQLiteConnection(ConnStringHelper.GetConn());
             const string sql = @"SELECT Hari FROM Jadwalhari WHERE HariID = @HariId";
-            return koneksi.QueryFirstOrDefault<JadwalModel>(sql, new {HariId=hariId});
+            return koneksi.QuerySingleOrDefault<string>(sql, new {HariId=hariId}) ?? string.Empty;
         }
        
     }
