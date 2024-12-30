@@ -272,8 +272,8 @@ namespace BelSekolah.BelSekolahForm
                     SoundName = x.SoundName,
                     SoundPath = x.SoundPath
                 });
-                _keteranganJadwal = 
-                    $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString()??string.Empty*/ _hariSekarang} - Jadwal Direncanakan";
+                string keterangan = _jadwalDal.GetHariById(data?.FirstOrDefault()?.HariID ?? 0).ToString();
+                _keteranganJadwal = keterangan != string.Empty ? $"{keterangan} - Jadwal Khusus" : "Data Kosong";
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
@@ -298,8 +298,8 @@ namespace BelSekolah.BelSekolahForm
                         SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
-                    _keteranganJadwal =
-                        $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty*/ _hariSekarang} - Jadwal Normal";
+                    string keterangan = _jadwalDal.GetHariById(data.FirstOrDefault()?.HariID ?? 0).ToString();
+                    _keteranganJadwal = keterangan != string.Empty ? $"{keterangan} - Jadwal Normal" : "Data Kosong";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
@@ -316,8 +316,8 @@ namespace BelSekolah.BelSekolahForm
                         SoundName = x.SoundName,
                         SoundPath = x.SoundPath,
                     });
-                    _keteranganJadwal =
-                        $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty*/ _hariSekarang} - Jadwal Khusus";
+                    string keterangan = _jadwalDal.GetHariById(data.FirstOrDefault()?.HariID ?? 0).ToString();
+                    _keteranganJadwal = keterangan != string.Empty ? $"{keterangan} - Jadwal Khusus" : "Data Kosong";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
