@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -168,6 +169,12 @@ namespace BelSekolah.BelSekolahForm
 
         private async Task PlaySoundAsync(string soundPath)
         {
+            if (!File.Exists(soundPath))
+            {
+                MessageBox.Show("File audio tidak ditemukan.");
+                return;
+            }
+
             var tcs = new TaskCompletionSource<bool>();
 
             try
@@ -178,21 +185,11 @@ namespace BelSekolah.BelSekolahForm
                 waveOutDevice = new WaveOutEvent();
                 waveOutDevice.Init(audioFileReader);
                 waveOutDevice.Play();
+
                 waveOutDevice.PlaybackStopped += (s, e) =>
                 {
-                    if (waveOutDevice != null)
-                    {
-                        waveOutDevice.Dispose();
-                        waveOutDevice = null;
-                    }
-
-                    if (audioFileReader != null)
-                    {
-                        audioFileReader.Dispose();
-                        audioFileReader = null;
-                    }
-
-                    tcs.SetResult(true); 
+                    CleanupAudioResources();
+                    tcs.TrySetResult(true); // Pastikan task diselesaikan
                 };
 
                 await tcs.Task;
@@ -200,7 +197,6 @@ namespace BelSekolah.BelSekolahForm
             catch (Exception ex)
             {
                 MessageBox.Show($"Gagal memutar suara: {ex.Message}");
-                tcs.SetException(ex); 
             }
         }
 
@@ -210,8 +206,11 @@ namespace BelSekolah.BelSekolahForm
             {
                 try
                 {
-                    int fadeOutDuration = 1000;
-                    float initialVolume = waveOutDevice.Volume;
+                    int fadeOutDuration = 1000; // ms
+                    float initialVolume = 1.0f;
+
+                    if (waveOutDevice.Volume > 0)
+                        initialVolume = waveOutDevice.Volume;
 
                     for (int i = 10; i >= 0; i--)
                     {
@@ -221,10 +220,27 @@ namespace BelSekolah.BelSekolahForm
 
                     waveOutDevice.Stop();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    
+                    Debug.WriteLine($"Error during fade-out: {ex.Message}");
                 }
+            }
+
+            CleanupAudioResources();
+        }
+
+        private void CleanupAudioResources()
+        {
+            if (waveOutDevice != null)
+            {
+                waveOutDevice.Dispose();
+                waveOutDevice = null;
+            }
+
+            if (audioFileReader != null)
+            {
+                audioFileReader.Dispose();
+                audioFileReader = null;
             }
         }
 
@@ -257,7 +273,7 @@ namespace BelSekolah.BelSekolahForm
                     SoundPath = x.SoundPath
                 });
                 _keteranganJadwal = 
-                    $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString()??string.Empty} - Jadwal Khusus";
+                    $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString()??string.Empty*/ _hariSekarang} - Jadwal Direncanakan";
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
@@ -283,7 +299,7 @@ namespace BelSekolah.BelSekolahForm
                         SoundPath = x.SoundPath,
                     });
                     _keteranganJadwal =
-                        $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty} - Jadwal Normal";
+                        $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty*/ _hariSekarang} - Jadwal Normal";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
@@ -301,7 +317,7 @@ namespace BelSekolah.BelSekolahForm
                         SoundPath = x.SoundPath,
                     });
                     _keteranganJadwal =
-                        $"{_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty} - Jadwal Khusus";
+                        $"{/*_jadwalDal.GetHariById(data.FirstOrDefault()?.HariID??0)?.Hari.ToString() ?? string.Empty*/ _hariSekarang} - Jadwal Khusus";
                     foreach (var item in data)
                     {
                         _dataJadwalPutar.Add(item);
