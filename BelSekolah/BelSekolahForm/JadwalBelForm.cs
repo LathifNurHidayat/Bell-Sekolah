@@ -95,6 +95,7 @@ namespace BelSekolah.BelSekolahForm
             CustomStyleGrid(JadwalNormalGrid);
             CustomStyleGrid(JadwalKhususGrid);
 
+            _dataJadwalPutar.Clear();
         }
 
         private void CustomStyleGrid(DataGridView grid) 
@@ -142,7 +143,7 @@ namespace BelSekolah.BelSekolahForm
                         string laguPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu", lagu);
                         await PlaySoundAsync(laguPath);
                         await Task.Delay(3000);
-                    }
+                    } 
                 }
                 else
                 {
@@ -420,6 +421,7 @@ namespace BelSekolah.BelSekolahForm
         private void DetailJadwalLinkLabel_Click(object? sender, EventArgs e)
         {
             var form = new DataJadwalDiputarForm();
+            _keteranganJadwal = _dataJadwalPutar.Any() ? _keteranganJadwal : "Data Kosong";
             form.LoadData(_dataJadwalPutar ?? new List<JadwalDto>(), _keteranganJadwal);
             form.ShowDialog(this);
         }
@@ -434,10 +436,15 @@ namespace BelSekolah.BelSekolahForm
 
         private void JadwalkanButton_Click(object? sender, EventArgs e)
         {
+            if (_isRunning)
+            {
+                MessageBox.Show("Matikan running terlebih dahulu", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             RencanakanJadwalForm jadwalkanBelForm = new RencanakanJadwalForm();
             if (jadwalkanBelForm.ShowDialog(this) == DialogResult.OK)
             {
-                AddDataToList();
+               // AddDataToList();
             }
         }
 
@@ -522,7 +529,6 @@ namespace BelSekolah.BelSekolahForm
                     JadwalKhususRadio.Checked = true;
                 MessageBox.Show("Matikan running terlebih dahulu", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            AddDataToList();
         }
 
         private void JadwalRadio_CheckedChanged(object? sender, EventArgs e)

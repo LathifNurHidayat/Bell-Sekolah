@@ -79,7 +79,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
 
                 const string sql = $@"
                             SELECT 
-                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath, IsUjian
+                                JadwalKhususID, Waktu, Keterangan, SoundName, SoundPath, IsUjian, HariID
                             FROM 
                                 JadwalKhusus
                             WHERE 
