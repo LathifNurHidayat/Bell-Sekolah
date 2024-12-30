@@ -228,6 +228,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Sound Files (*.mp3)|*.mp3";
+            openFileDialog.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Jam Ujian");
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {

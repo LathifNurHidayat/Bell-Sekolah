@@ -268,7 +268,7 @@ namespace BelSekolah.BelSekolahForm
                 {
                     Keterangan = x.Keterangan,
                     HariID = x.HariID,
-                    Waktu = TimeSpan.Parse(x.Waktu),
+                    Waktu = TimeSpan.Parse(x.Waktu), 
                     SoundName = x.SoundName,
                     SoundPath = x.SoundPath
                 });
