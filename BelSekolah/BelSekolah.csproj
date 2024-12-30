@@ -84,10 +84,10 @@
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Ke - 2 _ Mars_LSS.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_2.mp3">
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_1.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_1.mp3">
+    <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Istirahat Selesai_2.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Jam Istirahat Ke - 1.mp3">

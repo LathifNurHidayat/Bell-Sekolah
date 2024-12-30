@@ -273,7 +273,7 @@ namespace BelSekolah.BelSekolahForm
                     SoundPath = x.SoundPath
                 });
                 string keterangan = _jadwalDal.GetHariById(data?.FirstOrDefault()?.HariID ?? 0).ToString();
-                _keteranganJadwal = keterangan != string.Empty ? $"{keterangan} - Jadwal Khusus" : "Data Kosong";
+                _keteranganJadwal = keterangan != string.Empty ? $"{keterangan} - Jadwal Direncanakan" : "Data Kosong";
                 foreach (var item in data)
                 {
                     _dataJadwalPutar.Add(item);
