@@ -159,7 +159,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             {
                 Conn.Open();
 
-                const string sql = @"DELETE FROM JadwalKhusus WHERE HariID = @HariID";
+                const string sql = @"DELETE FROM JadwalKhusus WHERE HariID = @HariID AND RencanakanJadwalID = 0";
 
                 Conn.Execute(sql, new { HariID = hariID});
             }

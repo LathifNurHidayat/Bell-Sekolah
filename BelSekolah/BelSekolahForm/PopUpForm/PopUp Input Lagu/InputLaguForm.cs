@@ -87,8 +87,12 @@ namespace BelSekolah.BelSekolahForm.PopUpForm.PopUp_Input_Lagu
         private void SimpanButton_Click(object? sender, EventArgs e)
         {
             var TextBox = new[] {Lagu1Text.Text, Lagu2Text.Text, Lagu3Text.Text, Lagu4Text.Text ,Lagu5Text.Text , Lagu6Text.Text };
-
             SoundName = string.Join("|", TextBox.Where(x => !string.IsNullOrWhiteSpace(x)));
+            if (!SoundName.Contains("|"))
+            {
+                MessageBox.Show("Masukan minimal 2 lagu !!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             this.DialogResult = DialogResult.OK;
         }
 

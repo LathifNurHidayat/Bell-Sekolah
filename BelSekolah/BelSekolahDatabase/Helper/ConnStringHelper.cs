@@ -44,7 +44,7 @@ namespace BelSekolah.BelSekolahDatabase.Helper
                 MessageBox.Show("DefaultPatch = "+defaultDatabasePath+"\ndatabasePatch="+databasePath);
                 File.Copy(defaultDatabasePath, databasePath);
             }
-
+            //MessageBox.Show(databasePath);
             return $"Data Source={databasePath}; Version=3";
         }
     }
