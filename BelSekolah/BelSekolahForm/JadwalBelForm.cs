@@ -54,6 +54,7 @@ namespace BelSekolah.BelSekolahForm
 
         private List<JadwalDto> _dataJadwalPutar = new List<JadwalDto>();
         private string _keteranganJadwal;
+        private Form _loadForm;
 
 
         public JadwalBelForm(Form mainForm)
@@ -71,6 +72,7 @@ namespace BelSekolah.BelSekolahForm
             _cekJadwal = new System.Windows.Forms.Timer();
 
             this.mainForm = mainForm;
+            _loadForm = mainForm;
 
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1600, 800);
@@ -116,8 +118,13 @@ namespace BelSekolah.BelSekolahForm
 
         private void _jam_Tick(object? sender, EventArgs e) 
         {
-            
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
+
+            if (DateTime.Now.Hour == 13 && DateTime.Now.Minute == 16 && DateTime.Now.Second == 30)
+            {
+                BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm);
+                form.ShowDialog();
+            }
         }
 
         private async void _timer_Tick(object? sender, EventArgs e)

@@ -41,7 +41,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Microsoft Yi Baiti", 36F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(69, 210);
+            label1.Location = new Point(77, 215);
             label1.Name = "label1";
             label1.Size = new Size(458, 60);
             label1.TabIndex = 0;
