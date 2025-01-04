@@ -65,7 +65,7 @@ namespace BelSekolah.BelSekolahForm
             _jadwalNormalDal = new JadwalNormalDal();
             _jadwalModel = new JadwalModel();
             _rencanakanJadwalDal = new RencanakanJadwalDal();
-            
+
 
             _timer = new System.Windows.Forms.Timer();
             _jam = new System.Windows.Forms.Timer();
@@ -77,7 +77,7 @@ namespace BelSekolah.BelSekolahForm
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Size = new Size(1600, 800);
 
-            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID")); 
+            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
             _waktuSekarang = DateTime.Now.ToString("HH:mm");
             _hariID = Convert.ToInt32(HariCombo.SelectedValue);
 
@@ -91,9 +91,9 @@ namespace BelSekolah.BelSekolahForm
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
 
-           /* _cekJadwal.Interval = 5000;
-            _cekJadwal.Tick += (s, e) => {AddDataToList(); };*/
-            
+            /* _cekJadwal.Interval = 5000;
+             _cekJadwal.Tick += (s, e) => {AddDataToList(); };*/
+
             LoadJadwalDetil(_hariID);
 
             CustomStyleGrid(JadwalNormalGrid);
@@ -102,7 +102,7 @@ namespace BelSekolah.BelSekolahForm
             _dataJadwalPutar.Clear();
         }
 
-        private void CustomStyleGrid(DataGridView grid) 
+        private void CustomStyleGrid(DataGridView grid)
         {
             grid.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
             grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
@@ -116,11 +116,11 @@ namespace BelSekolah.BelSekolahForm
             grid.RowTemplate.Height = 30;
         }
 
-        private void _jam_Tick(object? sender, EventArgs e) 
+        private void _jam_Tick(object? sender, EventArgs e)
         {
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
 
-            if (DateTime.Now.Hour == 13 && DateTime.Now.Minute == 16 && DateTime.Now.Second == 30)
+            if (DateTime.Now.Hour == 17 && DateTime.Now.Minute == 00 && DateTime.Now.Second == 00)
             {
                 BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm);
                 form.ShowDialog();
@@ -137,7 +137,7 @@ namespace BelSekolah.BelSekolahForm
             var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
             if (stopSoundIsPlayed != null && (stopSoundIsPlayed.Waktu - timeNow).TotalSeconds <= 5)
             {
-                StopAudio(); 
+                StopAudio();
             }
 
             if (data != null)
@@ -152,7 +152,7 @@ namespace BelSekolah.BelSekolahForm
                         string laguPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BelSekolahDatabase", "Sound", "Lagu Lagu", lagu);
                         await PlaySoundAsync(laguPath);
                         await Task.Delay(3000);
-                    } 
+                    }
                 }
                 else
                 {
@@ -273,14 +273,14 @@ namespace BelSekolah.BelSekolahForm
 
             string tanggalHariIni = DateTime.Now.ToString("dd-MM-yyyy");
             int cekRencanaJadwalID = _rencanakanJadwalDal.GetTanggal(tanggalHariIni);
-            
+
             if (cekRencanaJadwalID != 0)
             {
                 var data = _jadwalKhususDal.ListDataAddToPlay(cekRencanaJadwalID).Select(x => new JadwalDto
                 {
                     Keterangan = x.Keterangan,
                     HariID = x.HariID,
-                    Waktu = TimeSpan.Parse(x.Waktu), 
+                    Waktu = TimeSpan.Parse(x.Waktu),
                     SoundName = x.SoundName,
                     SoundPath = x.SoundPath
                 });
@@ -290,11 +290,11 @@ namespace BelSekolah.BelSekolahForm
                 {
                     _dataJadwalPutar.Add(item);
                 }
-                return; 
+                return;
             }
 
             _hariID = _jadwalDal.GetIdByHari(_hariSekarang);
-           // _hariID = (int)HariCombo.SelectedValue;
+            // _hariID = (int)HariCombo.SelectedValue;
             var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
 
             _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
@@ -342,7 +342,7 @@ namespace BelSekolah.BelSekolahForm
         private void InitialCombo()
         {
             var Hari = _jadwalDal.ListData();
-            HariCombo.DataSource = Hari;  
+            HariCombo.DataSource = Hari;
             HariCombo.DisplayMember = "Hari";
             HariCombo.ValueMember = "HariID";
 
@@ -391,7 +391,7 @@ namespace BelSekolah.BelSekolahForm
                 TambahKhususButton.Text = "Tambah";
                 TambahKhususButton.BackColor = Color.Goldenrod;
             }
-            else 
+            else
             {
                 TambahKhususButton.Text = "Edit";
                 TambahKhususButton.BackColor = Color.Coral;
@@ -405,6 +405,7 @@ namespace BelSekolah.BelSekolahForm
         private void RegisterControlEvent()
         {
             this.FormClosing += JadwalBelForm_FormClosing;
+            this.Load += JadwalBelForm_Load;
             MainPanel.Resize += MainPanel_Resize;
 
             TambahKhususButton.Click += TambahKhususButton_Click;
@@ -430,6 +431,11 @@ namespace BelSekolah.BelSekolahForm
             DetailJadwalLinkLabel.Click += DetailJadwalLinkLabel_Click;
         }
 
+        private void JadwalBelForm_Load(object? sender, EventArgs e)
+        {
+            StartStopButton.PerformClick();
+        }
+
         private void DetailJadwalLinkLabel_Click(object? sender, EventArgs e)
         {
             var form = new DataJadwalDiputarForm();
@@ -440,8 +446,8 @@ namespace BelSekolah.BelSekolahForm
 
         private void JadwalBelForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                e.Cancel = true; 
+            if (MessageBox.Show("Jika aplikasi ditutup, maka bel juga akan dihentikan !! \n Anda yakin ingin menutup aplikasi ?", "Pertanyaan", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                e.Cancel = true;
             else
                 this.mainForm.Close();
         }
@@ -456,7 +462,7 @@ namespace BelSekolah.BelSekolahForm
             RencanakanJadwalForm jadwalkanBelForm = new RencanakanJadwalForm();
             if (jadwalkanBelForm.ShowDialog(this) == DialogResult.OK)
             {
-               // AddDataToList();
+                // AddDataToList();
             }
         }
 
@@ -524,12 +530,14 @@ namespace BelSekolah.BelSekolahForm
                 MainPanel.Height - DeleteKhususButton.Height - 20
             );
 
-
             TambahNormalButton.Location = new Point(15, MainPanel.Height - TambahKhususButton.Height - 20);
-
             DeleteNormalButton.Location = new Point(15 + TambahNormalButton.Width + 10,
                 MainPanel.Height - DeleteKhususButton.Height - 20
             );
+
+            JadwalNormalGrid.Height = MainPanel.Height - 200;
+            JadwalKhususGrid.Height = MainPanel.Height - 200;
+
         }
 
         private void JadwalRadio_Click(object? sender, EventArgs e)
@@ -581,7 +589,7 @@ namespace BelSekolah.BelSekolahForm
                 LoadJadwalDetil(Convert.ToInt32(HariCombo.SelectedValue));
             }
         }
-         
+
         private void StartStopButton_Click(object? sender, EventArgs e)
         {
             if (StartStopButton.Text == "Start")
@@ -673,5 +681,6 @@ namespace BelSekolah.BelSekolahForm
             public string SoundName { get; set; }
             public string SoundPath { get; set; }
         }
+
     }
 }

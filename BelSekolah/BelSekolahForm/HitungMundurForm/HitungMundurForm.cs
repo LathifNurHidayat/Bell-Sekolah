@@ -25,9 +25,9 @@ namespace BelSekolah.BelSekolahForm.HitungMundurForm
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.TopMost = true;
+            this.Size = new Size(440, 260);
 
             _mainForm = mainform;
-
 
             _hitungMundur.Interval = 1000;
             _hitungMundur.Start();

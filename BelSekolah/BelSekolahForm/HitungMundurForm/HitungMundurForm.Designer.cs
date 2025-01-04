@@ -52,7 +52,7 @@
             BatalkanButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             BatalkanButton.BackColor = Color.DarkKhaki;
             BatalkanButton.ForeColor = Color.White;
-            BatalkanButton.Location = new Point(292, 169);
+            BatalkanButton.Location = new Point(291, 166);
             BatalkanButton.Name = "BatalkanButton";
             BatalkanButton.Size = new Size(110, 35);
             BatalkanButton.TabIndex = 6;
@@ -75,7 +75,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(423, 216);
+            ClientSize = new Size(422, 213);
             Controls.Add(HitungMundurText);
             Controls.Add(BatalkanButton);
             Controls.Add(label1);
