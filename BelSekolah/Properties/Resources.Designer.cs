@@ -173,6 +173,36 @@ namespace BelSekolah.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Skansaba_dev_logo {
+            get {
+                object obj = ResourceManager.GetObject("Skansaba dev logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansaba_dev_logo_1 {
+            get {
+                object obj = ResourceManager.GetObject("Skansaba dev logo 1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Skansaba_dev_logo_11 {
+            get {
+                object obj = ResourceManager.GetObject("Skansaba dev logo 11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SMKN___BANTUL {
             get {
                 object obj = ResourceManager.GetObject("SMKN ! BANTUL", resourceCulture);
