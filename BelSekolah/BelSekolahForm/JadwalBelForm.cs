@@ -605,6 +605,7 @@ namespace BelSekolah.BelSekolahForm
                 AddDataToList();
                 GetJadwalDiputar();
             }
+
             else if (StartStopButton.Text == "Stop")
             {
                 StartStopButton.Text = "Start";
@@ -681,7 +682,5 @@ namespace BelSekolah.BelSekolahForm
             public string SoundName { get; set; }
             public string SoundPath { get; set; }
         }
-
-
     }
 }
