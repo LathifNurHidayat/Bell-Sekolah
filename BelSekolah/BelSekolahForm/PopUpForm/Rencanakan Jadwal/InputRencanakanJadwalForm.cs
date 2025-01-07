@@ -329,7 +329,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                     };
                     _rencanakanJadwalDal.Update(data);
 
-                    _jadwalKhususDal.Delete(_hariID);
+                    _jadwalKhususDal.DeleteDataRencanakanJadwal(_rencanakanJadwalID);
 
                     foreach (var jadwal in jadwalData)
                     {

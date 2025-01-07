@@ -41,9 +41,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(18, 20);
+            label1.Location = new Point(31, 9);
             label1.Name = "label1";
-            label1.Size = new Size(391, 41);
+            label1.Size = new Size(316, 32);
             label1.TabIndex = 3;
             label1.Text = "Aplikasi akan ditutup dalam ";
             // 
@@ -52,34 +52,38 @@
             BatalkanButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             BatalkanButton.BackColor = Color.DarkKhaki;
             BatalkanButton.ForeColor = Color.White;
-            BatalkanButton.Location = new Point(291, 166);
+            BatalkanButton.Location = new Point(255, 115);
+            BatalkanButton.Margin = new Padding(3, 2, 3, 2);
             BatalkanButton.Name = "BatalkanButton";
-            BatalkanButton.Size = new Size(110, 35);
+            BatalkanButton.Size = new Size(96, 35);
             BatalkanButton.TabIndex = 6;
             BatalkanButton.Text = "Batalkan";
             BatalkanButton.UseVisualStyleBackColor = false;
             // 
             // HitungMundurText
             // 
+            HitungMundurText.Anchor = AnchorStyles.None;
             HitungMundurText.BackColor = SystemColors.Menu;
             HitungMundurText.BorderStyle = BorderStyle.None;
-            HitungMundurText.Font = new Font("Segoe UI Semibold", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-            HitungMundurText.Location = new Point(171, 91);
+            HitungMundurText.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            HitungMundurText.Location = new Point(145, 59);
+            HitungMundurText.Margin = new Padding(3, 2, 3, 2);
             HitungMundurText.Name = "HitungMundurText";
-            HitungMundurText.Size = new Size(80, 44);
+            HitungMundurText.Size = new Size(70, 39);
             HitungMundurText.TabIndex = 8;
             HitungMundurText.Text = "30";
             HitungMundurText.TextAlign = HorizontalAlignment.Center;
             // 
             // HitungMundurForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(422, 213);
+            ClientSize = new Size(369, 160);
             Controls.Add(HitungMundurText);
             Controls.Add(BatalkanButton);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "HitungMundurForm";
             StartPosition = FormStartPosition.CenterParent;
             ResumeLayout(false);

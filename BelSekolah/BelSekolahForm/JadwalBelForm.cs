@@ -120,7 +120,7 @@ namespace BelSekolah.BelSekolahForm
         {
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
 
-            if (DateTime.Now.Hour == 17 && DateTime.Now.Minute == 00 && DateTime.Now.Second == 00)
+            if (DateTime.Now.Hour == 13 && DateTime.Now.Minute == 18 && DateTime.Now.Second == 10)
             {
                 BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm);
                 form.ShowDialog();
