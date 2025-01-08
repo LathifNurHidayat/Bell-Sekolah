@@ -600,6 +600,8 @@ namespace BelSekolah.BelSekolahForm
         {
             if (StartStopButton.Text == "Start")
             {
+                _hariSekarang =  DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("id-ID"));
+
                 StartStopButton.Text = "Stop";
                 StartStopButton.BackColor = Color.Red;
                 _timer.Start();
@@ -614,6 +616,7 @@ namespace BelSekolah.BelSekolahForm
 
             else if (StartStopButton.Text == "Stop")
             {
+                
                 StartStopButton.Text = "Start";
                 StartStopButton.BackColor = Color.LimeGreen;
                 _timer.Stop();
