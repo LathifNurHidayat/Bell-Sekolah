@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JadwalBelForm));
             MainPanel = new Panel();
+            btnCloseStartApk = new Button();
             JadwalkanButton = new Button();
             JadwalNormalRadio = new RadioButton();
             TambahNormalButton = new Button();
@@ -70,6 +71,7 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = Color.LightGray;
             MainPanel.BorderStyle = BorderStyle.FixedSingle;
+            MainPanel.Controls.Add(btnCloseStartApk);
             MainPanel.Controls.Add(JadwalkanButton);
             MainPanel.Controls.Add(JadwalNormalRadio);
             MainPanel.Controls.Add(TambahNormalButton);
@@ -87,6 +89,19 @@
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(1057, 432);
             MainPanel.TabIndex = 0;
+            // 
+            // btnCloseStartApk
+            // 
+            btnCloseStartApk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCloseStartApk.BackColor = SystemColors.GrayText;
+            btnCloseStartApk.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCloseStartApk.ForeColor = Color.White;
+            btnCloseStartApk.Location = new Point(942, 399);
+            btnCloseStartApk.Name = "btnCloseStartApk";
+            btnCloseStartApk.Size = new Size(110, 27);
+            btnCloseStartApk.TabIndex = 23;
+            btnCloseStartApk.Text = "Close - Start Apk";
+            btnCloseStartApk.UseVisualStyleBackColor = false;
             // 
             // JadwalkanButton
             // 
@@ -463,5 +478,6 @@
         private DataGridView JadwalNormalGrid;
         private Panel panel1;
         private Label label2;
+        private Button btnCloseStartApk;
     }
 }

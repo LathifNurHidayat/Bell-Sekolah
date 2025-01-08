@@ -15,8 +15,9 @@ namespace BelSekolah.BelSekolahForm.HitungMundurForm
     {
         private System.Windows.Forms.Timer _hitungMundur;
         private Form _mainForm;
+        private Form _utamaForm;
         private int _detikMundur = 29;
-        public HitungMundurForm(Form mainform)
+        public HitungMundurForm(Form mainform, Form utama)
         {
             InitializeComponent();
 
@@ -28,6 +29,7 @@ namespace BelSekolah.BelSekolahForm.HitungMundurForm
             this.Size = new Size(440, 260);
 
             _mainForm = mainform;
+            _utamaForm = utama;
 
             _hitungMundur.Interval = 1000;
             _hitungMundur.Start();
@@ -54,7 +56,9 @@ namespace BelSekolah.BelSekolahForm.HitungMundurForm
            else
             {
                 _hitungMundur.Stop();
-                _mainForm.Close();
+                //_mainForm.Close();
+                this.Close();
+                _utamaForm.Hide();
             }
         }
     }

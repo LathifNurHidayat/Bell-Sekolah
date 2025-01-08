@@ -56,6 +56,9 @@ namespace BelSekolah.BelSekolahForm
         private string _keteranganJadwal;
         private Form _loadForm;
 
+        public static TimeSpan jam1;
+        public static TimeSpan jam2;
+
 
         public JadwalBelForm(Form mainForm)
         {
@@ -120,10 +123,15 @@ namespace BelSekolah.BelSekolahForm
         {
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
 
-            if (DateTime.Now.Hour == 2 && DateTime.Now.Minute == 18 && DateTime.Now.Second == 10)
+            if (DateTime.Now.Hour == jam1.Hours && DateTime.Now.Minute == jam1.Minutes && DateTime.Now.Second == jam1.Seconds)
             {
-                BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm);
+                BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm,this);
                 form.ShowDialog();
+            }
+
+            if (DateTime.Now.Hour == jam2.Hours && DateTime.Now.Minute == jam2.Minutes && DateTime.Now.Second == jam2.Seconds)
+            {
+                this.Show();
             }
         }
 
@@ -429,6 +437,15 @@ namespace BelSekolah.BelSekolahForm
             JadwalkanButton.Click += JadwalkanButton_Click;
 
             DetailJadwalLinkLabel.Click += DetailJadwalLinkLabel_Click;
+
+            btnCloseStartApk.Click += BtnCloseStartApk_Click;
+        }
+
+        private void BtnCloseStartApk_Click(object? sender, EventArgs e)
+        {
+            var closeStart = new CloseStartApk(jam1,jam2);
+            closeStart.ShowDialog();
+            if (closeStart.DialogResult != DialogResult.OK) return;
         }
 
         private void JadwalBelForm_Load(object? sender, EventArgs e)
