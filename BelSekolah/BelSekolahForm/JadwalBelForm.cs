@@ -247,7 +247,10 @@ namespace BelSekolah.BelSekolahForm
             }
 
             CleanupAudioResources();
+
         }
+
+        
 
         private void CleanupAudioResources()
         {
@@ -279,6 +282,12 @@ namespace BelSekolah.BelSekolahForm
         {
             _dataJadwalPutar.Clear();
 
+            _hariSekarang = DateTime.Now.ToString("dddd", new System.Globalization.CultureInfo("ID-id"));
+            _hariID = _jadwalDal.GetIdByHari(_hariSekarang);
+            // _hariID = (int)HariCombo.SelectedValue;
+            var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
+            _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
+
             string tanggalHariIni = DateTime.Now.ToString("dd-MM-yyyy");
             int cekRencanaJadwalID = _rencanakanJadwalDal.GetTanggal(tanggalHariIni);
 
@@ -300,12 +309,7 @@ namespace BelSekolah.BelSekolahForm
                 }
                 return;
             }
-
-            _hariID = _jadwalDal.GetIdByHari(_hariSekarang);
-            // _hariID = (int)HariCombo.SelectedValue;
-            var jenis_jadwal = _jadwalDal.GetJenisJadwal(_hariID)?.JenisJadwal;
-
-            _jenisJadwal = jenis_jadwal?.ToString() ?? string.Empty;
+              
             if (!string.IsNullOrEmpty(_jenisJadwal))
             {
 
@@ -447,6 +451,8 @@ namespace BelSekolah.BelSekolahForm
             closeStart.ShowDialog();
             if (closeStart.DialogResult != DialogResult.OK) return;
         }
+
+
 
         private void JadwalBelForm_Load(object? sender, EventArgs e)
         {

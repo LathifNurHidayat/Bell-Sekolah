@@ -42,9 +42,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Microsoft Yi Baiti", 36F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.DimGray;
-            label1.Location = new Point(77, 215);
+            label1.Location = new Point(89, 162);
             label1.Name = "label1";
-            label1.Size = new Size(458, 60);
+            label1.Size = new Size(368, 48);
             label1.TabIndex = 0;
             label1.Text = "Aplikasi Bel Sekolah";
             // 
@@ -52,9 +52,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Microsoft Yi Baiti", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(238, 297);
+            label2.Location = new Point(208, 223);
             label2.Name = "label2";
-            label2.Size = new Size(0, 15);
+            label2.Size = new Size(0, 12);
             label2.TabIndex = 1;
             // 
             // pictureBox1
@@ -63,25 +63,27 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImage = Properties.Resources.school_bell;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(250, 63);
+            pictureBox1.Location = new Point(219, 47);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(125, 131);
+            pictureBox1.Size = new Size(109, 98);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
             // LoadForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.login;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(620, 328);
+            ClientSize = new Size(542, 246);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LoadForm";
             StartPosition = FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
