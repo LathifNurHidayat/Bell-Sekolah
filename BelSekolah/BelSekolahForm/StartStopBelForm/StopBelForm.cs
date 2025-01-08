@@ -11,13 +11,13 @@ using System.Windows.Forms.VisualStyles;
 
 namespace BelSekolah.BelSekolahForm.HitungMundurForm
 {
-    public partial class HitungMundurForm : Form
+    public partial class StopBelForm : Form
     {
         private System.Windows.Forms.Timer _hitungMundur;
         private Form _mainForm;
         private Form _utamaForm;
         private int _detikMundur = 29;
-        public HitungMundurForm(Form mainform, Form utama)
+        public StopBelForm(Form mainform, Form utama)
         {
             InitializeComponent();
 

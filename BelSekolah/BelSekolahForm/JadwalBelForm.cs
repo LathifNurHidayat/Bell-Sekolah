@@ -2,6 +2,7 @@
 using BelSekolah.BelSekolahBackEnd.Model;
 using BelSekolah.BelSekolahDatabase;
 using BelSekolah.BelSekolahDatabase.Helper;
+using BelSekolah.BelSekolahForm.HitungMundurForm;
 using BelSekolah.BelSekolahForm.PopUpForm;
 using BelSekolah.BelSekolahForm.PopUpForm.Jadwalkan_Form;
 using Dapper;
@@ -41,6 +42,7 @@ namespace BelSekolah.BelSekolahForm
         private readonly JadwalNormalDal _jadwalNormalDal;
         private readonly JadwalModel _jadwalModel;
         private readonly RencanakanJadwalDal _rencanakanJadwalDal;
+        private readonly StartCloseBelDal _startCloseBelDal;
 
         private int _hariID;
         private string _waktuSekarang;
@@ -56,10 +58,9 @@ namespace BelSekolah.BelSekolahForm
         private string _keteranganJadwal;
         private Form _loadForm;
 
-        public static TimeSpan jam1;
-        public static TimeSpan jam2;
+        private List<StartStopBelModel> _startStopBel = new();
 
-
+      
         public JadwalBelForm(Form mainForm)
         {
             InitializeComponent();
@@ -68,6 +69,7 @@ namespace BelSekolah.BelSekolahForm
             _jadwalNormalDal = new JadwalNormalDal();
             _jadwalModel = new JadwalModel();
             _rencanakanJadwalDal = new RencanakanJadwalDal();
+            _startCloseBelDal = new StartCloseBelDal();
 
 
             _timer = new System.Windows.Forms.Timer();
@@ -87,6 +89,11 @@ namespace BelSekolah.BelSekolahForm
             RegisterControlEvent();
             InitialCombo();
 
+            var data = _startCloseBelDal.GetData();
+            if (data == null) return;
+
+            _startStopBel.Add(data);
+
             _jam.Interval = 1000;
             _jam.Tick += _jam_Tick;
             _jam.Start();
@@ -103,6 +110,9 @@ namespace BelSekolah.BelSekolahForm
             CustomStyleGrid(JadwalKhususGrid);
 
             _dataJadwalPutar.Clear();
+
+     
+
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -123,17 +133,29 @@ namespace BelSekolah.BelSekolahForm
         {
             JamLabel.Text = DateTime.Now.ToString("HH:mm:ss");
 
-            if (DateTime.Now.Hour == jam1.Hours && DateTime.Now.Minute == jam1.Minutes && DateTime.Now.Second == jam1.Seconds)
+            var startBel = _startStopBel.FirstOrDefault()?.WaktuStartBel;
+            var stopBel = _startStopBel.FirstOrDefault()?.WaktuStopBel;
+
+            if (string.IsNullOrEmpty(startBel)) return;
+            if (string.IsNullOrEmpty(stopBel)) return;
+
+            var waktuSekarang = DateTime.Now.ToString("HH:mm:ss");
+
+            if (waktuSekarang == startBel && !_isRunning)
             {
-                BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm form = new BelSekolah.BelSekolahForm.HitungMundurForm.HitungMundurForm(_loadForm,this);
-                form.ShowDialog();
+                MessageBox.Show("Waktu Start");
+                StartStopButton.PerformClick();
             }
 
-            if (DateTime.Now.Hour == jam2.Hours && DateTime.Now.Minute == jam2.Minutes && DateTime.Now.Second == jam2.Seconds)
+            if (waktuSekarang == stopBel && _isRunning)
             {
-                this.Show();
+                MessageBox.Show("Waktu Stop");
+                StartStopButton.PerformClick();
             }
         }
+
+
+
 
         private async void _timer_Tick(object? sender, EventArgs e)
         {
@@ -442,17 +464,20 @@ namespace BelSekolah.BelSekolahForm
 
             DetailJadwalLinkLabel.Click += DetailJadwalLinkLabel_Click;
 
-            btnCloseStartApk.Click += BtnCloseStartApk_Click;
+            JadwalkanRunBelButton.Click += JadwalkanRunBelButton_Click;
         }
 
-        private void BtnCloseStartApk_Click(object? sender, EventArgs e)
+        private void JadwalkanRunBelButton_Click(object? sender, EventArgs e)
         {
-            var closeStart = new CloseStartApk(jam1,jam2);
-            closeStart.ShowDialog();
-            if (closeStart.DialogResult != DialogResult.OK) return;
+            StartStopBelForm stopBel = new StartStopBelForm();
+            if (stopBel.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = _startCloseBelDal.GetData();
+                if (data == null) return;
+
+                _startStopBel.Add(data);
+            }
         }
-
-
 
         private void JadwalBelForm_Load(object? sender, EventArgs e)
         {

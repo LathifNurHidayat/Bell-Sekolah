@@ -52,7 +52,7 @@
 
   <ItemGroup>
     <Content Include="BelSekolahDatabase\Database.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="BelSekolahDatabase\Sound\Jam Pelajaran\Akhir Jam Pelajaran.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

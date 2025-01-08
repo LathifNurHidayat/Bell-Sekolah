@@ -1,6 +1,6 @@
 ﻿namespace BelSekolah.BelSekolahForm.HitungMundurForm
 {
-    partial class HitungMundurForm
+    partial class StopBelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HitungMundurForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StopBelForm));
             label1 = new Label();
             BatalkanButton = new Button();
             HitungMundurText = new TextBox();
