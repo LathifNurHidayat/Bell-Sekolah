@@ -23,6 +23,9 @@ namespace BelSekolah
             _startCloseBelDal = new StartCloseBelDal();
             SaveButton.Click += SaveButton_Click;
 
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
             GetData();
         }
 
@@ -42,6 +45,7 @@ namespace BelSekolah
 
             _startCloseBelDal.UpdateStartCloseBel(start, stop);
             this.Close();
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

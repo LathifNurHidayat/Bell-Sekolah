@@ -69,6 +69,61 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             else
                 DefaultSound();
             IndonesiaRayaPicker.Value = DateTime.Parse("10:00");
+            OnApplicationStartup();
+        }
+
+        private void OnApplicationStartup()
+        {
+            try
+            {
+                CleanupAudioResources();
+                CheckAudioDevice();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saat inisialisasi audio: {ex.Message}");
+            }
+        }
+
+        private void CheckAudioDevice()
+        {
+            if (waveOutDevice == null || waveOutDevice.PlaybackState == PlaybackState.Stopped)
+            {
+                waveOutDevice = new WaveOutEvent();
+            }
+        }
+
+        private readonly object audioLock = new object();
+
+        private void CleanupAudioResources()
+        {
+            lock (audioLock)
+            {
+                try
+                {
+                    if (waveOutDevice != null)
+                    {
+                        if (waveOutDevice.PlaybackState == PlaybackState.Playing ||
+                            waveOutDevice.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOutDevice.Stop();
+                        }
+
+                        waveOutDevice.Dispose();
+                        waveOutDevice = null;
+                    }
+
+                    if (audioFileReader != null)
+                    {
+                        audioFileReader.Dispose();
+                        audioFileReader = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error saat menghentikan audio: {ex.Message}");
+                }
+            }
         }
 
         private void DefaultSound()

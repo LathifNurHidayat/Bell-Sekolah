@@ -16,6 +16,7 @@ using System.Media;
 using NAudio.Wave;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace BelSekolah.BelSekolahForm.PopUpForm
 {
@@ -57,6 +58,61 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             LoadData();
             CustomStyleGrid(JadwalUjianGrid);
             ClearForm();
+            OnApplicationStartup();
+        }
+
+        private void OnApplicationStartup()
+        {
+            try
+            {
+                CleanupAudioResources();
+                CheckAudioDevice();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saat inisialisasi audio: {ex.Message}");
+            }
+        }
+
+        private void CheckAudioDevice()
+        {
+            if (waveOutDevice == null || waveOutDevice.PlaybackState == PlaybackState.Stopped)
+            {
+                waveOutDevice = new WaveOutEvent();
+            }
+        }
+
+        private readonly object audioLock = new object();
+
+        private void CleanupAudioResources()
+        {
+            lock (audioLock)
+            {
+                try
+                {
+                    if (waveOutDevice != null)
+                    {
+                        if (waveOutDevice.PlaybackState == PlaybackState.Playing ||
+                            waveOutDevice.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOutDevice.Stop();
+                        }
+
+                        waveOutDevice.Dispose();
+                        waveOutDevice = null;
+                    }
+
+                    if (audioFileReader != null)
+                    {
+                        audioFileReader.Dispose();
+                        audioFileReader = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error saat menghentikan audio: {ex.Message}");
+                }
+            }
         }
 
         private void GetData(int rencanakanJadwalID)
@@ -236,6 +292,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 MessageBox.Show($"Gagal memutar sound {ex.Message}", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
         private void StopAudio()
         {

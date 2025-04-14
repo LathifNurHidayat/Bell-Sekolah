@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -60,6 +61,61 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
                 DefaultSound();
 
             IndonesiaRayaPicker.Value = DateTime.Parse("10:00");
+            OnApplicationStartup();
+        }
+
+        private void OnApplicationStartup()
+        {
+            try
+            {
+                CleanupAudioResources();
+                CheckAudioDevice();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saat inisialisasi audio: {ex.Message}");
+            }
+        }
+
+        private void CheckAudioDevice()
+        {
+            if (waveOutDevice == null || waveOutDevice.PlaybackState == PlaybackState.Stopped)
+            {
+                waveOutDevice = new WaveOutEvent();
+            }
+        }
+
+        private readonly object audioLock = new object();
+
+        private void CleanupAudioResources()
+        {
+            lock (audioLock)
+            {
+                try
+                {
+                    if (waveOutDevice != null)
+                    {
+                        if (waveOutDevice.PlaybackState == PlaybackState.Playing ||
+                            waveOutDevice.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOutDevice.Stop();
+                        }
+
+                        waveOutDevice.Dispose();
+                        waveOutDevice = null;
+                    }
+
+                    if (audioFileReader != null)
+                    {
+                        audioFileReader.Dispose();
+                        audioFileReader = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error saat menghentikan audio: {ex.Message}");
+                }
+            }
         }
 
         private void DefaultSound()

@@ -29,8 +29,9 @@ namespace BelSekolah.BelSekolahForm
 {
     public partial class JadwalBelForm : Form
     {
-        private IWavePlayer waveOutDevice;
-        private AudioFileReader audioFileReader;
+        private IWavePlayer? waveOutDevice;
+        private AudioFileReader? audioFileReader;
+        private readonly object audioLock = new object();
         private enum GridAktif { None, JadwalNormal, JadwalKhusus };
         private GridAktif _gridAktif = GridAktif.None;
         private enum ComboAktif { ComboAktif, ComboNonAktif };
@@ -59,8 +60,8 @@ namespace BelSekolah.BelSekolahForm
         private Form _loadForm;
 
         private List<StartStopBelModel> _startStopBel = new();
+        private EventHandler<StoppedEventArgs> playbackStoppedHandler;
 
-      
         public JadwalBelForm(Form mainForm)
         {
             InitializeComponent();
@@ -141,33 +142,146 @@ namespace BelSekolah.BelSekolahForm
 
             var waktuSekarang = DateTime.Now.ToString("HH:mm:ss");
 
+
             if (waktuSekarang == startBel && !_isRunning)
             {
-                MessageBox.Show("Waktu Start");
+                //MessageBox.Show("Waktu Start");
                 StartStopButton.PerformClick();
             }
-
+             
             if (waktuSekarang == stopBel && _isRunning)
             {
-                MessageBox.Show("Waktu Stop");
+               // MessageBox.Show("Waktu Stop");
                 StartStopButton.PerformClick();
             }
         }
 
+        private void CleanupAudioResources()
+        {
+            lock (audioLock)
+            {
+                try
+                {
+                    if (waveOutDevice != null)
+                    {
+                        if (waveOutDevice.PlaybackState == PlaybackState.Playing ||
+                            waveOutDevice.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOutDevice.Stop();
+                        }
 
+                        waveOutDevice.Dispose();
+                        waveOutDevice = null;
+                    }
 
+                    if (audioFileReader != null)
+                    {
+                        audioFileReader.Dispose();
+                        audioFileReader = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error saat menghentikan audio: {ex.Message}");
+                }
+            }
+        }
+
+        private void CheckAudioDevice()
+        {
+            if (waveOutDevice == null || waveOutDevice.PlaybackState == PlaybackState.Stopped)
+            {
+                waveOutDevice = new WaveOutEvent();
+            }
+        }
+
+        private async Task PlaySoundAsync(string soundPath)
+        {
+            if (!File.Exists(soundPath))
+            {
+                MessageBox.Show("File audio tidak ditemukan.");
+                return;
+            }
+            
+            var tcs = new TaskCompletionSource<bool>();
+
+            try
+            {
+                CleanupAudioResources();
+
+                audioFileReader = new AudioFileReader(soundPath);
+                waveOutDevice = new WaveOutEvent();
+                waveOutDevice.Init(audioFileReader);
+
+                if (playbackStoppedHandler != null)
+                    waveOutDevice.PlaybackStopped -= playbackStoppedHandler;
+
+                playbackStoppedHandler = (s, e) =>
+                {
+                    CleanupAudioResources();
+                    if (!tcs.Task.IsCompleted)
+                        tcs.TrySetResult(true);
+                };
+
+                waveOutDevice.PlaybackStopped += playbackStoppedHandler; 
+
+                waveOutDevice.Play();
+                await tcs.Task;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal memutar suara: {ex.Message}");
+            }
+        }
+
+        private async Task StopSoundGraduallyAsync()
+        {
+            if (waveOutDevice != null && audioFileReader != null)
+            {
+                try
+                {
+                    int fadeOutDuration = 1000; // ms
+                    float initialVolume = waveOutDevice.Volume; // Gunakan volume dari waveOutDevice
+
+                    for (int i = 10; i >= 0; i--)
+                    {
+                        waveOutDevice.Volume = initialVolume * (i / 10f);
+                        await Task.Delay(fadeOutDuration / 10);
+                    }
+
+                    waveOutDevice.Stop();
+                    await Task.Delay(100); 
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error during fade-out: {ex.Message}");
+                }
+            }
+        }
+
+        private void OnApplicationStartup()
+        {
+            try
+            {
+                CleanupAudioResources(); 
+                CheckAudioDevice(); 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saat inisialisasi audio: {ex.Message}");
+            }
+        }
 
         private async void _timer_Tick(object? sender, EventArgs e)
         {
-            /*TimeSpan timeNow = TimeSpan.Parse(DateTime.Now.ToString("HH:mm:ss"));*/
             TimeSpan timeNow = TimeSpan.Parse(JamLabel.Text);
-
             var data = _dataJadwalPutar.FirstOrDefault(x => x.Waktu == timeNow);
 
             var stopSoundIsPlayed = _dataJadwalPutar.FirstOrDefault(x => x.Waktu > timeNow);
             if (stopSoundIsPlayed != null && (stopSoundIsPlayed.Waktu - timeNow).TotalSeconds <= 5)
             {
-                StopAudio();
+                await StopSoundGraduallyAsync();
+                CleanupAudioResources(); 
             }
 
             if (data != null)
@@ -191,103 +305,6 @@ namespace BelSekolah.BelSekolahForm
             }
         }
 
-        private void StopAudio()
-        {
-            if (waveOutDevice != null)
-            {
-                waveOutDevice.Stop();
-                waveOutDevice.Dispose();
-                waveOutDevice = null;
-            }
-
-            if (audioFileReader != null)
-            {
-                audioFileReader.Dispose();
-                audioFileReader = null;
-            }
-        }
-
-        private async Task PlaySoundAsync(string soundPath)
-        {
-            if (!File.Exists(soundPath))
-            {
-                MessageBox.Show("File audio tidak ditemukan.");
-                MessageBox.Show(soundPath);
-
-                return;
-            }
-
-            var tcs = new TaskCompletionSource<bool>();
-
-            try
-            {
-                await StopSoundGraduallyAsync();
-
-                audioFileReader = new AudioFileReader(soundPath);
-                waveOutDevice = new WaveOutEvent();
-                waveOutDevice.Init(audioFileReader);
-                waveOutDevice.Play();
-
-                waveOutDevice.PlaybackStopped += (s, e) =>
-                {
-                    CleanupAudioResources();
-                    tcs.TrySetResult(true); // Pastikan task diselesaikan
-                };
-
-                await tcs.Task;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Gagal memutar suara: {ex.Message}");
-            }
-        }
-
-        private async Task StopSoundGraduallyAsync()
-        {
-            if (waveOutDevice != null && audioFileReader != null)
-            {
-                try
-                {
-                    int fadeOutDuration = 1000; // ms
-                    float initialVolume = 1.0f;
-
-                    if (waveOutDevice.Volume > 0)
-                        initialVolume = waveOutDevice.Volume;
-
-                    for (int i = 10; i >= 0; i--)
-                    {
-                        waveOutDevice.Volume = initialVolume * (i / 10f);
-                        await Task.Delay(fadeOutDuration / 10);
-                    }
-
-                    waveOutDevice.Stop();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error during fade-out: {ex.Message}");
-                }
-            }
-
-            CleanupAudioResources();
-
-        }
-
-        
-
-        private void CleanupAudioResources()
-        {
-            if (waveOutDevice != null)
-            {
-                waveOutDevice.Dispose();
-                waveOutDevice = null;
-            }
-
-            if (audioFileReader != null)
-            {
-                audioFileReader.Dispose();
-                audioFileReader = null;
-            }
-        }
 
         private void ClearText()
         {
@@ -475,6 +492,7 @@ namespace BelSekolah.BelSekolahForm
                 var data = _startCloseBelDal.GetData();
                 if (data == null) return;
 
+                _startStopBel.Clear();
                 _startStopBel.Add(data);
             }
         }
@@ -482,6 +500,7 @@ namespace BelSekolah.BelSekolahForm
         private void JadwalBelForm_Load(object? sender, EventArgs e)
         {
             StartStopButton.PerformClick();
+            OnApplicationStartup();
         }
 
         private void DetailJadwalLinkLabel_Click(object? sender, EventArgs e)
