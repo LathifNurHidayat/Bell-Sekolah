@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputRencanakanJadwalUjianForm));
             SaveButton = new Button();
             BrowseButton = new Button();
@@ -47,9 +48,12 @@
             label5 = new Label();
             label6 = new Label();
             TanggalPicker = new DateTimePicker();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).BeginInit();
             panel2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // SaveButton
@@ -261,6 +265,21 @@
             TanggalPicker.Size = new Size(227, 30);
             TanggalPicker.TabIndex = 160;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(133, 32);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            deleteToolStripMenuItem.Image = Properties.Resources.delete;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(132, 28);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
             // InputRencanakanJadwalUjianForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -277,6 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)JadwalUjianGrid).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -299,5 +319,7 @@
         private Label label6;
         private DateTimePicker TanggalPicker;
         private TextBox KeteranganText;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

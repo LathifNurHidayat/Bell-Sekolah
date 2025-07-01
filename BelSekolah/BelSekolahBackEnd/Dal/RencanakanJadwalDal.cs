@@ -32,6 +32,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
             }
         }
 
+
         public RencanakanJadwalModel? GetDataUjian(int rencanakanID)
         {
             using (var Conn = new SQLiteConnection(ConnStringHelper.GetConn()))
@@ -49,6 +50,7 @@ namespace BelSekolah.BelSekolahBackEnd.Dal
                 return Conn.Query<RencanakanJadwalModel>(sql, new { RencanakanJadwalID = rencanakanID }).FirstOrDefault();
             }
         }
+
 
         public RencanakanJadwalModel? GetDataJadwal(int rencanakanID)
         {

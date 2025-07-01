@@ -87,7 +87,7 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void CleanupAudioResources()
         {
             lock (audioLock)
-            {
+            { 
                 try
                 {
                     if (waveOutDevice != null)
@@ -118,9 +118,17 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
         private void GetData(int rencanakanJadwalID)
         {
             var data = _rencanakanJadwalDal.GetDataUjian(rencanakanJadwalID);
-
-            TanggalPicker.Value = DateTime.TryParse(data.Tanggal, out DateTime waktu) ? waktu : DateTime.Today;
-            KeteranganText.Text = data.Keterangan;
+            if (data == null)
+            {
+                MessageBox.Show("Data tidak ditemukan!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.Cancel;
+                return;
+            }
+            TanggalPicker.Value =
+                DateTime.TryParse(data?.Tanggal, out var tgl) && tgl >= TanggalPicker.MinDate
+                ? tgl
+                : DateTime.Today;
+            KeteranganText.Text = data?.Keterangan;
         }
 
         private void CustomStyleGrid(DataGridView grid)
@@ -170,6 +178,37 @@ namespace BelSekolah.BelSekolahForm.PopUpForm
             JadwalUjianGrid.RowEnter += JadwalUjianGrid_RowEnter;
             TanggalPicker.ValueChanged += TanggalPicker_ValueChanged;
             TanggalPicker.DropDown += TanggalPicker_DropDown;
+            deleteToolStripMenuItem.Click += DeleteToolStripMenuItem_Click;
+            JadwalUjianGrid.CellMouseClick += JadwalUjianGrid_CellMouseClick;
+        }
+
+        private void JadwalUjianGrid_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                JadwalUjianGrid.ClearSelection();
+                JadwalUjianGrid.CurrentCell = JadwalUjianGrid[e.ColumnIndex, e.RowIndex];
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void DeleteToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            int idJadwal = Convert.ToInt32(JadwalUjianGrid.CurrentRow?.Cells["JadwalKhususID"]?.Value);
+            int rencanaJadwalID = _rencanaJadwalID;
+
+            if (idJadwal == 0)
+            {
+                MessageBox.Show("Tidak ada data yang dipilih untuk dihapus!", "Perhatian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (MessageBox.Show("Anda yakin akan menghapus data ?", "Perhatian", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                _jadwalKhususDal.DeleteJamUjian(idJadwal, rencanaJadwalID);
+                LoadData();
+                ClearForm();
+            }
         }
 
         private void TanggalPicker_DropDown(object? sender, EventArgs e)
